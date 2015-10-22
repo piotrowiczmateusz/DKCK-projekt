@@ -1,14 +1,10 @@
 package dkck;
 
-public class Bomb {
+public class Bomb extends Item {
 
 	/**
 	 * ATTRIBUTES
 	 */
-	
-	protected int positionX;
-	
-	protected int positionY;
 	
 	protected int explosionRange;
 	
@@ -17,34 +13,6 @@ public class Bomb {
 	/**
 	 * SETTERS AND GETTERS
 	 */
-	
-	/**
-	 * @return the positionX
-	 */
-	public int getPositionX() {
-		return positionX;
-	}
-	
-	/**
-	 * @param positionX the positionX to set
-	 */
-	public void setPositionX(int positionX) {
-		this.positionX = positionX;
-	}
-
-	/**
-	 * @return the positionY
-	 */
-	public int getPositionY() {
-		return positionY;
-	}
-
-	/**
-	 * @param positionY the positionY to set
-	 */
-	public void setPositionY(int positionY) {
-		this.positionY = positionY;
-	}
 
 	/**
 	 * @return the status
@@ -79,9 +47,7 @@ public class Bomb {
 	 */
 
 	public Bomb(int positionX, int positionY, int explosionRange) {
-		super();
-		this.positionX = positionX;
-		this.positionY = positionY;
+		super(positionX, positionY);
 		this.explosionRange = explosionRange;
 		this.status = "active";
 	}

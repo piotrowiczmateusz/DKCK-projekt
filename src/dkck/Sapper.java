@@ -2,52 +2,19 @@ package dkck;
 
 import java.util.Random;
 
-public class Sapper {
+public class Sapper extends Item{
 	
 	/**
 	 * ATTRIBUTES
 	 */
-	protected int positionX;
-	
-	protected int positionY;
-	
 	protected int healthPoints;
 	
 	protected boolean status;
-
 	
 	/**
 	 * SETTERS AND GETTERS
 	 */
 	
-	/**
-	 * @return the positionX
-	 */
-	public int getPositionX() {
-		return positionX;
-	}
-
-	/**
-	 * @param positionX the positionX to set
-	 */
-	public void setPositionX(int positionX) {
-		this.positionX = positionX;
-	}
-
-	/**
-	 * @return the positionY
-	 */
-	public int getPositionY() {
-		return positionY;
-	}
-
-	/**
-	 * @param positionY the positionY to set
-	 */
-	public void setPositionY(int positionY) {
-		this.positionY = positionY;
-	}
-
 	/**
 	 * @return the status
 	 */
@@ -81,9 +48,7 @@ public class Sapper {
 	 */
 	
 	public Sapper(int positionX, int positionY) {
-		super();
-		this.positionX = positionX;
-		this.positionY = positionY;
+		super(positionX, positionY);
 		this.healthPoints = 10;
 		this.status = true;
 	}
@@ -127,6 +92,9 @@ public class Sapper {
 		}
 	}
 	
+	/**
+	 * Saper idzie na pozycjê bomby. Nastpênie na pozycje x,y i zmienia pozycjê bomby.
+	 */
 	public void moveBomb(Bomb bomb, int x, int y) throws InterruptedException {
 		this.go(bomb.getPositionX(), bomb.getPositionY());		
 		System.out.println("The sapper picked up a bomb.");	
