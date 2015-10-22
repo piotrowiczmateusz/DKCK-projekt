@@ -93,23 +93,33 @@ public class Bomb {
 	/**
 	 * Sprawdza czy saper jest w zasiêgu ra¿enia bomby.
 	 */
-	public void checkExplosionRange(Sapper sapper) {
+	public boolean checkExplosionRange(Sapper sapper) {
 		for(int x = this.getPositionX() - this.getExplosionRange(); x < this.getPositionX() + this.getExplosionRange(); x++) {
 			for(int y = this.getPositionY() - this.getExplosionRange(); y < this.getPositionY() + this.getExplosionRange(); y++) {
 				if((sapper.getPositionX() == x) && (sapper.getPositionY() == y)) {
-					System.out.println("Danger. The saper is in the bomb explosion range");
+					System.out.println("Danger. The saper is in the bomb explosion range");	
+					return true;
 				}
 			}
 		}
+		return false;
 	}
 
 	
 	public void explode(Sapper sapper) {
 		this.setStatus("afterExplosion");
 		System.out.println("The bomb exploded");
-		
-		// Tu musi zmieniaæ status sapera
-		
+		if(this.checkExplosionRange(sapper) == true) {
+			sapper.setHealthPoints(sapper.getHealthPoints() - 1);
+			
+			if(sapper.getHealthPoints() == 0) {
+				sapper.setStatus(false);
+				System.out.println("The sapper HP is: " + sapper.getHealthPoints() + ".The sapper is dead");			
+			}
+			else {
+				System.out.println("The sapper HP is: " + sapper.getHealthPoints());
+			}			
+		};			
 	}
 	
 }

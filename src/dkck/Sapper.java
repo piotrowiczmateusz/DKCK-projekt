@@ -11,6 +11,8 @@ public class Sapper {
 	
 	protected int positionY;
 	
+	protected int healthPoints;
+	
 	protected boolean status;
 
 	
@@ -61,6 +63,20 @@ public class Sapper {
 	}
 	
 	/**
+	 * @return the status
+	 */
+	public int getHealthPoints() {
+		return healthPoints;
+	}
+
+	/**
+	 * @param status the status to set
+	 */
+	public void setHealthPoints(int healthPoints) {
+		this.healthPoints = healthPoints;
+	}
+	
+	/**
 	 * CONSTRUCTORS
 	 */
 	
@@ -68,6 +84,7 @@ public class Sapper {
 		super();
 		this.positionX = positionX;
 		this.positionY = positionY;
+		this.healthPoints = 10;
 		this.status = true;
 	}
 	
@@ -108,6 +125,15 @@ public class Sapper {
 			
 			Thread.sleep(1000);
 		}
+	}
+	
+	public void moveBomb(Bomb bomb, int x, int y) throws InterruptedException {
+		this.go(bomb.getPositionX(), bomb.getPositionY());		
+		System.out.println("The sapper picked up a bomb.");	
+		this.go(x, y);
+		bomb.setPositionX(x);
+		bomb.setPositionY(y);
+		System.out.println("The bomb was moved to [" + x + "][" + y + "]");
 	}
 	
 	/**
