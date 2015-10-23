@@ -11,7 +11,4 @@ public class BombsArray {
 		super();
 		this.bombsArray = new ArrayList<Bomb>();
 	}
-	
-	
-	
 }

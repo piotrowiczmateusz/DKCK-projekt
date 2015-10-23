@@ -5,9 +5,9 @@ public class Bomb extends Item {
 	/**
 	 * ATTRIBUTES
 	 */
-	
+
 	protected int explosionRange;
-	
+
 	protected String status;
 
 	/**
@@ -22,26 +22,28 @@ public class Bomb extends Item {
 	}
 
 	/**
-	 * @param status the status to set
+	 * @param status
+	 *            the status to set
 	 */
 	public void setStatus(String status) {
 		this.status = status;
 	}
-	
+
 	/**
 	 * @return the explosionRange
 	 */
 	public int getExplosionRange() {
 		return explosionRange;
 	}
-	
+
 	/**
-	 * @param positionX the explosionRange to set
+	 * @param positionX
+	 *            the explosionRange to set
 	 */
 	public void setExplosionRange(int explosionRange) {
 		this.explosionRange = explosionRange;
 	}
-	
+
 	/**
 	 * CONSTRUCTORS
 	 */
@@ -55,37 +57,34 @@ public class Bomb extends Item {
 	/**
 	 * OTHER METHODS
 	 */
-	
+
 	/**
 	 * Sprawdza czy saper jest w zasiêgu ra¿enia bomby.
 	 */
 	public boolean checkExplosionRange(Sapper sapper) {
-		for(int x = this.getPositionX() - this.getExplosionRange(); x < this.getPositionX() + this.getExplosionRange(); x++) {
-			for(int y = this.getPositionY() - this.getExplosionRange(); y < this.getPositionY() + this.getExplosionRange(); y++) {
-				if((sapper.getPositionX() == x) && (sapper.getPositionY() == y)) {
-					System.out.println("Danger. The saper is in the bomb explosion range");	
-					return true;
-				}
-			}
-		}
-		return false;
+
+		if (Math.sqrt(Math.pow(this.positionX - sapper.positionX, 2)
+				+ Math.pow(this.positionY - sapper.positionY, 2)) <= this.explosionRange + sapper.safeZone) {
+			System.out.println("Danger. The sapper is in the bomb explosion range");
+			return true;
+		} else
+			return false;
 	}
 
-	
 	public void explode(Sapper sapper) {
 		this.setStatus("afterExplosion");
 		System.out.println("The bomb exploded");
-		if(this.checkExplosionRange(sapper) == true) {
+		if (this.checkExplosionRange(sapper) == true) {
 			sapper.setHealthPoints(sapper.getHealthPoints() - 1);
-			
-			if(sapper.getHealthPoints() == 0) {
+
+			if (sapper.getHealthPoints() == 0) {
 				sapper.setStatus(false);
-				System.out.println("The sapper HP is: " + sapper.getHealthPoints() + ".The sapper is dead");			
-			}
-			else {
+				System.out.println("The sapper HP is: " + sapper.getHealthPoints() + ".The sapper is dead");
+			} else {
 				System.out.println("The sapper HP is: " + sapper.getHealthPoints());
-			}			
-		};			
+			}
+		}
+		;
 	}
-	
+
 }

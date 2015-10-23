@@ -14,11 +14,11 @@ public class Main {
 
 		Sapper s1 = new Sapper(1, 1);
 
-		//b1.explode(s1);
-		//s1.moveBomb(b1, 6, 9);
-		//s1.moveBomb(b2, 6, 9);
-		//s1.disarmBomb(b1);
-		//s1.disarmBomb(b2);
+		b1.explode(s1);
+		s1.moveBomb(b1, 6, 9);
+		s1.moveBomb(b2, 6, 9);
+		s1.disarmBomb(b1);
+		s1.disarmBomb(b2);
 		
 	}
 

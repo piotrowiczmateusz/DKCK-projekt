@@ -9,11 +9,27 @@ public class Sapper extends Item{
 	 */
 	protected int healthPoints;
 	
+	protected int safeZone;
+	
 	protected boolean status;
 	
 	/**
 	 * SETTERS AND GETTERS
 	 */
+	
+	/**
+	 * @return SafeZone
+	 */
+	public int getSafeZone() {
+		return safeZone;
+	}
+
+	/**
+	 * @param safeZone
+	 */
+	public void setSafeZone(int safeZone) {
+		this.safeZone = safeZone;
+	}
 	
 	/**
 	 * @return the status
@@ -96,6 +112,7 @@ public class Sapper extends Item{
 	 * Saper idzie na pozycjê bomby. Nastpênie na pozycje x,y i zmienia pozycjê bomby.
 	 */
 	public void moveBomb(Bomb bomb, int x, int y) throws InterruptedException {
+		System.out.println("The sapper will try to move bomb...");
 		this.go(bomb.getPositionX(), bomb.getPositionY());		
 		System.out.println("The sapper picked up a bomb.");	
 		this.go(x, y);
@@ -125,7 +142,5 @@ public class Sapper extends Item{
 				bomb.explode(this);
 			}
 		}
-		
 	}
-
 }
