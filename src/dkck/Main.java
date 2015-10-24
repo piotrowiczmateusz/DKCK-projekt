@@ -5,10 +5,10 @@ public class Main {
 	public static BombsArray bombsList;
 
 	public static void main(String[] args) throws InterruptedException {
-		
+
 		bombsList = new BombsArray();
 		Bomb b1 = new Bomb(2, 2, 2, 1, 1);
-		Bomb b2 = new Bomb(8, 16, 5, 2, 1);		
+		Bomb b2 = new Bomb(8, 16, 5, 2, 1);
 		bombsList.bombsArray.add(b1);
 		bombsList.bombsArray.add(b2);
 
@@ -19,7 +19,7 @@ public class Main {
 		s1.moveBomb(b2, 6, 9);
 		s1.disarmBomb(b1);
 		s1.disarmBomb(b2);
-		
+
 	}
 
 }

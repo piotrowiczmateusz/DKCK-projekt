@@ -2,18 +2,16 @@ package dkck;
 
 public class Bomb extends Item {
 
-	
-
 	/**
 	 * ATTRIBUTES
 	 */
 
-	private int bombStatus;//EXPLODED - 0, ACTIVE - 1, DISARMED - 2
+	private int bombStatus;// EXPLODED - 0, ACTIVE - 1, DISARMED - 2
 
 	/**
 	 * SETTERS AND GETTERS
 	 */
-	
+
 	/**
 	 * @return the bombStatus
 	 */
@@ -21,22 +19,17 @@ public class Bomb extends Item {
 		return bombStatus;
 	}
 
-
-
 	/**
-	 * @param bombStatus the bombStatus to set
+	 * @param bombStatus
+	 *            the bombStatus to set
 	 */
 	public void setBombStatus(int bombStatus) {
 		this.bombStatus = bombStatus;
 	}
 
-
-
-
 	/**
 	 * CONSTRUCTORS
 	 */
-	
 
 	/**
 	 * @param positionX
@@ -49,8 +42,6 @@ public class Bomb extends Item {
 		super(positionX, positionY, range, id);
 		this.bombStatus = bombStatus;
 	}
-
-
 
 	/**
 	 * OTHER METHODS
@@ -82,7 +73,7 @@ public class Bomb extends Item {
 				System.out.println("The sapper HP is: " + sapper.getHealthPoints());
 			}
 		}
-		
+
 	}
 
 }
