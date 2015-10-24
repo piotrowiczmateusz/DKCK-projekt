@@ -7,12 +7,12 @@ public class Main {
 	public static void main(String[] args) throws InterruptedException {
 		
 		bombsList = new BombsArray();
-		Bomb b1 = new Bomb(2, 2, 2);
-		Bomb b2 = new Bomb(8, 16, 5);		
+		Bomb b1 = new Bomb(2, 2, 2, 1, 1);
+		Bomb b2 = new Bomb(8, 16, 5, 2, 1);		
 		bombsList.bombsArray.add(b1);
 		bombsList.bombsArray.add(b2);
 
-		Sapper s1 = new Sapper(1, 1);
+		Sapper s1 = new Sapper(1, 1, 2, 0);
 
 		b1.explode(s1);
 		s1.moveBomb(b1, 6, 9);

@@ -5,9 +5,13 @@ public abstract class Item {
 	/**
 	 * ATTRIBUTES
 	 */
-	protected int positionX;
+	private int positionX;
 	
-	protected int positionY;
+	private int positionY;
+	
+	private int range;
+	
+	private int id;
 	
 	/**
 	 * SETTERS AND GETTERS
@@ -40,13 +44,54 @@ public abstract class Item {
 	public void setPositionY(int positionY) {
 		this.positionY = positionY;
 	}
+
+	/**
+	 * @return the range
+	 */
+	public int getRange() {
+		return range;
+	}
+
+	/**
+	 * @param range the range to set
+	 */
+	public void setRange(int range) {
+		this.range = range;
+	}
+
+	/**
+	 * @return the id
+	 */
+	public int getId() {
+		return id;
+	}
+
+	/**
+	 * @param id the id to set
+	 */
+	public void setId(int id) {
+		this.id = id;
+	}
 	
 	/**
 	 * CONSTRUCTORS
 	 */
-	public Item(int positionX, int positionY) {
+	
+
+	/**
+	 * @param positionX
+	 * @param positionY
+	 * @param range
+	 * @param id
+	 */
+	public Item(int positionX, int positionY, int range, int id) {
 		super();
 		this.positionX = positionX;
 		this.positionY = positionY;
+		this.range = range;
+		this.id = id;
 	}
+
+	
+
 }

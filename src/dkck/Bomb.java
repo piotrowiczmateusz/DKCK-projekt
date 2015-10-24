@@ -2,57 +2,55 @@ package dkck;
 
 public class Bomb extends Item {
 
+	
+
 	/**
 	 * ATTRIBUTES
 	 */
 
-	protected int explosionRange;
-
-	protected String status;
+	private int bombStatus;//EXPLODED - 0, ACTIVE - 1, DISARMED - 2
 
 	/**
 	 * SETTERS AND GETTERS
 	 */
-
+	
 	/**
-	 * @return the status
+	 * @return the bombStatus
 	 */
-	public String getStatus() {
-		return status;
+	public int getBombStatus() {
+		return bombStatus;
 	}
 
-	/**
-	 * @param status
-	 *            the status to set
-	 */
-	public void setStatus(String status) {
-		this.status = status;
-	}
+
 
 	/**
-	 * @return the explosionRange
+	 * @param bombStatus the bombStatus to set
 	 */
-	public int getExplosionRange() {
-		return explosionRange;
+	public void setBombStatus(int bombStatus) {
+		this.bombStatus = bombStatus;
 	}
 
-	/**
-	 * @param positionX
-	 *            the explosionRange to set
-	 */
-	public void setExplosionRange(int explosionRange) {
-		this.explosionRange = explosionRange;
-	}
+
+
 
 	/**
 	 * CONSTRUCTORS
 	 */
+	
 
-	public Bomb(int positionX, int positionY, int explosionRange) {
-		super(positionX, positionY);
-		this.explosionRange = explosionRange;
-		this.status = "active";
+	/**
+	 * @param positionX
+	 * @param positionY
+	 * @param range
+	 * @param id
+	 * @param bombStatus
+	 */
+	public Bomb(int positionX, int positionY, int range, int id, int bombStatus) {
+		super(positionX, positionY, range, id);
+		this.bombStatus = bombStatus;
 	}
+
+
 
 	/**
 	 * OTHER METHODS
@@ -63,28 +61,28 @@ public class Bomb extends Item {
 	 */
 	public boolean checkExplosionRange(Sapper sapper) {
 
-		if (Math.sqrt(Math.pow(this.positionX - sapper.positionX, 2)
-				+ Math.pow(this.positionY - sapper.positionY, 2)) <= this.explosionRange + sapper.safeZone) {
-			System.out.println("Danger. The sapper is in the bomb explosion range");
+		if (Math.sqrt(Math.pow(this.getPositionX() - sapper.getPositionX(), 2)
+				+ Math.pow(this.getPositionY() - sapper.getPositionY(), 2)) <= this.getRange() + sapper.getRange()) {
+			System.out.println("Danger. The sapper is in the bomb nr: " + this.getId() + " explosion range");
 			return true;
 		} else
 			return false;
 	}
 
 	public void explode(Sapper sapper) {
-		this.setStatus("afterExplosion");
-		System.out.println("The bomb exploded");
+		this.setBombStatus(0);
+		System.out.println("The bomb nr: " + this.getId() + " exploded");
 		if (this.checkExplosionRange(sapper) == true) {
 			sapper.setHealthPoints(sapper.getHealthPoints() - 1);
 
 			if (sapper.getHealthPoints() == 0) {
-				sapper.setStatus(false);
-				System.out.println("The sapper HP is: " + sapper.getHealthPoints() + ".The sapper is dead");
+				sapper.setSapperStatus(false);
+				System.out.println("The sapper HP is: " + sapper.getHealthPoints() + " .The sapper is dead");
 			} else {
 				System.out.println("The sapper HP is: " + sapper.getHealthPoints());
 			}
 		}
-		;
+		
 	}
 
 }

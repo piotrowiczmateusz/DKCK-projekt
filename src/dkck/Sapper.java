@@ -2,49 +2,19 @@ package dkck;
 
 import java.util.Random;
 
-public class Sapper extends Item{
-	
+public class Sapper extends Item {
+
 	/**
 	 * ATTRIBUTES
 	 */
-	protected int healthPoints;
-	
-	protected int safeZone;
-	
-	protected boolean status;
-	
+	private int healthPoints;
+
+	private boolean SapperStatus;
+
 	/**
 	 * SETTERS AND GETTERS
 	 */
-	
-	/**
-	 * @return SafeZone
-	 */
-	public int getSafeZone() {
-		return safeZone;
-	}
 
-	/**
-	 * @param safeZone
-	 */
-	public void setSafeZone(int safeZone) {
-		this.safeZone = safeZone;
-	}
-	
-	/**
-	 * @return the status
-	 */
-	public boolean isStatus() {
-		return status;
-	}
-
-	/**
-	 * @param status the status to set
-	 */
-	public void setStatus(boolean status) {
-		this.status = status;
-	}
-	
 	/**
 	 * @return the status
 	 */
@@ -53,92 +23,101 @@ public class Sapper extends Item{
 	}
 
 	/**
-	 * @param status the status to set
+	 * @param status
+	 *            the status to set
 	 */
 	public void setHealthPoints(int healthPoints) {
 		this.healthPoints = healthPoints;
 	}
-	
+
+	/**
+	 * @return the sapperStatus
+	 */
+	public boolean getSapperStatus() {
+		return SapperStatus;
+	}
+
+	/**
+	 * @param sapperStatus
+	 *            the sapperStatus to set
+	 */
+	public void setSapperStatus(boolean sapperStatus) {
+		SapperStatus = sapperStatus;
+	}
+
 	/**
 	 * CONSTRUCTORS
 	 */
-	
-	public Sapper(int positionX, int positionY) {
-		super(positionX, positionY);
-		this.healthPoints = 10;
-		this.status = true;
+
+	public Sapper(int positionX, int positionY, int range, int id) {
+		super(positionX, positionY, range, id);
+		this.setSapperStatus(true);
+		this.setHealthPoints(2);
+		// TODO Auto-generated constructor stub
 	}
-	
+
 	/**
 	 * OTHER METHODS
 	 */
-	
+
 	/**
-	 * Zmienia pozycje sapera i sprawdza czy znajduje siê w zasiêgu ra¿enia bomby.
+	 * Zmienia pozycje sapera i sprawdza czy znajduje siê w zasiêgu ra¿enia
+	 * bomby.
 	 */
-	public void go(int x, int y) throws InterruptedException 
-	{
-		while((x != this.getPositionX()) || (y != this.getPositionY())) 
-		{
-			if(x > this.getPositionX()) 
-			{
+	public void go(int x, int y) throws InterruptedException {
+		while ((x != this.getPositionX()) || (y != this.getPositionY())) {
+			if (x > this.getPositionX()) {
 				this.setPositionX(this.getPositionX() + 1);
+			} else if (x < this.getPositionX()) {
+				this.setPositionX(this.getPositionX() - 1);
 			}
-			else if(x < this.getPositionX()) 
-			{
-				this.setPositionX(this.getPositionX() - 1);	
-			}
-			if(y > this.getPositionY()) 
-			{
-				this.setPositionY(this.getPositionY() + 1);		
-			}
-			else if(y < this.getPositionY()) 
-			{
+			if (y > this.getPositionY()) {
+				this.setPositionY(this.getPositionY() + 1);
+			} else if (y < this.getPositionY()) {
 				this.setPositionY(this.getPositionY() - 1);
 			}
 			System.out.println("Sapper position is: [" + this.getPositionX() + "][" + this.getPositionY() + "]");
-			
-			for(int i = 0; i < Main.bombsList.bombsArray.size(); i++) {
+
+			for (int i = 0; i < Main.bombsList.bombsArray.size(); i++) {
 				((Bomb) Main.bombsList.bombsArray.get(i)).checkExplosionRange(this);
 			}
-			
+
 			// Tu bêdzie metoda rysuj¹ca sapera na mapie;
-			
+
 			Thread.sleep(1000);
 		}
 	}
-	
+
 	/**
-	 * Saper idzie na pozycjê bomby. Nastpênie na pozycje x,y i zmienia pozycjê bomby.
+	 * Saper idzie na pozycjê bomby. Nastpênie na pozycje x,y i zmienia pozycjê
+	 * bomby.
 	 */
 	public void moveBomb(Bomb bomb, int x, int y) throws InterruptedException {
-		System.out.println("The sapper will try to move bomb...");
-		this.go(bomb.getPositionX(), bomb.getPositionY());		
-		System.out.println("The sapper picked up a bomb.");	
+		System.out.println("The sapper will try to move bomb nr: " + bomb.getId());
+		this.go(bomb.getPositionX(), bomb.getPositionY());
+		System.out.println("The sapper picked up a bomb.");
 		this.go(x, y);
 		bomb.setPositionX(x);
 		bomb.setPositionY(y);
 		System.out.println("The bomb was moved to [" + x + "][" + y + "]");
 	}
-	
+
 	/**
-	 * Wywo³uje metodê 'go', sprawdza status bomby, losowo decyduje, czy bomba wybuchnie.
+	 * Wywo³uje metodê 'go', sprawdza status bomby, losowo decyduje, czy bomba
+	 * wybuchnie.
 	 */
 	public void disarmBomb(Bomb bomb) throws InterruptedException {
 		go(bomb.getPositionX(), bomb.getPositionY());
-		
-		Random generator = new Random(); 
-		int success = generator.nextInt(2);
-		
-		if(bomb.getStatus() == "disarmed") {
-			System.out.println("The bomb was already disarmed");
-		}
-		else {
-			if(success == 1) {
-				bomb.setStatus("disarmed");
-				System.out.println("The bomb is now disarmed");
-			}		
-			else {
+
+		if (bomb.getBombStatus() != 1) {
+			System.out.println("The bomb nr: " + bomb.getId() + " was already disarmed");
+		} else {
+			Random generator = new Random();
+			int success = generator.nextInt(2);
+			if (success == 1) {
+				bomb.setBombStatus(2);
+				System.out.println("The bomb nr " + bomb.getId() + " is now disarmed");
+			} else {
 				bomb.explode(this);
 			}
 		}
