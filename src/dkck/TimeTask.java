@@ -14,7 +14,7 @@ public class TimeTask extends TimerTask {
 	}
 
 	public void run() {
-		if (itemReference.getClass().equals(Bomb.class)) {
+		if (itemReference instanceof Bomb) {
 			Bomb tempBombReference = ((Bomb) itemReference);
 			if (tempBombReference.getExplosionLeftTime() > 0) {
 				tempBombReference.setExplosionLeftTime(tempBombReference.getExplosionLeftTime() - 1);

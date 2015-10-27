@@ -2,7 +2,6 @@ package dkck;
 
 import java.util.Timer;
 
-
 public class Bomb extends Item {
 
 	/**
@@ -10,8 +9,8 @@ public class Bomb extends Item {
 	 */
 
 	private int bombStatus;// EXPLODED - 0, ACTIVE - 1, DISARMED - 2
-	
-	private int explosionLeftTime;//zmienna przechowujaca czas do wybuchu
+
+	private int explosionLeftTime;// zmienna przechowujaca czas do wybuchu
 
 	/**
 	 * SETTERS AND GETTERS
@@ -31,7 +30,7 @@ public class Bomb extends Item {
 	public void setBombStatus(int bombStatus) {
 		this.bombStatus = bombStatus;
 	}
-	
+
 	/**
 	 * @return the explosionLeftTime
 	 */
@@ -40,7 +39,8 @@ public class Bomb extends Item {
 	}
 
 	/**
-	 * @param explosionLeftTime the explosionLeftTime to set
+	 * @param explosionLeftTime
+	 *            the explosionLeftTime to set
 	 */
 	public void setExplosionLeftTime(int explosionLeftTime) {
 		this.explosionLeftTime = explosionLeftTime;
@@ -61,8 +61,7 @@ public class Bomb extends Item {
 		super(positionX, positionY, range, id);
 		this.bombStatus = bombStatus;
 		this.explosionLeftTime = explosionLeftTime;
-		
-		
+
 		Timer timer1 = new Timer();
 		TimeTask timer1_task = new TimeTask(this);
 		timer1.schedule(timer1_task, 0, 1000);
@@ -75,19 +74,22 @@ public class Bomb extends Item {
 	/**
 	 * Sprawdza czy saper jest w zasiêgu ra¿enia bomby.
 	 */
-	public boolean checkExplosionRange(Sapper sapper) {
-
-		if (Math.sqrt(Math.pow(this.getPositionX() - sapper.getPositionX(), 2)
-				+ Math.pow(this.getPositionY() - sapper.getPositionY(), 2)) <= this.getRange() + sapper.getRange()) {
-			System.out.println("Danger. The sapper is in the bomb nr: " + this.getId() + " explosion range");
-			return true;
-		} else
-			return false;
+	public boolean checkExplosionRange(Item sapper) {
+		if (sapper instanceof Sapper) {
+			if (Math.sqrt(Math.pow(this.getPositionX() - sapper.getPositionX(), 2)
+					+ Math.pow(this.getPositionY() - sapper.getPositionY(), 2)) <= this.getRange()
+							+ sapper.getRange()) {
+				System.out.println("Danger. The sapper is in the bomb nr: " + this.getId() + " explosion range");
+				return true;
+			}
+		}
+		return false;
 	}
 
 	public void explode(Sapper sapper) {
 		this.setBombStatus(0);
 		System.out.println("The bomb nr: " + this.getId() + " exploded");
+		this.setExplosionLeftTime(0);
 		if (this.checkExplosionRange(sapper) == true) {
 			sapper.setHealthPoints(sapper.getHealthPoints() - 1);
 
