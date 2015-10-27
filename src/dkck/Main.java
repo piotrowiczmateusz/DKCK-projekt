@@ -2,13 +2,13 @@ package dkck;
 
 public class Main {
 
-	public static BombsArray itemsList;
+	public static ItemsOperations itemsCollection;
 
 	public static void main(String[] args) throws InterruptedException {
 
-		itemsList = new BombsArray();
+		itemsCollection = new ItemsOperations();
 
-		itemsList.function();
+		itemsCollection.actions();
 
 	}
 

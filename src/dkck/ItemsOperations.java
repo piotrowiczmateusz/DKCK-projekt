@@ -3,7 +3,7 @@ package dkck;
 import java.util.ArrayList;
 import java.util.List;
 
-public class BombsArray {
+public class ItemsOperations {
 
 	/**
 	 * @return the itemsArray
@@ -21,15 +21,15 @@ public class BombsArray {
 
 	private List<Item> itemsArray;
 
-	public BombsArray() {
+	public ItemsOperations() {
 		super();
 		this.itemsArray = new ArrayList<Item>();
 
 	}
 
-	public void function() throws InterruptedException {
+	public void actions() throws InterruptedException {
 		itemsArray.add((Item) new Bomb(2, 2, 2, 1, 1, 10));
-		itemsArray.add((Item) new Bomb(8, 16, 5, 2, 1, 20));
+		itemsArray.add((Item) new Bomb(8, 16, 5, 2, 1, 30));
 		itemsArray.add((Item) new Sapper(1, 1, 2, 0));
 
 		((Bomb) itemsArray.get(0)).explode(((Sapper) itemsArray.get(2)));

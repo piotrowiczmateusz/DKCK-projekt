@@ -62,9 +62,9 @@ public class Bomb extends Item {
 		this.bombStatus = bombStatus;
 		this.explosionLeftTime = explosionLeftTime;
 
-		Timer timer1 = new Timer();
+		
 		TimeTask timer1_task = new TimeTask(this);
-		timer1.schedule(timer1_task, 0, 1000);
+
 	}
 
 	/**
