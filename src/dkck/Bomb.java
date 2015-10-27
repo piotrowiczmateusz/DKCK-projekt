@@ -1,5 +1,8 @@
 package dkck;
 
+import java.util.Timer;
+
+
 public class Bomb extends Item {
 
 	/**
@@ -7,6 +10,8 @@ public class Bomb extends Item {
 	 */
 
 	private int bombStatus;// EXPLODED - 0, ACTIVE - 1, DISARMED - 2
+	
+	private int explosionLeftTime;//zmienna przechowujaca czas do wybuchu
 
 	/**
 	 * SETTERS AND GETTERS
@@ -26,6 +31,20 @@ public class Bomb extends Item {
 	public void setBombStatus(int bombStatus) {
 		this.bombStatus = bombStatus;
 	}
+	
+	/**
+	 * @return the explosionLeftTime
+	 */
+	public int getExplosionLeftTime() {
+		return explosionLeftTime;
+	}
+
+	/**
+	 * @param explosionLeftTime the explosionLeftTime to set
+	 */
+	public void setExplosionLeftTime(int explosionLeftTime) {
+		this.explosionLeftTime = explosionLeftTime;
+	}
 
 	/**
 	 * CONSTRUCTORS
@@ -38,9 +57,15 @@ public class Bomb extends Item {
 	 * @param id
 	 * @param bombStatus
 	 */
-	public Bomb(int positionX, int positionY, int range, int id, int bombStatus) {
+	public Bomb(int positionX, int positionY, int range, int id, int bombStatus, int explosionLeftTime) {
 		super(positionX, positionY, range, id);
 		this.bombStatus = bombStatus;
+		this.explosionLeftTime = explosionLeftTime;
+		
+		
+		Timer timer1 = new Timer();
+		TimeTask timer1_task = new TimeTask(this);
+		timer1.schedule(timer1_task, 0, 1000);
 	}
 
 	/**

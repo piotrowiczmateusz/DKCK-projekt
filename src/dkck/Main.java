@@ -7,8 +7,8 @@ public class Main {
 	public static void main(String[] args) throws InterruptedException {
 
 		bombsList = new BombsArray();
-		Bomb b1 = new Bomb(2, 2, 2, 1, 1);
-		Bomb b2 = new Bomb(8, 16, 5, 2, 1);
+		Bomb b1 = new Bomb(2, 2, 2, 1, 1, 10);
+		Bomb b2 = new Bomb(8, 16, 5, 2, 1, 20);
 		bombsList.bombsArray.add(b1);
 		bombsList.bombsArray.add(b2);
 
