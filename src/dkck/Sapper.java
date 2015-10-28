@@ -78,10 +78,10 @@ public class Sapper extends Item {
 				this.setPositionY(this.getPositionY() - 1);
 			}
 			System.out.println("Position of sapper is: [" + this.getPositionX() + "][" + this.getPositionY() + "]");
-			if (itemToMove instanceof Bomb || itemToMove instanceof Sapper) {
+			if (itemToMove instanceof Bomb) {
 				itemToMove.setPositionX(this.getPositionX());
 				itemToMove.setPositionY(this.getPositionY());
-				System.out.println("Position of moving item is: [" + itemToMove.getPositionX() + "]["
+				System.out.println("Position of moving bomb is: [" + itemToMove.getPositionX() + "]["
 						+ itemToMove.getPositionY() + "]");
 			}
 
