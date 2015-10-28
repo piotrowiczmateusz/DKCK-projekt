@@ -64,9 +64,7 @@ public class Sapper extends Item {
 	 * Zmienia pozycje sapera i sprawdza czy znajduje siê w zasiêgu ra¿enia
 	 * bomby.
 	 */
-	
 
-	
 	public void go(int x, int y, Item itemToMove) throws InterruptedException {
 		while ((x != this.getPositionX()) || (y != this.getPositionY())) {
 			if (x > this.getPositionX()) {
@@ -79,20 +77,20 @@ public class Sapper extends Item {
 			} else if (y < this.getPositionY()) {
 				this.setPositionY(this.getPositionY() - 1);
 			}
-			System.out.println("Position is: [" + this.getPositionX() + "][" + this.getPositionY() + "]");
-			if(itemToMove instanceof Bomb || itemToMove instanceof Sapper)
-			{
+			System.out.println("Position of sapper is: [" + this.getPositionX() + "][" + this.getPositionY() + "]");
+			if (itemToMove instanceof Bomb || itemToMove instanceof Sapper) {
 				itemToMove.setPositionX(this.getPositionX());
 				itemToMove.setPositionY(this.getPositionY());
-				System.out.println("Position of moving item is: [" + itemToMove.getPositionX() + "][" + itemToMove.getPositionY() + "]");
+				System.out.println("Position of moving item is: [" + itemToMove.getPositionX() + "]["
+						+ itemToMove.getPositionY() + "]");
 			}
 
 			for (int i = 0; i < Main.itemsCollection.getItemsArray().size(); i++) {
 				Item tempItem = Main.itemsCollection.getItemsArray().get(i);
 				if (tempItem instanceof Bomb)
 					if (tempItem.checkItemsRange(this))
-						System.out
-								.println("Danger. The sapper is in the bomb nr: " + tempItem.getId() + " explosion range");
+						System.out.println(
+								"Danger. The sapper is in the bomb nr: " + tempItem.getId() + " explosion range");
 			}
 
 			// Tu bêdzie metoda rysuj¹ca sapera na mapie;
@@ -106,7 +104,9 @@ public class Sapper extends Item {
 	 * bomby.
 	 */
 	public void moveBomb(Bomb bomb, int x, int y) throws InterruptedException {
-		System.out.println("The sapper will try to move bomb nr: " + bomb.getId());
+		System.out.println("The sapper at position [" + this.getPositionX() + "][" + this.getPositionY()
+				+ "] will try to move bomb nr: " + bomb.getId() + " at the position [" + bomb.getPositionX() + "]["
+				+ bomb.getPositionY() + "] to the position: [" + x + "][" + y + "]");
 		this.go(bomb.getPositionX(), bomb.getPositionY(), null);
 		System.out.println("The sapper picked up a bomb.");
 		this.go(x, y, bomb);

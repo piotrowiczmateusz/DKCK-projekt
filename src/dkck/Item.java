@@ -101,7 +101,7 @@ public abstract class Item {
 
 	public boolean checkItemsRange(Item itemArgument) {
 
-		System.out.println("Range Calculation:");
+		System.out.println("RANGE CALCULATION:");
 
 		if (this instanceof Bomb) {
 			System.out.println("Bomb");
@@ -122,10 +122,10 @@ public abstract class Item {
 				+ Math.pow(this.getPositionY() - itemArgument.getPositionY(), 2)) <= this.getRange()
 						+ itemArgument.getRange()) {
 
-			System.out.println("Items are in their range");
+			System.out.println("Items are in their range!");
 			return true;
 		} else {
-			System.out.println("Items are NOT in their range");
+			System.out.println("Items are NOT in their range!");
 			return false;
 		}
 	}
