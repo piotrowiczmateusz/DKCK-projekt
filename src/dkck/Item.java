@@ -6,17 +6,17 @@ public abstract class Item {
 	 * ATTRIBUTES
 	 */
 	private int positionX;
-	
+
 	private int positionY;
-	
+
 	private int range;
-	
+
 	private int id;
-	
+
 	/**
 	 * SETTERS AND GETTERS
 	 */
-	
+
 	/**
 	 * @return the positionX
 	 */
@@ -25,7 +25,8 @@ public abstract class Item {
 	}
 
 	/**
-	 * @param positionX the positionX to set
+	 * @param positionX
+	 *            the positionX to set
 	 */
 	public void setPositionX(int positionX) {
 		this.positionX = positionX;
@@ -39,7 +40,8 @@ public abstract class Item {
 	}
 
 	/**
-	 * @param positionY the positionY to set
+	 * @param positionY
+	 *            the positionY to set
 	 */
 	public void setPositionY(int positionY) {
 		this.positionY = positionY;
@@ -53,7 +55,8 @@ public abstract class Item {
 	}
 
 	/**
-	 * @param range the range to set
+	 * @param range
+	 *            the range to set
 	 */
 	public void setRange(int range) {
 		this.range = range;
@@ -67,16 +70,16 @@ public abstract class Item {
 	}
 
 	/**
-	 * @param id the id to set
+	 * @param id
+	 *            the id to set
 	 */
 	public void setId(int id) {
 		this.id = id;
 	}
-	
+
 	/**
 	 * CONSTRUCTORS
 	 */
-	
 
 	/**
 	 * @param positionX
@@ -92,6 +95,19 @@ public abstract class Item {
 		this.id = id;
 	}
 
-	
+	/**
+	 * Sprawdza czy saper jest w zasiêgu ra¿enia bomby.
+	 */
+
+	public boolean checkItemsRange(Item itemArgument) {
+
+		if (Math.sqrt(Math.pow(this.getPositionX() - itemArgument.getPositionX(), 2)
+				+ Math.pow(this.getPositionY() - itemArgument.getPositionY(), 2)) <= this.getRange()
+						+ itemArgument.getRange()) {
+			System.out.println("Danger. The sapper is in the bomb nr: " + this.getId() + " explosion range");
+			return true;
+		} else
+			return false;
+	}
 
 }

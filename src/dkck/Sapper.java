@@ -81,7 +81,7 @@ public class Sapper extends Item {
 			for (int i = 0; i < Main.itemsCollection.getItemsArray().size(); i++) {
 				Item tempItem = Main.itemsCollection.getItemsArray().get(i);
 				if (tempItem instanceof Bomb)
-					((Bomb) Main.itemsCollection.getItemsArray().get(i)).checkExplosionRange(this);
+					((Bomb) Main.itemsCollection.getItemsArray().get(i)).checkItemsRange(this);
 			}
 
 			// Tu bêdzie metoda rysuj¹ca sapera na mapie;

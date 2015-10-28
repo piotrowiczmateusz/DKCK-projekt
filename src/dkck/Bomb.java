@@ -70,21 +70,7 @@ public class Bomb extends Item {
 	 * OTHER METHODS
 	 */
 
-	/**
-	 * Sprawdza czy saper jest w zasiêgu ra¿enia bomby.
-	 */
 
-	public boolean checkExplosionRange(Item sapper) {
-		if (sapper instanceof Sapper) {
-			if (Math.sqrt(Math.pow(this.getPositionX() - sapper.getPositionX(), 2)
-					+ Math.pow(this.getPositionY() - sapper.getPositionY(), 2)) <= this.getRange()
-							+ sapper.getRange()) {
-				System.out.println("Danger. The sapper is in the bomb nr: " + this.getId() + " explosion range");
-				return true;
-			}
-		}
-		return false;
-	}
 
 	/**
 	 * modyfikuje nieznacznie pola bomby i zmniejsza punkty ¿ycia dla Sapera
@@ -94,7 +80,7 @@ public class Bomb extends Item {
 		this.setBombStatus(0);
 		System.out.println("The bomb nr: " + this.getId() + " exploded");
 		this.setExplosionLeftTime(0);
-		if (this.checkExplosionRange(sapper) == true) {
+		if (this.checkItemsRange(sapper) == true) {
 			sapper.setHealthPoints(sapper.getHealthPoints() - 1);
 
 			if (sapper.getHealthPoints() == 0) {
