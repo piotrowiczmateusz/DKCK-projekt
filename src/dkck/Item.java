@@ -101,13 +101,33 @@ public abstract class Item {
 
 	public boolean checkItemsRange(Item itemArgument) {
 
+		System.out.println("Range Calculation:");
+
+		if (this instanceof Bomb) {
+			System.out.println("Bomb");
+		} else if (this instanceof Sapper) {
+			System.out.println("Sapper");
+		}
+		System.out.println("With id: " + this.id);
+
+		if (itemArgument instanceof Bomb) {
+			System.out.println("Bomb");
+		} else if (itemArgument instanceof Sapper) {
+			System.out.println("Sapper");
+		}
+
+		System.out.println("With id: " + itemArgument.id);
+
 		if (Math.sqrt(Math.pow(this.getPositionX() - itemArgument.getPositionX(), 2)
 				+ Math.pow(this.getPositionY() - itemArgument.getPositionY(), 2)) <= this.getRange()
 						+ itemArgument.getRange()) {
-			System.out.println("Danger. The sapper is in the bomb nr: " + this.getId() + " explosion range");
+
+			System.out.println("Items are in their range");
 			return true;
-		} else
+		} else {
+			System.out.println("Items are NOT in their range");
 			return false;
+		}
 	}
 
 }

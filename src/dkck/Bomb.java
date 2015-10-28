@@ -1,12 +1,12 @@
 package dkck;
 
-import java.util.Timer;
-
 public class Bomb extends Item {
 
 	/**
 	 * ATTRIBUTES
 	 */
+
+	TimeTask bombTimer;
 
 	private int bombStatus;// EXPLODED - 0, ACTIVE - 1, DISARMED - 2
 
@@ -62,15 +62,13 @@ public class Bomb extends Item {
 		this.bombStatus = bombStatus;
 		this.explosionLeftTime = explosionLeftTime;
 
-		TimeTask timer1_task = new TimeTask(this);
+		bombTimer = new TimeTask(this);
 
 	}
 
 	/**
 	 * OTHER METHODS
 	 */
-
-
 
 	/**
 	 * modyfikuje nieznacznie pola bomby i zmniejsza punkty ¿ycia dla Sapera
@@ -79,13 +77,14 @@ public class Bomb extends Item {
 	public void explode(Sapper sapper) {
 		this.setBombStatus(0);
 		System.out.println("The bomb nr: " + this.getId() + " exploded");
+		bombTimer.cancel();
 		this.setExplosionLeftTime(0);
 		if (this.checkItemsRange(sapper) == true) {
 			sapper.setHealthPoints(sapper.getHealthPoints() - 1);
 
 			if (sapper.getHealthPoints() == 0) {
 				sapper.setSapperStatus(false);
-				System.out.println("The sapper HP is: " + sapper.getHealthPoints() + " .The sapper is dead");
+				System.out.println("The sapper HP is: " + sapper.getHealthPoints() + ". The sapper is dead");
 			} else {
 				System.out.println("The sapper HP is: " + sapper.getHealthPoints());
 			}

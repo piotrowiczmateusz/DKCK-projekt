@@ -64,7 +64,10 @@ public class Sapper extends Item {
 	 * Zmienia pozycje sapera i sprawdza czy znajduje siê w zasiêgu ra¿enia
 	 * bomby.
 	 */
-	public void go(int x, int y) throws InterruptedException {
+	
+
+	
+	public void go(int x, int y, Item itemToMove) throws InterruptedException {
 		while ((x != this.getPositionX()) || (y != this.getPositionY())) {
 			if (x > this.getPositionX()) {
 				this.setPositionX(this.getPositionX() + 1);
@@ -76,12 +79,20 @@ public class Sapper extends Item {
 			} else if (y < this.getPositionY()) {
 				this.setPositionY(this.getPositionY() - 1);
 			}
-			System.out.println("Sapper position is: [" + this.getPositionX() + "][" + this.getPositionY() + "]");
+			System.out.println("Position is: [" + this.getPositionX() + "][" + this.getPositionY() + "]");
+			if(itemToMove instanceof Bomb || itemToMove instanceof Sapper)
+			{
+				itemToMove.setPositionX(this.getPositionX());
+				itemToMove.setPositionY(this.getPositionY());
+				System.out.println("Position of moving item is: [" + itemToMove.getPositionX() + "][" + itemToMove.getPositionY() + "]");
+			}
 
 			for (int i = 0; i < Main.itemsCollection.getItemsArray().size(); i++) {
 				Item tempItem = Main.itemsCollection.getItemsArray().get(i);
 				if (tempItem instanceof Bomb)
-					((Bomb) Main.itemsCollection.getItemsArray().get(i)).checkItemsRange(this);
+					if (tempItem.checkItemsRange(this))
+						System.out
+								.println("Danger. The sapper is in the bomb nr: " + tempItem.getId() + " explosion range");
 			}
 
 			// Tu bêdzie metoda rysuj¹ca sapera na mapie;
@@ -96,12 +107,11 @@ public class Sapper extends Item {
 	 */
 	public void moveBomb(Bomb bomb, int x, int y) throws InterruptedException {
 		System.out.println("The sapper will try to move bomb nr: " + bomb.getId());
-		this.go(bomb.getPositionX(), bomb.getPositionY());
+		this.go(bomb.getPositionX(), bomb.getPositionY(), null);
 		System.out.println("The sapper picked up a bomb.");
-		this.go(x, y);
-		bomb.setPositionX(x);
-		bomb.setPositionY(y);
-		System.out.println("The bomb was moved to [" + x + "][" + y + "]");
+		this.go(x, y, bomb);
+
+		System.out.println("The bomb was moved to [" + bomb.getPositionX() + "][" + bomb.getPositionY() + "]");
 	}
 
 	/**
@@ -109,7 +119,7 @@ public class Sapper extends Item {
 	 * wybuchnie.
 	 */
 	public void disarmBomb(Bomb bomb) throws InterruptedException {
-		go(bomb.getPositionX(), bomb.getPositionY());
+		go(bomb.getPositionX(), bomb.getPositionY(), null);
 
 		if (bomb.getBombStatus() != 1) {
 			System.out.println("The bomb nr: " + bomb.getId() + " was already disarmed");
