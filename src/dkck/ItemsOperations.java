@@ -5,6 +5,11 @@ import java.util.List;
 
 public class ItemsOperations {
 
+	private List<Item> itemsArray;
+	/**
+	 * SETTERS AND GETTERS
+	 */
+
 	/**
 	 * @return the itemsArray
 	 */
@@ -13,13 +18,16 @@ public class ItemsOperations {
 	}
 
 	/**
-	 * @param itemsArray the itemsArray to set
+	 * @param itemsArray
+	 *            the itemsArray to set
 	 */
 	public void setItemsArray(List<Item> itemsArray) {
 		this.itemsArray = itemsArray;
 	}
 
-	private List<Item> itemsArray;
+	/**
+	 * CONSTRUCTORS
+	 */
 
 	public ItemsOperations() {
 		super();
@@ -28,11 +36,11 @@ public class ItemsOperations {
 	}
 
 	public void actions() throws InterruptedException {
-		itemsArray.add((Item) new Bomb(2, 2, 2, 1, 1, 10));
+		itemsArray.add((Item) new Bomb(2, 2, 2, 1, 1, 10));//dodawanie do listy elementów dziedzicz¹cych z klasy Item z okreœlonymi parametrami
 		itemsArray.add((Item) new Bomb(8, 16, 5, 2, 1, 30));
 		itemsArray.add((Item) new Sapper(1, 1, 2, 0));
 
-		((Bomb) itemsArray.get(0)).explode(((Sapper) itemsArray.get(2)));
+		((Bomb) itemsArray.get(0)).explode(((Sapper) itemsArray.get(2)));//wywo³ywanie metod dla poszczególnych obiektów z lisy przy u¿yciu rzutowania (inteligentna funkcja wyszukuj¹ca obiekty po okreœlonym unikalnym dla obiektu ID jest jeszcze do napisania)
 
 		((Sapper) itemsArray.get(2)).moveBomb(((Bomb) itemsArray.get(0)), 6, 9);
 		((Sapper) itemsArray.get(2)).moveBomb(((Bomb) itemsArray.get(1)), 6, 9);

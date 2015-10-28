@@ -62,7 +62,6 @@ public class Bomb extends Item {
 		this.bombStatus = bombStatus;
 		this.explosionLeftTime = explosionLeftTime;
 
-		
 		TimeTask timer1_task = new TimeTask(this);
 
 	}
@@ -74,6 +73,7 @@ public class Bomb extends Item {
 	/**
 	 * Sprawdza czy saper jest w zasiêgu ra¿enia bomby.
 	 */
+
 	public boolean checkExplosionRange(Item sapper) {
 		if (sapper instanceof Sapper) {
 			if (Math.sqrt(Math.pow(this.getPositionX() - sapper.getPositionX(), 2)
@@ -85,6 +85,10 @@ public class Bomb extends Item {
 		}
 		return false;
 	}
+
+	/**
+	 * modyfikuje nieznacznie pola bomby i zmniejsza punkty ¿ycia dla Sapera
+	 */
 
 	public void explode(Sapper sapper) {
 		this.setBombStatus(0);

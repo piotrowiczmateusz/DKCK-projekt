@@ -86,7 +86,7 @@ public class Sapper extends Item {
 
 			// Tu bêdzie metoda rysuj¹ca sapera na mapie;
 
-			Thread.sleep(1000);
+			Thread.sleep(500);
 		}
 	}
 
