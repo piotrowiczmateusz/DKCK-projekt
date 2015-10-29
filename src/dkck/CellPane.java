@@ -1,10 +1,12 @@
+package dkck;
+
 import java.awt.Color;
 import java.awt.Dimension;
 
 import javax.swing.JPanel;
 
 public class CellPane extends JPanel {
-	private Color defaultBackground;
+	public Color defaultBackground;
 	
 	public CellPane() {
 		defaultBackground = getBackground();
@@ -12,8 +14,7 @@ public class CellPane extends JPanel {
 	}
 	
 	@Override
-	public Dimension getPreferredSize() {
-		
-		return new Dimension(15, 15);
+	public Dimension getPreferredSize() {		
+		return new Dimension(10, 10);
 	}
 }

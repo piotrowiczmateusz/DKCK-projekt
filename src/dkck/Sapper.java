@@ -48,12 +48,12 @@ public class Sapper extends Item {
 	/**
 	 * CONSTRUCTORS
 	 */
-
 	public Sapper(int positionX, int positionY, int range, int id) {
 		super(positionX, positionY, range, id);
 		this.setSapperStatus(true);
 		this.setHealthPoints(2);
-		// TODO Auto-generated constructor stub
+		
+		MainWindow.updateHPPanel("Sapper HP is: " + this.getHealthPoints());
 	}
 
 	/**
@@ -65,7 +65,12 @@ public class Sapper extends Item {
 	 * bomby.
 	 */
 	public void go(int x, int y) throws InterruptedException {
+			
 		while ((x != this.getPositionX()) || (y != this.getPositionY())) {
+			
+			int prevPositionX = this.getPositionX();
+			int prevPositionY = this.getPositionY();
+			
 			if (x > this.getPositionX()) {
 				this.setPositionX(this.getPositionX() + 1);
 			} else if (x < this.getPositionX()) {
@@ -76,15 +81,18 @@ public class Sapper extends Item {
 			} else if (y < this.getPositionY()) {
 				this.setPositionY(this.getPositionY() - 1);
 			}
-			System.out.println("Sapper position is: [" + this.getPositionX() + "][" + this.getPositionY() + "]");
-
-			for (int i = 0; i < Main.itemsCollection.getItemsArray().size(); i++) {
-				Item tempItem = Main.itemsCollection.getItemsArray().get(i);
+			
+			//System.out.println("Sapper position is: [" + this.getPositionX() + "][" + this.getPositionY() + "]");
+			//MainWindow.updateLog("Sapper position is: [" + this.getPositionX() + "][" + this.getPositionY() + "]");
+			MainWindow.updatePositionPanel("Sapper position is: [" + this.getPositionX() + "][" + this.getPositionY() + "]");
+			
+			for (int i = 0; i < MainWindow.itemsCollection.getItemsArray().size(); i++) {
+				Item tempItem = MainWindow.itemsCollection.getItemsArray().get(i);
 				if (tempItem instanceof Bomb)
-					((Bomb) Main.itemsCollection.getItemsArray().get(i)).checkExplosionRange(this);
+					((Bomb) MainWindow.itemsCollection.getItemsArray().get(i)).checkExplosionRange(this);
 			}
-
-			// Tu bêdzie metoda rysuj¹ca sapera na mapie;
+			
+			MainWindow.grid.drawSapper(prevPositionX, prevPositionY, this.getPositionX(), this.getPositionY());
 
 			Thread.sleep(500);
 		}
@@ -95,13 +103,24 @@ public class Sapper extends Item {
 	 * bomby.
 	 */
 	public void moveBomb(Bomb bomb, int x, int y) throws InterruptedException {
-		System.out.println("The sapper will try to move bomb nr: " + bomb.getId());
+		
+		//System.out.println("The sapper will try to move bomb nr: " + bomb.getId());
+		MainWindow.updateLog("The sapper will try to move bomb nr: " + bomb.getId());
+		
 		this.go(bomb.getPositionX(), bomb.getPositionY());
-		System.out.println("The sapper picked up a bomb.");
+		
+		//System.out.println("The sapper picked up a bomb.");
+		MainWindow.updateLog("The sapper picked up a bomb.");
+		
 		this.go(x, y);
 		bomb.setPositionX(x);
 		bomb.setPositionY(y);
-		System.out.println("The bomb was moved to [" + x + "][" + y + "]");
+		
+		//System.out.println("The bomb was moved to [" + x + "][" + y + "]");
+		MainWindow.updateLog("The bomb was moved to [" + x + "][" + y + "]");
+		
+		MainWindow.grid.drawBomb(x, y);
+		
 	}
 
 	/**
@@ -112,13 +131,19 @@ public class Sapper extends Item {
 		go(bomb.getPositionX(), bomb.getPositionY());
 
 		if (bomb.getBombStatus() != 1) {
-			System.out.println("The bomb nr: " + bomb.getId() + " was already disarmed");
+			
+			//System.out.println("The bomb nr: " + bomb.getId() + " was already disarmed");
+			MainWindow.updateLog("The bomb nr: " + bomb.getId() + " was already disarmed");
+			
 		} else {
 			Random generator = new Random();
 			int success = generator.nextInt(2);
 			if (success == 1) {
 				bomb.setBombStatus(2);
-				System.out.println("The bomb nr " + bomb.getId() + " is now disarmed");
+				
+				//System.out.println("The bomb nr " + bomb.getId() + " is now disarmed");
+				MainWindow.updateLog("The bomb nr " + bomb.getId() + " is now disarmed");
+				
 			} else {
 				bomb.explode(this);
 			}

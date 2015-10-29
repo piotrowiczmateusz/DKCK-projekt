@@ -91,7 +91,4 @@ public abstract class Item {
 		this.range = range;
 		this.id = id;
 	}
-
-	
-
 }
