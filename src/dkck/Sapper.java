@@ -78,12 +78,12 @@ public class Sapper extends Item {
 				this.setPositionY(this.getPositionY() - 1);
 			}
 			System.out.println("Position of sapper is: [" + this.getPositionX() + "][" + this.getPositionY() + "]");
-			if (itemToMove instanceof Bomb) {
+			if (itemToMove instanceof Bomb && itemToMove.getPositionX() == this.getPositionX() && itemToMove.getPositionY() == this.getPositionY()) {
 				itemToMove.setPositionX(this.getPositionX());
 				itemToMove.setPositionY(this.getPositionY());
 				System.out.println("Position of moving bomb is: [" + itemToMove.getPositionX() + "]["
 						+ itemToMove.getPositionY() + "]");
-			}
+			}else System.out.println("It is not possible to move bobm");
 
 			for (int i = 0; i < Main.itemsCollection.getItemsArray().size(); i++) {
 				Item tempItem = Main.itemsCollection.getItemsArray().get(i);

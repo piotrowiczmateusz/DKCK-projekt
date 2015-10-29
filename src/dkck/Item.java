@@ -95,13 +95,8 @@ public abstract class Item {
 		this.id = id;
 	}
 
-	/**
-	 * Sprawdza czy saper jest w zasiêgu ra¿enia bomby.
-	 */
-
-	public boolean checkItemsRange(Item itemArgument) {
-
-		System.out.println("RANGE CALCULATION:");
+	private double distanceCalculation(Item itemArgument) {
+		System.out.println("DISTANCE CALCULATION:");
 
 		Class<?> cls = null;
 		String tempText = "";
@@ -122,31 +117,24 @@ public abstract class Item {
 					tempText = "Sapper";
 				}
 				if (cls.isInstance(tempItem)) {
-					System.out.println(tempText + " with id: " + tempItem.id);
+					System.out.println(tempText + " with id: " + tempItem.id + " and position: [" + tempItem.getPositionX() + "][" + tempItem.getPositionY() + "]");
 				}
 			}
 		}
+		
+		double tempDistance = Math.sqrt(Math.pow(this.getPositionX() - itemArgument.getPositionX(), 2)
+				+ Math.pow(this.getPositionY() - itemArgument.getPositionY(), 2));
+		System.out.println("Distance is: " + tempDistance);
+		return tempDistance;
+	}
 
-		// if (cls.isInstance(this)) {
-		// System.out.println("Bomb");
-		// } else if (cls.isInstance(this)) {
-		// System.out.println("Sapper");
-		// } else {
-		// System.out.println("Error !!!");
-		// }
-		// System.out.println("With id: " + this.id);
-		//
-		// if (itemArgument instanceof Bomb) {
-		// System.out.println("Bomb");
-		// } else if (itemArgument instanceof Sapper) {
-		// System.out.println("Sapper");
-		// }
-		//
-		// System.out.println("With id: " + itemArgument.id);
+	/**
+	 * Sprawdza czy saper jest w zasiêgu ra¿enia bomby.
+	 */
 
-		if (Math.sqrt(Math.pow(this.getPositionX() - itemArgument.getPositionX(), 2)
-				+ Math.pow(this.getPositionY() - itemArgument.getPositionY(), 2)) <= this.getRange()
-						+ itemArgument.getRange()) {
+	public boolean checkItemsRange(Item itemArgument) {
+
+		if (distanceCalculation(itemArgument) <= this.getRange() + itemArgument.getRange()) {
 
 			System.out.println("Items are in their range!");
 			return true;
