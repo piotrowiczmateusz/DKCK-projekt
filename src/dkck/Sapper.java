@@ -54,6 +54,7 @@ public class Sapper extends Item {
 		this.setHealthPoints(2);
 		
 		MainWindow.updateHPPanel("Sapper HP is: " + this.getHealthPoints());
+		MainWindow.grid.drawSapper(0, 0, this.getPositionX(), this.getPositionY());
 	}
 
 	/**
@@ -64,8 +65,9 @@ public class Sapper extends Item {
 	 * Zmienia pozycje sapera i sprawdza czy znajduje siê w zasiêgu ra¿enia
 	 * bomby.
 	 */
+
 	public void go(int x, int y) throws InterruptedException {
-			
+
 		while ((x != this.getPositionX()) || (y != this.getPositionY())) {
 			
 			int prevPositionX = this.getPositionX();
@@ -82,19 +84,26 @@ public class Sapper extends Item {
 				this.setPositionY(this.getPositionY() - 1);
 			}
 			
-			//System.out.println("Sapper position is: [" + this.getPositionX() + "][" + this.getPositionY() + "]");
-			//MainWindow.updateLog("Sapper position is: [" + this.getPositionX() + "][" + this.getPositionY() + "]");
 			MainWindow.updatePositionPanel("Sapper position is: [" + this.getPositionX() + "][" + this.getPositionY() + "]");
 			
+			/*if (itemToMove instanceof Bomb && itemToMove.getPositionX() == this.getPositionX() && itemToMove.getPositionY() == this.getPositionY()) {
+				itemToMove.setPositionX(this.getPositionX());
+				itemToMove.setPositionY(this.getPositionY());
+				System.out.println("Position of moving bomb is: [" + itemToMove.getPositionX() + "]["
+						+ itemToMove.getPositionY() + "]");
+			} else System.out.println("It is not possible to move bomb");*/
+
 			for (int i = 0; i < MainWindow.itemsCollection.getItemsArray().size(); i++) {
 				Item tempItem = MainWindow.itemsCollection.getItemsArray().get(i);
-				if (tempItem instanceof Bomb)
-					((Bomb) MainWindow.itemsCollection.getItemsArray().get(i)).checkExplosionRange(this);
+				if (tempItem instanceof Bomb) {
+					if (this.checkItemsRange(tempItem)) {
+						//MainWindow.updateLog("");
+					}						
+				}
 			}
-			
 			MainWindow.grid.drawSapper(prevPositionX, prevPositionY, this.getPositionX(), this.getPositionY());
 
-			Thread.sleep(500);
+		Thread.sleep(500);
 		}
 	}
 
@@ -103,24 +112,22 @@ public class Sapper extends Item {
 	 * bomby.
 	 */
 	public void moveBomb(Bomb bomb, int x, int y) throws InterruptedException {
-		
-		//System.out.println("The sapper will try to move bomb nr: " + bomb.getId());
-		MainWindow.updateLog("The sapper will try to move bomb nr: " + bomb.getId());
+
+		MainWindow.updateLog("The sapper at position [" + this.getPositionX() + "][" + this.getPositionY()
+		+ "] will try to move bomb nr: " + bomb.getId() + " at the position [" + bomb.getPositionX() + "]["
+		+ bomb.getPositionY() + "] to the position: [" + x + "][" + y + "]");
 		
 		this.go(bomb.getPositionX(), bomb.getPositionY());
-		
-		//System.out.println("The sapper picked up a bomb.");
+			
 		MainWindow.updateLog("The sapper picked up a bomb.");
 		
 		this.go(x, y);
+
 		bomb.setPositionX(x);
 		bomb.setPositionY(y);
-		
-		//System.out.println("The bomb was moved to [" + x + "][" + y + "]");
-		MainWindow.updateLog("The bomb was moved to [" + x + "][" + y + "]");
-		
+	
+		MainWindow.updateLog("The bomb was moved to [" + x + "][" + y + "]");	
 		MainWindow.grid.drawBomb(x, y);
-		
 	}
 
 	/**
@@ -132,7 +139,6 @@ public class Sapper extends Item {
 
 		if (bomb.getBombStatus() != 1) {
 			
-			//System.out.println("The bomb nr: " + bomb.getId() + " was already disarmed");
 			MainWindow.updateLog("The bomb nr: " + bomb.getId() + " was already disarmed");
 			
 		} else {
@@ -141,7 +147,6 @@ public class Sapper extends Item {
 			if (success == 1) {
 				bomb.setBombStatus(2);
 				
-				//System.out.println("The bomb nr " + bomb.getId() + " is now disarmed");
 				MainWindow.updateLog("The bomb nr " + bomb.getId() + " is now disarmed");
 				
 			} else {

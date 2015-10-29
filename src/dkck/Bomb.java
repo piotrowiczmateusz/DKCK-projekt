@@ -6,6 +6,8 @@ public class Bomb extends Item {
 	 * ATTRIBUTES
 	 */
 
+	TimeTask bombTimer;
+
 	private int bombStatus;// EXPLODED - 0, ACTIVE - 1, DISARMED - 2
 
 	private int explosionLeftTime;// zmienna przechowujaca czas do wybuchu
@@ -27,6 +29,10 @@ public class Bomb extends Item {
 	 */
 	public void setBombStatus(int bombStatus) {
 		this.bombStatus = bombStatus;
+		if (bombStatus != 1)
+			bombTimer.cancel();
+		if (bombStatus == 0)
+			this.setExplosionLeftTime(0);
 	}
 
 	/**
@@ -60,7 +66,7 @@ public class Bomb extends Item {
 		this.bombStatus = bombStatus;
 		this.explosionLeftTime = explosionLeftTime;
 
-		TimeTask timer1_task = new TimeTask(this);
+		bombTimer = new TimeTask(this, 1000);
 		
 		MainWindow.grid.drawBomb(positionX, positionY);
 
@@ -79,9 +85,8 @@ public class Bomb extends Item {
 			if (Math.sqrt(Math.pow(this.getPositionX() - sapper.getPositionX(), 2)
 					+ Math.pow(this.getPositionY() - sapper.getPositionY(), 2)) <= this.getRange()
 							+ sapper.getRange()) {
-				
-				//System.out.println("Danger. The sapper is in the bomb nr: " + this.getId() + " explosion range");			
-				MainWindow.updateLog("Danger. The sapper is in the bomb nr: " + this.getId() + " explosion range");
+						
+				//MainWindow.updateLog("Danger. The sapper is in the bomb nr: " + this.getId() + " explosion range");
 				
 				return true;
 			}
@@ -92,31 +97,26 @@ public class Bomb extends Item {
 	/**
 	 * modyfikuje nieznacznie pola bomby i zmniejsza punkty ¿ycia dla Sapera
 	 */
-	
 	public void explode(Sapper sapper) {
 		
 		this.setBombStatus(0);
 		
-		//System.out.println("The bomb nr: " + this.getId() + " exploded");
 		MainWindow.updateLog("The bomb nr: " + this.getId() + " exploded");
-		
-		this.setExplosionLeftTime(0);
-		if (this.checkExplosionRange(sapper) == true) {
+	
+		// bombTimer.cancel();
+		if (this.checkItemsRange(sapper) == true) {
+
 			sapper.setHealthPoints(sapper.getHealthPoints() - 1);
 
 			if (sapper.getHealthPoints() == 0) {
 				sapper.setSapperStatus(false);
 				
-				//System.out.println("The sapper HP is: " + sapper.getHealthPoints() + " .The sapper is dead");
-				MainWindow.updateLog("The sapper HP is: " + sapper.getHealthPoints() + " .The sapper is dead");
-				
+				MainWindow.updateLog("The sapper HP is: " + sapper.getHealthPoints() + " .The sapper is dead");			
 				MainWindow.updateHPPanel("Sapper HP is: " + sapper.getHealthPoints());
-				
+
 			} else {
 				
-				//System.out.println("The sapper HP is: " + sapper.getHealthPoints());
-				MainWindow.updateLog("The sapper HP is: " + sapper.getHealthPoints());
-				
+				MainWindow.updateLog("The sapper HP is: " + sapper.getHealthPoints());				
 				MainWindow.updateHPPanel("Sapper HP is: " + sapper.getHealthPoints());
 			}
 		}
