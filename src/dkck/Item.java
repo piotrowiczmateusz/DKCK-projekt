@@ -1,5 +1,7 @@
 package dkck;
 
+import dkck.GUI.MainWindow;
+
 public abstract class Item {
 
 	/**
@@ -87,16 +89,16 @@ public abstract class Item {
 	 * @param range
 	 * @param id
 	 */
-	public Item(int positionX, int positionY, int range, int id) {
+	public Item(int positionX, int positionY, int range) {
 		super();
 		this.positionX = positionX;
 		this.positionY = positionY;
 		this.range = range;
-		this.id = id;
+		this.id = ItemsOperations.id++;
 	}
 
 	private double distanceCalculation(Item itemArgument) {
-		System.out.println("DISTANCE CALCULATION:");
+		MainWindow.updateLog("DISTANCE CALCULATION:");
 
 		Class<?> cls = null;
 		String tempText = "";
@@ -117,14 +119,14 @@ public abstract class Item {
 					tempText = "Sapper";
 				}
 				if (cls.isInstance(tempItem)) {
-					System.out.println(tempText + " with id: " + tempItem.id + " and position: [" + tempItem.getPositionX() + "][" + tempItem.getPositionY() + "]");
+					MainWindow.updateLog(tempText + " with id: " + tempItem.id + " and position: [" + tempItem.getPositionX() + "][" + tempItem.getPositionY() + "]");
 				}
 			}
 		}
 		
 		double tempDistance = Math.sqrt(Math.pow(this.getPositionX() - itemArgument.getPositionX(), 2)
 				+ Math.pow(this.getPositionY() - itemArgument.getPositionY(), 2));
-		System.out.println("Distance is: " + tempDistance);
+		MainWindow.updateLog("Distance is: " + tempDistance);
 		return tempDistance;
 	}
 
@@ -135,11 +137,10 @@ public abstract class Item {
 	public boolean checkItemsRange(Item itemArgument) {
 
 		if (distanceCalculation(itemArgument) <= this.getRange() + itemArgument.getRange()) {
-
-			System.out.println("Items are in their range!");
+			MainWindow.updateLog("Items are in their range!");
 			return true;
 		} else {
-			System.out.println("Items are NOT in their range!");
+			MainWindow.updateLog("Items are NOT in their range!");
 			return false;
 		}
 	}

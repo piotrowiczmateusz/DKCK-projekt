@@ -2,6 +2,8 @@ package dkck;
 
 import java.util.Random;
 
+import dkck.GUI.MainWindow;
+
 public class Sapper extends Item {
 
 	/**
@@ -48,8 +50,8 @@ public class Sapper extends Item {
 	/**
 	 * CONSTRUCTORS
 	 */
-	public Sapper(int positionX, int positionY, int range, int id) {
-		super(positionX, positionY, range, id);
+	public Sapper(int positionX, int positionY, int range) {
+		super(positionX, positionY, range);
 		this.setSapperStatus(true);
 		this.setHealthPoints(2);
 		

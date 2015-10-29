@@ -1,5 +1,7 @@
 package dkck;
 
+import dkck.GUI.MainWindow;
+
 public class Bomb extends Item {
 
 	/**
@@ -61,9 +63,9 @@ public class Bomb extends Item {
 	 * @param id
 	 * @param bombStatus
 	 */
-	public Bomb(int positionX, int positionY, int range, int id, int bombStatus, int explosionLeftTime) {
-		super(positionX, positionY, range, id);
-		this.bombStatus = bombStatus;
+	public Bomb(int positionX, int positionY, int range, int explosionLeftTime) {
+		super(positionX, positionY, range);
+		this.bombStatus = 0;
 		this.explosionLeftTime = explosionLeftTime;
 
 		bombTimer = new TimeTask(this, 1000);
