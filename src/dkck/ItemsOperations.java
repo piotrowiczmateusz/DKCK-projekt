@@ -51,7 +51,10 @@ public class ItemsOperations {
 		bombsArray.add(new Bomb(18, 10, 5, 30));
 		sappersArray.add(new Sapper(5, 5, 2));
 		
-		sappersArray.get(0).go(18, 18);
+		sappersArray.get(0).go(10, 14);
+		sappersArray.get(0).moveBomb(bombsArray.get(0), 14, 15);
+		sappersArray.get(0).go(10, 16);
+		
 		/*itemsArray.add((Item) new Bomb(2, 2, 2, 10));// dodawanie do listy
 															// elementów
 															// dziedzicz¹cych z
