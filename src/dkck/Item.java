@@ -103,20 +103,47 @@ public abstract class Item {
 
 		System.out.println("RANGE CALCULATION:");
 
-		if (this instanceof Bomb) {
-			System.out.println("Bomb");
-		} else if (this instanceof Sapper) {
-			System.out.println("Sapper");
-		}
-		System.out.println("With id: " + this.id);
+		Class<?> cls = null;
+		String tempText = "";
+		Item tempItem = null;
 
-		if (itemArgument instanceof Bomb) {
-			System.out.println("Bomb");
-		} else if (itemArgument instanceof Sapper) {
-			System.out.println("Sapper");
+		for (int j = 0; j < 2; ++j) {
+			if (j == 0)
+				tempItem = this;
+			else if (j == 1)
+				tempItem = itemArgument;
+
+			for (int i = 0; i < 2; ++i) {
+				if (i == 0) {
+					cls = Bomb.class;
+					tempText = "Bomb";
+				} else if (i == 1) {
+					cls = Sapper.class;
+					tempText = "Sapper";
+				}
+				if (cls.isInstance(tempItem)) {
+					System.out.println(tempText);
+					System.out.println("With id: " + tempItem.id);
+				}
+			}
 		}
 
-		System.out.println("With id: " + itemArgument.id);
+		// if (cls.isInstance(this)) {
+		// System.out.println("Bomb");
+		// } else if (cls.isInstance(this)) {
+		// System.out.println("Sapper");
+		// } else {
+		// System.out.println("Error !!!");
+		// }
+		// System.out.println("With id: " + this.id);
+		//
+		// if (itemArgument instanceof Bomb) {
+		// System.out.println("Bomb");
+		// } else if (itemArgument instanceof Sapper) {
+		// System.out.println("Sapper");
+		// }
+		//
+		// System.out.println("With id: " + itemArgument.id);
 
 		if (Math.sqrt(Math.pow(this.getPositionX() - itemArgument.getPositionX(), 2)
 				+ Math.pow(this.getPositionY() - itemArgument.getPositionY(), 2)) <= this.getRange()

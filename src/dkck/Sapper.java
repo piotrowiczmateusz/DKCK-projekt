@@ -88,7 +88,7 @@ public class Sapper extends Item {
 			for (int i = 0; i < Main.itemsCollection.getItemsArray().size(); i++) {
 				Item tempItem = Main.itemsCollection.getItemsArray().get(i);
 				if (tempItem instanceof Bomb)
-					if (tempItem.checkItemsRange(this))
+					if (this.checkItemsRange(tempItem))
 						System.out.println(
 								"Danger. The sapper is in the bomb nr: " + tempItem.getId() + " explosion range");
 			}
