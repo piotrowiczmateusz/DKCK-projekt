@@ -122,8 +122,7 @@ public abstract class Item {
 					tempText = "Sapper";
 				}
 				if (cls.isInstance(tempItem)) {
-					System.out.println(tempText);
-					System.out.println("With id: " + tempItem.id);
+					System.out.println(tempText + " with id: " + tempItem.id);
 				}
 			}
 		}

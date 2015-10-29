@@ -29,6 +29,10 @@ public class Bomb extends Item {
 	 */
 	public void setBombStatus(int bombStatus) {
 		this.bombStatus = bombStatus;
+		if (bombStatus != 1)
+			bombTimer.cancel();
+		if (bombStatus == 0)
+			this.setExplosionLeftTime(0);
 	}
 
 	/**
@@ -62,7 +66,7 @@ public class Bomb extends Item {
 		this.bombStatus = bombStatus;
 		this.explosionLeftTime = explosionLeftTime;
 
-		bombTimer = new TimeTask(this);
+		bombTimer = new TimeTask(this, 1000);
 
 	}
 
@@ -77,8 +81,7 @@ public class Bomb extends Item {
 	public void explode(Sapper sapper) {
 		this.setBombStatus(0);
 		System.out.println("The bomb nr: " + this.getId() + " exploded");
-		bombTimer.cancel();
-		this.setExplosionLeftTime(0);
+		// bombTimer.cancel();
 		if (this.checkItemsRange(sapper) == true) {
 			sapper.setHealthPoints(sapper.getHealthPoints() - 1);
 

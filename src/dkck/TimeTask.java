@@ -11,11 +11,12 @@ public class TimeTask extends TimerTask {
 	/**
 	 * @param itemReference
 	 */
-	public TimeTask(Item itemReference) {
+	public TimeTask(Item itemReference, int frequency) {
 		super();
 		this.itemReference = itemReference;
 		timer1 = new Timer();
-		timer1.schedule(this, 0, 1000);
+		if (itemReference instanceof Bomb)
+			timer1.schedule(this, 0, frequency);
 	}
 
 	public void run() {
