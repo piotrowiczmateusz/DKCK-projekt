@@ -54,6 +54,8 @@ public class ItemsOperations {
 		sappersArray.get(0).go(10, 14);
 		sappersArray.get(0).moveBomb(bombsArray.get(0), 14, 15);
 		sappersArray.get(0).go(10, 16);
+		sappersArray.get(0).moveBomb(bombsArray.get(1), 13, 6);
+		sappersArray.get(0).go(5, 3);
 		
 		/*itemsArray.add((Item) new Bomb(2, 2, 2, 10));// dodawanie do listy
 															// elementów
