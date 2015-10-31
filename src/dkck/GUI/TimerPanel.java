@@ -8,15 +8,14 @@ import java.awt.Rectangle;
 import javax.swing.BorderFactory;
 import javax.swing.JTextArea;
 
-public class LogPanel extends JTextArea {
-	
-	public LogPanel() {    
-		super();	
-		setBackground(Color.white);
-		setPreferredSize(new Dimension(360, 200));
+public class TimerPanel extends JTextArea {
+	public TimerPanel() {	    
+		super();	    
+		setOpaque(true);
+		setPreferredSize(new Dimension(360, 160));
 		setBorder(BorderFactory.createLineBorder(Color.black));
-		setBounds(new Rectangle(new Point(180, 10), getPreferredSize()));	
+		setBounds(new Rectangle(new Point(510, 10), getPreferredSize()));
 		setEditable(false);
-		setLineWrap(true);  
+		setLineWrap(true);
 	}
 }

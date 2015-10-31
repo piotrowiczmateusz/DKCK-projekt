@@ -18,10 +18,10 @@ public class Grid extends JPanel {
 	
 	public List<List<CellPane>> cellPanes = new ArrayList<List<CellPane>>();
 	
-	
 	public Grid() {
-		setLayout(new GridBagLayout());
 		
+		setLayout(new GridBagLayout());
+	
 		GridBagConstraints gbc = new GridBagConstraints();
 		for(int row = 0; row < ROWS; row++) {
 			

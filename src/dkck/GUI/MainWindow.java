@@ -1,26 +1,10 @@
 package dkck.GUI;
 
 import java.awt.BorderLayout;
-import java.awt.Color;
 import java.awt.Dimension;
-import java.awt.Graphics;
-import java.awt.Insets;
-import java.awt.Point;
-import java.awt.Rectangle;
-import java.awt.ScrollPane;
 
-import javax.swing.BorderFactory;
-import javax.swing.BoxLayout;
-import javax.swing.JComponent;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
-import javax.swing.JPanel;
-import javax.swing.JScrollPane;
-import javax.swing.JTextArea;
-import javax.swing.JTextField;
-import javax.swing.JTextPane;
-import javax.swing.SpringLayout;
-import javax.swing.SwingConstants;
 
 import dkck.ItemsOperations;
 
@@ -28,15 +12,31 @@ public class MainWindow extends JFrame {
 
 	public static ItemsOperations itemsCollection;
 	
-	// Window elements
+	// Window elements	
+	
+	// Main panels 
+	
+	private static GridPanel gridPanel = new GridPanel();
+	private static RightPanel rightPanel = new RightPanel();
+	private static BottomPanel bottomPanel = new BottomPanel();
+	
+	// GridPanel elements
 	
 	public static Grid grid = new Grid();
-	public static JPanel panel = new JPanel();
-	public static JLabel HPPanel = new JLabel();
-	public static JTextArea positionPanel = new JTextArea();
-	public static JTextArea logPanel = new JTextArea();
-	public static JScrollPane logScrollPane = new JScrollPane(logPanel);
-	public static JTextField consoleIn = new JTextField();
+	
+	// RightPanel elements
+	
+	private static HPPanel HPPanel = new HPPanel();
+	private static PositionPanel positionPanel = new PositionPanel();
+	private static TimerPanel timerPanel = new TimerPanel();
+	private static LogPanel logPanel = new LogPanel();
+	
+	// Bottom Panel elements
+	
+	public static ConsoleIn consoleIn = new ConsoleIn();
+	private static SubmitButton submitButton = new SubmitButton();
+	
+	// Methods
 	
 	public static void updateLog(String message) {
 		String log = MainWindow.logPanel.getText();
@@ -51,59 +51,43 @@ public class MainWindow extends JFrame {
 		MainWindow.positionPanel.setText(message);
 	}
 	
+	public static void updateTimerPanel(String message) {
+		String log = MainWindow.timerPanel.getText();
+		MainWindow.timerPanel.setText(message + "\n" + log);
+	}
+	
 	public static void main(String[] args) throws InterruptedException {
-		MainWindow mainWindow = new MainWindow();
-		
-		mainWindow.setSize(600, 700);
+		new MainWindow();
 		itemsCollection = new ItemsOperations();
-		itemsCollection.actions();	
+		itemsCollection.actions();		
 	}
 	
 	public MainWindow() {
 		
-		super("Test");
+		super();
 		
 		setDefaultCloseOperation(EXIT_ON_CLOSE);
+		setPreferredSize(new Dimension(900, 578));
 		
-		//Config
+		//Add elements to panels
 		
-		panel.setBackground(Color.lightGray);
-		panel.setPreferredSize(new Dimension(600, 170));
-		panel.setBorder(BorderFactory.createLineBorder(Color.black));
-		panel.setLayout(null);
+		gridPanel.add(grid);
 		
-		HPPanel.setOpaque(true);
-		HPPanel.setBackground(Color.white);
-		HPPanel.setPreferredSize(new Dimension(150, 25));
-		HPPanel.setBorder(BorderFactory.createLineBorder(Color.black));
-		HPPanel.setHorizontalAlignment(SwingConstants.CENTER);
-		HPPanel.setBounds(new Rectangle(new Point(10, 10), HPPanel.getPreferredSize()));
+		rightPanel.add(HPPanel);
+		rightPanel.add(positionPanel);	
+		rightPanel.add(new JLabel("Timer window:"));
+		rightPanel.add(timerPanel);
+		rightPanel.add(new JLabel("Log window:"));
+		rightPanel.add(logPanel);
 		
-		positionPanel.setBackground(Color.white);
-		positionPanel.setPreferredSize(new Dimension(150, 25));
-		positionPanel.setBorder(BorderFactory.createLineBorder(Color.black));
-		positionPanel.setLineWrap(true);
-		positionPanel.setBounds(new Rectangle(new Point(10, 45), positionPanel.getPreferredSize()));
+		bottomPanel.add(consoleIn);
+		bottomPanel.add(submitButton);
 		
-		logScrollPane.setBackground(Color.white);
-		logScrollPane.setPreferredSize(new Dimension(410, 110));
-		logScrollPane.setBorder(BorderFactory.createLineBorder(Color.black));
-		logScrollPane.setBounds(new Rectangle(new Point(170, 10), logScrollPane.getPreferredSize()));
-				
-		consoleIn.setBackground(Color.white);
-		consoleIn.setPreferredSize(new Dimension(570, 30));
-		consoleIn.setBorder(BorderFactory.createLineBorder(Color.black));
-		consoleIn.setBounds(new Rectangle(new Point(10, 130), consoleIn.getPreferredSize()));
+		// add panels to window
 		
-		//Add elements to window
-		
-		panel.add(HPPanel);
-		panel.add(positionPanel);
-		panel.add(logScrollPane);
-		panel.add(consoleIn);
-		
-		add(grid, BorderLayout.NORTH);
-		add(panel, BorderLayout.SOUTH);
+		add(gridPanel, BorderLayout.WEST);
+		add(rightPanel, BorderLayout.EAST);
+		add(bottomPanel, BorderLayout.SOUTH);
 	
 		pack();
 		setLocationRelativeTo(null);
@@ -111,5 +95,4 @@ public class MainWindow extends JFrame {
 		setResizable(false);
 		
 	}
-
 }

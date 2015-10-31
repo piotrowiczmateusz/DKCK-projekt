@@ -6,6 +6,7 @@ import java.awt.Dimension;
 import javax.swing.JPanel;
 
 public class CellPane extends JPanel {
+	
 	public Color defaultBackground;
 	
 	public CellPane() {

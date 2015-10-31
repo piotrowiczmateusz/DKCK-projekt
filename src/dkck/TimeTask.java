@@ -27,10 +27,10 @@ public class TimeTask extends TimerTask {
 			Bomb tempBombReference = ((Bomb) itemReference);
 			if (tempBombReference.getExplosionLeftTime() > 0) {
 				tempBombReference.setExplosionLeftTime(tempBombReference.getExplosionLeftTime() - 1);
-				MainWindow.updateLog("Bomb nr: " + tempBombReference.getId() + " has: "
+				MainWindow.updateTimerPanel("Bomb nr: " + tempBombReference.getId() + " has: "
 						+ tempBombReference.getExplosionLeftTime() + " seconds left to explosion");
 			} else {
-				MainWindow.updateLog("Bomb nr: " + tempBombReference.getId() + " EXPLODED!");
+				MainWindow.updateTimerPanel("Bomb nr: " + tempBombReference.getId() + " EXPLODED!");
 				this.cancel();
 			}
 		}
