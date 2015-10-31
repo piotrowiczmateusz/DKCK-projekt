@@ -39,7 +39,22 @@ public class ItemsOperations {
 
 	public void actions() throws InterruptedException {
 		
+<<<<<<< HEAD
 		itemsArray.add((Item) new Bomb(2, 2, 2, 10));// dodawanie do listy
+=======
+		bombsArray.add(new Bomb(2, 2, 2, 10));
+		bombsArray.add(new Bomb(8, 16, 5, 30));
+		bombsArray.add(new Bomb(18, 10, 5, 30));
+		sappersArray.add(new Sapper(5, 5, 2));
+		
+		sappersArray.get(0).go(10, 14);
+		sappersArray.get(0).moveBomb(bombsArray.get(0), 14, 15);
+		sappersArray.get(0).go(10, 16);
+		sappersArray.get(0).moveBomb(bombsArray.get(1), 13, 6);
+		sappersArray.get(0).go(5, 3);
+		
+		/*itemsArray.add((Item) new Bomb(2, 2, 2, 10));// dodawanie do listy
+>>>>>>> 8dc121a9ea79da1b18fa5147dda78d990b947efd
 															// elementów
 															// dziedzicz¹cych z
 															// klasy Item z

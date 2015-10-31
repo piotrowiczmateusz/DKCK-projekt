@@ -131,7 +131,7 @@ public abstract class Item {
 	}
 
 	/**
-	 * Sprawdza czy saper jest w zasiêgu ra¿enia bomby.
+	 * Sprawdza czy item jest w zasiêgu innego itemu
 	 */
 
 	public boolean checkItemsRange(Item itemArgument) {
@@ -141,6 +141,22 @@ public abstract class Item {
 			return true;
 		} else {
 			MainWindow.updateLog("Items are NOT in their range!");
+			return false;
+		}
+	}
+	
+	/**
+	 * Sprawdza czy œrodek obiektu jest w zasiêgu itemu
+	 */
+	
+	public boolean checkItemsCenterDistance(Item itemArgument)
+	{
+		if (distanceCalculation(itemArgument) <= this.getRange()) {
+
+			System.out.println("Center of another Item is included in this range!");
+			return true;
+		} else {
+			System.out.println("Center of another Item is NOT included in this range!!");
 			return false;
 		}
 	}
