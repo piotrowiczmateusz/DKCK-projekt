@@ -96,7 +96,7 @@ public class Bomb extends Item {
 
 		bombTimer = new TimeTask(this, 1000);
 
-		MainWindow.grid.drawBomb(positionX, positionY);
+		MainWindow.grid.drawBomb(0, 0, positionX, positionY);
 
 	}
 

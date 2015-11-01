@@ -64,7 +64,9 @@ public class Grid extends JPanel {
 		this.cellPanes.get(x).get(y).setBackground(Color.gray);
 	}
 	
-	public void drawBomb(int x, int y) {
+	public void drawBomb(int prevX, int prevY, int x, int y) {
+
+		this.cellPanes.get(prevX).get(prevY).setBackground(this.getBackground());
 		this.cellPanes.get(x).get(y).setBackground(Color.black);
 	}
 	

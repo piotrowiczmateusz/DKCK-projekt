@@ -14,6 +14,8 @@ import javax.swing.JTextArea;
 import javax.swing.JTextField;
 import javax.swing.SwingConstants;
 
+import dkck.GUI.Grid;
+
 public class MainWindow extends JFrame {
 
 	/**

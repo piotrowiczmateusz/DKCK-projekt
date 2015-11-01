@@ -54,6 +54,7 @@ public class ItemsOperations {
 		itemsArray.add((Item) new Bomb(16, 8, 5, 30));
 		itemsArray.add((Item) new Bomb(7, 20, 5, 30));
 		itemsArray.add((Item) new Sapper(2, 2, 2));
+		itemsArray.add((Item) new Sapper(8, 9, 2));
 		
 		for (int i = 0; i < itemsArray.size(); i++) {
 			Item tempItem = itemsArray.get(i);
@@ -72,7 +73,7 @@ public class ItemsOperations {
 		
 		((Sapper) itemsArray.get(3)).go(3, 9, null);
 		
-		((Sapper) itemsArray.get(3)).moveBomb(((Bomb) itemsArray.get(1)), 6, 3);
+		((Sapper) itemsArray.get(3)).moveBomb(((Bomb) itemsArray.get(1)), 6, 35);
 		
 		((Sapper) itemsArray.get(3)).go(49, 49, null);
 		
