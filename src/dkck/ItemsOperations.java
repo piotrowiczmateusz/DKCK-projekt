@@ -41,7 +41,7 @@ public class ItemsOperations {
 	}
 
 	public void actions() throws InterruptedException {
-		
+
 		itemsArray.add((Item) new Bomb(2, 2, 2, 10));// dodawanie do listy
 
 															// elementów
