@@ -1,5 +1,11 @@
 package dkck;
 
+import java.awt.Color;
+import java.awt.Dimension;
+
+import javax.swing.JTextField;
+import javax.swing.border.MatteBorder;
+
 import dkck.GUI.MainWindow;
 
 public class Bomb extends Item {
@@ -14,6 +20,8 @@ public class Bomb extends Item {
 
 	private int explosionLeftTime;// zmienna przechowujaca czas do wybuchu
 
+	private JTextField timerLog;
+	
 	/**
 	 * SETTERS AND GETTERS
 	 */
@@ -51,6 +59,20 @@ public class Bomb extends Item {
 	public void setExplosionLeftTime(int explosionLeftTime) {
 		this.explosionLeftTime = explosionLeftTime;
 	}
+	
+	/**
+	 * @return the timerLog
+	 */
+	public JTextField getTimerLog() {
+		return timerLog;
+	}
+
+	/**
+	 * @param timerLog the timerLog to set
+	 */
+	public void setTimerLog(JTextField timerLog) {
+		this.timerLog = timerLog;
+	}
 
 	/**
 	 * CONSTRUCTORS
@@ -67,7 +89,14 @@ public class Bomb extends Item {
 		super(positionX, positionY, range);
 		this.bombStatus = 0;
 		this.explosionLeftTime = explosionLeftTime;
-
+		this.timerLog = new JTextField();
+		
+		timerLog.setOpaque(true);
+		timerLog.setBackground(Color.white);
+		timerLog.setBorder(new MatteBorder(0, 0, 0, 0, (Color) new Color(0, 0, 0)));
+		timerLog.setPreferredSize(new Dimension(358, 14));
+		timerLog.setEditable(false);
+		
 		bombTimer = new TimeTask(this, 1000);
 		
 		MainWindow.grid.drawBomb(positionX, positionY);

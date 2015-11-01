@@ -1,5 +1,6 @@
 package dkck;
 
+import java.awt.Color;
 import java.util.Random;
 
 import dkck.GUI.MainWindow;
@@ -140,7 +141,9 @@ public class Sapper extends Item {
 		
 		this.go(x, y, bomb);
 		
-		if(x != 0) {
+		// Sprawdza, czy przenosi bombe na krawedz planszy lub, czy na tym miejscu nie ma innej bomby.
+		
+		if((x != 0) && (MainWindow.grid.cellPanes.get(x-1).get(y).getBackground() != Color.black)) {
 			bomb.setPositionX(x-1);
 			bomb.setPositionY(y);
 			
@@ -149,17 +152,20 @@ public class Sapper extends Item {
 		}
 		else {
 			bomb.setPositionX(x);
-			if(y != 0) {
+			if((y != 0) && (MainWindow.grid.cellPanes.get(x).get(y-1).getBackground() != Color.black)) {
 				bomb.setPositionY(y-1);
 				
 				MainWindow.grid.drawBomb(x, y-1);
 				MainWindow.updateLog("The bomb was moved to [" + x + "][" + (y-1) + "]");
 			}
-			else if(y != 50) {
+			else if((y != 50) && (MainWindow.grid.cellPanes.get(x).get(y+1).getBackground() != Color.black)) {
 				bomb.setPositionY(y+1);
 				
 				MainWindow.grid.drawBomb(x, y+1);
 				MainWindow.updateLog("The bomb was moved to [" + x + "][" + (y+1) + "]");
+			}
+			else {
+				MainWindow.updateLog("It was impossible to move bomb to [" + x + "][" + (y+1) + "]. Choose different coordinates.");
 			}
 		}
 	}

@@ -6,6 +6,8 @@ import java.awt.Dimension;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 
+import dkck.Bomb;
+import dkck.Item;
 import dkck.ItemsOperations;
 
 public class MainWindow extends JFrame {
@@ -28,7 +30,7 @@ public class MainWindow extends JFrame {
 	
 	private static HPPanel HPPanel = new HPPanel();
 	private static PositionPanel positionPanel = new PositionPanel();
-	private static TimerPanel timerPanel = new TimerPanel();
+	public static TimerPanel timerPanel = new TimerPanel();
 	private static LogPanel logPanel = new LogPanel();
 	
 	// Bottom Panel elements
@@ -52,14 +54,14 @@ public class MainWindow extends JFrame {
 	}
 	
 	public static void updateTimerPanel(String message) {
-		String log = MainWindow.timerPanel.getText();
-		MainWindow.timerPanel.setText(message + "\n" + log);
+		//String log = MainWindow.timerPanel.getText();
+		//MainWindow.timerPanel.setText(message + "\n" + log);
 	}
 	
 	public static void main(String[] args) throws InterruptedException {
 		new MainWindow();
 		itemsCollection = new ItemsOperations();
-		itemsCollection.actions();		
+		itemsCollection.actions();			
 	}
 	
 	public MainWindow() {
