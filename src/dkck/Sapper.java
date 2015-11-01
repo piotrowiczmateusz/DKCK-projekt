@@ -106,21 +106,23 @@ public class Sapper extends Item {
 
 			for (int i = 0; i < MainWindow.itemsCollection.getItemsArray().size(); i++) {
 				Item tempItem = MainWindow.itemsCollection.getItemsArray().get(i);
+				int tempX = tempItem.getPositionX();
+				int tempY = tempItem.getPositionY();
 				if (tempItem instanceof Bomb) {
 
-					int bombX = tempItem.getPositionX();
-					int bombY = tempItem.getPositionY();
+					MainWindow.grid.drawBomb(prevPositionX, prevPositionY, tempX, tempY);
 
-					MainWindow.grid.drawBomb(prevPositionX, prevPositionY, bombX, bombY);
-
-					if ((bombX == this.getPositionX()) && (bombY == this.getPositionY())) {
+					if ((tempX == this.getPositionX()) && (tempY == this.getPositionY())) {
 						MainWindow.grid.drawSapper(prevPositionX, prevPositionY, this.getPositionX(),
 								this.getPositionY());
 					}
 
 					this.checkItemsRange(tempItem);
-
-				}
+				} 
+//				else if (tempItem instanceof Sapper) {
+//					MainWindow.grid.drawSapper(tempItem.getPositionX(), tempItem.getPositionY(),
+//							tempItem.getPositionX(), tempItem.getPositionY());
+//				}
 			}
 			Thread.sleep(30);
 		}
