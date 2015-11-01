@@ -119,7 +119,7 @@ public class Sapper extends Item {
 
 				}
 			}
-			Thread.sleep(100);
+			Thread.sleep(30);
 		}
 	}
 
@@ -165,6 +165,7 @@ public class Sapper extends Item {
 						+ "]. Choose different coordinates.");
 			}
 		}
+
 	}
 
 	/**

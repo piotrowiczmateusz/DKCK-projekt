@@ -69,6 +69,14 @@ public class ItemsOperations {
 		((Bomb) itemsArray.get(0)).explode(itemsArray.get(3));
 		
 		((Sapper) itemsArray.get(3)).moveBomb(((Bomb) itemsArray.get(1)), 2, 3);
+		
+		((Sapper) itemsArray.get(3)).go(3, 9, null);
+		
+		((Sapper) itemsArray.get(3)).moveBomb(((Bomb) itemsArray.get(1)), 6, 3);
+		
+		((Sapper) itemsArray.get(3)).go(49, 49, null);
+		
+		
 		//((Sapper) itemsArray.get(3)).go(7, 7, null);
 		//((Bomb) itemsArray.get(0)).explode(((Sapper) itemsArray.get(2)));//wywo³ywanie metod dla poszczególnych obiektów z lisy przy u¿yciu rzutowania (inteligentna funkcja wyszukuj¹ca obiekty po okreœlonym unikalnym dla obiektu ID jest jeszcze do napisania)
 
