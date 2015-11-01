@@ -12,6 +12,11 @@ import javax.swing.border.MatteBorder;
 
 public class Grid extends JPanel {
 	
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+
 	protected int ROWS = 50;
 	
 	protected int COLUMNS = 50;

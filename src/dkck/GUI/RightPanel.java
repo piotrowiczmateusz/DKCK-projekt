@@ -8,6 +8,11 @@ import javax.swing.UIManager;
 import javax.swing.border.MatteBorder;
 
 public class RightPanel extends JPanel {
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+
 	public RightPanel() {
 		super();
 		setBackground(UIManager.getColor("Panel.background"));

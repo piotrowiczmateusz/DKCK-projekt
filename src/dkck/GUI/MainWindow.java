@@ -6,11 +6,14 @@ import java.awt.Dimension;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 
-import dkck.Bomb;
-import dkck.Item;
 import dkck.ItemsOperations;
 
 public class MainWindow extends JFrame {
+
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 
 	public static ItemsOperations itemsCollection;
 	

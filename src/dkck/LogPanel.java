@@ -6,6 +6,11 @@ import javax.swing.JScrollPane;
 
 public class LogPanel extends JFrame {
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+
 	private JTextArea textArea = null;
 
 	private JScrollPane pane = null;

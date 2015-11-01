@@ -7,6 +7,11 @@ import javax.swing.JPanel;
 import javax.swing.border.MatteBorder;
 
 public class BottomPanel extends JPanel {
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+
 	public BottomPanel() {
 		super();
 		setBorder(new MatteBorder(1, 0, 0, 0, (Color) new Color(0, 0, 0)));

@@ -11,6 +11,11 @@ import javax.swing.JLabel;
 import javax.swing.SwingConstants;
 
 public class PositionPanel extends JLabel {
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+
 	public PositionPanel() {
 		super();
 		setOpaque(true);
