@@ -21,7 +21,7 @@ public class Bomb extends Item {
 	private int explosionLeftTime;// zmienna przechowujaca czas do wybuchu
 
 	private JTextField timerLog;
-	
+
 	/**
 	 * SETTERS AND GETTERS
 	 */
@@ -39,10 +39,6 @@ public class Bomb extends Item {
 	 */
 	public void setBombStatus(int bombStatus) {
 		this.bombStatus = bombStatus;
-		if (bombStatus != 1)
-			bombTimer.cancel();
-		if (bombStatus == 0)
-			this.setExplosionLeftTime(0);
 	}
 
 	/**
@@ -59,7 +55,7 @@ public class Bomb extends Item {
 	public void setExplosionLeftTime(int explosionLeftTime) {
 		this.explosionLeftTime = explosionLeftTime;
 	}
-	
+
 	/**
 	 * @return the timerLog
 	 */
@@ -68,7 +64,8 @@ public class Bomb extends Item {
 	}
 
 	/**
-	 * @param timerLog the timerLog to set
+	 * @param timerLog
+	 *            the timerLog to set
 	 */
 	public void setTimerLog(JTextField timerLog) {
 		this.timerLog = timerLog;
@@ -90,15 +87,15 @@ public class Bomb extends Item {
 		this.bombStatus = 0;
 		this.explosionLeftTime = explosionLeftTime;
 		this.timerLog = new JTextField();
-		
+
 		timerLog.setOpaque(true);
 		timerLog.setBackground(Color.white);
 		timerLog.setBorder(new MatteBorder(0, 0, 0, 0, (Color) new Color(0, 0, 0)));
 		timerLog.setPreferredSize(new Dimension(358, 14));
 		timerLog.setEditable(false);
-		
+
 		bombTimer = new TimeTask(this, 1000);
-		
+
 		MainWindow.grid.drawBomb(positionX, positionY);
 
 	}
@@ -108,48 +105,34 @@ public class Bomb extends Item {
 	 */
 
 	/**
-	 * Sprawdza czy saper jest w zasiêgu ra¿enia bomby.
-	 */
-
-	public boolean checkExplosionRange(Item sapper) {
-		if (sapper instanceof Sapper) {
-			if (Math.sqrt(Math.pow(this.getPositionX() - sapper.getPositionX(), 2)
-					+ Math.pow(this.getPositionY() - sapper.getPositionY(), 2)) <= this.getRange()
-							+ sapper.getRange()) {
-						
-				//MainWindow.updateLog("Danger. The sapper is in the bomb nr: " + this.getId() + " explosion range");
-				
-				return true;
-			}
-		}
-		return false;
-	}
-
-	/**
 	 * modyfikuje nieznacznie pola bomby i zmniejsza punkty ¿ycia dla Sapera
 	 */
-	public void explode(Sapper sapper) {
-		
+	public void explode(Item itemArgument) {
+		// this.bombTimer.cancel();
 		this.setBombStatus(0);
-		
+		this.setExplosionLeftTime(0);
+
 		MainWindow.updateLog("The bomb nr: " + this.getId() + " exploded");
-	
-		// bombTimer.cancel();
-		if (this.checkItemsRange(sapper) == true) {
 
-			sapper.setHealthPoints(sapper.getHealthPoints() - 1);
+		if (itemArgument instanceof Sapper) {
+			Sapper tempItemArgument = (Sapper) itemArgument;
+			if (this.checkItemsRange(tempItemArgument)) {
+				tempItemArgument.setHealthPoints(tempItemArgument.getHealthPoints() - 1);
+				if (tempItemArgument.getHealthPoints() == 0) {
+					tempItemArgument.setSapperStatus(false);
+					MainWindow.updateLog(
+							"The sapper HP is: " + tempItemArgument.getHealthPoints() + " .The sapper is dead");
+					MainWindow.updateHPPanel("Sapper HP is: " + tempItemArgument.getHealthPoints());
 
-			if (sapper.getHealthPoints() == 0) {
-				sapper.setSapperStatus(false);
-				
-				MainWindow.updateLog("The sapper HP is: " + sapper.getHealthPoints() + " .The sapper is dead");			
-				MainWindow.updateHPPanel("Sapper HP is: " + sapper.getHealthPoints());
+				} else {
+					MainWindow.updateLog("The sapper HP is: " + tempItemArgument.getHealthPoints());
+					MainWindow.updateHPPanel("Sapper HP is: " + tempItemArgument.getHealthPoints());
 
-			} else {
-				
-				MainWindow.updateLog("The sapper HP is: " + sapper.getHealthPoints());				
-				MainWindow.updateHPPanel("Sapper HP is: " + sapper.getHealthPoints());
+				}
 			}
-		}
+		} else
+			MainWindow.updateLog("THIS IS NOT A SAPPER!");
+
 	}
+
 }

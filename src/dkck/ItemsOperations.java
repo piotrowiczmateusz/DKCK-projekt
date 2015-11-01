@@ -41,6 +41,8 @@ public class ItemsOperations {
 	}
 
 	public void actions() throws InterruptedException {
+		
+		
 
 		itemsArray.add((Item) new Bomb(2, 2, 2, 10));// dodawanie do listy
 
@@ -51,7 +53,7 @@ public class ItemsOperations {
 															// parametrami
 		itemsArray.add((Item) new Bomb(16, 8, 5, 30));
 		itemsArray.add((Item) new Bomb(7, 20, 5, 30));
-		itemsArray.add((Item) new Sapper(5, 5, 2));
+		itemsArray.add((Item) new Sapper(2, 2, 2));
 		
 		for (int i = 0; i < itemsArray.size(); i++) {
 			Item tempItem = itemsArray.get(i);
@@ -61,7 +63,11 @@ public class ItemsOperations {
 		}
 		
 		//((Sapper) itemsArray.get(3)).go(0, 0, null);
+		
 		((Sapper) itemsArray.get(3)).moveBomb(((Bomb) itemsArray.get(2)), 2, 3);
+		
+		((Bomb) itemsArray.get(0)).explode(itemsArray.get(3));
+		
 		((Sapper) itemsArray.get(3)).moveBomb(((Bomb) itemsArray.get(1)), 2, 3);
 		//((Sapper) itemsArray.get(3)).go(7, 7, null);
 		//((Bomb) itemsArray.get(0)).explode(((Sapper) itemsArray.get(2)));//wywo³ywanie metod dla poszczególnych obiektów z lisy przy u¿yciu rzutowania (inteligentna funkcja wyszukuj¹ca obiekty po okreœlonym unikalnym dla obiektu ID jest jeszcze do napisania)

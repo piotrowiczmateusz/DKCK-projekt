@@ -15,7 +15,8 @@ public class Grid extends JPanel {
 	/**
 	 * 
 	 */
-	private static final long serialVersionUID = 6702891321154752969L;
+	private static final long serialVersionUID = 1L;
+	
 
 	protected int ROWS = 50;
 	

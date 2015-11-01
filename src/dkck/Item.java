@@ -119,7 +119,7 @@ public abstract class Item {
 					tempText = "Sapper";
 				}
 				if (cls.isInstance(tempItem)) {
-					MainWindow.updateLog(tempText + " with id: " + tempItem.id + " and position: [" + tempItem.getPositionX() + "][" + tempItem.getPositionY() + "]");
+					System.out.println(tempText + " with id: " + tempItem.id + " and position: [" + tempItem.getPositionX() + "][" + tempItem.getPositionY() + "]");
 				}
 			}
 		}
@@ -153,10 +153,10 @@ public abstract class Item {
 	{
 		if (distanceCalculation(itemArgument) <= this.getRange()) {
 
-			System.out.println("Center of another Item is included in this range!");
+			MainWindow.updateLog("Center of another Item is included in this range!");
 			return true;
 		} else {
-			System.out.println("Center of another Item is NOT included in this range!!");
+			MainWindow.updateLog("Center of another Item is NOT included in this range!!");
 			return false;
 		}
 	}

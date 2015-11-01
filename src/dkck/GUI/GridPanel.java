@@ -7,10 +7,12 @@ import javax.swing.UIManager;
 import javax.swing.border.MatteBorder;
 
 public class GridPanel extends JPanel{
+
+
 	/**
 	 * 
 	 */
-	private static final long serialVersionUID = -3637758474364417635L;
+	private static final long serialVersionUID = 1L;
 
 	public GridPanel() {
 		super();
