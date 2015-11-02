@@ -84,7 +84,7 @@ public class Bomb extends Item {
 	 */
 	public Bomb(int positionX, int positionY, int range, int explosionLeftTime) {
 		super(positionX, positionY, range);
-		this.bombStatus = 0;
+		this.bombStatus = 1;
 		this.explosionLeftTime = explosionLeftTime;
 		this.timerLog = new JTextField();
 
@@ -103,6 +103,16 @@ public class Bomb extends Item {
 	/**
 	 * OTHER METHODS
 	 */
+	
+	public void burn() {
+		if (this.explosionLeftTime > 0)
+			explosionLeftTime = 10;
+	}
+
+	public void disarm() {
+		this.bombTimer.cancel();
+		this.setBombStatus(2);
+	}
 
 	/**
 	 * modyfikuje nieznacznie pola bomby i zmniejsza punkty ¿ycia dla Sapera

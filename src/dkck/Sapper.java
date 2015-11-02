@@ -175,6 +175,7 @@ public class Sapper extends Item {
 	public void disarmBomb(Item itemArgument) throws InterruptedException {
 		if (itemArgument instanceof Bomb) {
 			Bomb tempItemArgument = (Bomb) itemArgument;
+
 			go(itemArgument.getPositionX(), itemArgument.getPositionY(), null);
 
 			if (tempItemArgument.getBombStatus() != 1) {
@@ -184,9 +185,10 @@ public class Sapper extends Item {
 			} else {
 				Random generator = new Random();
 				int success = generator.nextInt(2);
+				success = 1;
 				if (success == 1) {
 					tempItemArgument.setBombStatus(2);
-
+					tempItemArgument.disarm();
 					MainWindow.updateLog("The bomb nr " + itemArgument.getId() + " is now disarmed");
 
 				} else {
@@ -194,6 +196,6 @@ public class Sapper extends Item {
 				}
 			}
 		} else
-			System.out.println("You can't disarm something else than bomb");
+			MainWindow.updateLog("You can't disarm something else than bomb");
 	}
 }
