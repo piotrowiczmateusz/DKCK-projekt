@@ -63,16 +63,16 @@ public class ItemsOperations {
 
 		// ((Sapper) itemsArray.get(3)).go(0, 0, null);
 
-		((Sapper) itemsArray.get(3)).moveBomb(((Bomb) itemsArray.get(2)), 2, 3);
+		((Sapper) itemsArray.get(3)).moveBomb(itemsArray.get(2), 2, 3);
 
 		((Bomb) itemsArray.get(0)).explode(itemsArray.get(3));
 
-		((Sapper) itemsArray.get(4)).moveBomb(((Bomb) itemsArray.get(1)), 2, 3);
+		((Sapper) itemsArray.get(4)).moveBomb(itemsArray.get(1), 2, 3);
 		((Sapper) itemsArray.get(4)).go(3, 8, null);
 
 		((Sapper) itemsArray.get(3)).go(3, 9, null);
 
-		((Sapper) itemsArray.get(3)).moveBomb(((Bomb) itemsArray.get(1)), 6, 35);
+		((Sapper) itemsArray.get(3)).moveBomb(itemsArray.get(1), 6, 35);
 
 		((Sapper) itemsArray.get(3)).go(49, 49, null);
 

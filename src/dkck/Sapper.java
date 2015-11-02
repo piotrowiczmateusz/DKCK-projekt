@@ -97,7 +97,7 @@ public class Sapper extends Item {
 						+ itemToMove.getPositionY() + "]");
 				MainWindow.grid.drawBomb(itemToMove.getPositionX(), itemToMove.getPositionY());
 			} else {
-				MainWindow.updateLog("It is not possible to move bomb");
+				MainWindow.updateLog("You are not moving antyhing");
 			}
 
 			MainWindow.grid.drawSapper(prevPositionX, prevPositionY, this.getPositionX(), this.getPositionY());
@@ -116,7 +116,7 @@ public class Sapper extends Item {
 					}
 				}
 			}
-			Thread.sleep(30);
+			Thread.sleep(100);
 		}
 	}
 
@@ -124,44 +124,47 @@ public class Sapper extends Item {
 	 * Saper idzie na pozycjê bomby. Nastpênie na pozycje x,y i zmienia pozycjê
 	 * bomby.
 	 */
-	public void moveBomb(Bomb bomb, int x, int y) throws InterruptedException {
+	public void moveBomb(Item itemArgument, int x, int y) throws InterruptedException {
+		if (itemArgument instanceof Bomb) {
+			MainWindow.updateLog("The sapper at position [" + this.getPositionX() + "][" + this.getPositionY()
+					+ "] will try to move bomb nr: " + itemArgument.getId() + " at the position ["
+					+ itemArgument.getPositionX() + "][" + itemArgument.getPositionY() + "] to the position: [" + x
+					+ "][" + y + "]");
 
-		MainWindow.updateLog("The sapper at position [" + this.getPositionX() + "][" + this.getPositionY()
-				+ "] will try to move bomb nr: " + bomb.getId() + " at the position [" + bomb.getPositionX() + "]["
-				+ bomb.getPositionY() + "] to the position: [" + x + "][" + y + "]");
+			this.go(itemArgument.getPositionX(), itemArgument.getPositionY(), null);
 
-		this.go(bomb.getPositionX(), bomb.getPositionY(), null);
+			MainWindow.updateLog("The sapper picked up a bomb.");
 
-		MainWindow.updateLog("The sapper picked up a bomb.");
+			this.go(x, y, itemArgument);
 
-		this.go(x, y, bomb);
+			// Sprawdza, czy przenosi bombe na krawedz planszy lub, czy na tym
+			// miejscu nie ma innej bomby.
 
-		// Sprawdza, czy przenosi bombe na krawedz planszy lub, czy na tym
-		// miejscu nie ma innej bomby.
+			if ((x != 0) && (MainWindow.grid.cellPanes.get(x - 1).get(y).getBackground() != Color.black)) {
+				itemArgument.setPositionX(x - 1);
+				itemArgument.setPositionY(y);
 
-		if ((x != 0) && (MainWindow.grid.cellPanes.get(x - 1).get(y).getBackground() != Color.black)) {
-			bomb.setPositionX(x - 1);
-			bomb.setPositionY(y);
-
-			MainWindow.grid.drawBomb(x - 1, y);
-			MainWindow.updateLog("The bomb was moved to [" + (x - 1) + "][" + y + "]");
-		} else {
-			bomb.setPositionX(x);
-			if ((y != 0) && (MainWindow.grid.cellPanes.get(x).get(y - 1).getBackground() != Color.black)) {
-				bomb.setPositionY(y - 1);
-
-				MainWindow.grid.drawBomb(x, y - 1);
-				MainWindow.updateLog("The bomb was moved to [" + x + "][" + (y - 1) + "]");
-			} else if ((y != 50) && (MainWindow.grid.cellPanes.get(x).get(y + 1).getBackground() != Color.black)) {
-				bomb.setPositionY(y + 1);
-
-				MainWindow.grid.drawBomb(x, y + 1);
-				MainWindow.updateLog("The bomb was moved to [" + x + "][" + (y + 1) + "]");
+				MainWindow.grid.drawBomb(x - 1, y);
+				MainWindow.updateLog("The bomb was moved to [" + (x - 1) + "][" + y + "]");
 			} else {
-				MainWindow.updateLog("It was impossible to move bomb to [" + x + "][" + (y + 1)
-						+ "]. Choose different coordinates.");
+				itemArgument.setPositionX(x);
+				if ((y != 0) && (MainWindow.grid.cellPanes.get(x).get(y - 1).getBackground() != Color.black)) {
+					itemArgument.setPositionY(y - 1);
+
+					MainWindow.grid.drawBomb(x, y - 1);
+					MainWindow.updateLog("The bomb was moved to [" + x + "][" + (y - 1) + "]");
+				} else if ((y != 50) && (MainWindow.grid.cellPanes.get(x).get(y + 1).getBackground() != Color.black)) {
+					itemArgument.setPositionY(y + 1);
+
+					MainWindow.grid.drawBomb(x, y + 1);
+					MainWindow.updateLog("The bomb was moved to [" + x + "][" + (y + 1) + "]");
+				} else {
+					MainWindow.updateLog("It was impossible to move bomb to [" + x + "][" + (y + 1)
+							+ "]. Choose different coordinates.");
+				}
 			}
-		}
+		} else
+			MainWindow.updateLog("THIS IS NOT A BOMB!");
 
 	}
 
@@ -169,24 +172,28 @@ public class Sapper extends Item {
 	 * Wywo³uje metodê 'go', sprawdza status bomby, losowo decyduje, czy bomba
 	 * wybuchnie.
 	 */
-	public void disarmBomb(Bomb bomb) throws InterruptedException {
-		go(bomb.getPositionX(), bomb.getPositionY(), null);
+	public void disarmBomb(Item itemArgument) throws InterruptedException {
+		if (itemArgument instanceof Bomb) {
+			Bomb tempItemArgument = (Bomb) itemArgument;
+			go(itemArgument.getPositionX(), itemArgument.getPositionY(), null);
 
-		if (bomb.getBombStatus() != 1) {
+			if (tempItemArgument.getBombStatus() != 1) {
 
-			MainWindow.updateLog("The bomb nr: " + bomb.getId() + " was already disarmed");
-
-		} else {
-			Random generator = new Random();
-			int success = generator.nextInt(2);
-			if (success == 1) {
-				bomb.setBombStatus(2);
-
-				MainWindow.updateLog("The bomb nr " + bomb.getId() + " is now disarmed");
+				MainWindow.updateLog("The bomb nr: " + itemArgument.getId() + " was already disarmed");
 
 			} else {
-				bomb.explode(this);
+				Random generator = new Random();
+				int success = generator.nextInt(2);
+				if (success == 1) {
+					tempItemArgument.setBombStatus(2);
+
+					MainWindow.updateLog("The bomb nr " + itemArgument.getId() + " is now disarmed");
+
+				} else {
+					tempItemArgument.explode(this);
+				}
 			}
-		}
+		} else
+			System.out.println("You can't disarm something else than bomb");
 	}
 }
