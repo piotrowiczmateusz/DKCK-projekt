@@ -1,7 +1,10 @@
 package dkck;
 
 import java.awt.Color;
+
 import java.util.Random;
+import java.util.ArrayList;
+import java.util.List;
 
 import dkck.GUI.MainWindow;
 
@@ -11,9 +14,12 @@ public class Sapper extends Item {
 	 * ATTRIBUTES
 	 */
 	TimeTask sapperTimer;
+	
 	private int healthPoints;
 
 	private boolean SapperStatus;
+
+	private List<Item> targetsArray;
 
 	/**
 	 * SETTERS AND GETTERS
@@ -50,13 +56,31 @@ public class Sapper extends Item {
 	}
 
 	/**
+	 * @return the targetsArray
+	 */
+	public List<Item> getTargetsArray() {
+		return targetsArray;
+	}
+
+	/**
+	 * @param targetsArray
+	 *            the targetsArray to set
+	 */
+	public void setTargetsArray(List<Item> targetsArray) {
+		this.targetsArray = targetsArray;
+	}
+
+	/**
 	 * CONSTRUCTORS
 	 */
 	public Sapper(int positionX, int positionY, int range) {
 		super(positionX, positionY, range);
+		targetsArray = new ArrayList<Item>();
+		targetsArray.add(new Point(48,3));
+		targetsArray.add(new Point(8,3));
 		this.setSapperStatus(true);
 		this.setHealthPoints(2);
-		
+
 		sapperTimer = new TimeTask(this, 100);
 
 		MainWindow.updateHPPanel("Sapper HP is: " + this.getHealthPoints());
@@ -72,55 +96,16 @@ public class Sapper extends Item {
 	 * bomby.
 	 */
 
+	// private void step()
+	// {
+	//
+	// }
+
 	public void go(Item targetToReach, Item itemToMove) throws InterruptedException {
+		targetsArray.add(targetToReach);
+		targetsArray.add(itemToMove);
 
-		while ((targetToReach.getPositionX() != this.getPositionX()) || (targetToReach.getPositionY() != this.getPositionY())) {
-
-			int prevPositionX = this.getPositionX();
-			int prevPositionY = this.getPositionY();
-
-			if (targetToReach.getPositionX() > this.getPositionX()) {
-				this.setPositionX(this.getPositionX() + 1);
-			} else if (targetToReach.getPositionX() < this.getPositionX()) {
-				this.setPositionX(this.getPositionX() - 1);
-			}
-			if (targetToReach.getPositionY() > this.getPositionY()) {
-				this.setPositionY(this.getPositionY() + 1);
-			} else if (targetToReach.getPositionY() < this.getPositionY()) {
-				this.setPositionY(this.getPositionY() - 1);
-			}
-
-			MainWindow.updatePositionPanel(
-					"Sapper position is: [" + this.getPositionX() + "][" + this.getPositionY() + "]");
-
-			if (itemToMove instanceof Bomb) {
-				itemToMove.setPositionX(this.getPositionX());
-				itemToMove.setPositionY(this.getPositionY());
-				MainWindow.updateLog("Position of moving bomb is: [" + itemToMove.getPositionX() + "]["
-						+ itemToMove.getPositionY() + "]");
-				MainWindow.grid.drawBomb(itemToMove.getPositionX(), itemToMove.getPositionY());
-			} else {
-				MainWindow.updateLog("You are not moving antyhing");
-			}
-
-			MainWindow.grid.drawSapper(prevPositionX, prevPositionY, this.getPositionX(), this.getPositionY());
-
-			for (int i = 0; i < MainWindow.itemsCollection.getItemsArray().size(); i++) {
-				Item tempItem = MainWindow.itemsCollection.getItemsArray().get(i);
-				int tempX = tempItem.getPositionX();
-				int tempY = tempItem.getPositionY();
-				if ((tempX == prevPositionX) && (tempY == prevPositionY)) {
-					if (tempItem instanceof Bomb) {
-						MainWindow.grid.drawBomb(tempX, tempY);
-
-						this.checkItemsRange(tempItem);
-					} else if (tempItem instanceof Sapper) {
-						MainWindow.grid.drawSapper(prevPositionX, prevPositionY, tempX, tempY);
-					}
-				}
-			}
-			Thread.sleep(100);
-		}
+		
 	}
 
 	/**
