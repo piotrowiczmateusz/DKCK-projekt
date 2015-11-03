@@ -73,7 +73,7 @@ public class Sapper extends Item {
 	/**
 	 * CONSTRUCTORS
 	 */
-	public Sapper(int positionX, int positionY, int range) {
+	public Sapper(int positionX, int positionY, int range, int speed) {
 		super(positionX, positionY, range);
 		targetsArray = new ArrayList<Item>();
 		// targetsArray.add(new Point(14, 45));
@@ -81,7 +81,7 @@ public class Sapper extends Item {
 		this.setSapperStatus(true);
 		this.setHealthPoints(2);
 
-		sapperTimer = new TimeTask(this, 100);
+		sapperTimer = new TimeTask(this, speed);
 
 		MainWindow.updateHPPanel("Sapper HP is: " + this.getHealthPoints());
 		MainWindow.grid.drawSapper(0, 0, this.getPositionX(), this.getPositionY());

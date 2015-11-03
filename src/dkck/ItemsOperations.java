@@ -51,8 +51,8 @@ public class ItemsOperations {
 		// parametrami
 		itemsArray.add((Item) new Bomb(16, 8, 5, 30));
 		itemsArray.add((Item) new Bomb(7, 20, 5, 30));
-		itemsArray.add((Item) new Sapper(2, 7, 2));
-		itemsArray.add((Item) new Sapper(8, 9, 2));
+		itemsArray.add((Item) new Sapper(2, 7, 2, 50));
+		itemsArray.add((Item) new Sapper(8, 9, 2, 100));
 
 		for (int i = 0; i < itemsArray.size(); i++) {
 			Item tempItem = itemsArray.get(i);
@@ -68,16 +68,16 @@ public class ItemsOperations {
 		((Bomb) itemsArray.get(0)).explode(itemsArray.get(3));
 
 		((Sapper) itemsArray.get(4)).moveBomb(itemsArray.get(1), 45, 49);
-		((Sapper) itemsArray.get(4)).moveBomb(itemsArray.get(1), 2, 1);
+		((Sapper) itemsArray.get(4)).moveBomb(itemsArray.get(1), 2, 5);
 		((Sapper) itemsArray.get(4)).go(itemsArray.get(1), null);
 
-		((Sapper) itemsArray.get(3)).go(new Point(3, 9), null);
+		((Sapper) itemsArray.get(3)).go(new Point(3, 7), null);
 
-		((Sapper) itemsArray.get(3)).moveBomb(itemsArray.get(1), 6, 35);
+		((Sapper) itemsArray.get(3)).moveBomb(itemsArray.get(1), 6, 33);
 
 		((Sapper) itemsArray.get(3)).disarmBomb(itemsArray.get(2));
 
-		((Sapper) itemsArray.get(3)).go(new Point(49, 49), null);
+		((Sapper) itemsArray.get(3)).go(new Point(6, 49), null);
 		((Sapper) itemsArray.get(3)).go(itemsArray.get(4), null);
 
 		// ((Sapper) itemsArray.get(3)).go(7, 7, null);
