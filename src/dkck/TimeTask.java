@@ -29,8 +29,8 @@ public class TimeTask extends TimerTask {
 				tempBombReference.getTimerLog().setText("Bomb nr: " + tempBombReference.getId() + " has: "
 						+ tempBombReference.getExplosionLeftTime() + " seconds left to explosion");
 			} else {
-				tempBombReference.getTimerLog().setText("Bomb nr: " + tempBombReference.getId() + " EXPLODED!");
-				this.cancel();
+				tempBombReference.explode(null);
+				
 			}
 		}
 	}

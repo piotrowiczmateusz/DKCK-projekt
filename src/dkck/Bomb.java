@@ -121,6 +121,8 @@ public class Bomb extends Item {
 		// this.bombTimer.cancel();
 		this.setBombStatus(0);
 		this.setExplosionLeftTime(0);
+		this.bombTimer.cancel();
+		timerLog.setText("Bomb nr: " + this.getId() + " EXPLODED!");
 
 		MainWindow.updateLog("The bomb nr: " + this.getId() + " exploded");
 
