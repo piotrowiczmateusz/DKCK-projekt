@@ -51,7 +51,7 @@ public class ItemsOperations {
 		// parametrami
 		itemsArray.add((Item) new Bomb(16, 8, 5, 30));
 		itemsArray.add((Item) new Bomb(7, 20, 5, 30));
-		itemsArray.add((Item) new Sapper(2, 2, 2));
+		itemsArray.add((Item) new Sapper(2, 7, 2));
 		itemsArray.add((Item) new Sapper(8, 9, 2));
 
 		for (int i = 0; i < itemsArray.size(); i++) {
@@ -67,8 +67,9 @@ public class ItemsOperations {
 
 		((Bomb) itemsArray.get(0)).explode(itemsArray.get(3));
 
-		((Sapper) itemsArray.get(4)).moveBomb(itemsArray.get(1), 2, 3);
-		((Sapper) itemsArray.get(4)).go(new Point(3, 8), null);
+		((Sapper) itemsArray.get(4)).moveBomb(itemsArray.get(1), 45, 49);
+		((Sapper) itemsArray.get(4)).moveBomb(itemsArray.get(1), 2, 1);
+		((Sapper) itemsArray.get(4)).go(itemsArray.get(1), null);
 
 		((Sapper) itemsArray.get(3)).go(new Point(3, 9), null);
 

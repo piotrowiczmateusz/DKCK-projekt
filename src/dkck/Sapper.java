@@ -14,7 +14,7 @@ public class Sapper extends Item {
 	 * ATTRIBUTES
 	 */
 	TimeTask sapperTimer;
-	
+
 	private int healthPoints;
 
 	private boolean SapperStatus;
@@ -76,8 +76,8 @@ public class Sapper extends Item {
 	public Sapper(int positionX, int positionY, int range) {
 		super(positionX, positionY, range);
 		targetsArray = new ArrayList<Item>();
-		targetsArray.add(new Point(48,3));
-		targetsArray.add(new Point(8,3));
+		// targetsArray.add(new Point(14, 45));
+		// targetsArray.add(new Point(8,3));
 		this.setSapperStatus(true);
 		this.setHealthPoints(2);
 
@@ -105,7 +105,6 @@ public class Sapper extends Item {
 		targetsArray.add(targetToReach);
 		targetsArray.add(itemToMove);
 
-		
 	}
 
 	/**
@@ -128,29 +127,29 @@ public class Sapper extends Item {
 			// Sprawdza, czy przenosi bombe na krawedz planszy lub, czy na tym
 			// miejscu nie ma innej bomby.
 
-			if ((x != 0) && (MainWindow.grid.cellPanes.get(x - 1).get(y).getBackground() != Color.black)) {
-				itemArgument.setPositionX(x - 1);
-				itemArgument.setPositionY(y);
-
-				MainWindow.grid.drawBomb(x - 1, y);
-				MainWindow.updateLog("The bomb was moved to [" + (x - 1) + "][" + y + "]");
-			} else {
-				itemArgument.setPositionX(x);
-				if ((y != 0) && (MainWindow.grid.cellPanes.get(x).get(y - 1).getBackground() != Color.black)) {
-					itemArgument.setPositionY(y - 1);
-
-					MainWindow.grid.drawBomb(x, y - 1);
-					MainWindow.updateLog("The bomb was moved to [" + x + "][" + (y - 1) + "]");
-				} else if ((y != 50) && (MainWindow.grid.cellPanes.get(x).get(y + 1).getBackground() != Color.black)) {
-					itemArgument.setPositionY(y + 1);
-
-					MainWindow.grid.drawBomb(x, y + 1);
-					MainWindow.updateLog("The bomb was moved to [" + x + "][" + (y + 1) + "]");
-				} else {
-					MainWindow.updateLog("It was impossible to move bomb to [" + x + "][" + (y + 1)
-							+ "]. Choose different coordinates.");
-				}
-			}
+//			if ((x != 0) && (MainWindow.grid.cellPanes.get(x - 1).get(y).getBackground() != Color.black)) {
+//				itemArgument.setPositionX(x - 1);
+//				itemArgument.setPositionY(y);
+//
+//				MainWindow.grid.drawBomb(x - 1, y);
+//				MainWindow.updateLog("The bomb was moved to [" + (x - 1) + "][" + y + "]");
+//			} else {
+//				itemArgument.setPositionX(x);
+//				if ((y != 0) && (MainWindow.grid.cellPanes.get(x).get(y - 1).getBackground() != Color.black)) {
+//					itemArgument.setPositionY(y - 1);
+//
+//					MainWindow.grid.drawBomb(x, y - 1);
+//					MainWindow.updateLog("The bomb was moved to [" + x + "][" + (y - 1) + "]");
+//				} else if ((y != 50) && (MainWindow.grid.cellPanes.get(x).get(y + 1).getBackground() != Color.black)) {
+//					itemArgument.setPositionY(y + 1);
+//
+//					MainWindow.grid.drawBomb(x, y + 1);
+//					MainWindow.updateLog("The bomb was moved to [" + x + "][" + (y + 1) + "]");
+//				} else {
+//					MainWindow.updateLog("It was impossible to move bomb to [" + x + "][" + (y + 1)
+//							+ "]. Choose different coordinates.");
+//				}
+//			}
 		} else
 			MainWindow.updateLog("THIS IS NOT A BOMB!");
 
