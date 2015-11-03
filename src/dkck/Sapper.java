@@ -69,21 +69,21 @@ public class Sapper extends Item {
 	 * bomby.
 	 */
 
-	public void go(int x, int y, Item itemToMove) throws InterruptedException {
+	public void go(Item targetToReach, Item itemToMove) throws InterruptedException {
 
-		while ((x != this.getPositionX()) || (y != this.getPositionY())) {
+		while ((targetToReach.getPositionX() != this.getPositionX()) || (targetToReach.getPositionY() != this.getPositionY())) {
 
 			int prevPositionX = this.getPositionX();
 			int prevPositionY = this.getPositionY();
 
-			if (x > this.getPositionX()) {
+			if (targetToReach.getPositionX() > this.getPositionX()) {
 				this.setPositionX(this.getPositionX() + 1);
-			} else if (x < this.getPositionX()) {
+			} else if (targetToReach.getPositionX() < this.getPositionX()) {
 				this.setPositionX(this.getPositionX() - 1);
 			}
-			if (y > this.getPositionY()) {
+			if (targetToReach.getPositionY() > this.getPositionY()) {
 				this.setPositionY(this.getPositionY() + 1);
-			} else if (y < this.getPositionY()) {
+			} else if (targetToReach.getPositionY() < this.getPositionY()) {
 				this.setPositionY(this.getPositionY() - 1);
 			}
 
@@ -131,11 +131,11 @@ public class Sapper extends Item {
 					+ itemArgument.getPositionX() + "][" + itemArgument.getPositionY() + "] to the position: [" + x
 					+ "][" + y + "]");
 
-			this.go(itemArgument.getPositionX(), itemArgument.getPositionY(), null);
+			this.go(itemArgument, null);
 
 			MainWindow.updateLog("The sapper picked up a bomb.");
 
-			this.go(x, y, itemArgument);
+			this.go(new Point(x, y), itemArgument);
 
 			// Sprawdza, czy przenosi bombe na krawedz planszy lub, czy na tym
 			// miejscu nie ma innej bomby.
@@ -176,7 +176,7 @@ public class Sapper extends Item {
 		if (itemArgument instanceof Bomb) {
 			Bomb tempItemArgument = (Bomb) itemArgument;
 
-			go(itemArgument.getPositionX(), itemArgument.getPositionY(), null);
+			go(itemArgument, null);
 
 			if (tempItemArgument.getBombStatus() != 1) {
 

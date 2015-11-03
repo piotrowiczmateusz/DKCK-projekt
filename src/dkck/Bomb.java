@@ -103,7 +103,7 @@ public class Bomb extends Item {
 	/**
 	 * OTHER METHODS
 	 */
-	
+
 	public void burn() {
 		if (this.explosionLeftTime > 0)
 			explosionLeftTime = 10;

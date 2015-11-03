@@ -68,15 +68,15 @@ public class ItemsOperations {
 		((Bomb) itemsArray.get(0)).explode(itemsArray.get(3));
 
 		((Sapper) itemsArray.get(4)).moveBomb(itemsArray.get(1), 2, 3);
-		((Sapper) itemsArray.get(4)).go(3, 8, null);
+		((Sapper) itemsArray.get(4)).go(new Point(3, 8), null);
 
-		((Sapper) itemsArray.get(3)).go(3, 9, null);
+		((Sapper) itemsArray.get(3)).go(new Point(3, 9), null);
 
 		((Sapper) itemsArray.get(3)).moveBomb(itemsArray.get(1), 6, 35);
 		
 		((Sapper) itemsArray.get(3)).disarmBomb(itemsArray.get(2));
 
-		((Sapper) itemsArray.get(3)).go(49, 49, null);
+		((Sapper) itemsArray.get(3)).go(new Point(49, 49), null);
 
 		// ((Sapper) itemsArray.get(3)).go(7, 7, null);
 		// ((Bomb) itemsArray.get(0)).explode(((Sapper)
