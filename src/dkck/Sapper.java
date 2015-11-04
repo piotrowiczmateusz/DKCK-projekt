@@ -16,7 +16,7 @@ public class Sapper extends Item {
 	
 	public static int id = 0;
 	
-	TimeTask sapperTimer;
+	SapperTimer sapperTimer;
 
 	private int healthPoints;
 
@@ -90,7 +90,7 @@ public class Sapper extends Item {
 		this.setSapperStatus(true);
 		this.setHealthPoints(2);
 
-		sapperTimer = new TimeTask(this, speed);
+		sapperTimer = new SapperTimer(this, speed);
 
 		MainWindow.updateHPPanel("Sapper HP is: " + this.getHealthPoints());
 		MainWindow.grid.drawSapper(0, 0, this.getPositionX(), this.getPositionY());

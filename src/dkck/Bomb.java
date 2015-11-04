@@ -16,7 +16,7 @@ public class Bomb extends Item {
 
 	public static int id = 0;
 
-	TimeTask bombTimer;
+	BombTimer bombTimer;
 
 	private int bombStatus;// EXPLODED - 0, ACTIVE - 1, DISARMED - 2
 
@@ -96,7 +96,7 @@ public class Bomb extends Item {
 		timerLog.setPreferredSize(new Dimension(358, 14));
 		timerLog.setEditable(false);
 
-		bombTimer = new TimeTask(this, 1000);
+		bombTimer = new BombTimer(this, 1000);
 
 		MainWindow.grid.drawBomb(positionX, positionY);
 
