@@ -105,8 +105,8 @@ public class TimeTask extends TimerTask {
 						MainWindow.updateLog("You are not moving antyhing");
 					}
 
-					MainWindow.grid.drawSapper(initialSapperPositionX, initialSapperPositionY, itemReference.getPositionX(),
-							itemReference.getPositionY());
+					MainWindow.grid.drawSapper(initialSapperPositionX, initialSapperPositionY,
+							itemReference.getPositionX(), itemReference.getPositionY());
 
 					for (int i = 0; i < MainWindow.itemsCollection.getItemsArray().size(); i++) {
 						Item tempItem = MainWindow.itemsCollection.getItemsArray().get(i);
@@ -116,9 +116,9 @@ public class TimeTask extends TimerTask {
 							if (tempItem instanceof Bomb) {
 								MainWindow.grid.drawBomb(tempX, tempY);
 
-								
 							} else if (tempItem instanceof Sapper) {
-								MainWindow.grid.drawSapper(initialSapperPositionX, initialSapperPositionY, tempX, tempY);
+								MainWindow.grid.drawSapper(initialSapperPositionX, initialSapperPositionY, tempX,
+										tempY);
 							}
 						}
 						// }

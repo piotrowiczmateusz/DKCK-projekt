@@ -1,9 +1,9 @@
 package dkck;
 
-import java.awt.Color;
+//import java.awt.Color;
 
 import java.util.Random;
-import java.util.ArrayList;
+import java.util.LinkedList;
 import java.util.List;
 
 import dkck.GUI.MainWindow;
@@ -84,7 +84,7 @@ public class Sapper extends Item {
 	 */
 	public Sapper(int positionX, int positionY, int range, int speed) {
 		super(positionX, positionY, range, id++);
-		targetsArray = new ArrayList<Item>();
+		targetsArray = new LinkedList<Item>();
 		// targetsArray.add(new Point(14, 45));
 		// targetsArray.add(new Point(8,3));
 		this.setSapperStatus(true);
