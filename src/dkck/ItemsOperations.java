@@ -42,7 +42,7 @@ public class ItemsOperations {
 
 	public void actions() throws InterruptedException {
 
-		itemsArray.add((Item) new Bomb(2, 2, 2, 10));// dodawanie do listy
+		itemsArray.add((Item) new Bomb(2, 2, 2, 1000));// dodawanie do listy
 
 		// elementów
 		// dziedzicz¹cych z
@@ -70,12 +70,13 @@ public class ItemsOperations {
 		((Sapper) itemsArray.get(4)).moveBomb(itemsArray.get(1), 45, 49);
 		((Sapper) itemsArray.get(4)).moveBomb(itemsArray.get(1), 2, 5);
 		((Sapper) itemsArray.get(4)).go(itemsArray.get(1), null);
+		((Sapper) itemsArray.get(4)).go(itemsArray.get(3), null);
 
 		((Sapper) itemsArray.get(3)).go(new Point(3, 7), null);
 
 		((Sapper) itemsArray.get(3)).moveBomb(itemsArray.get(1), 6, 33);
 
-		((Sapper) itemsArray.get(3)).disarmBomb(itemsArray.get(2));
+		((Sapper) itemsArray.get(3)).go(itemsArray.get(2),null);
 
 		((Sapper) itemsArray.get(3)).go(new Point(6, 49), null);
 		((Sapper) itemsArray.get(3)).go(itemsArray.get(4), null);

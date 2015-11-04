@@ -39,8 +39,8 @@ public class TimeTask extends TimerTask {
 
 			if (tempSapperReference.getTargetsArray().isEmpty() == false) {
 
-				int prevPositionX = itemReference.getPositionX();
-				int prevPositionY = itemReference.getPositionY();
+				int initialSapperPositionX = itemReference.getPositionX();
+				int initialSapperPositionY = itemReference.getPositionY();
 
 				if (tempSapperReference.getTargetsArray().isEmpty() == false
 						&& tempSapperReference.getTargetsArray().get(0).getPositionX() == itemReference.getPositionX()
@@ -56,8 +56,8 @@ public class TimeTask extends TimerTask {
 
 				if (tempSapperReference.getTargetsArray().get(1) instanceof Bomb) {
 					Item tempItemReference = ((Sapper) itemReference).getTargetsArray().get(1);
-					if (tempItemReference.getPositionX() != prevPositionX
-							&& tempItemReference.getPositionY() != prevPositionY) {
+					if (tempItemReference.getPositionX() != initialSapperPositionX
+							&& tempItemReference.getPositionY() != initialSapperPositionY) {
 
 						// run();
 						// itemReference.setPositionX(prevPositionX);
@@ -68,7 +68,7 @@ public class TimeTask extends TimerTask {
 				}
 
 				if (continueStep == false) {
-					tempSapperReference.getTargetsArray().remove(0);
+					tempSapperReference.getTargetsArray().remove(1);
 					tempSapperReference.getTargetsArray().remove(0);
 				}
 
@@ -105,23 +105,22 @@ public class TimeTask extends TimerTask {
 						MainWindow.updateLog("You are not moving antyhing");
 					}
 
-					MainWindow.grid.drawSapper(prevPositionX, prevPositionY, itemReference.getPositionX(),
+					MainWindow.grid.drawSapper(initialSapperPositionX, initialSapperPositionY, itemReference.getPositionX(),
 							itemReference.getPositionY());
 
 					for (int i = 0; i < MainWindow.itemsCollection.getItemsArray().size(); i++) {
 						Item tempItem = MainWindow.itemsCollection.getItemsArray().get(i);
 						int tempX = tempItem.getPositionX();
 						int tempY = tempItem.getPositionY();
-						if ((tempX == prevPositionX) && (tempY == prevPositionY)) {
+						if ((tempX == initialSapperPositionX) && (tempY == initialSapperPositionY)) {
 							if (tempItem instanceof Bomb) {
 								MainWindow.grid.drawBomb(tempX, tempY);
 
 								itemReference.checkItemsRange(tempItem);
 							} else if (tempItem instanceof Sapper) {
-								MainWindow.grid.drawSapper(prevPositionX, prevPositionY, tempX, tempY);
+								MainWindow.grid.drawSapper(initialSapperPositionX, initialSapperPositionY, tempX, tempY);
 							}
 						}
-
 						// }
 
 						// System.out.println("test");
