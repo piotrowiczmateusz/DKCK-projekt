@@ -8,8 +8,6 @@ import dkck.GUI.MainWindow;
 
 public class ItemsOperations {
 
-	public static int id = 0;
-
 	private List<Item> itemsArray;
 
 	/**
@@ -65,7 +63,6 @@ public class ItemsOperations {
 
 		((Sapper) itemsArray.get(3)).moveBomb(itemsArray.get(2), 2, 3);
 
-		((Bomb) itemsArray.get(0)).explode();
 
 		((Sapper) itemsArray.get(4)).moveBomb(itemsArray.get(1), 45, 49);
 		((Sapper) itemsArray.get(4)).moveBomb(itemsArray.get(1), 2, 5);
@@ -80,6 +77,11 @@ public class ItemsOperations {
 
 		((Sapper) itemsArray.get(3)).go(new Point(6, 49), null);
 		((Sapper) itemsArray.get(3)).go(itemsArray.get(4), null);
+		
+		Thread.sleep(2000);
+		
+		((Bomb) itemsArray.get(0)).explode();
+
 
 		// ((Sapper) itemsArray.get(3)).go(7, 7, null);
 		// ((Bomb) itemsArray.get(0)).explode(((Sapper)

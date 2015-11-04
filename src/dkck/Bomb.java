@@ -14,6 +14,8 @@ public class Bomb extends Item {
 	 * ATTRIBUTES
 	 */
 
+	public static int id = 0;
+
 	TimeTask bombTimer;
 
 	private int bombStatus;// EXPLODED - 0, ACTIVE - 1, DISARMED - 2
@@ -83,7 +85,7 @@ public class Bomb extends Item {
 	 * @param bombStatus
 	 */
 	public Bomb(int positionX, int positionY, int range, int explosionLeftTime) {
-		super(positionX, positionY, range);
+		super(positionX, positionY, range, id++);
 		this.bombStatus = 1;
 		this.explosionLeftTime = explosionLeftTime;
 		this.timerLog = new JTextField();
@@ -132,19 +134,16 @@ public class Bomb extends Item {
 			if (tempItem instanceof Bomb) {
 				Bomb tempBombReference = (Bomb) tempItem;
 				if (this.checkItemsCenterDistance(tempBombReference) == true) {
-					System.out.println("burn");
 					tempBombReference.burn();
 
-					
 				}
 			} else if (tempItem instanceof Sapper) {
 				Sapper tempSapperReference = (Sapper) tempItem;
-				if (this.checkItemsRange(tempSapperReference) == true)
-				{
-					tempSapperReference.setHealthPoints(tempSapperReference.getHealthPoints() - 1);
-					MainWindow.updateHPPanel("Sapper HP is: " + tempSapperReference.getHealthPoints());
+				if (this.checkItemsRange(tempSapperReference) == true) {
+					tempSapperReference.hurt();
+
 				}
-				
+
 			}
 
 			// }

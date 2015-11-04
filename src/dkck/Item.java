@@ -89,12 +89,12 @@ public abstract class Item {
 	 * @param range
 	 * @param id
 	 */
-	public Item(int positionX, int positionY, int range) {
+	public Item(int positionX, int positionY, int range, int id) {
 		super();
 		this.positionX = positionX;
 		this.positionY = positionY;
 		this.range = range;
-		this.id = ItemsOperations.id++;
+		this.id = id;
 	}
 
 	private double distanceCalculation(Item itemArgument) {
@@ -110,20 +110,24 @@ public abstract class Item {
 			else if (j == 1)
 				tempItem = itemArgument;
 
-			for (int i = 0; i < 2; ++i) {
+			for (int i = 0; i < 3; ++i) {
 				if (i == 0) {
 					cls = Bomb.class;
 					tempText = "Bomb";
 				} else if (i == 1) {
 					cls = Sapper.class;
 					tempText = "Sapper";
+				} else if (i == 2) {
+					cls = Point.class;
+					tempText = "Point";
 				}
 				if (cls.isInstance(tempItem)) {
-					System.out.println(tempText + " with id: " + tempItem.id + " and position: [" + tempItem.getPositionX() + "][" + tempItem.getPositionY() + "]");
+					System.out.println(tempText + " with id: " + tempItem.id + " and position: ["
+							+ tempItem.getPositionX() + "][" + tempItem.getPositionY() + "]");
 				}
 			}
 		}
-		
+
 		double tempDistance = Math.sqrt(Math.pow(this.getPositionX() - itemArgument.getPositionX(), 2)
 				+ Math.pow(this.getPositionY() - itemArgument.getPositionY(), 2));
 		MainWindow.updateLog("Distance is: " + tempDistance);
@@ -144,13 +148,12 @@ public abstract class Item {
 			return false;
 		}
 	}
-	
+
 	/**
 	 * Sprawdza czy œrodek obiektu jest w zasiêgu itemu
 	 */
-	
-	public boolean checkItemsCenterDistance(Item itemArgument)
-	{
+
+	public boolean checkItemsCenterDistance(Item itemArgument) {
 		if (distanceCalculation(itemArgument) <= this.getRange()) {
 
 			MainWindow.updateLog("Center of another Item is included in this range!");

@@ -13,6 +13,9 @@ public class Sapper extends Item {
 	/**
 	 * ATTRIBUTES
 	 */
+	
+	public static int id = 0;
+	
 	TimeTask sapperTimer;
 
 	private int healthPoints;
@@ -69,12 +72,18 @@ public class Sapper extends Item {
 	public void setTargetsArray(List<Item> targetsArray) {
 		this.targetsArray = targetsArray;
 	}
+	
+	public void hurt()
+	{
+		--this.healthPoints;
+		MainWindow.updateHPPanel("Sapper HP is: " + this.healthPoints);
+	}
 
 	/**
 	 * CONSTRUCTORS
 	 */
 	public Sapper(int positionX, int positionY, int range, int speed) {
-		super(positionX, positionY, range);
+		super(positionX, positionY, range, id++);
 		targetsArray = new ArrayList<Item>();
 		// targetsArray.add(new Point(14, 45));
 		// targetsArray.add(new Point(8,3));
@@ -123,6 +132,8 @@ public class Sapper extends Item {
 			MainWindow.updateLog("The sapper picked up a bomb.");
 
 			this.go(new Point(x, y), itemArgument);
+			
+			//IMPORTANT CODE TO USE IN THE FUTURE!!!
 
 			// Sprawdza, czy przenosi bombe na krawedz planszy lub, czy na tym
 			// miejscu nie ma innej bomby.

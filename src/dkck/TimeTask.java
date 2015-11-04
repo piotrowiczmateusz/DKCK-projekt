@@ -116,7 +116,7 @@ public class TimeTask extends TimerTask {
 							if (tempItem instanceof Bomb) {
 								MainWindow.grid.drawBomb(tempX, tempY);
 
-								itemReference.checkItemsRange(tempItem);
+								
 							} else if (tempItem instanceof Sapper) {
 								MainWindow.grid.drawSapper(initialSapperPositionX, initialSapperPositionY, tempX, tempY);
 							}
