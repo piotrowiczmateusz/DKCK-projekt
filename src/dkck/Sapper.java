@@ -102,7 +102,7 @@ public class Sapper extends Item {
 		// targetsArray.add(new Point(14, 45));
 		// targetsArray.add(new Point(8,3));
 		this.setSapperStatus(true);
-		this.setHealthPoints(2);
+		this.setHealthPoints(1);
 
 		this.setSapperTimer(new SapperTimer(this, speed));
 
