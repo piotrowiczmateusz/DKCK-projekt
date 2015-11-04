@@ -77,11 +77,16 @@ public class ItemsOperations {
 
 		((Sapper) itemsArray.get(3)).go(new Point(30, 49), null);
 		((Sapper) itemsArray.get(3)).go(itemsArray.get(4), null);
+		((Sapper) itemsArray.get(3)).go(itemsArray.get(1), null);
+
 		
 		Thread.sleep(3000);
 		
 		((Bomb) itemsArray.get(0)).explode();
+		
+		Thread.sleep(15000);
 
+		((Sapper) itemsArray.get(3)).disarmBomb(itemsArray.get(1));
 
 		// ((Sapper) itemsArray.get(3)).go(7, 7, null);
 		// ((Bomb) itemsArray.get(0)).explode(((Sapper)

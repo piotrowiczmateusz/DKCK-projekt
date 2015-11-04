@@ -69,6 +69,7 @@ public class SapperTimer extends TimerTask {
 						&& tempSapperReference.getTargetsArray().get(0).getPositionY() == this.getItemReference()
 								.getPositionY()) {
 
+					MainWindow.updateLog("Sapper reached the target.");
 					continueStep = false;
 
 				}

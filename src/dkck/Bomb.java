@@ -2,6 +2,7 @@ package dkck;
 
 import java.awt.Color;
 import java.awt.Dimension;
+import java.util.Random;
 
 import javax.swing.JTextField;
 import javax.swing.border.MatteBorder;
@@ -9,7 +10,6 @@ import javax.swing.border.MatteBorder;
 import dkck.GUI.MainWindow;
 
 public class Bomb extends Item {
-
 
 	/**
 	 * ATTRIBUTES
@@ -28,7 +28,7 @@ public class Bomb extends Item {
 	/**
 	 * SETTERS AND GETTERS
 	 */
-	
+
 	/**
 	 * @return the bombTimer
 	 */
@@ -37,7 +37,8 @@ public class Bomb extends Item {
 	}
 
 	/**
-	 * @param bombTimer the bombTimer to set
+	 * @param bombTimer
+	 *            the bombTimer to set
 	 */
 	public void setBombTimer(BombTimer bombTimer) {
 		this.bombTimer = bombTimer;
@@ -127,8 +128,19 @@ public class Bomb extends Item {
 	}
 
 	public void disarm() {
-		this.getBombTimer().cancel();
-		this.setBombStatus(2);
+		System.out.println("Disarming...");
+
+		Random generator = new Random();
+		int success = generator.nextInt(2);
+
+		if (success == 1) {
+			this.getBombTimer().cancel();
+			this.setBombStatus(2);
+			MainWindow.updateLog("The bomb nr " + this.getId() + " is now disarmed");
+
+		} else {
+			this.explode();
+		}
 	}
 
 	/**

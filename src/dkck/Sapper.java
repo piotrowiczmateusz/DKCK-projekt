@@ -2,7 +2,7 @@ package dkck;
 
 //import java.awt.Color;
 
-import java.util.Random;
+//import java.util.Random;
 import java.util.LinkedList;
 import java.util.List;
 
@@ -10,14 +10,12 @@ import dkck.GUI.MainWindow;
 
 public class Sapper extends Item {
 
-
-
 	/**
 	 * ATTRIBUTES
 	 */
-	
+
 	public static int id = 0;
-	
+
 	SapperTimer sapperTimer;
 
 	private int healthPoints;
@@ -29,7 +27,7 @@ public class Sapper extends Item {
 	/**
 	 * SETTERS AND GETTERS
 	 */
-	
+
 	/**
 	 * @return the sapperTimer
 	 */
@@ -38,7 +36,8 @@ public class Sapper extends Item {
 	}
 
 	/**
-	 * @param sapperTimer the sapperTimer to set
+	 * @param sapperTimer
+	 *            the sapperTimer to set
 	 */
 	public void setSapperTimer(SapperTimer sapperTimer) {
 		this.sapperTimer = sapperTimer;
@@ -88,9 +87,8 @@ public class Sapper extends Item {
 	public void setTargetsArray(List<Item> targetsArray) {
 		this.targetsArray = targetsArray;
 	}
-	
-	public void hurt()
-	{
+
+	public void hurt() {
 		--this.healthPoints;
 		MainWindow.updateHPPanel("Sapper HP is: " + this.healthPoints);
 	}
@@ -129,7 +127,6 @@ public class Sapper extends Item {
 	public void go(Item targetToReach, Item itemToMove) throws InterruptedException {
 		targetsArray.add(targetToReach);
 		targetsArray.add(itemToMove);
-
 	}
 
 	/**
@@ -138,18 +135,19 @@ public class Sapper extends Item {
 	 */
 	public void moveBomb(Item itemArgument, int x, int y) throws InterruptedException {
 		if (itemArgument instanceof Bomb) {
-			MainWindow.updateLog("The sapper at position [" + this.getPositionX() + "][" + this.getPositionY()
-					+ "] will try to move bomb nr: " + itemArgument.getId() + " at the position ["
-					+ itemArgument.getPositionX() + "][" + itemArgument.getPositionY() + "] to the position: [" + x
-					+ "][" + y + "]");
+			// MainWindow.updateLog("The sapper at position [" +
+			// this.getPositionX() + "][" + this.getPositionY()
+			// + "] will try to move bomb nr: " + itemArgument.getId() + " at
+			// the position ["
+			// + itemArgument.getPositionX() + "][" +
+			// itemArgument.getPositionY() + "] to the position: [" + x
+			// + "][" + y + "]");
 
 			this.go(itemArgument, null);
 
-			MainWindow.updateLog("The sapper picked up a bomb.");
-
 			this.go(new Point(x, y), itemArgument);
-			
-			//IMPORTANT CODE TO USE IN THE FUTURE!!!
+
+			// IMPORTANT CODE TO USE IN THE FUTURE!!!
 
 			// Sprawdza, czy przenosi bombe na krawedz planszy lub, czy na tym
 			// miejscu nie ma innej bomby.
@@ -203,22 +201,13 @@ public class Sapper extends Item {
 
 				if (tempBombArgument.getBombStatus() != 1) {
 
-					MainWindow.updateLog("The bomb nr: " + itemArgument.getId() + " was already disarmed");
-					
-				} else {
-					Random generator = new Random();
-					int success = generator.nextInt(2);
-					success = 1;
-					if (success == 1) {
-						tempBombArgument.setBombStatus(2);
-						tempBombArgument.disarm();
-						MainWindow.updateLog("The bomb nr " + itemArgument.getId() + " is now disarmed");
+					System.out.println("The bomb nr: " + itemArgument.getId() + " is already disarmed");
 
-					} else {
-						tempBombArgument.explode();
-					}
+				} else {
+					tempBombArgument.disarm();
 				}
-			}
+			} else
+				System.out.println("wrong position!");
 		} else
 			MainWindow.updateLog("You can't disarm something else than bomb");
 	}
