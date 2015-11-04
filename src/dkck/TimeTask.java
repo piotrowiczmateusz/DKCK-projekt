@@ -29,7 +29,7 @@ public class TimeTask extends TimerTask {
 				tempBombReference.getTimerLog().setText("Bomb nr: " + tempBombReference.getId() + " has: "
 						+ tempBombReference.getExplosionLeftTime() + " seconds left to explosion");
 			} else {
-				tempBombReference.explode(null);
+				tempBombReference.explode();
 			}
 		} else if (itemReference instanceof Sapper) {
 

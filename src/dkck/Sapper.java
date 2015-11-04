@@ -188,7 +188,7 @@ public class Sapper extends Item {
 						MainWindow.updateLog("The bomb nr " + itemArgument.getId() + " is now disarmed");
 
 					} else {
-						tempBombArgument.explode(this);
+						tempBombArgument.explode();
 					}
 				}
 			}

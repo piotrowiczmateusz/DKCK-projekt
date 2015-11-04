@@ -105,7 +105,7 @@ public class Bomb extends Item {
 	 */
 
 	public void burn() {
-		if (this.explosionLeftTime > 0)
+		if (this.bombStatus == 1 && this.explosionLeftTime > 10)
 			explosionLeftTime = 10;
 	}
 
@@ -117,7 +117,7 @@ public class Bomb extends Item {
 	/**
 	 * modyfikuje nieznacznie pola bomby i zmniejsza punkty ¿ycia dla Sapera
 	 */
-	public void explode(Item itemArgument) {
+	public void explode() {
 		// this.bombTimer.cancel();
 		this.setBombStatus(0);
 		this.setExplosionLeftTime(0);
@@ -126,24 +126,55 @@ public class Bomb extends Item {
 
 		MainWindow.updateLog("The bomb nr: " + this.getId() + " exploded");
 
-		if (itemArgument instanceof Sapper) {
-			Sapper tempItemArgument = (Sapper) itemArgument;
-			if (this.checkItemsRange(tempItemArgument)) {
-				tempItemArgument.setHealthPoints(tempItemArgument.getHealthPoints() - 1);
-				if (tempItemArgument.getHealthPoints() == 0) {
-					tempItemArgument.setSapperStatus(false);
-					MainWindow.updateLog(
-							"The sapper HP is: " + tempItemArgument.getHealthPoints() + " .The sapper is dead");
-					MainWindow.updateHPPanel("Sapper HP is: " + tempItemArgument.getHealthPoints());
+		for (int i = 0; i < MainWindow.itemsCollection.getItemsArray().size(); i++) {
+			Item tempItem = MainWindow.itemsCollection.getItemsArray().get(i);
 
-				} else {
-					MainWindow.updateLog("The sapper HP is: " + tempItemArgument.getHealthPoints());
-					MainWindow.updateHPPanel("Sapper HP is: " + tempItemArgument.getHealthPoints());
+			if (tempItem instanceof Bomb) {
+				Bomb tempBombReference = (Bomb) tempItem;
+				if (this.checkItemsCenterDistance(tempBombReference) == true) {
+					System.out.println("burn");
+					tempBombReference.burn();
 
+					
 				}
+			} else if (tempItem instanceof Sapper) {
+				Sapper tempSapperReference = (Sapper) tempItem;
+				if (this.checkItemsRange(tempSapperReference) == true)
+				{
+					tempSapperReference.setHealthPoints(tempSapperReference.getHealthPoints() - 1);
+					MainWindow.updateHPPanel("Sapper HP is: " + tempSapperReference.getHealthPoints());
+				}
+				
 			}
-		} else
-			MainWindow.updateLog("THIS IS NOT A SAPPER!");
+
+			// }
+
+			// System.out.println("test");
+		}
+
+		// if (itemArgument instanceof Sapper) {
+		// Sapper tempItemArgument = (Sapper) itemArgument;
+		// if (this.checkItemsRange(tempItemArgument)) {
+		// tempItemArgument.setHealthPoints(tempItemArgument.getHealthPoints() -
+		// 1);
+		// if (tempItemArgument.getHealthPoints() == 0) {
+		// tempItemArgument.setSapperStatus(false);
+		// MainWindow.updateLog(
+		// "The sapper HP is: " + tempItemArgument.getHealthPoints() + " .The
+		// sapper is dead");
+		// MainWindow.updateHPPanel("Sapper HP is: " +
+		// tempItemArgument.getHealthPoints());
+		//
+		// } else {
+		// MainWindow.updateLog("The sapper HP is: " +
+		// tempItemArgument.getHealthPoints());
+		// MainWindow.updateHPPanel("Sapper HP is: " +
+		// tempItemArgument.getHealthPoints());
+		//
+		// }
+		// }
+		// } else
+		// MainWindow.updateLog("THIS IS NOT A SAPPER!");
 
 	}
 
