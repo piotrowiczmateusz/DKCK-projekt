@@ -10,6 +10,8 @@ import dkck.GUI.MainWindow;
 
 public class Sapper extends Item {
 
+
+
 	/**
 	 * ATTRIBUTES
 	 */
@@ -27,6 +29,20 @@ public class Sapper extends Item {
 	/**
 	 * SETTERS AND GETTERS
 	 */
+	
+	/**
+	 * @return the sapperTimer
+	 */
+	public SapperTimer getSapperTimer() {
+		return sapperTimer;
+	}
+
+	/**
+	 * @param sapperTimer the sapperTimer to set
+	 */
+	public void setSapperTimer(SapperTimer sapperTimer) {
+		this.sapperTimer = sapperTimer;
+	}
 
 	/**
 	 * @return the status
@@ -90,7 +106,7 @@ public class Sapper extends Item {
 		this.setSapperStatus(true);
 		this.setHealthPoints(2);
 
-		sapperTimer = new SapperTimer(this, speed);
+		this.setSapperTimer(new SapperTimer(this, speed));
 
 		MainWindow.updateHPPanel("Sapper HP is: " + this.getHealthPoints());
 		MainWindow.grid.drawSapper(0, 0, this.getPositionX(), this.getPositionY());

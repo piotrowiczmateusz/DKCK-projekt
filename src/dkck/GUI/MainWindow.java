@@ -14,6 +14,10 @@ public class MainWindow extends JFrame {
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
+	
+	private static final int gridRows = 50;
+	
+	private static final int gridColumns = 50;
 
 	public static ItemsOperations itemsCollection;
 
@@ -27,7 +31,7 @@ public class MainWindow extends JFrame {
 
 	// GridPanel elements
 
-	public static Grid grid = new Grid();
+	public static Grid grid = new Grid(gridRows, gridColumns);
 
 	// RightPanel elements
 

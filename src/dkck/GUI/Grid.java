@@ -17,36 +17,68 @@ public class Grid extends JPanel {
 	 */
 	private static final long serialVersionUID = 1L;
 
-	protected int ROWS = 50;
+	private int rows;
 
-	protected int COLUMNS = 50;
+	private int columns;
 
 	public List<List<CellPane>> cellPanes = new ArrayList<List<CellPane>>();
 
-	public Grid() {
+	/**
+	 * @return the rows
+	 */
+	public int getRows() {
+		return rows;
+	}
+
+	/**
+	 * @param rows
+	 *            the rows to set
+	 */
+	public void setRows(int rows) {
+		this.rows = rows;
+	}
+
+	/**
+	 * @return the columns
+	 */
+	public int getColumns() {
+		return columns;
+	}
+
+	/**
+	 * @param columns
+	 *            the columns to set
+	 */
+	public void setColumns(int columns) {
+		this.columns = columns;
+	}
+
+	public Grid(int rows, int columns) {
+		this.rows = rows - 1;
+		this.columns = columns - 1;
 
 		setLayout(new GridBagLayout());
 
 		GridBagConstraints gbc = new GridBagConstraints();
-		for (int row = 0; row < ROWS; row++) {
+		for (int row = 0; row < rows; row++) {
 
 			this.cellPanes.add(new ArrayList<CellPane>());
 
-			for (int col = 0; col < COLUMNS; col++) {
+			for (int col = 0; col < columns; col++) {
 				gbc.gridx = col;
 				gbc.gridy = row;
 
 				this.cellPanes.get(row).add(new CellPane());
 
 				Border border = null;
-				if (row < ROWS - 1) {
-					if (col < COLUMNS - 1) {
+				if (row < rows - 1) {
+					if (col < columns - 1) {
 						border = new MatteBorder(1, 1, 0, 0, Color.GRAY);
 					} else {
 						border = new MatteBorder(1, 1, 0, 1, Color.GRAY);
 					}
 				} else {
-					if (col < COLUMNS - 1) {
+					if (col < columns - 1) {
 						border = new MatteBorder(1, 1, 1, 0, Color.GRAY);
 					} else {
 						border = new MatteBorder(1, 1, 1, 1, Color.GRAY);
@@ -59,11 +91,25 @@ public class Grid extends JPanel {
 	}
 
 	public void drawSapper(int prevX, int prevY, int x, int y) {
+		if (prevX > this.getRows())
+			prevX = this.getRows();
+		if (x > this.getRows())
+			x = this.getRows();
+		if (prevY > this.getColumns())
+			prevY = this.getColumns();
+		if (y > this.getColumns())
+			y = this.getColumns();
+
 		this.cellPanes.get(prevX).get(prevY).setBackground(this.getBackground());
 		this.cellPanes.get(x).get(y).setBackground(Color.gray);
 	}
 
 	public void drawBomb(int x, int y) {
+		if (x > this.getRows())
+			x = this.getRows();
+		if (y > this.getColumns())
+			y = this.getColumns();
+
 		this.cellPanes.get(x).get(y).setBackground(Color.black);
 	}
 

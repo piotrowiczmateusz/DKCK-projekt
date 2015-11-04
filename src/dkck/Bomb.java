@@ -10,13 +10,14 @@ import dkck.GUI.MainWindow;
 
 public class Bomb extends Item {
 
+
 	/**
 	 * ATTRIBUTES
 	 */
 
-	public static int id = 0;
+	private static int id = 0;
 
-	BombTimer bombTimer;
+	private BombTimer bombTimer;
 
 	private int bombStatus;// EXPLODED - 0, ACTIVE - 1, DISARMED - 2
 
@@ -27,6 +28,20 @@ public class Bomb extends Item {
 	/**
 	 * SETTERS AND GETTERS
 	 */
+	
+	/**
+	 * @return the bombTimer
+	 */
+	public BombTimer getBombTimer() {
+		return bombTimer;
+	}
+
+	/**
+	 * @param bombTimer the bombTimer to set
+	 */
+	public void setBombTimer(BombTimer bombTimer) {
+		this.bombTimer = bombTimer;
+	}
 
 	/**
 	 * @return the bombStatus
@@ -96,7 +111,7 @@ public class Bomb extends Item {
 		timerLog.setPreferredSize(new Dimension(358, 14));
 		timerLog.setEditable(false);
 
-		bombTimer = new BombTimer(this, 1000);
+		this.setBombTimer(new BombTimer(this, 1000));
 
 		MainWindow.grid.drawBomb(positionX, positionY);
 
@@ -108,11 +123,11 @@ public class Bomb extends Item {
 
 	public void burn() {
 		if (this.bombStatus == 1 && this.explosionLeftTime > 10)
-			explosionLeftTime = 10;
+			this.setExplosionLeftTime(10);
 	}
 
 	public void disarm() {
-		this.bombTimer.cancel();
+		this.getBombTimer().cancel();
 		this.setBombStatus(2);
 	}
 
@@ -123,7 +138,7 @@ public class Bomb extends Item {
 		// this.bombTimer.cancel();
 		this.setBombStatus(0);
 		this.setExplosionLeftTime(0);
-		this.bombTimer.cancel();
+		this.getBombTimer().cancel();
 		timerLog.setText("Bomb nr: " + this.getId() + " EXPLODED!");
 
 		MainWindow.updateLog("The bomb nr: " + this.getId() + " exploded");
