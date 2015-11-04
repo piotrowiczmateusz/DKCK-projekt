@@ -89,8 +89,8 @@ public class Sapper extends Item {
 	}
 
 	public void hurt() {
-		--this.healthPoints;
-		MainWindow.updateHPPanel("Sapper HP is: " + this.healthPoints);
+		this.setHealthPoints(healthPoints - 1);
+		MainWindow.updateHPPanel("Sapper HP is: " + this.getHealthPoints());
 	}
 
 	/**
@@ -124,9 +124,14 @@ public class Sapper extends Item {
 	//
 	// }
 
-	public void go(Item targetToReach, Item itemToMove) throws InterruptedException {
+	public void addTaskTomove(Item targetToReach, Item itemToMove) throws InterruptedException {
 		targetsArray.add(targetToReach);
 		targetsArray.add(itemToMove);
+	}
+	
+	public void go(int x, int y) throws InterruptedException
+	{
+		this.addTaskTomove(new Point(x, y), null);
 	}
 
 	/**
@@ -143,9 +148,9 @@ public class Sapper extends Item {
 			// itemArgument.getPositionY() + "] to the position: [" + x
 			// + "][" + y + "]");
 
-			this.go(itemArgument, null);
+			this.addTaskTomove(itemArgument, null);
 
-			this.go(new Point(x, y), itemArgument);
+			this.addTaskTomove(new Point(x, y), itemArgument);
 
 			// IMPORTANT CODE TO USE IN THE FUTURE!!!
 

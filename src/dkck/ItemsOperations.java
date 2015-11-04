@@ -66,18 +66,18 @@ public class ItemsOperations {
 
 		((Sapper) itemsArray.get(4)).moveBomb(itemsArray.get(1), 45, 49);
 		((Sapper) itemsArray.get(4)).moveBomb(itemsArray.get(1), 2, 5);
-		((Sapper) itemsArray.get(4)).go(itemsArray.get(1), null);
-		((Sapper) itemsArray.get(4)).go(itemsArray.get(3), null);
+		((Sapper) itemsArray.get(4)).addTaskTomove(itemsArray.get(1), null);
+		((Sapper) itemsArray.get(4)).addTaskTomove(itemsArray.get(3), null);
 
-		((Sapper) itemsArray.get(3)).go(new Point(3, 7), null);
+		((Sapper) itemsArray.get(3)).go(3, 7);
 
 		((Sapper) itemsArray.get(3)).moveBomb(itemsArray.get(1), 6, 33);
 
-		((Sapper) itemsArray.get(3)).go(itemsArray.get(2),null);
+		((Sapper) itemsArray.get(3)).addTaskTomove(itemsArray.get(2),null);
 
-		((Sapper) itemsArray.get(3)).go(new Point(30, 49), null);
-		((Sapper) itemsArray.get(3)).go(itemsArray.get(4), null);
-		((Sapper) itemsArray.get(3)).go(itemsArray.get(1), null);
+		((Sapper) itemsArray.get(3)).go(30, 49);
+		((Sapper) itemsArray.get(3)).addTaskTomove(itemsArray.get(4), null);
+		((Sapper) itemsArray.get(3)).addTaskTomove(itemsArray.get(1), null);
 
 		
 		Thread.sleep(3000);
