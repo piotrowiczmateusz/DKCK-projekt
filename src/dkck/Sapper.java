@@ -102,7 +102,7 @@ public class Sapper extends Item {
 		// targetsArray.add(new Point(14, 45));
 		// targetsArray.add(new Point(8,3));
 		this.setSapperStatus(true);
-		this.setHealthPoints(1);
+		this.setHealthPoints(2);
 
 		this.setSapperTimer(new SapperTimer(this, speed));
 
@@ -128,9 +128,8 @@ public class Sapper extends Item {
 		targetsArray.add(targetToReach);
 		targetsArray.add(itemToMove);
 	}
-	
-	public void go(int x, int y) throws InterruptedException
-	{
+
+	public void go(int x, int y) throws InterruptedException {
 		this.addTaskTomove(new Point(x, y), null);
 	}
 
@@ -197,23 +196,26 @@ public class Sapper extends Item {
 	 * wybuchnie.
 	 */
 	public void disarmBomb(Item itemArgument) throws InterruptedException {
-		if (itemArgument instanceof Bomb) {
-			Bomb tempBombArgument = (Bomb) itemArgument;
-			if (this.getPositionX() == tempBombArgument.getPositionX()
-					&& this.getPositionY() == tempBombArgument.getPositionY()) {
+		if (this.getHealthPoints() > 0) {
+			if (itemArgument instanceof Bomb) {
+				Bomb tempBombArgument = (Bomb) itemArgument;
+				if (this.getPositionX() == tempBombArgument.getPositionX()
+						&& this.getPositionY() == tempBombArgument.getPositionY()) {
 
-				// go(itemArgument, null);
+					// go(itemArgument, null);
 
-				if (tempBombArgument.getBombStatus() != 1) {
+					if (tempBombArgument.getBombStatus() != 1) {
 
-					System.out.println("The bomb nr: " + itemArgument.getId() + " is already disarmed");
+						System.out.println("The bomb nr: " + itemArgument.getId() + " is already disarmed");
 
-				} else {
-					tempBombArgument.disarm();
-				}
+					} else {
+						tempBombArgument.disarm();
+					}
+				} else
+					System.out.println("wrong position!");
 			} else
-				System.out.println("wrong position!");
+				MainWindow.updateLog("You can't disarm something else than bomb");
 		} else
-			MainWindow.updateLog("You can't disarm something else than bomb");
+			MainWindow.updateLog("Dead sapper can't disarm anything");
 	}
 }

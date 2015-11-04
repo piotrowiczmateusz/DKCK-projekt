@@ -147,10 +147,11 @@ public class Bomb extends Item {
 	 * modyfikuje nieznacznie pola bomby i zmniejsza punkty ¿ycia dla Sapera
 	 */
 	public void explode() {
-		// this.bombTimer.cancel();
-		this.setBombStatus(0);
-		this.setExplosionLeftTime(0);
 		this.getBombTimer().cancel();
+		this.setExplosionLeftTime(0);
+		this.setBombStatus(0);
+		
+		
 		timerLog.setText("Bomb nr: " + this.getId() + " EXPLODED!");
 
 		MainWindow.updateLog("The bomb nr: " + this.getId() + " exploded");
