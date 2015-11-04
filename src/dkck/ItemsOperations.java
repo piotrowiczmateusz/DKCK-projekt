@@ -84,7 +84,7 @@ public class ItemsOperations {
 		
 		((Bomb) itemsArray.get(0)).explode();
 		
-		Thread.sleep(15000);
+		Thread.sleep(8000);
 
 		((Sapper) itemsArray.get(3)).disarmBomb(itemsArray.get(1));
 

@@ -6,7 +6,6 @@ import java.util.TimerTask;
 import dkck.GUI.MainWindow;
 
 public class SapperTimer extends TimerTask {
-	
 
 	private Item itemReference;
 
@@ -15,7 +14,7 @@ public class SapperTimer extends TimerTask {
 	/**
 	 * @param itemReference
 	 */
-	
+
 	/**
 	 * @return the itemReference
 	 */
@@ -24,7 +23,8 @@ public class SapperTimer extends TimerTask {
 	}
 
 	/**
-	 * @param itemReference the itemReference to set
+	 * @param itemReference
+	 *            the itemReference to set
 	 */
 	public void setItemReference(Item itemReference) {
 		this.itemReference = itemReference;
@@ -38,12 +38,13 @@ public class SapperTimer extends TimerTask {
 	}
 
 	/**
-	 * @param timer1 the timer1 to set
+	 * @param timer1
+	 *            the timer1 to set
 	 */
 	public void setTimer1(Timer timer1) {
 		this.timer1 = timer1;
 	}
-	
+
 	public SapperTimer(Item itemReference, int miliseconds) {
 		super();
 		this.setItemReference(itemReference);
@@ -59,13 +60,22 @@ public class SapperTimer extends TimerTask {
 
 			Sapper tempSapperReference = ((Sapper) this.getItemReference());
 
+			if (tempSapperReference.getHealthPoints() == 0) {
+
+				MainWindow.updateLog("Sapper " + tempSapperReference.getId() + " is dead!");
+				tempSapperReference.getTargetsArray().clear();
+				this.cancel();
+				continueStep = false;
+			}
+
 			if (tempSapperReference.getTargetsArray().isEmpty() == false) {
 
 				int initialSapperPositionX = this.getItemReference().getPositionX();
 				int initialSapperPositionY = this.getItemReference().getPositionY();
 
 				if (tempSapperReference.getTargetsArray().isEmpty() == false
-						&& tempSapperReference.getTargetsArray().get(0).getPositionX() == this.getItemReference().getPositionX()
+						&& tempSapperReference.getTargetsArray().get(0).getPositionX() == this.getItemReference()
+								.getPositionX()
 						&& tempSapperReference.getTargetsArray().get(0).getPositionY() == this.getItemReference()
 								.getPositionY()) {
 
@@ -94,21 +104,23 @@ public class SapperTimer extends TimerTask {
 
 				if (continueStep) {
 
-					if (tempSapperReference.getTargetsArray().get(0).getPositionX() > this.getItemReference().getPositionX()) {
+					if (tempSapperReference.getTargetsArray().get(0).getPositionX() > this.getItemReference()
+							.getPositionX()) {
 						this.getItemReference().setPositionX(this.getItemReference().getPositionX() + 1);
 					} else if (tempSapperReference.getTargetsArray().get(0).getPositionX() < itemReference
 							.getPositionX()) {
 						this.getItemReference().setPositionX(this.getItemReference().getPositionX() - 1);
 					}
-					if (tempSapperReference.getTargetsArray().get(0).getPositionY() > this.getItemReference().getPositionY()) {
+					if (tempSapperReference.getTargetsArray().get(0).getPositionY() > this.getItemReference()
+							.getPositionY()) {
 						this.getItemReference().setPositionY(this.getItemReference().getPositionY() + 1);
 					} else if (tempSapperReference.getTargetsArray().get(0).getPositionY() < this.getItemReference()
 							.getPositionY()) {
 						this.getItemReference().setPositionY(this.getItemReference().getPositionY() - 1);
 					}
 
-					MainWindow.updatePositionPanel("Sapper position is: [" + this.getItemReference().getPositionX() + "]["
-							+ this.getItemReference().getPositionY() + "]");
+					MainWindow.updatePositionPanel("Sapper position is: [" + this.getItemReference().getPositionX()
+							+ "][" + this.getItemReference().getPositionY() + "]");
 
 					Item tempItemReference = ((Sapper) this.getItemReference()).getTargetsArray().get(1);
 
