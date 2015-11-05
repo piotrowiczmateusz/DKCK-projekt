@@ -134,13 +134,20 @@ public class Sapper extends Item {
 	//
 	// }
 
-	public void addTaskTomove(Item targetToReach, Item itemToMove) throws InterruptedException {
+	private void addTaskToMove(Item targetToReach, Item itemToMove) throws InterruptedException {
 		targetsArray.add(targetToReach);
 		targetsArray.add(itemToMove);
 	}
+	
+	public void reachItem(Item itemToReach) throws InterruptedException
+	{
+		addTaskToMove(itemToReach, null);
+	}
+	
+	
 
 	public void go(int x, int y) throws InterruptedException {
-		this.addTaskTomove(new Point(x, y), null);
+		this.addTaskToMove(new Point(x, y), null);
 	}
 
 	/**
@@ -157,9 +164,9 @@ public class Sapper extends Item {
 			// itemArgument.getPositionY() + "] to the position: [" + x
 			// + "][" + y + "]");
 
-			this.addTaskTomove(itemArgument, null);
+			this.addTaskToMove(itemArgument, null);
 
-			this.addTaskTomove(new Point(x, y), itemArgument);
+			this.addTaskToMove(new Point(x, y), itemArgument);
 
 			// IMPORTANT CODE TO USE IN THE FUTURE!!!
 
