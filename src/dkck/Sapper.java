@@ -216,8 +216,7 @@ public class Sapper extends Item {
 		if (this.getHealthPoints() > 0) {
 			if (itemArgument instanceof Bomb) {
 				Bomb tempBombArgument = (Bomb) itemArgument;
-				if (this.getPositionX() == tempBombArgument.getPositionX()
-						&& this.getPositionY() == tempBombArgument.getPositionY()) {
+				if (this.checkItemsCenterDistance(tempBombArgument)){
 
 					// go(itemArgument, null);
 
