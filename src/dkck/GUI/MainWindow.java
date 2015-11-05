@@ -6,6 +6,7 @@ import java.awt.Dimension;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 
+import dkck.Interpreter;
 import dkck.ItemsOperations;
 
 public class MainWindow extends JFrame {
@@ -20,6 +21,8 @@ public class MainWindow extends JFrame {
 	private static final int gridColumns = 50;
 
 	public static ItemsOperations itemsCollection;
+	
+	public static Interpreter interpreter;
 
 	// Window elements
 
@@ -67,8 +70,11 @@ public class MainWindow extends JFrame {
 
 	public static void main(String[] args) throws InterruptedException {
 		new MainWindow();
+		
 		itemsCollection = new ItemsOperations();
-		itemsCollection.actions();
+		itemsCollection.addItems();
+		interpreter = new Interpreter();
+		//itemsCollection.actions();
 	}
 
 	public MainWindow() {

@@ -26,7 +26,15 @@ public class SubmitButton extends JButton {
 		addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
-				MainWindow.updateLog("USER: " + MainWindow.consoleIn.getText());
+				String input = MainWindow.consoleIn.getText();
+				
+				try {
+					MainWindow.interpreter.interpret(input);
+				} catch (InterruptedException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}
+				MainWindow.updateLog("USER: " + input);			
 		        MainWindow.consoleIn.setText(null);
 			}
 		});

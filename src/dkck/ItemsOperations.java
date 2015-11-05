@@ -37,9 +37,8 @@ public class ItemsOperations {
 		super();
 		this.itemsArray = new ArrayList<Item>();
 	}
-
-	public void actions() throws InterruptedException {
-
+	
+	public void addItems() {
 		itemsArray.add((Item) new Bomb(2, 2, 40, 10));// dodawanie do listy
 
 		// elementów
@@ -58,6 +57,11 @@ public class ItemsOperations {
 				MainWindow.timerPanel.add(((Bomb) tempItem).getTimerLog(), BorderLayout.WEST);
 			}
 		}
+	}
+
+	public void actions() throws InterruptedException {
+
+		
 
 		// ((Sapper) itemsArray.get(3)).go(0, 0, null);
 
