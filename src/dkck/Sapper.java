@@ -18,6 +18,8 @@ public class Sapper extends Item {
 
 	SapperTimer sapperTimer;
 
+	private int numberOfDisarmedBombs;
+
 	private int healthPoints;
 
 	private boolean SapperStatus;
@@ -41,6 +43,14 @@ public class Sapper extends Item {
 	 */
 	public void setSapperTimer(SapperTimer sapperTimer) {
 		this.sapperTimer = sapperTimer;
+	}
+
+	public int getNumberOfDisarmedBombs() {
+		return numberOfDisarmedBombs;
+	}
+
+	public void setNumberOfDisarmedBombs(int numberOfDisarmedBombs) {
+		this.numberOfDisarmedBombs = numberOfDisarmedBombs;
 	}
 
 	/**
@@ -204,13 +214,9 @@ public class Sapper extends Item {
 
 					// go(itemArgument, null);
 
-					if (tempBombArgument.getBombStatus() != 1) {
+					tempBombArgument.disarm(this);
+					System.out.println("Number of disarmed bombs: " + this.getNumberOfDisarmedBombs());
 
-						System.out.println("The bomb nr: " + itemArgument.getId() + " is already disarmed");
-
-					} else {
-						tempBombArgument.disarm();
-					}
 				} else
 					System.out.println("wrong position!");
 			} else

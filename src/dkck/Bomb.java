@@ -124,23 +124,33 @@ public class Bomb extends Item {
 
 	public void burn() {
 		if (this.bombStatus == 1 && this.explosionLeftTime > 10)
-			this.setExplosionLeftTime(10);
+			this.setExplosionLeftTime(5);
 	}
 
-	public void disarm() {
-		System.out.println("Disarming...");
+	public void disarm(Item itemArgument) {
+		if (itemArgument instanceof Sapper) {
 
-		Random generator = new Random();
-		int success = generator.nextInt(2);
+			if (this.getBombStatus() != 1) {
 
-		if (success == 1) {
-			this.getBombTimer().cancel();
-			this.setBombStatus(2);
-			MainWindow.updateLog("The bomb nr " + this.getId() + " is now disarmed");
+				Sapper tempSapperReference = (Sapper) itemArgument;
+				System.out.println("Disarming...");
 
-		} else {
-			this.explode();
-		}
+				Random generator = new Random();
+				int success = generator.nextInt(2);
+
+				if (success == 1) {
+					this.getBombTimer().cancel();
+					this.setBombStatus(2);
+					tempSapperReference.setNumberOfDisarmedBombs(tempSapperReference.getNumberOfDisarmedBombs() + 1);
+					MainWindow.updateLog("The bomb nr " + this.getId() + " is now disarmed");
+
+				} else {
+					this.explode();
+				}
+			} else
+				System.out.println("The bomb nr: " + this.getId() + " is already disarmed");
+		} else
+			System.out.println("This is not a Sapper!!");
 	}
 
 	/**
@@ -150,8 +160,7 @@ public class Bomb extends Item {
 		this.getBombTimer().cancel();
 		this.setExplosionLeftTime(0);
 		this.setBombStatus(0);
-		
-		
+
 		timerLog.setText("Bomb nr: " + this.getId() + " EXPLODED!");
 
 		MainWindow.updateLog("The bomb nr: " + this.getId() + " exploded");

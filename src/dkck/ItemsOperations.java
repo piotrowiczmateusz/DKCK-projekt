@@ -49,7 +49,7 @@ public class ItemsOperations {
 		// parametrami
 		itemsArray.add((Item) new Bomb(16, 8, 5, 30));
 		itemsArray.add((Item) new Bomb(7, 20, 20, 30));
-		itemsArray.add((Item) new Sapper(2, 7, 2, 70));
+		itemsArray.add((Item) new Sapper(2, 7, 2, 40));
 		itemsArray.add((Item) new Sapper(8, 9, 2, 70));
 
 		for (int i = 0; i < itemsArray.size(); i++) {
