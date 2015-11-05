@@ -63,6 +63,8 @@ public class SapperTimer extends TimerTask {
 			if (tempSapperReference.getHealthPoints() == 0) {
 
 				MainWindow.updateLog("Sapper " + tempSapperReference.getId() + " is dead!");
+				//MainWindow.grid.drawDeadSapper(tempSapperReference.getPositionX(), tempSapperReference.getPositionY());
+				
 				tempSapperReference.getTargetsArray().clear();
 				this.cancel();
 				continueStep = false;
@@ -132,6 +134,7 @@ public class SapperTimer extends TimerTask {
 						MainWindow.updateLog("Position of moving bomb is: [" + tempItemReference.getPositionX() + "]["
 								+ tempItemReference.getPositionY() + "]");
 						MainWindow.grid.drawBomb(tempItemReference.getPositionX(), tempItemReference.getPositionY());
+						
 
 					} else {
 						MainWindow.updateLog("You are not moving antyhing");
@@ -139,7 +142,8 @@ public class SapperTimer extends TimerTask {
 
 					MainWindow.grid.drawSapper(initialSapperPositionX, initialSapperPositionY,
 							this.getItemReference().getPositionX(), this.getItemReference().getPositionY());
-
+					MainWindow.grid.drawRange();
+					
 					for (int i = 0; i < MainWindow.itemsCollection.getItemsArray().size(); i++) {
 						Item tempItem = MainWindow.itemsCollection.getItemsArray().get(i);
 						int tempX = tempItem.getPositionX();
@@ -151,6 +155,7 @@ public class SapperTimer extends TimerTask {
 							} else if (tempItem instanceof Sapper) {
 								MainWindow.grid.drawSapper(initialSapperPositionX, initialSapperPositionY, tempX,
 										tempY);
+								
 							}
 						}
 					}

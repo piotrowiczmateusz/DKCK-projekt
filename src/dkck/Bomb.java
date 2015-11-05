@@ -115,7 +115,7 @@ public class Bomb extends Item {
 		this.setBombTimer(new BombTimer(this, 1000));
 
 		MainWindow.grid.drawBomb(positionX, positionY);
-
+	
 	}
 
 	/**
@@ -137,6 +137,7 @@ public class Bomb extends Item {
 			this.getBombTimer().cancel();
 			this.setBombStatus(2);
 			MainWindow.updateLog("The bomb nr " + this.getId() + " is now disarmed");
+			MainWindow.grid.drawDisarmedBomb(this.getPositionX(), this.getPositionY());
 
 		} else {
 			this.explode();
@@ -150,7 +151,7 @@ public class Bomb extends Item {
 		this.getBombTimer().cancel();
 		this.setExplosionLeftTime(0);
 		this.setBombStatus(0);
-		
+		this.setRange(0);
 		
 		timerLog.setText("Bomb nr: " + this.getId() + " EXPLODED!");
 
@@ -173,7 +174,8 @@ public class Bomb extends Item {
 				}
 
 			}
-
+			
+			MainWindow.grid.drawExplodedBomb(this.getPositionX(), this.getPositionY());
 			// }
 
 			// System.out.println("test");

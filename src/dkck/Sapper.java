@@ -1,8 +1,5 @@
 package dkck;
 
-//import java.awt.Color;
-
-//import java.util.Random;
 import java.util.LinkedList;
 import java.util.List;
 
@@ -23,6 +20,7 @@ public class Sapper extends Item {
 	private boolean SapperStatus;
 
 	private List<Item> targetsArray;
+	
 
 	/**
 	 * SETTERS AND GETTERS
@@ -91,6 +89,11 @@ public class Sapper extends Item {
 	public void hurt() {
 		this.setHealthPoints(healthPoints - 1);
 		MainWindow.updateHPPanel("Sapper HP is: " + this.getHealthPoints());
+		
+		if(this.getHealthPoints() == 0) {
+			MainWindow.updateLog("Sapper is dead");
+			MainWindow.grid.drawDeadSapper(this.getPositionX(), this.getPositionY());
+		}
 	}
 
 	/**
@@ -127,10 +130,12 @@ public class Sapper extends Item {
 	public void addTaskTomove(Item targetToReach, Item itemToMove) throws InterruptedException {
 		targetsArray.add(targetToReach);
 		targetsArray.add(itemToMove);
+		
 	}
 
 	public void go(int x, int y) throws InterruptedException {
 		this.addTaskTomove(new Point(x, y), null);
+		
 	}
 
 	/**

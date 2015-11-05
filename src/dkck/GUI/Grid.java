@@ -6,9 +6,12 @@ import java.awt.GridBagLayout;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.swing.ImageIcon;
 import javax.swing.JPanel;
 import javax.swing.border.Border;
 import javax.swing.border.MatteBorder;
+
+import dkck.Bomb;
 
 public class Grid extends JPanel {
 
@@ -90,7 +93,15 @@ public class Grid extends JPanel {
 		}
 	}
 
+	
+	/*
+	 * Drawing methods:
+	 */
+	
 	public void drawSapper(int prevX, int prevY, int x, int y) {
+		
+		this.clearGrid();	
+		
 		if (prevX > this.getRows())
 			prevX = this.getRows();
 		if (x > this.getRows())
@@ -100,8 +111,16 @@ public class Grid extends JPanel {
 		if (y > this.getColumns())
 			y = this.getColumns();
 
-		this.cellPanes.get(prevX).get(prevY).setBackground(this.getBackground());
-		this.cellPanes.get(x).get(y).setBackground(Color.gray);
+		this.cellPanes.get(prevX).get(prevY).setBackground(this.cellPanes.get(prevX).get(prevY).defaultBackground);
+		
+		this.cellPanes.get(x).get(y).image.img = new ImageIcon("images/sapper.png").getImage();
+		this.cellPanes.get(prevX).get(prevY).image.img = new ImageIcon("images/blank.png").getImage();
+		
+		this.repaint();
+	}
+	
+	public void drawDeadSapper(int x, int y) {
+		this.cellPanes.get(x).get(y).image.img = new ImageIcon("images/dead.png").getImage();
 	}
 
 	public void drawBomb(int x, int y) {
@@ -109,8 +128,48 @@ public class Grid extends JPanel {
 			x = this.getRows();
 		if (y > this.getColumns())
 			y = this.getColumns();
+		
+		this.cellPanes.get(x).get(y).image.img = new ImageIcon("images/bomb.png").getImage();
+		this.cellPanes.get(x).get(y).setBackground(new Color(255, 0, 0, 50));
 
-		this.cellPanes.get(x).get(y).setBackground(Color.black);
 	}
-
+	
+	public void drawExplodedBomb(int x, int y) {
+		this.cellPanes.get(x).get(y).image.img = new ImageIcon("images/exploded.png").getImage();
+	}
+	
+	public void drawDisarmedBomb(int x, int y) {
+		this.cellPanes.get(x).get(y).image.img = new ImageIcon("images/disarmed.png").getImage();
+	}
+	
+	public void drawRange() {
+		
+		for(int k = 0; k < MainWindow.itemsCollection.getItemsArray().size(); k++) {
+			
+			if(MainWindow.itemsCollection.getItemsArray().get(k) instanceof Bomb) {
+				
+				int x = MainWindow.itemsCollection.getItemsArray().get(k).getPositionX();
+				int y = MainWindow.itemsCollection.getItemsArray().get(k).getPositionY();
+				int range = MainWindow.itemsCollection.getItemsArray().get(k).getRange();
+				
+				if(range != 0) {
+					for(int i = x-range; i < x+range+1; i++) {
+						for(int j = y-range; j < y+range+1; j++) {
+							if((i != 0) && (i != 25) && (j != 0) && (j != 25)) {
+								this.cellPanes.get(i).get(j).setBackground(new Color(255, 0, 0, 55));
+							}	
+						}
+					}
+				}		
+			}	
+		}			
+	}
+	
+	public void clearGrid() {
+		for(int i = 0; i < this.getRows(); i++) {
+			for(int j = 0; j < this.getColumns(); j++) {
+				this.cellPanes.get(i).get(j).setBackground(this.cellPanes.get(i).get(j).defaultBackground);		
+			}
+		}
+	}
 }

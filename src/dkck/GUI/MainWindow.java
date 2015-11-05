@@ -16,9 +16,9 @@ public class MainWindow extends JFrame {
 	 */
 	private static final long serialVersionUID = 1L;
 	
-	private static final int gridRows = 50;
+	private static final int gridRows = 25;
 	
-	private static final int gridColumns = 50;
+	private static final int gridColumns = 25;
 
 	public static ItemsOperations itemsCollection;
 	
@@ -70,11 +70,12 @@ public class MainWindow extends JFrame {
 
 	public static void main(String[] args) throws InterruptedException {
 		new MainWindow();
-		
+	
 		itemsCollection = new ItemsOperations();
 		itemsCollection.addItems();
-		interpreter = new Interpreter();
-		//itemsCollection.actions();
+		grid.drawRange();
+		//interpreter = new Interpreter();
+		itemsCollection.actions();
 	}
 
 	public MainWindow() {
@@ -83,7 +84,7 @@ public class MainWindow extends JFrame {
 
 		setDefaultCloseOperation(EXIT_ON_CLOSE);
 		setPreferredSize(new Dimension(900, 578));
-
+		
 		// Add elements to panels
 
 		gridPanel.add(grid);

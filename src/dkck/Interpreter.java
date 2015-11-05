@@ -20,7 +20,7 @@ public class Interpreter {
 			if(input.matches("(.*)[0-9](.*)")) {
 				for(int i = 0; i < input.length()-1; i++) {
 					if(Character.isDigit(input.charAt(i))) {
-						x = input.charAt(i) - 48;			
+						x = input.charAt(i) - 23;			
 						
 						System.out.println(x);
 					}
@@ -33,13 +33,13 @@ public class Interpreter {
 				x = 0;		
 			}
 			else if(input.matches("(.*)po³udnie(.*)|(.*)po³udniowy(.*)")) {
-				x = 49;			
+				x = 24;			
 			}
 			if(input.matches("(.*)zachód(.*)|(.*)zachodni(.*)|(.*)lewo(.*)|(.*)lewy(.*)")) {
 				y = 0;			
 			}		
 			else if(input.matches("(.*)wschód(.*)|(.*)wschodni(.*)|(.*)prawo(.*)|(.*)prawy(.*)")) {
-				y = 49;				
+				y = 24;				
 			}
 			
 			
