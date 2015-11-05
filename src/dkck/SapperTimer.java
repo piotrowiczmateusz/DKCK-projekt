@@ -79,7 +79,7 @@ public class SapperTimer extends TimerTask {
 						&& tempSapperReference.getTargetsArray().get(0).getPositionY() == this.getItemReference()
 								.getPositionY()) {
 
-					MainWindow.updateLog("Sapper reached the target.");
+					MainWindow.updateLog("Sapper nr: " + tempSapperReference.getId() + " reached the target.");
 					continueStep = false;
 
 				}
@@ -92,7 +92,7 @@ public class SapperTimer extends TimerTask {
 						// run();
 						// itemReference.setPositionX(prevPositionX);
 						// itemReference.setPositionY(prevPositionY);
-						MainWindow.updateLog("Sapper lost the bomb");
+						MainWindow.updateLog("Sapper nr: " + tempSapperReference.getId() + "lost the bomb");
 						continueStep = false;
 					}
 				}
@@ -119,7 +119,7 @@ public class SapperTimer extends TimerTask {
 						this.getItemReference().setPositionY(this.getItemReference().getPositionY() - 1);
 					}
 
-					MainWindow.updatePositionPanel("Sapper position is: [" + this.getItemReference().getPositionX()
+					MainWindow.updatePositionPanel("Sapper nr: " + tempSapperReference.getId() + "is on position: [" + this.getItemReference().getPositionX()
 							+ "][" + this.getItemReference().getPositionY() + "]");
 
 					Item tempItemReference = ((Sapper) this.getItemReference()).getTargetsArray().get(1);

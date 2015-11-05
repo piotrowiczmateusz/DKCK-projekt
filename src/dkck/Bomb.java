@@ -122,7 +122,7 @@ public class Bomb extends Item {
 	 * OTHER METHODS
 	 */
 
-	public void burn() {
+	public void launch() {
 		if (this.bombStatus == 1 && this.explosionLeftTime > 10)
 			this.setExplosionLeftTime(5);
 	}
@@ -130,7 +130,7 @@ public class Bomb extends Item {
 	public void disarm(Item itemArgument) {
 		if (itemArgument instanceof Sapper) {
 
-			if (this.getBombStatus() != 1) {
+			if (this.getBombStatus() != 0) {
 
 				Sapper tempSapperReference = (Sapper) itemArgument;
 				System.out.println("Disarming...");
@@ -171,7 +171,7 @@ public class Bomb extends Item {
 			if (tempItem instanceof Bomb) {
 				Bomb tempBombReference = (Bomb) tempItem;
 				if (this.checkItemsCenterDistance(tempBombReference) == true) {
-					tempBombReference.burn();
+					tempBombReference.launch();
 
 				}
 			} else if (tempItem instanceof Sapper) {
