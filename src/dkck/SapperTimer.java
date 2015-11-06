@@ -128,7 +128,7 @@ public class SapperTimer extends TimerTask {
 						this.getItemReference().setPositionY(this.getItemReference().getPositionY() - 1);
 					}
 
-					MainWindow.updatePositionPanel("Sapper nr: " + tempSapperReference.getId() + "is on position: ["
+					MainWindow.updatePositionPanel("Sapper nr: " + tempSapperReference.getId() + " is on position: ["
 							+ this.getItemReference().getPositionX() + "][" + this.getItemReference().getPositionY()
 							+ "]");
 
@@ -167,7 +167,7 @@ public class SapperTimer extends TimerTask {
 						}
 					}
 				} else
-					run();//recursive call
+					run();// recursive call
 
 			}
 		} else {
