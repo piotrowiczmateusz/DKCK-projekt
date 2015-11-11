@@ -141,7 +141,9 @@ public class MovingTimer extends TimerTask {
 						tempItemReference.setPositionY(this.getItemReference().getPositionY());
 						MainWindow.updateLog("Position of moving bomb is: [" + tempItemReference.getPositionX() + "]["
 								+ tempItemReference.getPositionY() + "]");
-						MainWindow.grid.drawSquare(tempItemReference.getPositionX(), tempItemReference.getPositionY(), tempItemReference.getPositionX(), tempItemReference.getPositionY(), MainWindow.bombColor);
+						MainWindow.grid.drawSquare(initialSapperPositionX, initialSapperPositionY,
+								tempItemReference.getPositionX(), tempItemReference.getPositionY(),
+								MainWindow.bombColor);
 
 					} else {
 						MainWindow.updateLog("You are not moving antyhing");
@@ -150,7 +152,8 @@ public class MovingTimer extends TimerTask {
 					// drawing everything
 
 					MainWindow.grid.drawSquare(initialSapperPositionX, initialSapperPositionY,
-							this.getItemReference().getPositionX(), this.getItemReference().getPositionY(), MainWindow.sapperColor);
+							this.getItemReference().getPositionX(), this.getItemReference().getPositionY(),
+							MainWindow.sapperColor);
 
 					for (int i = 0; i < MainWindow.itemsCollection.getItemsArray().size(); i++) {
 						Item tempItem = MainWindow.itemsCollection.getItemsArray().get(i);
@@ -161,8 +164,8 @@ public class MovingTimer extends TimerTask {
 								MainWindow.grid.drawSquare(tempX, tempY, tempX, tempY, MainWindow.bombColor);
 
 							} else if (tempItem instanceof Sapper) {
-								MainWindow.grid.drawSquare(initialSapperPositionX, initialSapperPositionY, tempX,
-										tempY, MainWindow.sapperColor);
+								MainWindow.grid.drawSquare(initialSapperPositionX, initialSapperPositionY, tempX, tempY,
+										MainWindow.sapperColor);
 							}
 						}
 					}

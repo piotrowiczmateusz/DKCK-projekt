@@ -9,7 +9,6 @@ import java.util.List;
 import javax.swing.JPanel;
 import javax.swing.border.Border;
 import javax.swing.border.MatteBorder;
-import javax.swing.plaf.synth.ColorType;
 
 public class Grid extends JPanel {
 
@@ -101,9 +100,8 @@ public class Grid extends JPanel {
 		if (y > this.getColumns())
 			y = this.getColumns();
 
-		this.cellPanes.get(prevX).get(prevY).setBackground(this.getBackground());
+		this.cellPanes.get(prevX).get(prevY).setBackground(Color.white);
 		this.cellPanes.get(x).get(y).setBackground(oolor);
 	}
-
 
 }
