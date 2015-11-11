@@ -1,11 +1,12 @@
 package dkck;
 
+import java.awt.Color;
 import java.util.Timer;
 import java.util.TimerTask;
 
 import dkck.GUI.MainWindow;
 
-public class SapperTimer extends TimerTask {
+public class MovingTimer extends TimerTask {
 
 	private Item itemReference;
 
@@ -45,7 +46,7 @@ public class SapperTimer extends TimerTask {
 		this.timer1 = timer1;
 	}
 
-	public SapperTimer(Item itemReference, int miliseconds) {
+	public MovingTimer(Item itemReference, int miliseconds) {
 		super();
 		this.setItemReference(itemReference);
 		this.setTimer1(new Timer());
@@ -141,7 +142,7 @@ public class SapperTimer extends TimerTask {
 						tempItemReference.setPositionY(this.getItemReference().getPositionY());
 						MainWindow.updateLog("Position of moving bomb is: [" + tempItemReference.getPositionX() + "]["
 								+ tempItemReference.getPositionY() + "]");
-						MainWindow.grid.drawBomb(tempItemReference.getPositionX(), tempItemReference.getPositionY());
+						MainWindow.grid.drawSquare(tempItemReference.getPositionX(), tempItemReference.getPositionY(), tempItemReference.getPositionX(), tempItemReference.getPositionY(), Color.red);
 
 					} else {
 						MainWindow.updateLog("You are not moving antyhing");
@@ -149,8 +150,8 @@ public class SapperTimer extends TimerTask {
 
 					// drawing everything
 
-					MainWindow.grid.drawSapper(initialSapperPositionX, initialSapperPositionY,
-							this.getItemReference().getPositionX(), this.getItemReference().getPositionY());
+					MainWindow.grid.drawSquare(initialSapperPositionX, initialSapperPositionY,
+							this.getItemReference().getPositionX(), this.getItemReference().getPositionY(), Color.gray);
 
 					for (int i = 0; i < MainWindow.itemsCollection.getItemsArray().size(); i++) {
 						Item tempItem = MainWindow.itemsCollection.getItemsArray().get(i);
@@ -158,11 +159,11 @@ public class SapperTimer extends TimerTask {
 						int tempY = tempItem.getPositionY();
 						if ((tempX == initialSapperPositionX) && (tempY == initialSapperPositionY)) {
 							if (tempItem instanceof Bomb) {
-								MainWindow.grid.drawBomb(tempX, tempY);
+								MainWindow.grid.drawSquare(tempX, tempY, tempX, tempY, Color.red);
 
 							} else if (tempItem instanceof Sapper) {
-								MainWindow.grid.drawSapper(initialSapperPositionX, initialSapperPositionY, tempX,
-										tempY);
+								MainWindow.grid.drawSquare(initialSapperPositionX, initialSapperPositionY, tempX,
+										tempY, Color.gray);
 							}
 						}
 					}
@@ -171,7 +172,8 @@ public class SapperTimer extends TimerTask {
 
 			}
 		} else {
-			MainWindow.updateLog("Wrong timer argument!!!");
+			System.out.println("Wrong timer argument!!!");
+			this.cancel();
 		}
 	}
 }

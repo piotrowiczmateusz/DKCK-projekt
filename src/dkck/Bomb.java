@@ -101,7 +101,7 @@ public class Bomb extends Item {
 	 * @param bombStatus
 	 */
 	public Bomb(int positionX, int positionY, int range, int explosionLeftTime) {
-		super(positionX, positionY, range, id++);
+		super(positionX, positionY, range, id++, 0);
 		this.bombStatus = 1;
 		this.explosionLeftTime = explosionLeftTime;
 		this.timerLog = new JTextField();
@@ -114,7 +114,7 @@ public class Bomb extends Item {
 
 		this.setBombTimer(new BombTimer(this, 1000));
 
-		MainWindow.grid.drawBomb(positionX, positionY);
+		MainWindow.grid.drawSquare(positionX, positionY, positionX, positionY, Color.red);
 
 	}
 

@@ -9,6 +9,7 @@ import java.util.List;
 import javax.swing.JPanel;
 import javax.swing.border.Border;
 import javax.swing.border.MatteBorder;
+import javax.swing.plaf.synth.ColorType;
 
 public class Grid extends JPanel {
 
@@ -90,7 +91,7 @@ public class Grid extends JPanel {
 		}
 	}
 
-	public void drawSapper(int prevX, int prevY, int x, int y) {
+	public void drawSquare(int prevX, int prevY, int x, int y, Color oolor) {
 		if (prevX > this.getRows())
 			prevX = this.getRows();
 		if (x > this.getRows())
@@ -101,16 +102,8 @@ public class Grid extends JPanel {
 			y = this.getColumns();
 
 		this.cellPanes.get(prevX).get(prevY).setBackground(this.getBackground());
-		this.cellPanes.get(x).get(y).setBackground(Color.gray);
+		this.cellPanes.get(x).get(y).setBackground(oolor);
 	}
 
-	public void drawBomb(int x, int y) {
-		if (x > this.getRows())
-			x = this.getRows();
-		if (y > this.getColumns())
-			y = this.getColumns();
-
-		this.cellPanes.get(x).get(y).setBackground(Color.black);
-	}
 
 }
