@@ -1,7 +1,5 @@
 package dkck;
 
-import java.awt.Color;
-
 //import java.awt.Color;
 
 //import java.util.Random;
@@ -88,7 +86,7 @@ public class Sapper extends Item {
 		
 
 		MainWindow.updateHPPanel("Sapper HP is: " + this.getHealthPoints());
-		MainWindow.grid.drawSquare(0, 0, this.getPositionX(), this.getPositionY(), Color.gray);
+		MainWindow.grid.drawSquare(0, 0, this.getPositionX(), this.getPositionY(), MainWindow.sapperColor);
 	}
 
 	/**

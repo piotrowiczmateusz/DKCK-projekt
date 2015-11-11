@@ -114,7 +114,7 @@ public class Bomb extends Item {
 
 		this.setBombTimer(new BombTimer(this, 1000));
 
-		MainWindow.grid.drawSquare(positionX, positionY, positionX, positionY, Color.red);
+		MainWindow.grid.drawSquare(positionX, positionY, positionX, positionY, MainWindow.bombColor);
 
 	}
 

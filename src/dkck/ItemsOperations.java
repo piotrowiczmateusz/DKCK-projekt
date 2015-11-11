@@ -64,7 +64,7 @@ public class ItemsOperations {
 		((Sapper) itemsArray.get(3)).moveBomb(itemsArray.get(2), 2, 3);
 
 		((Sapper) itemsArray.get(4)).moveBomb(itemsArray.get(1), 45, 49);
-		((Sapper) itemsArray.get(4)).moveBomb(itemsArray.get(1), 2, 5);
+		((Sapper) itemsArray.get(4)).moveBomb(itemsArray.get(1), 1, 1);
 		((Sapper) itemsArray.get(4)).reachItem(itemsArray.get(1));
 		((Sapper) itemsArray.get(4)).reachItem(itemsArray.get(3));
 

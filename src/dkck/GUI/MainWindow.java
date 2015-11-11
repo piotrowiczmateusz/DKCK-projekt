@@ -1,6 +1,7 @@
 package dkck.GUI;
 
 import java.awt.BorderLayout;
+import java.awt.Color;
 import java.awt.Dimension;
 
 import javax.swing.JFrame;
@@ -20,6 +21,13 @@ public class MainWindow extends JFrame {
 	private static final int gridColumns = 50;
 
 	public static ItemsOperations itemsCollection;
+	
+	public static final Color bombColor = Color.red;
+	
+	public static final Color sapperColor = Color.blue;
+	
+	
+	
 
 	// Window elements
 

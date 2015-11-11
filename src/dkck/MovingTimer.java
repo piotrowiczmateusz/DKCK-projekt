@@ -1,6 +1,5 @@
 package dkck;
 
-import java.awt.Color;
 import java.util.Timer;
 import java.util.TimerTask;
 
@@ -142,7 +141,7 @@ public class MovingTimer extends TimerTask {
 						tempItemReference.setPositionY(this.getItemReference().getPositionY());
 						MainWindow.updateLog("Position of moving bomb is: [" + tempItemReference.getPositionX() + "]["
 								+ tempItemReference.getPositionY() + "]");
-						MainWindow.grid.drawSquare(tempItemReference.getPositionX(), tempItemReference.getPositionY(), tempItemReference.getPositionX(), tempItemReference.getPositionY(), Color.red);
+						MainWindow.grid.drawSquare(tempItemReference.getPositionX(), tempItemReference.getPositionY(), tempItemReference.getPositionX(), tempItemReference.getPositionY(), MainWindow.bombColor);
 
 					} else {
 						MainWindow.updateLog("You are not moving antyhing");
@@ -151,7 +150,7 @@ public class MovingTimer extends TimerTask {
 					// drawing everything
 
 					MainWindow.grid.drawSquare(initialSapperPositionX, initialSapperPositionY,
-							this.getItemReference().getPositionX(), this.getItemReference().getPositionY(), Color.gray);
+							this.getItemReference().getPositionX(), this.getItemReference().getPositionY(), MainWindow.sapperColor);
 
 					for (int i = 0; i < MainWindow.itemsCollection.getItemsArray().size(); i++) {
 						Item tempItem = MainWindow.itemsCollection.getItemsArray().get(i);
@@ -159,11 +158,11 @@ public class MovingTimer extends TimerTask {
 						int tempY = tempItem.getPositionY();
 						if ((tempX == initialSapperPositionX) && (tempY == initialSapperPositionY)) {
 							if (tempItem instanceof Bomb) {
-								MainWindow.grid.drawSquare(tempX, tempY, tempX, tempY, Color.red);
+								MainWindow.grid.drawSquare(tempX, tempY, tempX, tempY, MainWindow.bombColor);
 
 							} else if (tempItem instanceof Sapper) {
 								MainWindow.grid.drawSquare(initialSapperPositionX, initialSapperPositionY, tempX,
-										tempY, Color.gray);
+										tempY, MainWindow.sapperColor);
 							}
 						}
 					}
