@@ -86,7 +86,6 @@ public class MovingTimer extends TimerTask {
 
 					MainWindow.updateLog("Sapper nr: " + tempSapperReference.getId() + " reached the target.");
 					continueStep = false;
-
 				}
 
 				// checking bomb loss
@@ -171,7 +170,6 @@ public class MovingTimer extends TimerTask {
 					}
 				} else
 					run();// recursive call
-
 			}
 		} else {
 			System.out.println("Wrong timer argument!!!");

@@ -17,9 +17,9 @@ public abstract class Item {
 	private int range;
 
 	private int id;
-	
+
 	MovingTimer movingTimer;
-	
+
 	private List<Item> targetsArray;
 
 	/**
@@ -85,7 +85,7 @@ public abstract class Item {
 	public void setId(int id) {
 		this.id = id;
 	}
-	
+
 	/**
 	 * @return the movingTimer
 	 */
@@ -93,11 +93,10 @@ public abstract class Item {
 		return movingTimer;
 	}
 
-
 	public void setMovingTimer(MovingTimer sapperTimer) {
 		this.movingTimer = sapperTimer;
 	}
-	
+
 	/**
 	 * @return the targetsArray
 	 */
@@ -125,22 +124,29 @@ public abstract class Item {
 	 */
 	public Item(int positionX, int positionY, int range, int id, int speed) {
 		super();
-		targetsArray = new LinkedList<Item>();
 		this.positionX = positionX;
 		this.positionY = positionY;
 		this.range = range;
 		this.id = id;
-		
-		if(speed == 0) this.setMovingTimer(null);
-		else this.setMovingTimer(new MovingTimer(this, speed));
 
-//		this.setMovingTimer(new MovingTimer(this, 50));
+		if (speed == 0) {
+			this.setTargetsArray(null);
+			this.setMovingTimer(null);
+		} else {
+			this.setTargetsArray(new LinkedList<Item>());
+			this.setMovingTimer(new MovingTimer(this, speed));
+		}
+
+		// this.setMovingTimer(new MovingTimer(this, 50));
 
 	}
-	
+
 	private void addTaskToMove(Item targetToReach, Item itemToMove) throws InterruptedException {
-		targetsArray.add(targetToReach);
-		targetsArray.add(itemToMove);
+		if (this.getTargetsArray() != null && this.getMovingTimer() != null) {
+			this.getTargetsArray().add(targetToReach);
+			this.getTargetsArray().add(itemToMove);
+		} else
+			System.out.println("Nothing happens");
 	}
 
 	public void reachItem(Item itemToReach) throws InterruptedException {
