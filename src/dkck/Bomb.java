@@ -100,10 +100,31 @@ public class Bomb extends Item {
 	 * @param id
 	 * @param bombStatus
 	 */
-	public Bomb(int positionX, int positionY, int range, int explosionLeftTime) {
-		super(positionX, positionY, range, id++, 0);
+	// public Bomb(int positionX, int positionY, int range, int
+	// explosionLeftTime) {
+	// super(positionX, positionY, range, id++, 0);
+	// this.bombStatus = 1;
+	// this.explosionLeftTime = explosionLeftTime;
+	// this.timerLog = new JTextField();
+	//
+	// timerLog.setOpaque(true);
+	// timerLog.setBackground(Color.white);
+	// timerLog.setBorder(new MatteBorder(0, 0, 0, 0, (Color) new Color(0, 0,
+	// 0)));
+	// timerLog.setPreferredSize(new Dimension(358, 14));
+	// timerLog.setEditable(false);
+	//
+	// this.setBombTimer(new BombTimer(this, 1000));
+	//
+	// MainWindow.grid.drawSquare(positionX, positionY, positionX, positionY,
+	// MainWindow.bombColor);
+	// }
+
+	public Bomb() {
+		super(id);
+		id++;
+
 		this.bombStatus = 1;
-		this.explosionLeftTime = explosionLeftTime;
 		this.timerLog = new JTextField();
 
 		timerLog.setOpaque(true);
@@ -113,39 +134,7 @@ public class Bomb extends Item {
 		timerLog.setEditable(false);
 
 		this.setBombTimer(new BombTimer(this, 1000));
-
-		MainWindow.grid.drawSquare(positionX, positionY, positionX, positionY, MainWindow.bombColor);
-
 	}
-	
-	static Random generator = new Random();
-	
-	private static int positionX = generator.nextInt(MainWindow.gridRows);
-	
-	private static int positionY = generator.nextInt(MainWindow.gridColumns);
-	
-	public Bomb(){
-		super(positionX, positionY, generator.nextInt(30), id++, 0);
-		
-		this.bombStatus = 1;
-		this.explosionLeftTime = generator.nextInt(30);
-		this.timerLog = new JTextField();
-		
-		timerLog.setOpaque(true);
-		timerLog.setBackground(Color.white);
-		timerLog.setBorder(new MatteBorder(0, 0, 0, 0, (Color) new Color(0, 0, 0)));
-		timerLog.setPreferredSize(new Dimension(358, 14));
-		timerLog.setEditable(false);
-
-		this.setBombTimer(new BombTimer(this, 1000));
-
-		MainWindow.grid.drawSquare(positionX, positionY, positionX, positionY, MainWindow.bombColor);
-		
-	}
-	
-	
-	
-	
 
 	/**
 	 * OTHER METHODS

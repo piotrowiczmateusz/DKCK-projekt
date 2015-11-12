@@ -4,8 +4,6 @@ package dkck;
 
 //import java.util.Random;
 
-import java.util.Random;
-
 import dkck.GUI.MainWindow;
 
 public class Sapper extends Item {
@@ -77,33 +75,23 @@ public class Sapper extends Item {
 	/**
 	 * CONSTRUCTORS
 	 */
-	public Sapper(int positionX, int positionY, int range, int speed) {
-		super(positionX, positionY, range, id++, speed);
-		
-		// targetsArray.add(new Point(14, 45));
-		// targetsArray.add(new Point(8,3));
-		this.setSapperStatus(true);
-		this.setHealthPoints(2);
+//	public Sapper(int positionX, int positionY, int range, int speed) {
+//		super(positionX, positionY, range, id, speed);
+//		id++;
+//		
+//		// targetsArray.add(new Point(14, 45));
+//		// targetsArray.add(new Point(8,3));
+//		this.setSapperStatus(true);
+//		this.setHealthPoints(2);
+//
+//		MainWindow.updateHPPanel("Sapper HP: " + this.getHealthPoints());
+//		MainWindow.grid.drawSquare(this.getPositionX(), this.getPositionY(), this.getPositionX(), this.getPositionY(), MainWindow.sapperColor);
+//	}
 
-		
-
-		MainWindow.updateHPPanel("Sapper HP: " + this.getHealthPoints());
-		MainWindow.grid.drawSquare(this.getPositionX(), this.getPositionY(), this.getPositionX(), this.getPositionY(), MainWindow.sapperColor);
-	}
-
-	
-	static Random generator = new Random();
-	
-	private static int positionX = generator.nextInt(MainWindow.gridRows);
-	
-	private static int positionY = generator.nextInt(MainWindow.gridColumns);
-	
-	private static int range = generator.nextInt(30);
-	
-	private static int speed = generator.nextInt(50);
 	
 	public Sapper(){
-		super(positionX, positionY , range, id++, speed);
+		super(id);
+		id++;
 
 		// targetsArray.add(new Point(14, 45));
 		// targetsArray.add(new Point(8,3));
@@ -114,9 +102,6 @@ public class Sapper extends Item {
 		MainWindow.grid.drawSquare(this.getPositionX(), this.getPositionY(), this.getPositionX(), this.getPositionY(), MainWindow.sapperColor);
 		
 	}
-	
-	
-	
 	
 	
 	/**

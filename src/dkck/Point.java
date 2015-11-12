@@ -17,7 +17,8 @@ public class Point extends Item {
 	 * @param positionY
 	 */
 	public Point(int positionX, int positionY) {
-		super(positionX, positionY, 0, id++, 0);
+		super( id);
+		++id;
 		
 		// TODO Auto-generated constructor stub
 	}

@@ -2,6 +2,7 @@ package dkck;
 
 import java.util.LinkedList;
 import java.util.List;
+import java.util.Random;
 
 import dkck.GUI.MainWindow;
 
@@ -122,12 +123,47 @@ public abstract class Item {
 	 * @param range
 	 * @param id
 	 */
-	public Item(int positionX, int positionY, int range, int id, int speed) {
+	// public Item(int positionX, int positionY, int range, int id, int speed) {
+	// super();
+	// this.positionX = positionX;
+	// this.positionY = positionY;
+	// this.range = range;
+	// this.id = id;
+	//
+	// if (speed == 0) {
+	// this.setTargetsArray(null);
+	// this.setMovingTimer(null);
+	// } else {
+	// this.setTargetsArray(new LinkedList<Item>());
+	// this.setMovingTimer(new MovingTimer(this, speed));
+	// }
+	//
+	// // this.setMovingTimer(new MovingTimer(this, 50));
+	//
+	// }
+
+	public Item(int id) {
 		super();
+		Random generator = new Random();
+
+		int positionX = generator.nextInt(MainWindow.gridRows);
+
+		int positionY = generator.nextInt(MainWindow.gridColumns);
+
+		int range = 2 + generator.nextInt(10);
+
+		int speed = 50 + generator.nextInt(300);
+
 		this.positionX = positionX;
 		this.positionY = positionY;
 		this.range = range;
 		this.id = id;
+
+		if (this instanceof Bomb) {
+			((Bomb) this).setExplosionLeftTime(generator.nextInt(30));
+			MainWindow.grid.drawSquare(positionX, positionY, positionX, positionY, MainWindow.bombColor);
+		} else if (this instanceof Sapper)
+			MainWindow.grid.drawSquare(positionX, positionY, positionX, positionY, MainWindow.sapperColor);
 
 		if (speed == 0) {
 			this.setTargetsArray(null);
@@ -138,7 +174,6 @@ public abstract class Item {
 		}
 
 		// this.setMovingTimer(new MovingTimer(this, 50));
-
 	}
 
 	private void addTaskToMove(Item targetToReach, Item itemToMove) throws InterruptedException {
@@ -241,7 +276,7 @@ public abstract class Item {
 				}
 				if (cls.isInstance(tempItem)) {
 					System.out.println(tempText + " with id: " + tempItem.id + " and position: ["
-							+ (tempItem.getPositionX()+1) + "][" + (tempItem.getPositionY()+1) + "]");
+							+ (tempItem.getPositionX() + 1) + "][" + (tempItem.getPositionY() + 1) + "]");
 				}
 			}
 		}
