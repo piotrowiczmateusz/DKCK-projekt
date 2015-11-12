@@ -88,7 +88,6 @@ public class Sapper extends Item {
 //		MainWindow.grid.drawSquare(this.getPositionX(), this.getPositionY(), this.getPositionX(), this.getPositionY(), MainWindow.sapperColor);
 //	}
 
-	
 	public Sapper(){
 		super(id);
 		id++;

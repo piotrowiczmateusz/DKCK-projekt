@@ -37,6 +37,7 @@ public class ItemsOperations {
 		super();
 		this.itemsArray = new ArrayList<Item>();
 	}
+	
 
 	public void actions() throws InterruptedException {
 

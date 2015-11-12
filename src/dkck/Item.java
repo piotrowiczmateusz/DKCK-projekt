@@ -172,7 +172,6 @@ public abstract class Item {
 			this.setTargetsArray(new LinkedList<Item>());
 			this.setMovingTimer(new MovingTimer(this, speed));
 		}
-
 		// this.setMovingTimer(new MovingTimer(this, 50));
 	}
 
