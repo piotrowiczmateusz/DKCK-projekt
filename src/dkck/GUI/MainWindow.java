@@ -26,6 +26,8 @@ public class MainWindow extends JFrame {
 	
 	public static final Color sapperColor = Color.blue;
 	
+	public static final Color rocketColor = Color.green;
+	
 	
 	
 

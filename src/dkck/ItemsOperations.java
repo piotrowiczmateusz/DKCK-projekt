@@ -37,21 +37,23 @@ public class ItemsOperations {
 		super();
 		this.itemsArray = new ArrayList<Item>();
 	}
-	
 
 	public void actions() throws InterruptedException {
 
-		itemsArray.add((Item) new Bomb());//(2, 2, 40, 10));// dodawanie do listy
+		itemsArray.add((Item) new Bomb());// (2, 2, 40, 10));// dodawanie do
+											// listy
 
 		// elementów
 		// dziedzicz¹cych z
 		// klasy Item z
 		// okreœlonymi
 		// parametrami
-		itemsArray.add((Item) new Bomb());//16, 8, 5, 30));
-		itemsArray.add((Item) new Bomb());//7, 20, 20, 30));
-		itemsArray.add((Item) new Sapper());//2, 7, 2, 40));
-		itemsArray.add((Item) new Sapper());//8, 9, 2, 70));
+		itemsArray.add((Item) new Bomb());// 16, 8, 5, 30));
+		itemsArray.add((Item) new Bomb());// 7, 20, 20, 30));
+		itemsArray.add((Item) new Sapper());// 2, 7, 2, 40));
+		itemsArray.add((Item) new Sapper());// 8, 9, 2, 70));
+
+		itemsArray.add((Item) new Rocket());
 
 		for (int i = 0; i < itemsArray.size(); i++) {
 			Item tempItem = itemsArray.get(i);
@@ -64,20 +66,21 @@ public class ItemsOperations {
 
 		((Sapper) itemsArray.get(3)).moveBomb(itemsArray.get(2), 2, 3);
 
-		((Sapper) itemsArray.get(4)).moveBomb(itemsArray.get(1), 45, 49);
-		((Sapper) itemsArray.get(4)).moveBomb(itemsArray.get(1), 1, 1);
-		((Sapper) itemsArray.get(4)).reachItem(itemsArray.get(1));
-		((Sapper) itemsArray.get(4)).reachItem(itemsArray.get(3));
+		itemsArray.get(4).moveBomb(itemsArray.get(1), 45, 49);
+		itemsArray.get(4).moveBomb(itemsArray.get(1), 1, 1);
+		itemsArray.get(4).reachItem(itemsArray.get(1));
+		itemsArray.get(4).reachItem(itemsArray.get(3));
 
-		((Sapper) itemsArray.get(3)).go(3, 7);
+		itemsArray.get(3).go(3, 7);
 
-		((Sapper) itemsArray.get(3)).moveBomb(itemsArray.get(1), 6, 33);
+		itemsArray.get(3).moveBomb(itemsArray.get(1), 6, 33);
 
-		((Sapper) itemsArray.get(3)).reachItem(itemsArray.get(2));
+		itemsArray.get(3).reachItem(itemsArray.get(2));
 
-		((Sapper) itemsArray.get(3)).go(30, 49);
-		((Sapper) itemsArray.get(3)).reachItem(itemsArray.get(4));
-		((Sapper) itemsArray.get(3)).reachItem(itemsArray.get(1));
+		itemsArray.get(3).go(30, 49);
+		itemsArray.get(3).reachItem(itemsArray.get(4));
+		itemsArray.get(3).reachItem(itemsArray.get(1));
+		itemsArray.get(5).reachItem(itemsArray.get(3));
 
 		Thread.sleep(3000);
 

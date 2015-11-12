@@ -22,7 +22,7 @@ public class BombTimer extends TimerTask {
 
 	public void run() {
 
-		if (itemReference instanceof Bomb) {
+		if (itemReference instanceof Bomb && (itemReference instanceof Rocket == false)) {
 			Bomb tempBombReference = ((Bomb) itemReference);
 			if (tempBombReference.getExplosionLeftTime() > 0) {
 				tempBombReference.setExplosionLeftTime(tempBombReference.getExplosionLeftTime() - 1);
@@ -34,6 +34,7 @@ public class BombTimer extends TimerTask {
 
 		} else {
 			MainWindow.updateLog("Wrong timer argument!!!");
+			this.cancel();
 		}
 	}
 }

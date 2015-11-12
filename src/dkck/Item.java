@@ -152,17 +152,22 @@ public abstract class Item {
 
 		int range = 2 + generator.nextInt(10);
 
-		int speed = 50 + generator.nextInt(300);
+		int speed = 0;
+
+		if (this instanceof Rocket || this instanceof Sapper)
+			speed = 50 + generator.nextInt(300);
 
 		this.positionX = positionX;
 		this.positionY = positionY;
 		this.range = range;
 		this.id = id;
 
-		if (this instanceof Bomb) {
-			((Bomb) this).setExplosionLeftTime(generator.nextInt(30));
+		if (this instanceof Rocket)
+			MainWindow.grid.drawSquare(positionX, positionY, positionX, positionY, MainWindow.rocketColor);
+		else if (this instanceof Bomb)
+
 			MainWindow.grid.drawSquare(positionX, positionY, positionX, positionY, MainWindow.bombColor);
-		} else if (this instanceof Sapper)
+		else if (this instanceof Sapper)
 			MainWindow.grid.drawSquare(positionX, positionY, positionX, positionY, MainWindow.sapperColor);
 
 		if (speed == 0) {

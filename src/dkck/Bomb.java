@@ -124,6 +124,18 @@ public class Bomb extends Item {
 		super(id);
 		id++;
 
+		if (this instanceof Rocket)
+			this.setBombTimer(null);
+		else
+			this.setBombTimer(new BombTimer(this, 1000));
+
+		if (this.getBombTimer() == null)
+			this.setExplosionLeftTime(0);
+		else {
+			Random generator = new Random();
+			this.setExplosionLeftTime(generator.nextInt(30));
+		}
+
 		this.bombStatus = 1;
 		this.timerLog = new JTextField();
 
@@ -132,8 +144,6 @@ public class Bomb extends Item {
 		timerLog.setBorder(new MatteBorder(0, 0, 0, 0, (Color) new Color(0, 0, 0)));
 		timerLog.setPreferredSize(new Dimension(358, 14));
 		timerLog.setEditable(false);
-
-		this.setBombTimer(new BombTimer(this, 1000));
 	}
 
 	/**

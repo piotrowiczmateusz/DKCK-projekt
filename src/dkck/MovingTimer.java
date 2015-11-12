@@ -54,43 +54,46 @@ public class MovingTimer extends TimerTask {
 
 	public void run() {
 
-		if (this.getItemReference() instanceof Sapper) {
+		if (this.getItemReference() instanceof Sapper || this.getItemReference() instanceof Rocket) {
 
 			boolean continueStep = true;// important variable to state if sapper
 										// is doing one step or not in one cycle
 
-			Sapper tempSapperReference = ((Sapper) this.getItemReference());
+			if (this.getItemReference() instanceof Sapper) {
 
-			// checking health points
+				Sapper tempSapperReference = ((Sapper) this.getItemReference());
 
-			if (tempSapperReference.getHealthPoints() == 0) {
+				// checking health points
 
-				MainWindow.updateLog("Sapper " + tempSapperReference.getId() + " is dead!");
-				tempSapperReference.getTargetsArray().clear();
-				this.cancel();
-				continueStep = false;
+				if (tempSapperReference.getHealthPoints() == 0) {
+
+					MainWindow.updateLog("Sapper " + tempSapperReference.getId() + " is dead!");
+					tempSapperReference.getTargetsArray().clear();
+					this.cancel();
+					continueStep = false;
+				}
 			}
 
 			// checking position of sapper (mayby he reached the target)
 
-			if (tempSapperReference.getTargetsArray().isEmpty() == false) {
+			if (this.getItemReference().getTargetsArray().isEmpty() == false) {
 
 				int initialSapperPositionX = this.getItemReference().getPositionX();
 				int initialSapperPositionY = this.getItemReference().getPositionY();
 
-				if (tempSapperReference.getTargetsArray().isEmpty() == false
-						&& tempSapperReference.getTargetsArray().get(0).getPositionX() == this.getItemReference()
+				if (this.getItemReference().getTargetsArray().isEmpty() == false
+						&& this.getItemReference().getTargetsArray().get(0).getPositionX() == this.getItemReference()
 								.getPositionX()
-						&& tempSapperReference.getTargetsArray().get(0).getPositionY() == this.getItemReference()
+						&& this.getItemReference().getTargetsArray().get(0).getPositionY() == this.getItemReference()
 								.getPositionY()) {
 
-					MainWindow.updateLog("Sapper nr: " + tempSapperReference.getId() + " reached the target.");
+					MainWindow.updateLog("Sapper nr: " + this.getItemReference().getId() + " reached the target.");
 					continueStep = false;
 				}
 
 				// checking bomb loss
 
-				if (tempSapperReference.getTargetsArray().get(1) instanceof Bomb) {
+				if (this.getItemReference().getTargetsArray().get(1) instanceof Bomb) {
 					Item tempItemReference = ((Sapper) this.getItemReference()).getTargetsArray().get(1);
 					if (tempItemReference.getPositionX() != initialSapperPositionX
 							&& tempItemReference.getPositionY() != initialSapperPositionY) {
@@ -98,7 +101,7 @@ public class MovingTimer extends TimerTask {
 						// run();
 						// itemReference.setPositionX(prevPositionX);
 						// itemReference.setPositionY(prevPositionY);
-						MainWindow.updateLog("Sapper nr: " + tempSapperReference.getId() + "lost the bomb");
+						MainWindow.updateLog("Sapper nr: " + this.getItemReference().getId() + "lost the bomb");
 						continueStep = false;
 					}
 				}
@@ -106,13 +109,13 @@ public class MovingTimer extends TimerTask {
 				// removing things form list if something was wrong
 
 				if (continueStep == false) {
-					tempSapperReference.getTargetsArray().remove(1);
-					tempSapperReference.getTargetsArray().remove(0);
+					this.getItemReference().getTargetsArray().remove(1);
+					this.getItemReference().getTargetsArray().remove(0);
 				}
 
 				if (continueStep == true) {
 
-					Item tempItemReference = tempSapperReference.getTargetsArray().get(0);
+					Item tempItemReference = this.getItemReference().getTargetsArray().get(0);
 
 					// one step to target
 
@@ -127,13 +130,13 @@ public class MovingTimer extends TimerTask {
 						this.getItemReference().setPositionY(this.getItemReference().getPositionY() - 1);
 					}
 
-					MainWindow.updatePositionPanel("Sapper nr: " + tempSapperReference.getId() + " pozycja: ["
-							+ (this.getItemReference().getPositionX()+1) + "][" + (this.getItemReference().getPositionY()+1)
-							+ "]");
+					MainWindow.updatePositionPanel("Sapper nr: " + this.getItemReference().getId() + " pozycja: ["
+							+ (this.getItemReference().getPositionX() + 1) + "]["
+							+ (this.getItemReference().getPositionY() + 1) + "]");
 
 					// moving bomb
 
-					if (tempSapperReference.getTargetsArray().get(1) instanceof Bomb) {
+					if (this.getItemReference().getTargetsArray().get(1) instanceof Bomb) {
 						tempItemReference = ((Sapper) this.getItemReference()).getTargetsArray().get(1);
 
 						tempItemReference.setPositionX(this.getItemReference().getPositionX());
@@ -150,27 +153,38 @@ public class MovingTimer extends TimerTask {
 
 					// drawing everything
 
-					MainWindow.grid.drawSquare(initialSapperPositionX, initialSapperPositionY,
-							this.getItemReference().getPositionX(), this.getItemReference().getPositionY(),
-							MainWindow.sapperColor);
+					if (this.getItemReference() instanceof Sapper)
+						MainWindow.grid.drawSquare(initialSapperPositionX, initialSapperPositionY,
+								this.getItemReference().getPositionX(), this.getItemReference().getPositionY(),
+								MainWindow.sapperColor);
+
+					else if (this.getItemReference() instanceof Rocket)
+						MainWindow.grid.drawSquare(initialSapperPositionX, initialSapperPositionY,
+								this.getItemReference().getPositionX(), this.getItemReference().getPositionY(),
+								MainWindow.rocketColor);
 
 					for (int i = 0; i < MainWindow.itemsCollection.getItemsArray().size(); i++) {
 						Item tempItem = MainWindow.itemsCollection.getItemsArray().get(i);
 						int tempX = tempItem.getPositionX();
 						int tempY = tempItem.getPositionY();
 						if ((tempX == initialSapperPositionX) && (tempY == initialSapperPositionY)) {
-							if (tempItem instanceof Bomb) {
+							if (tempItem instanceof Bomb && (tempItem instanceof Rocket == false)) {
 								MainWindow.grid.drawSquare(tempX, tempY, tempX, tempY, MainWindow.bombColor);
 
 							} else if (tempItem instanceof Sapper) {
 								MainWindow.grid.drawSquare(initialSapperPositionX, initialSapperPositionY, tempX, tempY,
 										MainWindow.sapperColor);
+							} else if (tempItem instanceof Rocket) {
+								MainWindow.grid.drawSquare(initialSapperPositionX, initialSapperPositionY, tempX, tempY,
+										MainWindow.rocketColor);
+
 							}
 						}
 					}
 				} else
 					run();// recursive call
 			}
+
 		} else {
 			System.out.println("Wrong timer argument!!!");
 			this.cancel();
