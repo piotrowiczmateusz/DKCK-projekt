@@ -241,7 +241,7 @@ public abstract class Item {
 				}
 				if (cls.isInstance(tempItem)) {
 					System.out.println(tempText + " with id: " + tempItem.id + " and position: ["
-							+ tempItem.getPositionX() + "][" + tempItem.getPositionY() + "]");
+							+ (tempItem.getPositionX()+1) + "][" + (tempItem.getPositionY()+1) + "]");
 				}
 			}
 		}

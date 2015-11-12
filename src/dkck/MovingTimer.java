@@ -127,8 +127,8 @@ public class MovingTimer extends TimerTask {
 						this.getItemReference().setPositionY(this.getItemReference().getPositionY() - 1);
 					}
 
-					MainWindow.updatePositionPanel("Sapper nr: " + tempSapperReference.getId() + " is on position: ["
-							+ this.getItemReference().getPositionX() + "][" + this.getItemReference().getPositionY()
+					MainWindow.updatePositionPanel("Sapper nr: " + tempSapperReference.getId() + " pozycja: ["
+							+ (this.getItemReference().getPositionX()+1) + "][" + (this.getItemReference().getPositionY()+1)
 							+ "]");
 
 					// moving bomb

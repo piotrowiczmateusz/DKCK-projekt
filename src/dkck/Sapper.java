@@ -4,6 +4,8 @@ package dkck;
 
 //import java.util.Random;
 
+import java.util.Random;
+
 import dkck.GUI.MainWindow;
 
 public class Sapper extends Item {
@@ -68,7 +70,7 @@ public class Sapper extends Item {
 	public void hurt() {
 		if (this.getHealthPoints() > 0) {
 			this.setHealthPoints(this.getHealthPoints() - 1);
-			MainWindow.updateHPPanel("Sapper HP is: " + this.getHealthPoints());
+			MainWindow.updateHPPanel("Sapper HP: " + this.getHealthPoints());
 		}
 	}
 
@@ -85,10 +87,38 @@ public class Sapper extends Item {
 
 		
 
-		MainWindow.updateHPPanel("Sapper HP is: " + this.getHealthPoints());
+		MainWindow.updateHPPanel("Sapper HP: " + this.getHealthPoints());
 		MainWindow.grid.drawSquare(this.getPositionX(), this.getPositionY(), this.getPositionX(), this.getPositionY(), MainWindow.sapperColor);
 	}
 
+	
+	static Random generator = new Random();
+	
+	private static int positionX = generator.nextInt(MainWindow.gridRows);
+	
+	private static int positionY = generator.nextInt(MainWindow.gridColumns);
+	
+	private static int range = generator.nextInt(30);
+	
+	private static int speed = generator.nextInt(50);
+	
+	public Sapper(){
+		super(positionX, positionY , range, id++, speed);
+
+		// targetsArray.add(new Point(14, 45));
+		// targetsArray.add(new Point(8,3));
+		this.setSapperStatus(true);
+		this.setHealthPoints(2);
+
+		MainWindow.updateHPPanel("Sapper HP: " + this.getHealthPoints());
+		MainWindow.grid.drawSquare(this.getPositionX(), this.getPositionY(), this.getPositionX(), this.getPositionY(), MainWindow.sapperColor);
+		
+	}
+	
+	
+	
+	
+	
 	/**
 	 * OTHER METHODS
 	 */
