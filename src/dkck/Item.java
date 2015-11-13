@@ -254,37 +254,50 @@ public abstract class Item {
 
 	}
 
-	private double distanceCalculation(Item itemArgument) {
-		MainWindow.updateLog("DISTANCE CALCULATION:");
+	public String nameOfItem(Item itemArgument) {
 
 		Class<?> cls = null;
 		String tempText = "";
-		Item tempItem = null;
+		Item tempItem = itemArgument;
 
-		for (int j = 0; j < 2; ++j) {
-			if (j == 0)
-				tempItem = this;
-			else if (j == 1)
-				tempItem = itemArgument;
-
-			for (int i = 0; i < 3; ++i) {
-				if (i == 0) {
-					cls = Bomb.class;
-					tempText = "Bomb";
-				} else if (i == 1) {
-					cls = Sapper.class;
-					tempText = "Sapper";
-				} else if (i == 2) {
-					cls = Point.class;
-					tempText = "Point";
-				}
-				if (cls.isInstance(tempItem)) {
-					System.out.println(tempText + " with id: " + tempItem.id + " and position: ["
-							+ (tempItem.getPositionX() + 1) + "][" + (tempItem.getPositionY() + 1) + "]");
-				}
+		for (int i = 0; i < 4; ++i) {
+			if (i == 0) {
+				cls = Bomb.class;
+				tempText = "Bomb";
+			} else if (i == 1) {
+				cls = Sapper.class;
+				tempText = "Sapper";
+			} else if (i == 2) {
+				cls = Point.class;
+				tempText = "Point";
+			} else if (i == 3) {
+				cls = Point.class;
+				tempText = "Rocket";
+			}
+			if (cls.isInstance(tempItem) && tempItem.getClass().equals(cls)) {
+				return tempText;
 			}
 		}
 
+		return tempText;
+		// return text;
+	}
+
+	private double distanceCalculation(Item itemArgument) {
+		MainWindow.updateLog("DISTANCE CALCULATION:");
+
+		Item tempItem = null;
+
+		for (int i = 0; i < 2; ++i) {
+			if (i == 0)
+				tempItem = this;
+			else if (i == 1)
+				tempItem = itemArgument;
+
+			System.out.println(nameOfItem(tempItem) + " with id: " + tempItem.id + " and position: ["
+					+ (tempItem.getPositionX() + 1) + "][" + (tempItem.getPositionY() + 1) + "]");
+
+		}
 		double tempDistance = Math.sqrt(Math.pow(this.getPositionX() - itemArgument.getPositionX(), 2)
 				+ Math.pow(this.getPositionY() - itemArgument.getPositionY(), 2));
 		MainWindow.updateLog("Distance is: " + tempDistance);

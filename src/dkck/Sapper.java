@@ -135,7 +135,7 @@ public class Sapper extends Item {
 					System.out.println("Number of disarmed bombs: " + this.getNumberOfDisarmedBombs());
 
 				} else
-					System.out.println("wrong position!");
+					System.out.println("too far to disarm bomb!");
 			} else
 				MainWindow.updateLog("You can't disarm something else than bomb");
 		} else
