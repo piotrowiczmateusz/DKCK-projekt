@@ -53,7 +53,10 @@ public class ItemsOperations {
 		itemsArray.add((Item) new Sapper());// 2, 7, 2, 40));
 		itemsArray.add((Item) new Sapper());// 8, 9, 2, 70));
 
-		itemsArray.add((Item) new Rocket());
+		 for (int i = 0; i < 20; ++i)
+		 itemsArray.add((Item) new Sapper());// 8, 9, 2, 70));
+
+		itemsArray.add((Item) new Rocket(itemsArray.get(3)));
 
 		for (int i = 0; i < itemsArray.size(); i++) {
 			Item tempItem = itemsArray.get(i);
@@ -80,7 +83,7 @@ public class ItemsOperations {
 		itemsArray.get(3).go(30, 49);
 		itemsArray.get(3).reachItem(itemsArray.get(4));
 		itemsArray.get(3).reachItem(itemsArray.get(1));
-		itemsArray.get(5).reachItem(itemsArray.get(3));
+		// itemsArray.get(5).reachItem(itemsArray.get(3));
 
 		Thread.sleep(3000);
 

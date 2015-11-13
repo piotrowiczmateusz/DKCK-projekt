@@ -87,13 +87,15 @@ public class MovingTimer extends TimerTask {
 						&& this.getItemReference().getTargetsArray().get(0).getPositionY() == this.getItemReference()
 								.getPositionY()) {
 
-					MainWindow.updateLog("Sapper nr: " + this.getItemReference().getId() + " reached the target.");
+					MainWindow.updateLog(this.getItemReference().nameOfItem(this.getItemReference()) + " nr: "
+							+ this.getItemReference().getId() + " reached the target.");
 					continueStep = false;
 				}
 
 				// checking bomb loss
 
-				if (this.getItemReference().getTargetsArray().get(1) instanceof Bomb && this.getItemReference() instanceof Sapper) {
+				if (this.getItemReference().getTargetsArray().get(1) instanceof Bomb
+						&& this.getItemReference() instanceof Sapper) {
 					Item tempItemReference = ((Sapper) this.getItemReference()).getTargetsArray().get(1);
 					if (tempItemReference.getPositionX() != initialItemPositionX
 							&& tempItemReference.getPositionY() != initialItemPositionY) {
@@ -130,13 +132,15 @@ public class MovingTimer extends TimerTask {
 						this.getItemReference().setPositionY(this.getItemReference().getPositionY() - 1);
 					}
 
-					MainWindow.updatePositionPanel("Sapper nr: " + this.getItemReference().getId() + " pozycja: ["
+					MainWindow.updatePositionPanel(this.getItemReference().nameOfItem(this.getItemReference()) + " nr: "
+							+ this.getItemReference().getId() + " pozycja: ["
 							+ (this.getItemReference().getPositionX() + 1) + "]["
 							+ (this.getItemReference().getPositionY() + 1) + "]");
 
 					// moving bomb
 
-					if (this.getItemReference().getTargetsArray().get(1) instanceof Bomb) {
+					if (this.getItemReference().getTargetsArray().get(1) instanceof Bomb
+							&& this.getItemReference() instanceof Sapper) {
 						tempItemReference = ((Sapper) this.getItemReference()).getTargetsArray().get(1);
 
 						tempItemReference.setPositionX(this.getItemReference().getPositionX());
@@ -148,7 +152,7 @@ public class MovingTimer extends TimerTask {
 								MainWindow.bombColor);
 
 					} else {
-						MainWindow.updateLog("You are not moving antyhing");
+						MainWindow.updateLog("Sapper is not moving antyhing");
 					}
 
 					// drawing everything
