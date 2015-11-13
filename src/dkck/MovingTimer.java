@@ -58,12 +58,13 @@ public class MovingTimer extends TimerTask {
 
 			boolean continueStep = true;// important variable to state if item
 										// is doing one step or not in one cycle
+			Sapper tempSapperReference = null;
 
 			if (this.getItemReference() instanceof Sapper) {
 
-				Sapper tempSapperReference = ((Sapper) this.getItemReference());
+				tempSapperReference = ((Sapper) this.getItemReference());
 
-				// checking health points
+				// checking sapper health points
 
 				if (tempSapperReference.getHealthPoints() == 0) {
 
@@ -73,10 +74,20 @@ public class MovingTimer extends TimerTask {
 					continueStep = false;
 				}
 			}
-
-			// checking position of item(mayby he reached the target)
-
 			if (this.getItemReference().getTargetsArray().isEmpty() == false) {
+
+				//checking if sapper is already dead (if is, rocket change sapper to hurt)
+				
+				if (this.getItemReference() instanceof Rocket
+						&& this.getItemReference().getTargetsArray().get(0) instanceof Sapper) {
+					tempSapperReference = ((Sapper) this.getItemReference().getTargetsArray().get(0));
+					if (tempSapperReference.getHealthPoints() == 0) {
+						System.out.println("Rocket won't reach dead Sapper");
+						continueStep = false;
+					}
+				}
+
+				// checking position of item (mayby he reached the target)
 
 				int initialItemPositionX = this.getItemReference().getPositionX();
 				int initialItemPositionY = this.getItemReference().getPositionY();
@@ -89,6 +100,10 @@ public class MovingTimer extends TimerTask {
 
 					MainWindow.updateLog(this.getItemReference().nameOfItem(this.getItemReference()) + " nr: "
 							+ this.getItemReference().getId() + " reached the target.");
+
+					if (this.getItemReference() instanceof Rocket)
+						((Rocket) this.getItemReference()).explode();
+
 					continueStep = false;
 				}
 

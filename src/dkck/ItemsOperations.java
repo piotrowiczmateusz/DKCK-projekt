@@ -53,10 +53,11 @@ public class ItemsOperations {
 		itemsArray.add((Item) new Sapper());// 2, 7, 2, 40));
 		itemsArray.add((Item) new Sapper());// 8, 9, 2, 70));
 
-		 for (int i = 0; i < 20; ++i)
-		 itemsArray.add((Item) new Sapper());// 8, 9, 2, 70));
+		for (int i = 0; i < 10; ++i)
+			itemsArray.add((Item) new Sapper());// 8, 9, 2, 70));
 
 		itemsArray.add((Item) new Rocket(itemsArray.get(3)));
+		itemsArray.add((Item) new Rocket(itemsArray.get(4)));
 
 		for (int i = 0; i < itemsArray.size(); i++) {
 			Item tempItem = itemsArray.get(i);

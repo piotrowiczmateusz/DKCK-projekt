@@ -154,9 +154,13 @@ public abstract class Item {
 
 		int speed = 0;
 
-		if (this instanceof Rocket || this instanceof Sapper)
-			speed = 20 + generator.nextInt(100);
+		if (this instanceof Sapper)
+			speed = 70 + generator.nextInt(50);
 
+		if (this instanceof Rocket )
+			speed = 25 + generator.nextInt(25);
+
+		
 		this.positionX = positionX;
 		this.positionY = positionY;
 		this.range = range;

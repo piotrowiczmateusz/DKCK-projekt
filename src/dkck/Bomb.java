@@ -129,14 +129,14 @@ public class Bomb extends Item {
 		else
 			this.setBombTimer(new BombTimer(this, 1000));
 
-		if (this.getBombTimer() == null)
+		if (this.getBombTimer() == null) {
 			this.setExplosionLeftTime(0);
-		else {
+		} else {
 			Random generator = new Random();
 			this.setExplosionLeftTime(generator.nextInt(30));
 		}
 
-		this.bombStatus = 1;
+		this.setBombStatus(1);
 		this.timerLog = new JTextField();
 
 		timerLog.setOpaque(true);
@@ -151,7 +151,7 @@ public class Bomb extends Item {
 	 */
 
 	public void launch() {
-		if (this.bombStatus == 1 && this.explosionLeftTime > 10)
+		if (this.bombStatus == 1 && this.explosionLeftTime > 10 && this.getBombTimer() != null)
 			this.setExplosionLeftTime(5);
 	}
 
@@ -185,13 +185,16 @@ public class Bomb extends Item {
 	 * modyfikuje nieznacznie pola bomby i zmniejsza punkty ¿ycia dla Sapera
 	 */
 	public void explode() {
-		this.getBombTimer().cancel();
-		this.setExplosionLeftTime(0);
-		this.setBombStatus(0);
+		if (this.getBombStatus() == 1 && this.getBombTimer() != null) {
+			this.getBombTimer().cancel();
+			this.setExplosionLeftTime(0);
+			this.setBombStatus(0);
+		}
 
-		timerLog.setText("Bomb nr: " + this.getId() + " EXPLODED!");
+		if (this instanceof Bomb && (this instanceof Rocket) == false)
+			timerLog.setText(this.nameOfItem(this) + " nr: " + this.getId() + " EXPLODED!");
 
-		MainWindow.updateLog("The bomb nr: " + this.getId() + " exploded");
+		MainWindow.updateLog(this.nameOfItem(this) + " nr: " + this.getId() + " exploded");
 
 		for (int i = 0; i < MainWindow.itemsCollection.getItemsArray().size(); i++) {
 			Item tempItem = MainWindow.itemsCollection.getItemsArray().get(i);
@@ -219,12 +222,14 @@ public class Bomb extends Item {
 		// if (itemArgument instanceof Sapper) {
 		// Sapper tempItemArgument = (Sapper) itemArgument;
 		// if (this.checkItemsRange(tempItemArgument)) {
-		// tempItemArgument.setHealthPoints(tempItemArgument.getHealthPoints() -
+		// tempItemArgument.setHealthPoints(tempItemArgument.getHealthPoints()
+		// -
 		// 1);
 		// if (tempItemArgument.getHealthPoints() == 0) {
 		// tempItemArgument.setSapperStatus(false);
 		// MainWindow.updateLog(
-		// "The sapper HP is: " + tempItemArgument.getHealthPoints() + " .The
+		// "The sapper HP is: " + tempItemArgument.getHealthPoints() + "
+		// .The
 		// sapper is dead");
 		// MainWindow.updateHPPanel("Sapper HP is: " +
 		// tempItemArgument.getHealthPoints());
