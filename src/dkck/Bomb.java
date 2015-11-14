@@ -19,7 +19,7 @@ public class Bomb extends Item {
 
 	private BombTimer bombTimer;
 
-	private int bombStatus;// EXPLODED - 0, ACTIVE - 1, DISARMED - 2
+	private int bombStatus;// INACTIVE - 0, ACTIVE - 1, DISARMED - 2
 
 	private int explosionLeftTime;// zmienna przechowujaca czas do wybuchu
 
