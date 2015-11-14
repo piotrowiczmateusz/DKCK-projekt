@@ -22,11 +22,13 @@ public class MainWindow extends JFrame {
 
 	public static ItemsOperations itemsCollection;
 	
-	public static final Color bombColor = Color.red;
+	public static final Color railColor = Color.WHITE;
 	
-	public static final Color sapperColor = Color.blue;
+	public static final Color bombColor = Color.RED;
 	
-	public static final Color rocketColor = Color.green;
+	public static final Color sapperColor = Color.BLUE;
+	
+	public static final Color rocketColor = Color.GREEN;
 	
 	
 	

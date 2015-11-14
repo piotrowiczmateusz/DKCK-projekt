@@ -10,6 +10,11 @@ import javax.swing.JPanel;
 import javax.swing.border.Border;
 import javax.swing.border.MatteBorder;
 
+import dkck.Bomb;
+import dkck.Item;
+import dkck.Rocket;
+import dkck.Sapper;
+
 public class Grid extends JPanel {
 
 	/**
@@ -90,7 +95,7 @@ public class Grid extends JPanel {
 		}
 	}
 
-	public void drawSquare(int prevX, int prevY, int x, int y, Color oolor) {
+	public void drawSquare(int prevX, int prevY, int x, int y, Color color) {
 		if (prevX > this.getRows())
 			prevX = this.getRows();
 		if (x > this.getRows())
@@ -100,8 +105,30 @@ public class Grid extends JPanel {
 		if (y > this.getColumns())
 			y = this.getColumns();
 
-		this.cellPanes.get(prevX).get(prevY).setBackground(Color.white);
-		this.cellPanes.get(x).get(y).setBackground(oolor);
+		this.cellPanes.get(prevX).get(prevY).setBackground(MainWindow.railColor);
+		this.cellPanes.get(x).get(y).setBackground(color);
+	}
+	
+	public void repairSquare(int initialItemPositionX, int initialItemPositionY)
+	{
+	for (int i = 0; i < MainWindow.itemsCollection.getItemsArray().size(); i++) {
+		Item tempItem = MainWindow.itemsCollection.getItemsArray().get(i);
+
+		if ((tempItem.getPositionX() == initialItemPositionX)
+				&& (tempItem.getPositionY() == initialItemPositionY)) {
+			if (tempItem instanceof Bomb && (tempItem instanceof Rocket == false)) {
+				MainWindow.grid.drawSquare(tempItem.getPositionX(), tempItem.getPositionY(),
+						tempItem.getPositionX(), tempItem.getPositionY(), MainWindow.bombColor);
+
+			} else if (tempItem instanceof Sapper) {
+				MainWindow.grid.drawSquare(initialItemPositionX, initialItemPositionY,
+						tempItem.getPositionX(), tempItem.getPositionY(), MainWindow.sapperColor);
+			} else if (tempItem instanceof Rocket) {
+				MainWindow.grid.drawSquare(initialItemPositionX, initialItemPositionY,
+						tempItem.getPositionX(), tempItem.getPositionY(), MainWindow.rocketColor);
+			}
+		}
 	}
 
+}
 }

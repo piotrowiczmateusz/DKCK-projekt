@@ -38,7 +38,28 @@ public class ItemsOperations {
 		this.itemsArray = new ArrayList<Item>();
 	}
 
+	protected void dropItem(int index) {
+		Item tempItemReference = this.getItemsArray().get(index);
+		this.getItemsArray().remove(index);
+		MainWindow.grid.drawSquare(tempItemReference.getPositionX(), tempItemReference.getPositionY(), tempItemReference.getPositionX(),
+				tempItemReference.getPositionY(), MainWindow.railColor);
+
+		MainWindow.grid.repairSquare(tempItemReference.getPositionX(), tempItemReference.getPositionY());
+	}
+
+	protected void createBombs(int numberOfBombs) {
+		for (int currentBombIndex = 0; currentBombIndex < numberOfBombs; currentBombIndex++) {
+			boolean goodBombPosition = true;
+			do {
+				System.out.println("jakiœ napis");
+			} while (goodBombPosition == false);
+
+		}
+	}
+
 	public void actions() throws InterruptedException {
+
+		createBombs(10);
 
 		itemsArray.add((Item) new Bomb());// (2, 2, 40, 10));// dodawanie do
 											// listy
@@ -53,10 +74,12 @@ public class ItemsOperations {
 		itemsArray.add((Item) new Sapper());// 2, 7, 2, 40));
 		itemsArray.add((Item) new Sapper());// 8, 9, 2, 70));
 
-		for (int i = 0; i < 10; ++i)
-			itemsArray.add((Item) new Sapper());// 8, 9, 2, 70));
+		// for (int i = 0; i < 10; ++i)
+		// itemsArray.add((Item) new Sapper());// 8, 9, 2, 70));
 
 		itemsArray.add((Item) new Rocket(itemsArray.get(3)));
+		itemsArray.add((Item) new Rocket(itemsArray.get(4)));
+		itemsArray.add((Item) new Rocket(itemsArray.get(4)));
 		itemsArray.add((Item) new Rocket(itemsArray.get(4)));
 
 		for (int i = 0; i < itemsArray.size(); i++) {
@@ -89,6 +112,8 @@ public class ItemsOperations {
 		Thread.sleep(3000);
 
 		((Bomb) itemsArray.get(0)).explode();
+
+		dropItem(6);
 
 		Thread.sleep(8000);
 

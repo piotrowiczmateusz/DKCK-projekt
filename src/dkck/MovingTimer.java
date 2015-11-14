@@ -76,8 +76,9 @@ public class MovingTimer extends TimerTask {
 			}
 			if (this.getItemReference().getTargetsArray().isEmpty() == false) {
 
-				//checking if sapper is already dead (if is, rocket change sapper to hurt)
-				
+				// checking if sapper is already dead (if is, rocket change
+				// sapperg to hurt)
+
 				if (this.getItemReference() instanceof Rocket
 						&& this.getItemReference().getTargetsArray().get(0) instanceof Sapper) {
 					tempSapperReference = ((Sapper) this.getItemReference().getTargetsArray().get(0));
@@ -170,7 +171,7 @@ public class MovingTimer extends TimerTask {
 						MainWindow.updateLog("Sapper is not moving antyhing");
 					}
 
-					// drawing everything
+					// drawing moving object
 
 					if (this.getItemReference() instanceof Sapper)
 						MainWindow.grid.drawSquare(initialItemPositionX, initialItemPositionY,
@@ -182,24 +183,7 @@ public class MovingTimer extends TimerTask {
 								this.getItemReference().getPositionX(), this.getItemReference().getPositionY(),
 								MainWindow.rocketColor);
 
-					for (int i = 0; i < MainWindow.itemsCollection.getItemsArray().size(); i++) {
-						Item tempItem = MainWindow.itemsCollection.getItemsArray().get(i);
-						int tempX = tempItem.getPositionX();
-						int tempY = tempItem.getPositionY();
-						if ((tempX == initialItemPositionX) && (tempY == initialItemPositionY)) {
-							if (tempItem instanceof Bomb && (tempItem instanceof Rocket == false)) {
-								MainWindow.grid.drawSquare(tempX, tempY, tempX, tempY, MainWindow.bombColor);
-
-							} else if (tempItem instanceof Sapper) {
-								MainWindow.grid.drawSquare(initialItemPositionX, initialItemPositionY, tempX, tempY,
-										MainWindow.sapperColor);
-							} else if (tempItem instanceof Rocket) {
-								MainWindow.grid.drawSquare(initialItemPositionX, initialItemPositionY, tempX, tempY,
-										MainWindow.rocketColor);
-
-							}
-						}
-					}
+					MainWindow.grid.repairSquare(initialItemPositionX, initialItemPositionY);
 				} else
 					run();// recursive call
 			}
