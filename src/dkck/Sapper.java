@@ -95,7 +95,7 @@ public class Sapper extends Item {
 		// targetsArray.add(new Point(14, 45));
 		// targetsArray.add(new Point(8,3));
 		this.setSapperStatus(true);
-		this.setHealthPoints(2);
+		this.setHealthPoints(20);
 
 		MainWindow.updateHPPanel("Sapper HP: " + this.getHealthPoints());
 		MainWindow.grid.drawSquare(this.getPositionX(), this.getPositionY(), this.getPositionX(), this.getPositionY(), MainWindow.sapperColor);
@@ -116,6 +116,66 @@ public class Sapper extends Item {
 	// {
 	//
 	// }
+	
+	
+	/**
+	 * Saper idzie na pozycjê bomby. Nastpênie na pozycje x,y i zmienia pozycjê
+	 * bomby.
+	 */
+	public void moveBomb(Item itemArgument, int x, int y) throws InterruptedException {
+		if (itemArgument instanceof Bomb) {
+			// MainWindow.updateLog("The sapper at position [" +
+			// this.getPositionX() + "][" + this.getPositionY()
+			// + "] will try to move bomb nr: " + itemArgument.getId() + " at
+			// the position ["
+			// + itemArgument.getPositionX() + "][" +
+			// itemArgument.getPositionY() + "] to the position: [" + x
+			// + "][" + y + "]");
+
+			this.addTaskToMove(itemArgument, null);
+
+			this.addTaskToMove(new Point(x, y), itemArgument);
+
+			// IMPORTANT CODE TO USE IN THE FUTURE!!!
+
+			// Sprawdza, czy przenosi bombe na krawedz planszy lub, czy na tym
+			// miejscu nie ma innej bomby.
+
+			// if ((x != 0) && (MainWindow.grid.cellPanes.get(x -
+			// 1).get(y).getBackground() != Color.black)) {
+			// itemArgument.setPositionX(x - 1);
+			// itemArgument.setPositionY(y);
+			//
+			// MainWindow.grid.drawBomb(x - 1, y);
+			// MainWindow.updateLog("The bomb was moved to [" + (x - 1) + "][" +
+			// y + "]");
+			// } else {
+			// itemArgument.setPositionX(x);
+			// if ((y != 0) && (MainWindow.grid.cellPanes.get(x).get(y -
+			// 1).getBackground() != Color.black)) {
+			// itemArgument.setPositionY(y - 1);
+			//
+			// MainWindow.grid.drawBomb(x, y - 1);
+			// MainWindow.updateLog("The bomb was moved to [" + x + "][" + (y -
+			// 1) + "]");
+			// } else if ((y != 50) && (MainWindow.grid.cellPanes.get(x).get(y +
+			// 1).getBackground() != Color.black)) {
+			// itemArgument.setPositionY(y + 1);
+			//
+			// MainWindow.grid.drawBomb(x, y + 1);
+			// MainWindow.updateLog("The bomb was moved to [" + x + "][" + (y +
+			// 1) + "]");
+			// } else {
+			// MainWindow.updateLog("It was impossible to move bomb to [" + x +
+			// "][" + (y + 1)
+			// + "]. Choose different coordinates.");
+			// }
+			// }
+		} else
+			MainWindow.updateLog("THIS IS NOT A BOMB!");
+
+	}
+
 
 
 

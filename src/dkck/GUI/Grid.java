@@ -109,22 +109,22 @@ public class Grid extends JPanel {
 		this.cellPanes.get(x).get(y).setBackground(color);
 	}
 	
-	public void repairSquare(int initialItemPositionX, int initialItemPositionY)
+	public void repairSquare(int positionX, int positionY)
 	{
 	for (int i = 0; i < MainWindow.itemsCollection.getItemsArray().size(); i++) {
 		Item tempItem = MainWindow.itemsCollection.getItemsArray().get(i);
 
-		if ((tempItem.getPositionX() == initialItemPositionX)
-				&& (tempItem.getPositionY() == initialItemPositionY)) {
+		if ((tempItem.getPositionX() == positionX)
+				&& (tempItem.getPositionY() == positionY)) {
 			if (tempItem instanceof Bomb && (tempItem instanceof Rocket == false)) {
 				MainWindow.grid.drawSquare(tempItem.getPositionX(), tempItem.getPositionY(),
 						tempItem.getPositionX(), tempItem.getPositionY(), MainWindow.bombColor);
 
 			} else if (tempItem instanceof Sapper) {
-				MainWindow.grid.drawSquare(initialItemPositionX, initialItemPositionY,
+				MainWindow.grid.drawSquare(positionX, positionY,
 						tempItem.getPositionX(), tempItem.getPositionY(), MainWindow.sapperColor);
 			} else if (tempItem instanceof Rocket) {
-				MainWindow.grid.drawSquare(initialItemPositionX, initialItemPositionY,
+				MainWindow.grid.drawSquare(positionX, positionY,
 						tempItem.getPositionX(), tempItem.getPositionY(), MainWindow.rocketColor);
 			}
 		}

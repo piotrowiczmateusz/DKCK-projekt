@@ -38,29 +38,65 @@ public class ItemsOperations {
 		this.itemsArray = new ArrayList<Item>();
 	}
 
-	protected void dropItem(int index) {
+	private void dropItem(int index) {
 		Item tempItemReference = this.getItemsArray().get(index);
 		this.getItemsArray().remove(index);
-		MainWindow.grid.drawSquare(tempItemReference.getPositionX(), tempItemReference.getPositionY(), tempItemReference.getPositionX(),
-				tempItemReference.getPositionY(), MainWindow.railColor);
-
+		MainWindow.grid.drawSquare(tempItemReference.getPositionX(), tempItemReference.getPositionY(),
+				tempItemReference.getPositionX(), tempItemReference.getPositionY(), MainWindow.railColor);
 		MainWindow.grid.repairSquare(tempItemReference.getPositionX(), tempItemReference.getPositionY());
 	}
 
 	protected void createBombs(int numberOfBombs) {
+
+		Point pointReference = new Point(0, 0);
+
+		int beginningArrayIndex = this.getItemsArray().size() - 1;
+
 		for (int currentBombIndex = 0; currentBombIndex < numberOfBombs; currentBombIndex++) {
 			boolean goodBombPosition = true;
 			do {
-				System.out.println("jakiœ napis");
-			} while (goodBombPosition == false);
+				this.getItemsArray().add(new Bomb());
 
+				boolean continueSearching = true;
+
+				int maxCounter = 0;
+
+				for (int tempX = pointReference.getPositionX(); tempX < MainWindow.gridRows; tempX++) {
+					for (int tempY = pointReference.getPositionY(); tempY < MainWindow.gridColumns; tempY++) {
+						if (continueSearching) {
+							int counter = 0;
+							for (int arrayIndex = beginningArrayIndex + 1; arrayIndex < currentBombIndex
+									+ beginningArrayIndex; arrayIndex++) {
+								if (pointReference.checkItemsCenterDistance(this.getItemsArray().get(arrayIndex))) {
+									counter++;
+								}
+							}
+
+							if (maxCounter < counter)
+								maxCounter = counter;
+
+							if (maxCounter == currentBombIndex + 1) {
+								continueSearching = false;
+								pointReference.setPositionX(tempX);
+								pointReference.setPositionY(tempY);
+							}
+
+						}
+
+					}
+				}
+
+				if (continueSearching) {
+					this.dropItem(currentBombIndex + beginningArrayIndex);
+				} else {
+					goodBombPosition = true;
+				}
+				// System.out.println("jakiœ napis");
+			} while (goodBombPosition == false);
 		}
 	}
 
 	public void actions() throws InterruptedException {
-
-		createBombs(10);
-
 		itemsArray.add((Item) new Bomb());// (2, 2, 40, 10));// dodawanie do
 											// listy
 
@@ -69,18 +105,21 @@ public class ItemsOperations {
 		// klasy Item z
 		// okreœlonymi
 		// parametrami
-		itemsArray.add((Item) new Bomb());// 16, 8, 5, 30));
-		itemsArray.add((Item) new Bomb());// 7, 20, 20, 30));
-		itemsArray.add((Item) new Sapper());// 2, 7, 2, 40));
-		itemsArray.add((Item) new Sapper());// 8, 9, 2, 70));
+		itemsArray.add(new Bomb());// 16, 8, 5, 30));
+		itemsArray.add(new Bomb());// 7, 20, 20, 30));
+		itemsArray.add(new Sapper());// 2, 7, 2, 40));
+		itemsArray.add(new Sapper());// 8, 9, 2, 70));
 
-		// for (int i = 0; i < 10; ++i)
-		// itemsArray.add((Item) new Sapper());// 8, 9, 2, 70));
+		 for (int i = 0; i < 5; ++i)
+		 {
+			 itemsArray.add( new Bomb());// 8, 9, 2, 70));
+			 itemsArray.add(new Rocket(itemsArray.get(3)));
+				itemsArray.add(new Rocket(itemsArray.get(4)));
+		 }
 
-		itemsArray.add((Item) new Rocket(itemsArray.get(3)));
-		itemsArray.add((Item) new Rocket(itemsArray.get(4)));
-		itemsArray.add((Item) new Rocket(itemsArray.get(4)));
-		itemsArray.add((Item) new Rocket(itemsArray.get(4)));
+
+
+		//createBombs(10);
 
 		for (int i = 0; i < itemsArray.size(); i++) {
 			Item tempItem = itemsArray.get(i);
@@ -93,14 +132,14 @@ public class ItemsOperations {
 
 		((Sapper) itemsArray.get(3)).moveBomb(itemsArray.get(2), 2, 3);
 
-		itemsArray.get(4).moveBomb(itemsArray.get(1), 45, 49);
-		itemsArray.get(4).moveBomb(itemsArray.get(1), 1, 1);
+		((Sapper)itemsArray.get(4)).moveBomb(itemsArray.get(1), 45, 49);
+		((Sapper)itemsArray.get(4)).moveBomb(itemsArray.get(1), 1, 1);
 		itemsArray.get(4).reachItem(itemsArray.get(1));
 		itemsArray.get(4).reachItem(itemsArray.get(3));
 
 		itemsArray.get(3).go(3, 7);
 
-		itemsArray.get(3).moveBomb(itemsArray.get(1), 6, 33);
+		((Sapper)itemsArray.get(4)).moveBomb(itemsArray.get(1), 6, 33);
 
 		itemsArray.get(3).reachItem(itemsArray.get(2));
 
@@ -113,7 +152,7 @@ public class ItemsOperations {
 
 		((Bomb) itemsArray.get(0)).explode();
 
-		dropItem(6);
+		 dropItem(6);
 
 		Thread.sleep(8000);
 

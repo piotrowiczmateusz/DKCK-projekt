@@ -133,7 +133,7 @@ public class Bomb extends Item {
 			this.setExplosionLeftTime(0);
 		} else {
 			Random generator = new Random();
-			this.setExplosionLeftTime(generator.nextInt(30));
+			this.setExplosionLeftTime(10 + generator.nextInt(300));
 		}
 
 		this.setBombStatus(1);
@@ -151,8 +151,14 @@ public class Bomb extends Item {
 	 */
 
 	public void launch() {
-		if (this.bombStatus == 1 && this.explosionLeftTime > 10 && this.getBombTimer() != null)
-			this.setExplosionLeftTime(5);
+
+		if (this.getBombStatus() == 1 && this.getBombTimer() != null) {
+			int launchTime = 5;
+			if (this.getExplosionLeftTime() <= launchTime)
+				this.explode();
+			else
+				this.setExplosionLeftTime(launchTime);
+		}
 	}
 
 	public void disarm(Item itemArgument) {

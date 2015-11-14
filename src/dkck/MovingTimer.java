@@ -76,7 +76,7 @@ public class MovingTimer extends TimerTask {
 			}
 			if (this.getItemReference().getTargetsArray().isEmpty() == false) {
 
-				// checking if sapper is already dead (if is, rocket change
+				// checking if sapper is already dead (if is, rocket choose another
 				// sapperg to hurt)
 
 				if (this.getItemReference() instanceof Rocket

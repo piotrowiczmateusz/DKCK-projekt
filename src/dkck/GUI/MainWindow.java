@@ -15,23 +15,20 @@ public class MainWindow extends JFrame {
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
-	
+
 	public static final int gridRows = 50;
-	
+
 	public static final int gridColumns = 50;
 
 	public static ItemsOperations itemsCollection;
-	
+
 	public static final Color railColor = Color.WHITE;
-	
+
 	public static final Color bombColor = Color.RED;
-	
+
 	public static final Color sapperColor = Color.BLUE;
-	
+
 	public static final Color rocketColor = Color.GREEN;
-	
-	
-	
 
 	// Window elements
 
