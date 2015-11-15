@@ -129,6 +129,109 @@ public class Grid extends JPanel {
 			}
 		}
 	}
+	}
+	
+	//funkcja rysowania zakresów obiektów
+	
+	public void drawCircle(int x0, int y0, int radius, Color color)
+	{
+		  int x = radius;
+		  int y = 0;
+		  int decisionOver2 = 1 - x;
 
-}
+		  while( y <= x )
+		  {
+			if ((x + x0 >=0) && (x + x0 <= this.getRows()) && (y + y0 >=0) && (y + y0 <= this.getColumns())){
+				this.cellPanes.get( x + x0).get(y + y0).setBackground(color);
+			}
+			if ((y + x0 >=0) && (y + x0 <= this.getRows()) && (x + y0 >=0) && (x + y0 <= this.getColumns())){
+				this.cellPanes.get( y + x0).get(x + y0).setBackground(color);
+			}
+			if ((-x + x0 >=0) && (-x + x0 <= this.getRows()) && (y + y0 >=0) && (y + y0 <= this.getColumns())){
+				this.cellPanes.get(-x + x0).get(y + y0).setBackground(color);
+			}
+			if ((-y + x0 >=0) && (-y + x0 <= this.getRows()) && (x + y0 >=0) && (x + y0 <= this.getColumns())){
+				this.cellPanes.get(-y + x0).get(x + y0).setBackground(color);
+			}
+			if ((-x + x0 >=0) && (-x + x0 <= this.getRows()) && (-y + y0 >=0) && (-y + y0 <= this.getColumns())){
+				this.cellPanes.get(-x + x0).get(-y + y0).setBackground(color);
+			}
+			if ((-y + x0 >=0) && (-y + x0 <= this.getRows()) && (-x + y0 >=0) && (-x + y0 <= this.getColumns())){
+				this.cellPanes.get(-y + x0).get(-x + y0).setBackground(color);
+			}
+			if ((x + x0 >=0) && (x + x0 <= this.getRows()) && (-y + y0 >=0) && (-y + y0 <= this.getColumns())){
+				this.cellPanes.get( x + x0).get(-y + y0).setBackground(color);
+			}
+			if ((y + x0 >=0) && (y + x0 <= this.getRows()) && (-x + y0 >=0) && (-x + y0 <= this.getColumns())){
+				this.cellPanes.get( y + x0).get(-x + y0).setBackground(color);
+			}
+		    y++;
+		    if (decisionOver2<=0)
+		    {
+		      decisionOver2 += 2 * y + 1;
+		    }
+		    else
+		    {
+		      x--;
+		      decisionOver2 += 2 * (y - x) + 1;
+		    }
+		  }
+	}
+	
+	public void repairCircle(int x0, int y0, int radius){
+		for (int i = 0; i < MainWindow.itemsCollection.getItemsArray().size(); i++) {
+			Item tempItem = MainWindow.itemsCollection.getItemsArray().get(i);
+
+			if ((tempItem.getPositionX() == x0) && (tempItem.getPositionY() == y0 )
+					&& (tempItem.getRange() == radius)) {
+				if (tempItem instanceof Bomb && (tempItem instanceof Rocket == false)) {
+					MainWindow.grid.drawCircle(tempItem.getPositionX(), tempItem.getPositionY(),
+							tempItem.getRange(), MainWindow.bombColor);
+
+				} else if (tempItem instanceof Sapper) {
+					MainWindow.grid.drawCircle(tempItem.getPositionX(), tempItem.getPositionY(), 
+							tempItem.getRange(), MainWindow.sapperColor);
+				} else if (tempItem instanceof Rocket) {
+					MainWindow.grid.drawCircle(tempItem.getPositionX(), tempItem.getPositionY(), 
+							tempItem.getRange(), MainWindow.rocketColor);
+				}
+			}
+		}
+	}
+	
+	public void repairCircle2(){
+		for (int i = 0; i < MainWindow.itemsCollection.getItemsArray().size(); i++) {
+			Item tempItem = MainWindow.itemsCollection.getItemsArray().get(i);
+			
+			if (tempItem instanceof Bomb && (tempItem instanceof Rocket == false)) {
+				MainWindow.grid.drawCircle(tempItem.getPositionX(), tempItem.getPositionY(),
+						tempItem.getRange(), MainWindow.bombColor);
+
+			} else if (tempItem instanceof Sapper) {
+				MainWindow.grid.drawCircle(tempItem.getPositionX(), tempItem.getPositionY(), 
+						tempItem.getRange(), MainWindow.sapperColor);
+			} else if (tempItem instanceof Rocket) {
+				MainWindow.grid.drawCircle(tempItem.getPositionX(), tempItem.getPositionY(), 
+						tempItem.getRange(), MainWindow.rocketColor);
+			}	
+		}
+	}
+	
+	public void repairSquare2(){
+		for (int i = 0; i < MainWindow.itemsCollection.getItemsArray().size(); i++) {
+			Item tempItem = MainWindow.itemsCollection.getItemsArray().get(i);
+
+				if (tempItem instanceof Bomb && (tempItem instanceof Rocket == false)) {
+					MainWindow.grid.drawSquare(tempItem.getPositionX(), tempItem.getPositionY(),
+							tempItem.getPositionX(), tempItem.getPositionY(), MainWindow.bombColor);
+
+				} else if (tempItem instanceof Sapper) {
+					MainWindow.grid.drawSquare(tempItem.getPositionX(), tempItem.getPositionY(),
+							tempItem.getPositionX(), tempItem.getPositionY(), MainWindow.sapperColor);
+				} else if (tempItem instanceof Rocket) {
+					MainWindow.grid.drawSquare(tempItem.getPositionX(), tempItem.getPositionY(),
+							tempItem.getPositionX(), tempItem.getPositionY(), MainWindow.rocketColor);
+				}
+		}	
+	}
 }

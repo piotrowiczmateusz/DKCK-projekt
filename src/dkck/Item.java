@@ -171,13 +171,22 @@ public abstract class Item {
 		this.range = range;
 		this.id = id;
 
-		if (this instanceof Rocket)
+		if (this instanceof Rocket){
 			MainWindow.grid.drawSquare(positionX, positionY, positionX, positionY, MainWindow.rocketColor);
-		else if (this instanceof Bomb)
+			MainWindow.grid.drawCircle(this.getPositionX(), this.getPositionY(), this.getRange(), null);
+			MainWindow.grid.drawCircle(this.getPositionX(), this.getPositionY(), this.getRange(), MainWindow.rocketColor);
+		}
+		else if (this instanceof Bomb){
 
 			MainWindow.grid.drawSquare(positionX, positionY, positionX, positionY, MainWindow.bombColor);
-		else if (this instanceof Sapper)
+			MainWindow.grid.drawCircle(this.getPositionX(), this.getPositionY(), this.getRange(), null);
+			MainWindow.grid.drawCircle(this.getPositionX(), this.getPositionY(), this.getRange(), MainWindow.bombColor);
+		}
+		else if (this instanceof Sapper){
 			MainWindow.grid.drawSquare(positionX, positionY, positionX, positionY, MainWindow.sapperColor);
+			MainWindow.grid.drawCircle(this.getPositionX(), this.getPositionY(), this.getRange(), null);
+			MainWindow.grid.drawCircle(this.getPositionX(), this.getPositionY(), this.getRange(), MainWindow.sapperColor);
+		}
 
 		if (speed == 0) {
 			this.setTargetsArray(null);
