@@ -6,6 +6,35 @@ import java.util.TimerTask;
 import dkck.GUI.MainWindow;
 
 public class BombTimer extends TimerTask {
+	
+	/**
+	 * @return the itemReference
+	 */
+	public Item getItemReference() {
+		return itemReference;
+	}
+
+	/**
+	 * @param itemReference the itemReference to set
+	 */
+	public void setItemReference(Item itemReference) {
+		this.itemReference = itemReference;
+	}
+
+	/**
+	 * @return the timer1
+	 */
+	public Timer getTimer1() {
+		return timer1;
+	}
+
+	/**
+	 * @param timer1 the timer1 to set
+	 */
+	public void setTimer1(Timer timer1) {
+		this.timer1 = timer1;
+	}
+
 	public Item itemReference;
 
 	private Timer timer1;

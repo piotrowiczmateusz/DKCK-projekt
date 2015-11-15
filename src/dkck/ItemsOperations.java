@@ -40,9 +40,15 @@ public class ItemsOperations {
 
 	private void dropItem(int index) {
 		Item tempItemReference = this.getItemsArray().get(index);
+
+		if (tempItemReference.getMovingTimer() != null) {
+			((Bomb) tempItemReference).getMovingTimer().cancel();
+			((Bomb) tempItemReference).getMovingTimer().setItemReference(null);
+			((Bomb) tempItemReference).setMovingTimer(null);
+		}
 		if (tempItemReference instanceof Bomb && ((Bomb) tempItemReference).getBombTimer() != null) {
 			((Bomb) tempItemReference).getBombTimer().cancel();
-			((Bomb) tempItemReference).getBombTimer().itemReference = null;
+			((Bomb) tempItemReference).getBombTimer().setItemReference(null);
 			((Bomb) tempItemReference).setBombTimer(null);
 		}
 		this.getItemsArray().remove(index);
