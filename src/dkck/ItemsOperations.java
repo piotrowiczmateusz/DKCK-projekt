@@ -110,7 +110,7 @@ public class ItemsOperations {
 		itemsArray.add(new Sapper());// 2, 7, 2, 40));
 		itemsArray.add(new Sapper());// 8, 9, 2, 70));
 
-		 for (int i = 0; i < 5; ++i)
+		 for (int i = 0; i < 2; ++i)
 		 {
 			 itemsArray.add( new Bomb());// 8, 9, 2, 70));
 			 itemsArray.add(new Rocket(itemsArray.get(3)));
@@ -119,7 +119,7 @@ public class ItemsOperations {
 
 
 
-		//createBombs(10);
+		//createBombs(3);
 
 		for (int i = 0; i < itemsArray.size(); i++) {
 			Item tempItem = itemsArray.get(i);

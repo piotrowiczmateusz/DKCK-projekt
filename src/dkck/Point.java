@@ -17,8 +17,10 @@ public class Point extends Item {
 	 * @param positionY
 	 */
 	public Point(int positionX, int positionY) {
-		super( id);
+		super(id);
 		++id;
+		this.setPositionX(positionX);
+		this.setPositionY(positionY);
 		
 		// TODO Auto-generated constructor stub
 	}

@@ -146,9 +146,15 @@ public abstract class Item {
 		super();
 		Random generator = new Random();
 
-		int positionX = generator.nextInt(MainWindow.gridRows);
+		int positionX = 0;
 
-		int positionY = generator.nextInt(MainWindow.gridColumns);
+		int positionY = 0;
+
+		if (this instanceof Point == false) {
+			positionX = generator.nextInt(MainWindow.gridRows);
+
+			positionY = generator.nextInt(MainWindow.gridColumns);
+		}
 
 		int range = 2 + generator.nextInt(10);
 
@@ -157,10 +163,9 @@ public abstract class Item {
 		if (this instanceof Sapper)
 			speed = 70 + generator.nextInt(50);
 
-		if (this instanceof Rocket )
+		if (this instanceof Rocket)
 			speed = 25 + generator.nextInt(25);
 
-		
 		this.positionX = positionX;
 		this.positionY = positionY;
 		this.range = range;
@@ -200,7 +205,6 @@ public abstract class Item {
 		this.addTaskToMove(new Point(x, y), null);
 	}
 
-	
 	public String nameOfItem(Item itemArgument) {
 
 		Class<?> cls = null;
