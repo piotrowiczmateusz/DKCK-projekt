@@ -40,6 +40,11 @@ public class ItemsOperations {
 
 	private void dropItem(int index) {
 		Item tempItemReference = this.getItemsArray().get(index);
+		if (tempItemReference instanceof Bomb && ((Bomb) tempItemReference).getBombTimer() != null) {
+			((Bomb) tempItemReference).getBombTimer().cancel();
+			((Bomb) tempItemReference).getBombTimer().itemReference = null;
+			((Bomb) tempItemReference).setBombTimer(null);
+		}
 		this.getItemsArray().remove(index);
 		MainWindow.grid.drawSquare(tempItemReference.getPositionX(), tempItemReference.getPositionY(),
 				tempItemReference.getPositionX(), tempItemReference.getPositionY(), MainWindow.railColor);
@@ -110,16 +115,13 @@ public class ItemsOperations {
 		itemsArray.add(new Sapper());// 2, 7, 2, 40));
 		itemsArray.add(new Sapper());// 8, 9, 2, 70));
 
-		 for (int i = 0; i < 2; ++i)
-		 {
-			 itemsArray.add( new Bomb());// 8, 9, 2, 70));
-			 itemsArray.add(new Rocket(itemsArray.get(3)));
-				itemsArray.add(new Rocket(itemsArray.get(4)));
-		 }
+		for (int i = 0; i < 2; ++i) {
+			itemsArray.add(new Bomb());// 8, 9, 2, 70));
+			itemsArray.add(new Rocket(itemsArray.get(3)));
+			itemsArray.add(new Rocket(itemsArray.get(4)));
+		}
 
-
-
-		//createBombs(3);
+		// createBombs(3);
 
 		for (int i = 0; i < itemsArray.size(); i++) {
 			Item tempItem = itemsArray.get(i);
@@ -132,14 +134,14 @@ public class ItemsOperations {
 
 		((Sapper) itemsArray.get(3)).moveBomb(itemsArray.get(2), 2, 3);
 
-		((Sapper)itemsArray.get(4)).moveBomb(itemsArray.get(1), 45, 49);
-		((Sapper)itemsArray.get(4)).moveBomb(itemsArray.get(1), 1, 1);
+		((Sapper) itemsArray.get(4)).moveBomb(itemsArray.get(1), 45, 49);
+		((Sapper) itemsArray.get(4)).moveBomb(itemsArray.get(1), 1, 1);
 		itemsArray.get(4).reachItem(itemsArray.get(1));
 		itemsArray.get(4).reachItem(itemsArray.get(3));
 
 		itemsArray.get(3).go(3, 7);
 
-		((Sapper)itemsArray.get(4)).moveBomb(itemsArray.get(1), 6, 33);
+		((Sapper) itemsArray.get(4)).moveBomb(itemsArray.get(1), 6, 33);
 
 		itemsArray.get(3).reachItem(itemsArray.get(2));
 
@@ -152,7 +154,14 @@ public class ItemsOperations {
 
 		((Bomb) itemsArray.get(0)).explode();
 
-		 dropItem(6);
+		// dropItem(6);
+
+		for (int i = 0; i < 20000; ++i) {
+			this.dropItem(6);
+			Thread.sleep(1);
+			this.getItemsArray().add(6, new Bomb());
+			Thread.sleep(1);
+		}
 
 		Thread.sleep(8000);
 
