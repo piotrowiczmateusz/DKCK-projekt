@@ -1,5 +1,6 @@
 package dkck;
 
+import java.awt.Color;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Random;
@@ -170,23 +171,22 @@ public abstract class Item {
 		this.positionY = positionY;
 		this.range = range;
 		this.id = id;
+		
+		Color tempColor = null;
 
 		if (this instanceof Rocket){
-			MainWindow.grid.drawSquare(positionX, positionY, positionX, positionY, MainWindow.rocketColor);
-			MainWindow.grid.drawCircle(this.getPositionX(), this.getPositionY(), this.getRange(), null);
-			MainWindow.grid.drawCircle(this.getPositionX(), this.getPositionY(), this.getRange(), MainWindow.rocketColor);
+			tempColor = MainWindow.rocketColor;
 		}
 		else if (this instanceof Bomb){
-
-			MainWindow.grid.drawSquare(positionX, positionY, positionX, positionY, MainWindow.bombColor);
-			MainWindow.grid.drawCircle(this.getPositionX(), this.getPositionY(), this.getRange(), null);
-			MainWindow.grid.drawCircle(this.getPositionX(), this.getPositionY(), this.getRange(), MainWindow.bombColor);
+			tempColor = MainWindow.bombColor;
 		}
 		else if (this instanceof Sapper){
-			MainWindow.grid.drawSquare(positionX, positionY, positionX, positionY, MainWindow.sapperColor);
-			MainWindow.grid.drawCircle(this.getPositionX(), this.getPositionY(), this.getRange(), null);
-			MainWindow.grid.drawCircle(this.getPositionX(), this.getPositionY(), this.getRange(), MainWindow.sapperColor);
+			tempColor = MainWindow.sapperColor;
 		}
+		
+		MainWindow.grid.drawCircle(this.getPositionX(), this.getPositionY(), this.getRange(), null);
+		MainWindow.grid.drawCircle(this.getPositionX(), this.getPositionY(), this.getRange(), tempColor);
+		MainWindow.grid.drawSquare(positionX, positionY, positionX, positionY, tempColor);
 
 		if (speed == 0) {
 			this.setTargetsArray(null);

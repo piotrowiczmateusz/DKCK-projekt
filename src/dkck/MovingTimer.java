@@ -76,7 +76,8 @@ public class MovingTimer extends TimerTask {
 			}
 			if (this.getItemReference().getTargetsArray().isEmpty() == false) {
 
-				// checking if sapper is already dead (if is, rocket choose another
+				// checking if sapper is already dead (if is, rocket choose
+				// another
 				// sapperg to hurt)
 
 				if (this.getItemReference() instanceof Rocket
@@ -163,13 +164,14 @@ public class MovingTimer extends TimerTask {
 						tempItemReference.setPositionY(this.getItemReference().getPositionY());
 						MainWindow.updateLog("Position of moving bomb is: [" + tempItemReference.getPositionX() + "]["
 								+ tempItemReference.getPositionY() + "]");
-						MainWindow.grid.drawSquare(initialItemPositionX, initialItemPositionY,
-								tempItemReference.getPositionX(), tempItemReference.getPositionY(),
-								MainWindow.bombColor);
+						
 						MainWindow.grid.drawCircle(initialItemPositionX, initialItemPositionY,
 								tempItemReference.getRange(), null);
 						MainWindow.grid.drawCircle(tempItemReference.getPositionX(), tempItemReference.getPositionY(),
 								tempItemReference.getRange(), MainWindow.bombColor);
+						MainWindow.grid.drawSquare(initialItemPositionX, initialItemPositionY,
+								tempItemReference.getPositionX(), tempItemReference.getPositionY(),
+								MainWindow.bombColor);
 
 					} else {
 						MainWindow.updateLog("Sapper is not moving antyhing");
@@ -177,29 +179,32 @@ public class MovingTimer extends TimerTask {
 
 					// drawing moving object
 
-					if (this.getItemReference() instanceof Sapper){
+					if (this.getItemReference() instanceof Sapper) {
+						MainWindow.grid.drawCircle(initialItemPositionX, initialItemPositionY,
+								this.getItemReference().getRange(), null);
+						MainWindow.grid.drawCircle(this.getItemReference().getPositionX(),
+								this.getItemReference().getPositionY(), this.getItemReference().getRange(),
+								MainWindow.sapperColor);
 						MainWindow.grid.drawSquare(initialItemPositionX, initialItemPositionY,
 								this.getItemReference().getPositionX(), this.getItemReference().getPositionY(),
 								MainWindow.sapperColor);
+					} else if (this.getItemReference() instanceof Rocket) {
 						MainWindow.grid.drawCircle(initialItemPositionX, initialItemPositionY,
-							this.getItemReference().getRange(), null);
-						MainWindow.grid.drawCircle(this.getItemReference().getPositionX(), this.getItemReference().getPositionY(),
-							this.getItemReference().getRange(), MainWindow.sapperColor);
-					}
-					else if (this.getItemReference() instanceof Rocket){
+								this.getItemReference().getRange(), null);
+						MainWindow.grid.drawCircle(this.getItemReference().getPositionX(),
+								this.getItemReference().getPositionY(), this.getItemReference().getRange(),
+								MainWindow.rocketColor);
 						MainWindow.grid.drawSquare(initialItemPositionX, initialItemPositionY,
 								this.getItemReference().getPositionX(), this.getItemReference().getPositionY(),
 								MainWindow.rocketColor);
-						MainWindow.grid.drawCircle(initialItemPositionX, initialItemPositionY,
-							this.getItemReference().getRange(), null);
-						MainWindow.grid.drawCircle(this.getItemReference().getPositionX(), this.getItemReference().getPositionY(),
-							this.getItemReference().getRange(), MainWindow.rocketColor);
 					}
 
+					
+					MainWindow.grid.repairCircle(this.getItemReference().getPositionX(),
+							this.getItemReference().getPositionY(), this.getItemReference().getRange());
 					MainWindow.grid.repairSquare(initialItemPositionX, initialItemPositionY);
-					MainWindow.grid.repairCircle(this.getItemReference().getPositionX(), this.getItemReference().getPositionY(), this.getItemReference().getRange());
-					MainWindow.grid.repairSquare2();
 					MainWindow.grid.repairCircle2();
+					MainWindow.grid.repairSquare2();
 				} else
 					run();// recursive call
 			}

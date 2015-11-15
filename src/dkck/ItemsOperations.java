@@ -55,6 +55,13 @@ public class ItemsOperations {
 		MainWindow.grid.drawSquare(tempItemReference.getPositionX(), tempItemReference.getPositionY(),
 				tempItemReference.getPositionX(), tempItemReference.getPositionY(), MainWindow.railColor);
 		MainWindow.grid.repairSquare(tempItemReference.getPositionX(), tempItemReference.getPositionY());
+
+		MainWindow.grid.drawCircle(tempItemReference.getPositionX(), tempItemReference.getPositionY(),
+				tempItemReference.getRange(), MainWindow.railColor);
+		MainWindow.grid.repairCircle(tempItemReference.getPositionX(), tempItemReference.getPositionY(),
+				tempItemReference.getRange());
+		MainWindow.grid.repairSquare2();
+		MainWindow.grid.repairCircle2();
 	}
 
 	protected void createBombs(int numberOfBombs) {
@@ -162,7 +169,7 @@ public class ItemsOperations {
 
 		// dropItem(6);
 
-		for (int i = 0; i < 20000; ++i) {
+		for (int i = 0; i < 200; ++i) {
 			this.dropItem(6);
 			Thread.sleep(1);
 			this.getItemsArray().add(6, new Bomb());
