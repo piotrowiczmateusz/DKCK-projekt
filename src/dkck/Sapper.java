@@ -99,6 +99,8 @@ public class Sapper extends Item {
 
 		MainWindow.updateHPPanel("Sapper HP: " + this.getHealthPoints());
 		MainWindow.grid.drawSquare(this.getPositionX(), this.getPositionY(), this.getPositionX(), this.getPositionY(), MainWindow.sapperColor);
+		MainWindow.grid.drawCircle(this.getPositionX(), this.getPositionY(), this.getRange(), null);
+		MainWindow.grid.drawCircle(this.getPositionX(), this.getPositionY(), this.getRange(), MainWindow.sapperColor);
 		
 	}
 	

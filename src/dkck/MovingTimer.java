@@ -166,6 +166,10 @@ public class MovingTimer extends TimerTask {
 						MainWindow.grid.drawSquare(initialItemPositionX, initialItemPositionY,
 								tempItemReference.getPositionX(), tempItemReference.getPositionY(),
 								MainWindow.bombColor);
+						MainWindow.grid.drawCircle(initialItemPositionX, initialItemPositionY,
+								tempItemReference.getRange(), null);
+						MainWindow.grid.drawCircle(tempItemReference.getPositionX(), tempItemReference.getPositionY(),
+								tempItemReference.getRange(), MainWindow.bombColor);
 
 					} else {
 						MainWindow.updateLog("Sapper is not moving antyhing");
@@ -173,17 +177,29 @@ public class MovingTimer extends TimerTask {
 
 					// drawing moving object
 
-					if (this.getItemReference() instanceof Sapper)
+					if (this.getItemReference() instanceof Sapper){
 						MainWindow.grid.drawSquare(initialItemPositionX, initialItemPositionY,
 								this.getItemReference().getPositionX(), this.getItemReference().getPositionY(),
 								MainWindow.sapperColor);
-
-					else if (this.getItemReference() instanceof Rocket)
+						MainWindow.grid.drawCircle(initialItemPositionX, initialItemPositionY,
+							this.getItemReference().getRange(), null);
+						MainWindow.grid.drawCircle(this.getItemReference().getPositionX(), this.getItemReference().getPositionY(),
+							this.getItemReference().getRange(), MainWindow.sapperColor);
+					}
+					else if (this.getItemReference() instanceof Rocket){
 						MainWindow.grid.drawSquare(initialItemPositionX, initialItemPositionY,
 								this.getItemReference().getPositionX(), this.getItemReference().getPositionY(),
 								MainWindow.rocketColor);
+						MainWindow.grid.drawCircle(initialItemPositionX, initialItemPositionY,
+							this.getItemReference().getRange(), null);
+						MainWindow.grid.drawCircle(this.getItemReference().getPositionX(), this.getItemReference().getPositionY(),
+							this.getItemReference().getRange(), MainWindow.rocketColor);
+					}
 
 					MainWindow.grid.repairSquare(initialItemPositionX, initialItemPositionY);
+					MainWindow.grid.repairCircle(this.getItemReference().getPositionX(), this.getItemReference().getPositionY(), this.getItemReference().getRange());
+					MainWindow.grid.repairSquare2();
+					MainWindow.grid.repairCircle2();
 				} else
 					run();// recursive call
 			}
