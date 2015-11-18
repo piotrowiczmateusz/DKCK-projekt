@@ -10,9 +10,7 @@ import javax.swing.BorderFactory;
 import javax.swing.JButton;
 
 public class SubmitButton extends JButton {
-	/**
-	 * 
-	 */
+
 	private static final long serialVersionUID = 1L;
 
 	public SubmitButton() {

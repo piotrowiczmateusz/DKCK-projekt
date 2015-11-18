@@ -1,9 +1,5 @@
 package dkck;
 
-//import java.awt.Color;
-
-//import java.util.Random;
-
 import dkck.GUI.MainWindow;
 
 public class Sapper extends Item {
@@ -11,7 +7,6 @@ public class Sapper extends Item {
 	/**
 	 * ATTRIBUTES
 	 */
-
 	public static int id = 0;
 
 	private int numberOfDisarmedBombs;
@@ -23,8 +18,6 @@ public class Sapper extends Item {
 	/**
 	 * SETTERS AND GETTERS
 	 */
-
-
 	public int getNumberOfDisarmedBombs() {
 		return numberOfDisarmedBombs;
 	}
@@ -33,89 +26,45 @@ public class Sapper extends Item {
 		this.numberOfDisarmedBombs = numberOfDisarmedBombs;
 	}
 
-	/**
-	 * @return the status
-	 */
 	public int getHealthPoints() {
 		return healthPoints;
 	}
 
-	/**
-	 * @param status
-	 *            the status to set
-	 */
 	public void setHealthPoints(int healthPoints) {
 		this.healthPoints = healthPoints;
 	}
 
-	/**
-	 * @return the sapperStatus
-	 */
 	public boolean getSapperStatus() {
 		return SapperStatus;
 	}
 
-	/**
-	 * @param sapperStatus
-	 *            the sapperStatus to set
-	 */
 	public void setSapperStatus(boolean sapperStatus) {
 		SapperStatus = sapperStatus;
 	}
-
-
-
-	public void hurt() {
-		if (this.getHealthPoints() > 0) {
-			this.setHealthPoints(this.getHealthPoints() - 1);
-			MainWindow.updateHPPanel("Sapper HP: " + this.getHealthPoints());
-		}
-	}
-
+	
 	/**
 	 * CONSTRUCTORS
 	 */
-//	public Sapper(int positionX, int positionY, int range, int speed) {
-//		super(positionX, positionY, range, id, speed);
-//		id++;
-//		
-//		// targetsArray.add(new Point(14, 45));
-//		// targetsArray.add(new Point(8,3));
-//		this.setSapperStatus(true);
-//		this.setHealthPoints(2);
-//
-//		MainWindow.updateHPPanel("Sapper HP: " + this.getHealthPoints());
-//		MainWindow.grid.drawSquare(this.getPositionX(), this.getPositionY(), this.getPositionX(), this.getPositionY(), MainWindow.sapperColor);
-//	}
-
+	
 	public Sapper(){
 		super(id);
 		id++;
-
-		// targetsArray.add(new Point(14, 45));
-		// targetsArray.add(new Point(8,3));
 		this.setSapperStatus(true);
 		this.setHealthPoints(20);
-
-		MainWindow.updateHPPanel("Sapper HP: " + this.getHealthPoints());
-		
+		MainWindow.updateHPPanel("Sapper HP: " + this.getHealthPoints());	
 	}
 	
 	
 	/**
 	 * OTHER METHODS
 	 */
-
-	/**
-	 * Zmienia pozycje sapera i sprawdza czy znajduje siê w zasiêgu ra¿enia
-	 * bomby.
-	 */
-
-	// private void step()
-	// {
-	//
-	// }
 	
+	public void hurt() {
+		if (this.getHealthPoints() > 0) {
+			this.setHealthPoints(this.getHealthPoints() - 1);
+			MainWindow.updateHPPanel("Sapper HP: " + this.getHealthPoints());
+		}
+	}
 	
 	/**
 	 * Saper idzie na pozycjê bomby. Nastpênie na pozycje x,y i zmienia pozycjê
@@ -123,13 +72,6 @@ public class Sapper extends Item {
 	 */
 	public void moveBomb(Item itemArgument, int x, int y) throws InterruptedException {
 		if (itemArgument instanceof Bomb) {
-			// MainWindow.updateLog("The sapper at position [" +
-			// this.getPositionX() + "][" + this.getPositionY()
-			// + "] will try to move bomb nr: " + itemArgument.getId() + " at
-			// the position ["
-			// + itemArgument.getPositionX() + "][" +
-			// itemArgument.getPositionY() + "] to the position: [" + x
-			// + "][" + y + "]");
 
 			this.addTaskToMove(itemArgument, null);
 
@@ -170,12 +112,9 @@ public class Sapper extends Item {
 			// + "]. Choose different coordinates.");
 			// }
 			// }
-		} else
-			MainWindow.updateLog("THIS IS NOT A BOMB!");
+		} 
 
 	}
-
-
 
 
 	/**
@@ -187,17 +126,12 @@ public class Sapper extends Item {
 			if (itemArgument instanceof Bomb) {
 				Bomb tempBombArgument = (Bomb) itemArgument;
 				if (this.checkItemsCenterDistance(tempBombArgument)) {
-
-					// go(itemArgument, null);
-
 					tempBombArgument.disarm(this);
 					System.out.println("Number of disarmed bombs: " + this.getNumberOfDisarmedBombs());
 
 				} else
 					System.out.println("too far to disarm bomb!");
-			} else
-				MainWindow.updateLog("You can't disarm something else than bomb");
-		} else
-			MainWindow.updateLog("Dead sapper can't disarm anything");
+			} 
+		} 
 	}
 }

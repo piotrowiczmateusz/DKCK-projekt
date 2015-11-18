@@ -17,9 +17,6 @@ import dkck.Sapper;
 
 public class Grid extends JPanel {
 
-	/**
-	 * 
-	 */
 	private static final long serialVersionUID = 1L;
 
 	private int rows;
@@ -28,32 +25,18 @@ public class Grid extends JPanel {
 
 	public List<List<CellPane>> cellPanes = new ArrayList<List<CellPane>>();
 
-	/**
-	 * @return the rows
-	 */
 	public int getRows() {
 		return rows;
 	}
 
-	/**
-	 * @param rows
-	 *            the rows to set
-	 */
 	public void setRows(int rows) {
 		this.rows = rows;
 	}
 
-	/**
-	 * @return the columns
-	 */
 	public int getColumns() {
 		return columns;
 	}
 
-	/**
-	 * @param columns
-	 *            the columns to set
-	 */
 	public void setColumns(int columns) {
 		this.columns = columns;
 	}
@@ -105,7 +88,7 @@ public class Grid extends JPanel {
 		if (y > this.getColumns())
 			y = this.getColumns();
 
-		this.cellPanes.get(prevX).get(prevY).setBackground(MainWindow.railColor);
+		this.cellPanes.get(prevX).get(prevY).setBackground(MainWindow.cellColor);
 		this.cellPanes.get(x).get(y).setBackground(color);
 	}
 

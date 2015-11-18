@@ -9,9 +9,7 @@ import javax.swing.BorderFactory;
 import javax.swing.JPanel;
 
 public class TimerPanel extends JPanel {
-	/**
-	 * 
-	 */
+
 	private static final long serialVersionUID = 1L;
 
 	public TimerPanel() {	    

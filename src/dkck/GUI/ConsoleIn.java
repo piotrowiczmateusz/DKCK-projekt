@@ -11,9 +11,7 @@ import javax.swing.BorderFactory;
 import javax.swing.JTextField;
 
 public class ConsoleIn extends JTextField {
-	/**
-	 * 
-	 */
+
 	private static final long serialVersionUID = 1L;
 
 	public ConsoleIn() {
@@ -27,8 +25,16 @@ public class ConsoleIn extends JTextField {
 			@Override
 			public void keyPressed(KeyEvent e) {
 				if (e.getKeyCode() == KeyEvent.VK_ENTER){
-		           MainWindow.updateLog("USER: " + MainWindow.consoleIn.getText());
-		           MainWindow.consoleIn.setText(null);
+					String input = MainWindow.consoleIn.getText();
+					
+				    try {
+						MainWindow.interpreter.interpret(input);
+					} catch (InterruptedException e1) {
+						// TODO Auto-generated catch block
+						e1.printStackTrace();
+					}
+		            MainWindow.updateLog("USER: " + input);	           
+		            MainWindow.consoleIn.setText(null);	           
 		        }        
 			}	
 		});

@@ -9,10 +9,7 @@ import javax.swing.BorderFactory;
 import javax.swing.JTextArea;
 
 public class LogPanel extends JTextArea {
-	
-	/**
-	 * 
-	 */
+
 	private static final long serialVersionUID = 1L;
 
 	public LogPanel() {    

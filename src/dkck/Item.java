@@ -28,69 +28,38 @@ public abstract class Item {
 	 * SETTERS AND GETTERS
 	 */
 
-	/**
-	 * @return the positionX
-	 */
 	public int getPositionX() {
 		return positionX;
 	}
 
-	/**
-	 * @param positionX
-	 *            the positionX to set
-	 */
 	public void setPositionX(int positionX) {
 		this.positionX = positionX;
 	}
 
-	/**
-	 * @return the positionY
-	 */
 	public int getPositionY() {
 		return positionY;
 	}
 
-	/**
-	 * @param positionY
-	 *            the positionY to set
-	 */
 	public void setPositionY(int positionY) {
 		this.positionY = positionY;
 	}
 
-	/**
-	 * @return the range
-	 */
 	public int getRange() {
 		return range;
 	}
 
-	/**
-	 * @param range
-	 *            the range to set
-	 */
 	public void setRange(int range) {
 		this.range = range;
 	}
 
-	/**
-	 * @return the id
-	 */
 	public int getId() {
 		return id;
 	}
 
-	/**
-	 * @param id
-	 *            the id to set
-	 */
 	public void setId(int id) {
 		this.id = id;
 	}
 
-	/**
-	 * @return the movingTimer
-	 */
 	public MovingTimer getMovingTimer() {
 		return movingTimer;
 	}
@@ -99,17 +68,10 @@ public abstract class Item {
 		this.movingTimer = sapperTimer;
 	}
 
-	/**
-	 * @return the targetsArray
-	 */
 	public List<Item> getTargetsArray() {
 		return targetsArray;
 	}
 
-	/**
-	 * @param targetsArray
-	 *            the targetsArray to set
-	 */
 	public void setTargetsArray(List<Item> targetsArray) {
 		this.targetsArray = targetsArray;
 	}
@@ -117,31 +79,6 @@ public abstract class Item {
 	/**
 	 * CONSTRUCTORS
 	 */
-
-	/**
-	 * @param positionX
-	 * @param positionY
-	 * @param range
-	 * @param id
-	 */
-	// public Item(int positionX, int positionY, int range, int id, int speed) {
-	// super();
-	// this.positionX = positionX;
-	// this.positionY = positionY;
-	// this.range = range;
-	// this.id = id;
-	//
-	// if (speed == 0) {
-	// this.setTargetsArray(null);
-	// this.setMovingTimer(null);
-	// } else {
-	// this.setTargetsArray(new LinkedList<Item>());
-	// this.setMovingTimer(new MovingTimer(this, speed));
-	// }
-	//
-	// // this.setMovingTimer(new MovingTimer(this, 50));
-	//
-	// }
 
 	public Item(int id) {
 		super();
@@ -195,15 +132,14 @@ public abstract class Item {
 			this.setTargetsArray(new LinkedList<Item>());
 			this.setMovingTimer(new MovingTimer(this, speed));
 		}
-		// this.setMovingTimer(new MovingTimer(this, 50));
+		
 	}
 
 	protected void addTaskToMove(Item targetToReach, Item itemToMove) throws InterruptedException {
 		if (this.getTargetsArray() != null && this.getMovingTimer() != null) {
 			this.getTargetsArray().add(targetToReach);
 			this.getTargetsArray().add(itemToMove);
-		} else
-			System.out.println("Nothing happens");
+		} 
 	}
 
 	public void reachItem(Item itemToReach) throws InterruptedException {
@@ -240,7 +176,6 @@ public abstract class Item {
 		}
 
 		return tempText;
-		// return text;
 	}
 
 	private double distanceCalculation(Item itemArgument) {
@@ -265,31 +200,26 @@ public abstract class Item {
 	}
 
 	/**
-	 * Sprawdza czy item jest w zasiêgu innego itemu
+	 * Sprawdza czy item jest w zasiÃªgu innego itemu
 	 */
 
 	public boolean checkItemsRange(Item itemArgument) {
 
-		if (distanceCalculation(itemArgument) <= this.getRange() + itemArgument.getRange()) {
-			MainWindow.updateLog("Items are in their range!");
+		if (distanceCalculation(itemArgument) <= this.getRange() + itemArgument.getRange()) {			
 			return true;
-		} else {
-			MainWindow.updateLog("Items are NOT in their range!");
+		} else {			
 			return false;
 		}
 	}
 
 	/**
-	 * Sprawdza czy œrodek obiektu jest w zasiêgu itemu
+	 * Sprawdza czy Å“rodek obiektu jest w zasiÃªgu itemu
 	 */
 
 	public boolean checkItemsCenterDistance(Item itemArgument) {
-		if (distanceCalculation(itemArgument) <= this.getRange()) {
-
-			MainWindow.updateLog("Center of another Item is included in this range!");
+		if (distanceCalculation(itemArgument) <= this.getRange()) {	
 			return true;
-		} else {
-			MainWindow.updateLog("Center of another Item is NOT included in this range!!");
+		} else {		
 			return false;
 		}
 	}

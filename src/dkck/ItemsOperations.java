@@ -1,6 +1,5 @@
 package dkck;
 
-import java.awt.BorderLayout;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -14,17 +13,10 @@ public class ItemsOperations {
 	 * SETTERS AND GETTERS
 	 */
 
-	/**
-	 * @return the itemsArray
-	 */
 	public List<Item> getItemsArray() {
 		return itemsArray;
 	}
 
-	/**
-	 * @param itemsArray
-	 *            the itemsArray to set
-	 */
 	public void setItemsArray(List<Item> itemsArray) {
 		this.itemsArray = itemsArray;
 	}
@@ -39,27 +31,27 @@ public class ItemsOperations {
 	}
 
 	private void dropItem(int index) {
-		Item tempItemReference = this.getItemsArray().get(index);
+		Item tempItem = this.getItemsArray().get(index);
 
-		if (tempItemReference.getMovingTimer() != null) {
-			((Bomb) tempItemReference).getMovingTimer().cancel();
-			((Bomb) tempItemReference).getMovingTimer().setItemReference(null);
-			((Bomb) tempItemReference).setMovingTimer(null);
+		if (tempItem.getMovingTimer() != null) {
+			((Bomb) tempItem).getMovingTimer().cancel();
+			((Bomb) tempItem).getMovingTimer().setItemReference(null);
+			((Bomb) tempItem).setMovingTimer(null);
 		}
-		if (tempItemReference instanceof Bomb && ((Bomb) tempItemReference).getBombTimer() != null) {
-			((Bomb) tempItemReference).getBombTimer().cancel();
-			((Bomb) tempItemReference).getBombTimer().setItemReference(null);
-			((Bomb) tempItemReference).setBombTimer(null);
+		if (tempItem instanceof Bomb && ((Bomb) tempItem).getBombTimer() != null) {
+			((Bomb) tempItem).getBombTimer().cancel();
+			((Bomb) tempItem).getBombTimer().setItemReference(null);
+			((Bomb) tempItem).setBombTimer(null);
 		}
 		this.getItemsArray().remove(index);
-		MainWindow.grid.drawSquare(tempItemReference.getPositionX(), tempItemReference.getPositionY(),
-				tempItemReference.getPositionX(), tempItemReference.getPositionY(), MainWindow.railColor);
-		MainWindow.grid.repairSquare(tempItemReference.getPositionX(), tempItemReference.getPositionY());
+		MainWindow.grid.drawSquare(tempItem.getPositionX(), tempItem.getPositionY(),
+				tempItem.getPositionX(), tempItem.getPositionY(), MainWindow.cellColor);
+		MainWindow.grid.repairSquare(tempItem.getPositionX(), tempItem.getPositionY());
 
-		MainWindow.grid.drawCircle(tempItemReference.getPositionX(), tempItemReference.getPositionY(),
-				tempItemReference.getRange(), MainWindow.railColor);
-		MainWindow.grid.repairCircle(tempItemReference.getPositionX(), tempItemReference.getPositionY(),
-				tempItemReference.getRange());
+		MainWindow.grid.drawCircle(tempItem.getPositionX(), tempItem.getPositionY(),
+				tempItem.getRange(), MainWindow.cellColor);
+		MainWindow.grid.repairCircle(tempItem.getPositionX(), tempItem.getPositionY(),
+				tempItem.getRange());
 		MainWindow.grid.repairSquare2();
 		MainWindow.grid.repairCircle2();
 	}
@@ -98,9 +90,7 @@ public class ItemsOperations {
 								pointReference.setPositionX(tempX);
 								pointReference.setPositionY(tempY);
 							}
-
 						}
-
 					}
 				}
 
@@ -109,32 +99,27 @@ public class ItemsOperations {
 				} else {
 					goodBombPosition = true;
 				}
-				// System.out.println("jakiœ napis");
 			} while (goodBombPosition == false);
 		}
 	}
+	
+	public void addItems() {
+		itemsArray.add(new Bomb());					
+		itemsArray.add(new Bomb());
+		itemsArray.add(new Bomb());
+		itemsArray.add(new Sapper());
+	}
 
 	public void actions() throws InterruptedException {
-		itemsArray.add((Item) new Bomb());// (2, 2, 40, 10));// dodawanie do
-											// listy
-
-		// elementów
-		// dziedzicz¹cych z
-		// klasy Item z
-		// okreœlonymi
-		// parametrami
-		itemsArray.add(new Bomb());// 16, 8, 5, 30));
-		itemsArray.add(new Bomb());// 7, 20, 20, 30));
-		itemsArray.add(new Sapper());// 2, 7, 2, 40));
-		itemsArray.add(new Sapper());// 8, 9, 2, 70));
-
+		
+		
+/*		
+		itemsArray.get(3).go(3, 7);
+	
 		for (int i = 0; i < 2; ++i) {
-			itemsArray.add(new Bomb());// 8, 9, 2, 70));
-			itemsArray.add(new Rocket(itemsArray.get(3)));
-			itemsArray.add(new Rocket(itemsArray.get(4)));
+			itemsArray.add(new Bomb());
+			itemsArray.add(new Rocket(itemsArray.get(3)));		
 		}
-
-		// createBombs(3);
 
 		for (int i = 0; i < itemsArray.size(); i++) {
 			Item tempItem = itemsArray.get(i);
@@ -142,83 +127,19 @@ public class ItemsOperations {
 				MainWindow.timerPanel.add(((Bomb) tempItem).getTimerLog(), BorderLayout.WEST);
 			}
 		}
-
-		// ((Sapper) itemsArray.get(3)).go(0, 0, null);
-
+		((Sapper) itemsArray.get(3)).disarmBomb(itemsArray.get(0));
 		((Sapper) itemsArray.get(3)).moveBomb(itemsArray.get(2), 2, 3);
-
-		((Sapper) itemsArray.get(4)).moveBomb(itemsArray.get(1), 45, 49);
-		((Sapper) itemsArray.get(4)).moveBomb(itemsArray.get(1), 1, 1);
-		itemsArray.get(4).reachItem(itemsArray.get(1));
-		itemsArray.get(4).reachItem(itemsArray.get(3));
 
 		itemsArray.get(3).go(3, 7);
 
-		((Sapper) itemsArray.get(4)).moveBomb(itemsArray.get(1), 6, 33);
-
-		itemsArray.get(3).reachItem(itemsArray.get(2));
+		itemsArray.get(3).reachItem(itemsArray.get(1));
 
 		itemsArray.get(3).go(30, 49);
-		itemsArray.get(3).reachItem(itemsArray.get(4));
-		itemsArray.get(3).reachItem(itemsArray.get(1));
-		// itemsArray.get(5).reachItem(itemsArray.get(3));
 
-		Thread.sleep(3000);
+		itemsArray.get(3).reachItem(itemsArray.get(1));
 
 		((Bomb) itemsArray.get(0)).explode();
 
-		// dropItem(6);
-
-		for (int i = 0; i < 200; ++i) {
-			this.dropItem(6);
-			Thread.sleep(1);
-			this.getItemsArray().add(6, new Bomb());
-			Thread.sleep(1);
-		}
-
-		Thread.sleep(8000);
-
-		((Sapper) itemsArray.get(3)).disarmBomb(itemsArray.get(1));
-
-		// ((Sapper) itemsArray.get(3)).go(7, 7, null);
-		// ((Bomb) itemsArray.get(0)).explode(((Sapper)
-		// itemsArray.get(2)));//wywo³ywanie metod dla poszczególnych obiektów z
-		// lisy przy u¿yciu rzutowania (inteligentna funkcja wyszukuj¹ca obiekty
-		// po okreœlonym unikalnym dla obiektu ID jest jeszcze do napisania)
-
-		// ((Sapper) itemsArray.get(2)).moveBomb(((Bomb) itemsArray.get(0)), 6,
-		// 9);
-		// ((Sapper) itemsArray.get(2)).moveBomb(((Bomb) itemsArray.get(1)), 6,
-		// 9);
-
-		// ((Bomb) itemsArray.get(0)).explode(((Sapper) itemsArray.get(2)));//
-		// wywo³ywanie
-		// metod
-		// dla
-		// poszczególnych
-		// obiektów
-		// z
-		// lisy
-		// przy
-		// u¿yciu
-		// rzutowania
-		// (inteligentna
-		// funkcja
-		// wyszukuj¹ca
-		// obiekty
-		// po
-		// okreœlonym
-		// unikalnym
-		// dla
-		// obiektu
-		// ID
-		// jest
-		// jeszcze
-		// do
-		// napisania)
-
-		// ((Sapper) itemsArray.get(3)).disarmBomb(((Bomb) itemsArray.get(0)));
-
-		// ((Sapper) itemsArray.get(2)).disarmBomb(((Bomb) itemsArray.get(1)));
+*/
 	}
 }

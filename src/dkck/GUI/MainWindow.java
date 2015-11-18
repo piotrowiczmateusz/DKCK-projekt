@@ -7,13 +7,11 @@ import java.awt.Dimension;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 
+import dkck.Interpreter;
 import dkck.ItemsOperations;
 
 public class MainWindow extends JFrame {
 
-	/**
-	 * 
-	 */
 	private static final long serialVersionUID = 1L;
 
 	public static final int gridRows = 50;
@@ -22,13 +20,15 @@ public class MainWindow extends JFrame {
 
 	public static ItemsOperations itemsCollection;
 
-	public static final Color railColor = Color.WHITE;
+	public static final Color cellColor = Color.WHITE;
 
 	public static final Color bombColor = Color.RED;
 
 	public static final Color sapperColor = Color.BLUE;
 
 	public static final Color rocketColor = Color.GREEN;
+	
+	public static Interpreter interpreter;
 
 	// Window elements
 
@@ -76,8 +76,12 @@ public class MainWindow extends JFrame {
 
 	public static void main(String[] args) throws InterruptedException {
 		new MainWindow();
+
 		itemsCollection = new ItemsOperations();
-		itemsCollection.actions();
+		itemsCollection.addItems();
+		//itemsCollection.actions();
+		interpreter = new Interpreter();
+	
 	}
 
 	public MainWindow() {
