@@ -51,7 +51,8 @@ public class Sapper extends Item {
 		id++;
 		this.setSapperStatus(true);
 		this.setHealthPoints(20);
-		MainWindow.updateHPPanel("Sapper HP: " + this.getHealthPoints());	
+		MainWindow.updateHPPanel("Sapper HP: " + this.getHealthPoints());
+		MainWindow.updatePositionPanel("Pozycja sapera: [" + this.getPositionX() + "][" + this.getPositionY() + "]");
 	}
 	
 	
@@ -62,7 +63,7 @@ public class Sapper extends Item {
 	public void hurt() {
 		if (this.getHealthPoints() > 0) {
 			this.setHealthPoints(this.getHealthPoints() - 1);
-			MainWindow.updateHPPanel("Sapper HP: " + this.getHealthPoints());
+			MainWindow.updateHPPanel("Saper HP: " + this.getHealthPoints());
 		}
 	}
 	
@@ -131,6 +132,7 @@ public class Sapper extends Item {
 
 				} else
 					System.out.println("too far to disarm bomb!");
+					MainWindow.updateLog("Za daleko, ¿eby rozbroiæ bombê");
 			} 
 		} 
 	}

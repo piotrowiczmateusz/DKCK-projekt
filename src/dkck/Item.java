@@ -178,7 +178,7 @@ public abstract class Item {
 		return tempText;
 	}
 
-	private double distanceCalculation(Item itemArgument) {
+	public double distanceCalculation(Item itemArgument) {
 		System.out.println("DISTANCE CALCULATION:");
 
 		Item tempItem = null;

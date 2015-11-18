@@ -112,7 +112,7 @@ public class Bomb extends Item {
 			if (this.getBombStatus() != 0) {
 
 				Sapper tempSapper = (Sapper) itemArgument;
-				System.out.println("Disarming...");
+				MainWindow.updateLog("Rozbrajam...");
 
 				Random generator = new Random();
 				int success = generator.nextInt(2);
@@ -121,13 +121,14 @@ public class Bomb extends Item {
 					this.getBombTimer().cancel();
 					this.setBombStatus(2);
 					tempSapper.setNumberOfDisarmedBombs(tempSapper.getNumberOfDisarmedBombs() + 1);
-					MainWindow.updateLog("The bomb nr " + this.getId() + " is now disarmed");
+					MainWindow.updateLog("Bomba nr " + this.getId() + " jest teraz rozbrojona");
 
 				} else {
+					MainWindow.updateLog("Nie uda³o siê rozbroiæ bomby");
 					this.explode();
 				}
 			} else
-				System.out.println("The bomb nr: " + this.getId() + " is already disarmed");
+				MainWindow.updateLog("Bomba nr: " + this.getId() + " jest ju¿ rozbrojona");
 		} 
 	}
 
@@ -143,9 +144,9 @@ public class Bomb extends Item {
 		}
 
 		if (this instanceof Bomb && (this instanceof Rocket) == false)
-			timerLog.setText(this.nameOfItem(this) + " nr: " + this.getId() + " exploded");
+			timerLog.setText("Bomba nr: " + this.getId() + " wybuch³a");
 
-		MainWindow.updateLog(this.nameOfItem(this) + " nr: " + this.getId() + " exploded");
+		MainWindow.updateLog("Bomba nr: " + this.getId() + " wybuch³a");
 
 		for (int i = 0; i < MainWindow.itemsCollection.getItemsArray().size(); i++) {
 			Item tempItem = MainWindow.itemsCollection.getItemsArray().get(i);

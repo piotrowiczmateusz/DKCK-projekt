@@ -41,8 +41,8 @@ public class BombTimer extends TimerTask {
 				/*System.out.println("Bomb nr: " + tempBomb.getId() + " has: "
 						+ tempBomb.getExplosionLeftTime() + " seconds left to explosion");*/
 				
-				tempBomb.getTimerLog().setText("Bomb nr: " + tempBomb.getId() + " has: "
-						+ tempBomb.getExplosionLeftTime() + " seconds left to explosion");
+				tempBomb.getTimerLog().setText("Bomba nr: " + tempBomb.getId() + " ma: "
+						+ tempBomb.getExplosionLeftTime() + " sekund do wybuchu");
 				
 				
 			} else {

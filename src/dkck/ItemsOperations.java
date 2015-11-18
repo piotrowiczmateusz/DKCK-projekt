@@ -1,5 +1,6 @@
 package dkck;
 
+import java.awt.BorderLayout;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -103,41 +104,41 @@ public class ItemsOperations {
 		}
 	}
 	
-	public void addItems() {
+	// nowa metoda służąca do dodawania itemów
+	public void addItems() throws InterruptedException {
+		
+		itemsArray.add(new Sapper()); // WAŻNE proponuje, żeby został 1 saper, zawsze dodawnay jako pierwszy, ułatwi to pracę
 		itemsArray.add(new Bomb());					
 		itemsArray.add(new Bomb());
 		itemsArray.add(new Bomb());
-		itemsArray.add(new Sapper());
+		
+		for (int i = 0; i < 2; ++i) {
+			itemsArray.add(new Bomb());
+			itemsArray.add(new Rocket(itemsArray.get(3)));		
+		}
+		
+		for (int i = 0; i < itemsArray.size(); i++) {
+			Item tempItem = itemsArray.get(i);
+			if (tempItem instanceof Bomb && !(tempItem instanceof Rocket)) {
+				MainWindow.timerPanel.add(((Bomb) tempItem).getTimerLog(), BorderLayout.WEST);
+			}
+		}
+	
 	}
 
 	public void actions() throws InterruptedException {
 		
 		
 /*		
-		itemsArray.get(3).go(3, 7);
-	
-		for (int i = 0; i < 2; ++i) {
-			itemsArray.add(new Bomb());
-			itemsArray.add(new Rocket(itemsArray.get(3)));		
-		}
-
-		for (int i = 0; i < itemsArray.size(); i++) {
-			Item tempItem = itemsArray.get(i);
-			if (tempItem instanceof Bomb) {
-				MainWindow.timerPanel.add(((Bomb) tempItem).getTimerLog(), BorderLayout.WEST);
-			}
-		}
+ * 	testowanie metod, w końcowej wersji wszystko musi być wykonywane przez interpreter
+ * 
+		itemsArray.get(3).go(3, 7);	
 		((Sapper) itemsArray.get(3)).disarmBomb(itemsArray.get(0));
 		((Sapper) itemsArray.get(3)).moveBomb(itemsArray.get(2), 2, 3);
-
 		itemsArray.get(3).go(3, 7);
-
 		itemsArray.get(3).reachItem(itemsArray.get(1));
-
 		itemsArray.get(3).go(30, 49);
-
 		itemsArray.get(3).reachItem(itemsArray.get(1));
-
 		((Bomb) itemsArray.get(0)).explode();
 
 */

@@ -15,7 +15,7 @@ public class SubmitButton extends JButton {
 
 	public SubmitButton() {
 		super();
-		setText("Submit");
+		setText("Wykonaj");
 		setBackground(SystemColor.controlShadow);
 		setForeground(Color.black);
 		setPreferredSize(new Dimension(200, 30));

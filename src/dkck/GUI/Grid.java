@@ -6,6 +6,7 @@ import java.awt.GridBagLayout;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.swing.ImageIcon;
 import javax.swing.JPanel;
 import javax.swing.border.Border;
 import javax.swing.border.MatteBorder;
@@ -104,6 +105,7 @@ public class Grid extends JPanel {
 				} else if (tempItem instanceof Sapper) {
 					MainWindow.grid.drawSquare(positionX, positionY, tempItem.getPositionX(), tempItem.getPositionY(),
 							MainWindow.sapperColor);
+					
 				} else if (tempItem instanceof Rocket) {
 					MainWindow.grid.drawSquare(positionX, positionY, tempItem.getPositionX(), tempItem.getPositionY(),
 							MainWindow.rocketColor);
@@ -199,7 +201,6 @@ public class Grid extends JPanel {
 			if (tempItem instanceof Bomb && (tempItem instanceof Rocket == false)) {
 				MainWindow.grid.drawSquare(tempItem.getPositionX(), tempItem.getPositionY(), tempItem.getPositionX(),
 						tempItem.getPositionY(), MainWindow.bombColor);
-
 			} else if (tempItem instanceof Sapper) {
 				MainWindow.grid.drawSquare(tempItem.getPositionX(), tempItem.getPositionY(), tempItem.getPositionX(),
 						tempItem.getPositionY(), MainWindow.sapperColor);
@@ -209,4 +210,29 @@ public class Grid extends JPanel {
 			}
 		}
 	}
+	
+	public void drawSapper(int x, int y) {
+		this.cellPanes.get(x).get(y).image.img = new ImageIcon("images/sapper.png").getImage();
+	}
+	
+	public void drawDeadSapper(int x, int y) {
+		this.cellPanes.get(x).get(y).image.img = new ImageIcon("images/dead.png").getImage();
+	}
+
+	public void drawBomb(int x, int y) {
+		this.cellPanes.get(x).get(y).image.img = new ImageIcon("images/bomb.png").getImage();
+	}
+	
+	public void drawExplodedBomb(int x, int y) {
+		this.cellPanes.get(x).get(y).image.img = new ImageIcon("images/exploded.png").getImage();
+	}
+	
+	public void drawDisarmedBomb(int x, int y) {
+		this.cellPanes.get(x).get(y).image.img = new ImageIcon("images/disarmed.png").getImage();
+	}
+	
+	public void drawRocket(int x, int y) {
+		this.cellPanes.get(x).get(y).image.img = new ImageIcon("images/disarmed.png").getImage();
+	}
+	
 }

@@ -30,7 +30,6 @@ public class ConsoleIn extends JTextField {
 				    try {
 						MainWindow.interpreter.interpret(input);
 					} catch (InterruptedException e1) {
-						// TODO Auto-generated catch block
 						e1.printStackTrace();
 					}
 		            MainWindow.updateLog("USER: " + input);	           

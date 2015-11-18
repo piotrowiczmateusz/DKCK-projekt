@@ -75,6 +75,7 @@ public class MainWindow extends JFrame {
 	}
 
 	public static void main(String[] args) throws InterruptedException {
+		
 		new MainWindow();
 
 		itemsCollection = new ItemsOperations();
@@ -87,7 +88,7 @@ public class MainWindow extends JFrame {
 	public MainWindow() {
 
 		super();
-
+		
 		setDefaultCloseOperation(EXIT_ON_CLOSE);
 		setPreferredSize(new Dimension(900, 578));
 
@@ -97,9 +98,9 @@ public class MainWindow extends JFrame {
 
 		rightPanel.add(HPPanel);
 		rightPanel.add(positionPanel);
-		rightPanel.add(new JLabel("Timer window:"));
+		rightPanel.add(new JLabel("Zegar:"));
 		rightPanel.add(timerPanel);
-		rightPanel.add(new JLabel("Log window:"));
+		rightPanel.add(new JLabel("Komunikaty:"));
 		rightPanel.add(logPanel);
 
 		bottomPanel.add(consoleIn);
@@ -116,5 +117,7 @@ public class MainWindow extends JFrame {
 		setVisible(true);
 		setResizable(false);
 
+		
+		
 	}
 }
