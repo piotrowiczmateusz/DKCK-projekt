@@ -123,7 +123,6 @@ public class ItemsOperations {
 				MainWindow.timerPanel.add(((Bomb) tempItem).getTimerLog(), BorderLayout.WEST);
 			}
 		}
-	
 	}
 
 	public void actions() throws InterruptedException {

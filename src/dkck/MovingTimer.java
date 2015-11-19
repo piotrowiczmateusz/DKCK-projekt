@@ -3,6 +3,8 @@ package dkck;
 import java.util.Timer;
 import java.util.TimerTask;
 
+import javax.swing.JLabel;
+
 import dkck.GUI.MainWindow;
 
 public class MovingTimer extends TimerTask {
@@ -147,6 +149,7 @@ public class MovingTimer extends TimerTask {
 						MainWindow.grid.drawSquare(initItemPositionX, initItemPositionY,
 								tempItem.getPositionX(), tempItem.getPositionY(),
 								MainWindow.bombColor);
+						MainWindow.grid.cellPanes.get(tempItem.getPositionX()).get(tempItem.getPositionY()).label.setText(tempItem.getId()+1+"");
 
 					} 
 

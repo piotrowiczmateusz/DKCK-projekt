@@ -7,6 +7,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import javax.swing.ImageIcon;
+import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.border.Border;
 import javax.swing.border.MatteBorder;
@@ -91,6 +92,8 @@ public class Grid extends JPanel {
 
 		this.cellPanes.get(prevX).get(prevY).setBackground(MainWindow.cellColor);
 		this.cellPanes.get(x).get(y).setBackground(color);
+		MainWindow.grid.cellPanes.get(prevX).get(prevY).label.setText("");
+		MainWindow.grid.cellPanes.get(x).get(y).label.setText("2");
 	}
 
 	public void repairSquare(int positionX, int positionY) {

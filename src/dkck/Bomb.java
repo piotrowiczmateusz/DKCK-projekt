@@ -4,6 +4,7 @@ import java.awt.Color;
 import java.awt.Dimension;
 import java.util.Random;
 
+import javax.swing.JLabel;
 import javax.swing.JTextField;
 import javax.swing.border.MatteBorder;
 
@@ -82,13 +83,15 @@ public class Bomb extends Item {
 		}
 
 		this.setBombStatus(1);
-		this.timerLog = new JTextField("Bomb nr: " + this.getId());
+		this.timerLog = new JTextField();
 
 		timerLog.setOpaque(true);
 		timerLog.setBackground(Color.white);
 		timerLog.setBorder(new MatteBorder(0, 0, 0, 0, (Color) new Color(0, 0, 0)));
 		timerLog.setPreferredSize(new Dimension(358, 14));
 		timerLog.setEditable(false);
+		
+		MainWindow.grid.cellPanes.get(this.getPositionX()).get(this.getPositionY()).label.setText(this.getId()+1+"");
 	}
 
 	/**
