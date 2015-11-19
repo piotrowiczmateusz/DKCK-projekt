@@ -26,6 +26,6 @@ public class CellPane extends JPanel {
 
 	@Override
 	public Dimension getPreferredSize() {
-		return new Dimension(20, 20);
+		return new Dimension(10, 10);
 	}
 }

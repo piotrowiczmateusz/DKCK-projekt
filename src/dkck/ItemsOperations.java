@@ -34,25 +34,19 @@ public class ItemsOperations {
 	private void dropItem(int index) {
 		Item tempItem = this.getItemsArray().get(index);
 
-		if (tempItem.getMovingTimer() != null) {
-			((Bomb) tempItem).getMovingTimer().cancel();
-			((Bomb) tempItem).getMovingTimer().setItemReference(null);
-			((Bomb) tempItem).setMovingTimer(null);
-		}
 		if (tempItem instanceof Bomb && ((Bomb) tempItem).getBombTimer() != null) {
 			((Bomb) tempItem).getBombTimer().cancel();
 			((Bomb) tempItem).getBombTimer().setItemReference(null);
 			((Bomb) tempItem).setBombTimer(null);
 		}
 		this.getItemsArray().remove(index);
-		MainWindow.grid.drawSquare(tempItem.getPositionX(), tempItem.getPositionY(),
-				tempItem.getPositionX(), tempItem.getPositionY(), MainWindow.cellColor);
+		MainWindow.grid.drawSquare(tempItem.getPositionX(), tempItem.getPositionY(), tempItem.getPositionX(),
+				tempItem.getPositionY(), MainWindow.cellColor);
 		MainWindow.grid.repairSquare(tempItem.getPositionX(), tempItem.getPositionY());
 
-		MainWindow.grid.drawCircle(tempItem.getPositionX(), tempItem.getPositionY(),
-				tempItem.getRange(), MainWindow.cellColor);
-		MainWindow.grid.repairCircle(tempItem.getPositionX(), tempItem.getPositionY(),
-				tempItem.getRange());
+		MainWindow.grid.drawCircle(tempItem.getPositionX(), tempItem.getPositionY(), tempItem.getRange(),
+				MainWindow.cellColor);
+		MainWindow.grid.repairCircle(tempItem.getPositionX(), tempItem.getPositionY(), tempItem.getRange());
 		MainWindow.grid.repairSquare2();
 		MainWindow.grid.repairCircle2();
 	}
@@ -103,43 +97,45 @@ public class ItemsOperations {
 			} while (goodBombPosition == false);
 		}
 	}
-	
+
 	// nowa metoda służąca do dodawania itemów
 	public void addItems() throws InterruptedException {
-		
-		itemsArray.add(new Sapper()); // WAŻNE proponuje, żeby został 1 saper, zawsze dodawnay jako pierwszy, ułatwi to pracę
-		itemsArray.add(new Bomb());					
+
+		itemsArray.add(new Sapper()); // WAŻNE proponuje, żeby został 1 saper,
+										// zawsze dodawnay jako pierwszy, ułatwi
+										// to pracę
+
+		// itemsArray.add(new Sapper());
 		itemsArray.add(new Bomb());
 		itemsArray.add(new Bomb());
-		
+		itemsArray.add(new Bomb());
+
 		for (int i = 0; i < 2; ++i) {
 			itemsArray.add(new Bomb());
-			itemsArray.add(new Rocket(itemsArray.get(3)));		
+			itemsArray.add(new Rocket(itemsArray.get(0)));
 		}
-		
-		for (int i = 0; i < itemsArray.size(); i++) {
-			Item tempItem = itemsArray.get(i);
-			if (tempItem instanceof Bomb && !(tempItem instanceof Rocket)) {
-				MainWindow.timerPanel.add(((Bomb) tempItem).getTimerLog(), BorderLayout.WEST);
-			}
-		}
+
+	/*	for (int i = 0; i < 2000; ++i) {
+			 itemsArray.add(new Rocket(itemsArray.get(0)));
+			dropItem(itemsArray.size() - 1);
+		}*/
 	}
 
 	public void actions() throws InterruptedException {
-		
-		
-/*		
- * 	testowanie metod, w końcowej wersji wszystko musi być wykonywane przez interpreter
- * 
-		itemsArray.get(3).go(3, 7);	
-		((Sapper) itemsArray.get(3)).disarmBomb(itemsArray.get(0));
-		((Sapper) itemsArray.get(3)).moveBomb(itemsArray.get(2), 2, 3);
-		itemsArray.get(3).go(3, 7);
-		itemsArray.get(3).reachItem(itemsArray.get(1));
-		itemsArray.get(3).go(30, 49);
-		itemsArray.get(3).reachItem(itemsArray.get(1));
-		((Bomb) itemsArray.get(0)).explode();
 
-*/
+		/*
+		 * testowanie metod, w końcowej wersji wszystko musi być wykonywane
+		 * przez interpreter
+		 * 
+		 * itemsArray.get(3).go(3, 7); ((Sapper)
+		 * itemsArray.get(3)).disarmBomb(itemsArray.get(0)); ((Sapper)
+		 * itemsArray.get(3)).moveBomb(itemsArray.get(2), 2, 3);
+		 * itemsArray.get(3).go(3, 7);
+		 * itemsArray.get(3).reachItem(itemsArray.get(1));
+		 * itemsArray.get(3).go(30, 49);
+		 * itemsArray.get(3).reachItem(itemsArray.get(1)); ((Bomb)
+		 * itemsArray.get(0)).explode();
+		 * 
+		 */
 	}
 }

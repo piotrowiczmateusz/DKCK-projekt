@@ -108,19 +108,17 @@ public abstract class Item {
 		this.positionY = positionY;
 		this.range = range;
 		this.id = id;
-		
+
 		Color tempColor = null;
 
-		if (this instanceof Rocket){
+		if (this instanceof Rocket) {
 			tempColor = MainWindow.rocketColor;
-		}
-		else if (this instanceof Bomb){
+		} else if (this instanceof Bomb) {
 			tempColor = MainWindow.bombColor;
-		}
-		else if (this instanceof Sapper){
+		} else if (this instanceof Sapper) {
 			tempColor = MainWindow.sapperColor;
 		}
-		
+
 		MainWindow.grid.drawCircle(this.getPositionX(), this.getPositionY(), this.getRange(), null);
 		MainWindow.grid.drawCircle(this.getPositionX(), this.getPositionY(), this.getRange(), tempColor);
 		MainWindow.grid.drawSquare(positionX, positionY, positionX, positionY, tempColor);
@@ -132,14 +130,14 @@ public abstract class Item {
 			this.setTargetsArray(new LinkedList<Item>());
 			this.setMovingTimer(new MovingTimer(this, speed));
 		}
-		
+
 	}
 
 	protected void addTaskToMove(Item targetToReach, Item itemToMove) throws InterruptedException {
 		if (this.getTargetsArray() != null && this.getMovingTimer() != null) {
 			this.getTargetsArray().add(targetToReach);
 			this.getTargetsArray().add(itemToMove);
-		} 
+		}
 	}
 
 	public void reachItem(Item itemToReach) throws InterruptedException {
@@ -205,9 +203,9 @@ public abstract class Item {
 
 	public boolean checkItemsRange(Item itemArgument) {
 
-		if (distanceCalculation(itemArgument) <= this.getRange() + itemArgument.getRange()) {			
+		if (distanceCalculation(itemArgument) <= this.getRange() + itemArgument.getRange()) {
 			return true;
-		} else {			
+		} else {
 			return false;
 		}
 	}
@@ -217,9 +215,9 @@ public abstract class Item {
 	 */
 
 	public boolean checkItemsCenterDistance(Item itemArgument) {
-		if (distanceCalculation(itemArgument) <= this.getRange()) {	
+		if (distanceCalculation(itemArgument) <= this.getRange()) {
 			return true;
-		} else {		
+		} else {
 			return false;
 		}
 	}

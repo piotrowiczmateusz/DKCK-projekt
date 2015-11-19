@@ -1,5 +1,6 @@
 package dkck;
 
+import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Dimension;
 import java.util.Random;
@@ -57,7 +58,7 @@ public class Bomb extends Item {
 	public JTextField getTimerLog() {
 		return timerLog;
 	}
-	
+
 	public void setTimerLog(JTextField timerLog) {
 		this.timerLog = timerLog;
 	}
@@ -70,10 +71,20 @@ public class Bomb extends Item {
 		super(id);
 		id++;
 
+		this.timerLog = new JTextField("Bomb nr: " + this.getId());
+		timerLog.setOpaque(true);
+		timerLog.setBackground(Color.white);
+		timerLog.setBorder(new MatteBorder(0, 0, 0, 0, (Color) new Color(0, 0, 0)));
+		timerLog.setPreferredSize(new Dimension(358, 14));
+		timerLog.setEditable(false);
+
 		if (this instanceof Rocket)
 			this.setBombTimer(null);
-		else
+		else {
+			MainWindow.timerPanel.add(((Bomb) this).getTimerLog(), BorderLayout.WEST);
 			this.setBombTimer(new BombTimer(this, 1000));
+
+		}
 
 		if (this.getBombTimer() == null) {
 			this.setExplosionLeftTime(0);
@@ -82,16 +93,9 @@ public class Bomb extends Item {
 			this.setExplosionLeftTime(10 + generator.nextInt(300));
 		}
 
-		this.setBombStatus(1);
-		this.timerLog = new JTextField();
-
-		timerLog.setOpaque(true);
-		timerLog.setBackground(Color.white);
-		timerLog.setBorder(new MatteBorder(0, 0, 0, 0, (Color) new Color(0, 0, 0)));
-		timerLog.setPreferredSize(new Dimension(358, 14));
-		timerLog.setEditable(false);
-		
+		this.setBombStatus(1);		
 		MainWindow.grid.cellPanes.get(this.getPositionX()).get(this.getPositionY()).label.setText(this.getId()+1+"");
+
 	}
 
 	/**
@@ -132,13 +136,13 @@ public class Bomb extends Item {
 				}
 			} else
 				MainWindow.updateLog("Bomba nr: " + this.getId() + " jest ju¿ rozbrojona");
-		} 
+		}
 	}
 
 	/**
 	 * modyfikuje nieznacznie pola bomby i zmniejsza punkty ¿ycia dla Sapera
 	 */
-	
+
 	public void explode() {
 		if (this.getBombStatus() == 1 && this.getBombTimer() != null) {
 			this.getBombTimer().cancel();
