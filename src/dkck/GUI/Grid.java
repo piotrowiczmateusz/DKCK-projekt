@@ -13,6 +13,7 @@ import javax.swing.border.MatteBorder;
 
 import dkck.Bomb;
 import dkck.Item;
+import dkck.Point;
 import dkck.Rocket;
 import dkck.Sapper;
 
@@ -81,7 +82,9 @@ public class Grid extends JPanel {
 
 	Color chooseObjectColor(Item itemReference) {
 
-		if (itemReference instanceof Rocket) {
+		if (itemReference instanceof Point) {
+			return null;
+		} else if (itemReference instanceof Rocket) {
 			return MainWindow.rocketColor;
 		} else if (itemReference instanceof Bomb && !(itemReference instanceof Rocket)) {
 			return MainWindow.bombColor;
@@ -104,10 +107,13 @@ public class Grid extends JPanel {
 		Color tempColor = chooseObjectColor(itemReference);
 
 		this.cellPanes.get(prevX).get(prevY).setBackground(MainWindow.cellColor);
-		this.cellPanes.get(x).get(y).setBackground(tempColor);
+		if (tempColor != null) {
+			this.cellPanes.get(x).get(y).setBackground(tempColor);
+		}
 		MainWindow.grid.cellPanes.get(prevX).get(prevY).label.setText("");
-		if (itemReference != null)
+		if (tempColor != null && itemReference != null) {
 			MainWindow.grid.cellPanes.get(x).get(y).label.setText(Integer.toString(itemReference.getId()));
+		}
 	}
 
 	/*
@@ -133,43 +139,45 @@ public class Grid extends JPanel {
 	// funkcja rysowania zakresów obiektów
 
 	public void drawCircle(int x0, int y0, int radius, Item itemReference) {
-		int x = radius;
-		int y = 0;
-		int decisionOver2 = 1 - x;
-
 		Color tempColor = chooseObjectColor(itemReference);
 
-		while (y <= x) {
-			if ((x + x0 >= 0) && (x + x0 <= this.getRows()) && (y + y0 >= 0) && (y + y0 <= this.getColumns())) {
-				this.cellPanes.get(x + x0).get(y + y0).setBackground(tempColor);
-			}
-			if ((y + x0 >= 0) && (y + x0 <= this.getRows()) && (x + y0 >= 0) && (x + y0 <= this.getColumns())) {
-				this.cellPanes.get(y + x0).get(x + y0).setBackground(tempColor);
-			}
-			if ((-x + x0 >= 0) && (-x + x0 <= this.getRows()) && (y + y0 >= 0) && (y + y0 <= this.getColumns())) {
-				this.cellPanes.get(-x + x0).get(y + y0).setBackground(tempColor);
-			}
-			if ((-y + x0 >= 0) && (-y + x0 <= this.getRows()) && (x + y0 >= 0) && (x + y0 <= this.getColumns())) {
-				this.cellPanes.get(-y + x0).get(x + y0).setBackground(tempColor);
-			}
-			if ((-x + x0 >= 0) && (-x + x0 <= this.getRows()) && (-y + y0 >= 0) && (-y + y0 <= this.getColumns())) {
-				this.cellPanes.get(-x + x0).get(-y + y0).setBackground(tempColor);
-			}
-			if ((-y + x0 >= 0) && (-y + x0 <= this.getRows()) && (-x + y0 >= 0) && (-x + y0 <= this.getColumns())) {
-				this.cellPanes.get(-y + x0).get(-x + y0).setBackground(tempColor);
-			}
-			if ((x + x0 >= 0) && (x + x0 <= this.getRows()) && (-y + y0 >= 0) && (-y + y0 <= this.getColumns())) {
-				this.cellPanes.get(x + x0).get(-y + y0).setBackground(tempColor);
-			}
-			if ((y + x0 >= 0) && (y + x0 <= this.getRows()) && (-x + y0 >= 0) && (-x + y0 <= this.getColumns())) {
-				this.cellPanes.get(y + x0).get(-x + y0).setBackground(tempColor);
-			}
-			y++;
-			if (decisionOver2 <= 0) {
-				decisionOver2 += 2 * y + 1;
-			} else {
-				x--;
-				decisionOver2 += 2 * (y - x) + 1;
+		if (tempColor != null) {
+			int x = radius;
+			int y = 0;
+			int decisionOver2 = 1 - x;
+
+			while (y <= x) {
+				if ((x + x0 >= 0) && (x + x0 <= this.getRows()) && (y + y0 >= 0) && (y + y0 <= this.getColumns())) {
+					this.cellPanes.get(x + x0).get(y + y0).setBackground(tempColor);
+				}
+				if ((y + x0 >= 0) && (y + x0 <= this.getRows()) && (x + y0 >= 0) && (x + y0 <= this.getColumns())) {
+					this.cellPanes.get(y + x0).get(x + y0).setBackground(tempColor);
+				}
+				if ((-x + x0 >= 0) && (-x + x0 <= this.getRows()) && (y + y0 >= 0) && (y + y0 <= this.getColumns())) {
+					this.cellPanes.get(-x + x0).get(y + y0).setBackground(tempColor);
+				}
+				if ((-y + x0 >= 0) && (-y + x0 <= this.getRows()) && (x + y0 >= 0) && (x + y0 <= this.getColumns())) {
+					this.cellPanes.get(-y + x0).get(x + y0).setBackground(tempColor);
+				}
+				if ((-x + x0 >= 0) && (-x + x0 <= this.getRows()) && (-y + y0 >= 0) && (-y + y0 <= this.getColumns())) {
+					this.cellPanes.get(-x + x0).get(-y + y0).setBackground(tempColor);
+				}
+				if ((-y + x0 >= 0) && (-y + x0 <= this.getRows()) && (-x + y0 >= 0) && (-x + y0 <= this.getColumns())) {
+					this.cellPanes.get(-y + x0).get(-x + y0).setBackground(tempColor);
+				}
+				if ((x + x0 >= 0) && (x + x0 <= this.getRows()) && (-y + y0 >= 0) && (-y + y0 <= this.getColumns())) {
+					this.cellPanes.get(x + x0).get(-y + y0).setBackground(tempColor);
+				}
+				if ((y + x0 >= 0) && (y + x0 <= this.getRows()) && (-x + y0 >= 0) && (-x + y0 <= this.getColumns())) {
+					this.cellPanes.get(y + x0).get(-x + y0).setBackground(tempColor);
+				}
+				y++;
+				if (decisionOver2 <= 0) {
+					decisionOver2 += 2 * y + 1;
+				} else {
+					x--;
+					decisionOver2 += 2 * (y - x) + 1;
+				}
 			}
 		}
 	}

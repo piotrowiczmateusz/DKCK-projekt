@@ -1,6 +1,5 @@
 package dkck;
 
-
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Random;
@@ -109,15 +108,11 @@ public abstract class Item {
 		this.range = range;
 		this.id = id;
 
-		
-
-		
-
-		
-			MainWindow.grid.drawCircle(this.getPositionX(), this.getPositionY(), this.getRange(), null);
-			MainWindow.grid.drawCircle(this.getPositionX(), this.getPositionY(), this.getRange(), this);
-			MainWindow.grid.drawSquare(positionX, positionY, positionX, positionY, this);
-		
+		MainWindow.grid.drawCircle(this.getPositionX(), this.getPositionY(), this.getRange(), null);
+		MainWindow.grid.drawCircle(this.getPositionX(), this.getPositionY(), this.getRange(), this);
+		MainWindow.grid.drawSquare(positionX, positionY, positionX, positionY, this);
+		MainWindow.grid.repairSquares();
+		MainWindow.grid.repairCircles();
 
 		if (speed == 0) {
 			this.setTargetsArray(null);
