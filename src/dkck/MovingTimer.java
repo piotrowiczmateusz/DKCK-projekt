@@ -3,8 +3,6 @@ package dkck;
 import java.util.Timer;
 import java.util.TimerTask;
 
-import javax.swing.JLabel;
-
 import dkck.GUI.MainWindow;
 
 public class MovingTimer extends TimerTask {

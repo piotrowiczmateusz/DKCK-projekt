@@ -41,12 +41,12 @@ public class Sapper extends Item {
 	public void setSapperStatus(boolean sapperStatus) {
 		SapperStatus = sapperStatus;
 	}
-	
+
 	/**
 	 * CONSTRUCTORS
 	 */
-	
-	public Sapper(){
+
+	public Sapper() {
 		super(id);
 		id++;
 		this.setSapperStatus(true);
@@ -54,19 +54,18 @@ public class Sapper extends Item {
 		MainWindow.updateHPPanel("Sapper HP: " + this.getHealthPoints());
 		MainWindow.updatePositionPanel("Pozycja sapera: [" + this.getPositionX() + "][" + this.getPositionY() + "]");
 	}
-	
-	
+
 	/**
 	 * OTHER METHODS
 	 */
-	
+
 	public void hurt() {
 		if (this.getHealthPoints() > 0) {
 			this.setHealthPoints(this.getHealthPoints() - 1);
 			MainWindow.updateHPPanel("Saper HP: " + this.getHealthPoints());
 		}
 	}
-	
+
 	/**
 	 * Saper idzie na pozycjê bomby. Nastpênie na pozycje x,y i zmienia pozycjê
 	 * bomby.
@@ -113,10 +112,9 @@ public class Sapper extends Item {
 			// + "]. Choose different coordinates.");
 			// }
 			// }
-		} 
+		}
 
 	}
-
 
 	/**
 	 * Wywo³uje metodê 'go', sprawdza status bomby, losowo decyduje, czy bomba
@@ -130,10 +128,11 @@ public class Sapper extends Item {
 					tempBombArgument.disarm(this);
 					System.out.println("Number of disarmed bombs: " + this.getNumberOfDisarmedBombs());
 
-				} else
+				} else {
 					System.out.println("too far to disarm bomb!");
 					MainWindow.updateLog("Za daleko, ¿eby rozbroiæ bombê");
-			} 
-		} 
+				}
+			}
+		}
 	}
 }

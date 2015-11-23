@@ -9,46 +9,49 @@ public class Interpreter {
 	}
 
 	// metoda sprawdzajaca czy bomba istnieje
-	public Bomb checkBomb(int id) {
+	public Item findElementByID(int id, Class<?> typeOfItem) {
 
-		Bomb tempBomb = null;
+		for (int i = 1; i < MainWindow.itemsCollection.getItemsArray().size(); i++) {
+			Item tempItem = MainWindow.itemsCollection.getItemsArray().get(i);
 
-		if (MainWindow.itemsCollection.getItemsArray().get(id) != null) {
-			tempBomb = (Bomb) MainWindow.itemsCollection.getItemsArray().get(id);
-		} else {
-			MainWindow.updateLog("Bomba nie istnieje");
+			if ((typeOfItem.isInstance(tempItem)) && (typeOfItem.equals(tempItem.getClass()) && tempItem.getId() == id)) {
+				return tempItem;
+			}
 		}
+		MainWindow.updateLog("Item nie istnieje");
 
-		return tempBomb;
+		return null;
 	}
 
 	// metoda zwracająca konkretną bombę w zależności od wejścia
 	public Bomb getBomb(String input) {
 
-		Bomb tempBomb = null;
+		Class<?> bombClass = Bomb.class;
+
+		Item tempBomb = null;
 
 		if (input.matches("|(.*)pierwsza(.*)|(.*)pierwszą(.*)|(.*)pierwszej(.*)|(.*)jeden(.*)")) {
-			tempBomb = checkBomb(1);
+			tempBomb = findElementByID(0, bombClass);
 		}
 
 		else if (input.matches("|(.*)druga(.*)|(.*)drugą(.*)|(.*)drugiej(.*)|(.*)dwa(.*)")) {
-			tempBomb = checkBomb(2);
+			tempBomb = findElementByID(1, bombClass);
 		}
 
 		else if (input.matches("|(.*)trzecia(.*)|(.*)trzecią(.*)|(.*)trzeciej(.*)|(.*)trzy(.*)")) {
-			tempBomb = checkBomb(3);
+			tempBomb = findElementByID(2, bombClass);
 		}
 
 		else if (input.matches("|(.*)czwarta(.*)|(.*)czwartą(.*)|(.*)czwartej(.*)|(.*)cztery(.*)")) {
-			tempBomb = checkBomb(4);
+			tempBomb = findElementByID(3, bombClass);
 		}
 
 		else if (input.matches("|(.*)piąta(.*)|(.*)piątą(.*)|(.*)piątej(.*)|(.*)pięć(.*)")) {
-			tempBomb = checkBomb(5);
+			tempBomb = findElementByID(4, bombClass);
 		}
 
 		else if (input.matches("|(.*)szósta(.*)|(.*)szóstą(.*)|(.*)szóstej(.*)|(.*)sześć(.*)")) {
-			tempBomb = checkBomb(6);
+			tempBomb = findElementByID(5, bombClass);
 		}
 
 		else if (input.matches("|(.*)najbliższą(.*)|(.*)najbliższej(.*)|(.*)najbliżej(.*)|(.*)blisko(.*)")) {
@@ -89,7 +92,7 @@ public class Interpreter {
 			MainWindow.updateLog("Sprecyzuj swoje polecenie.");
 		}
 
-		return tempBomb;
+		return (Bomb) tempBomb;
 	}
 
 	public void interpret(String input) throws InterruptedException {
