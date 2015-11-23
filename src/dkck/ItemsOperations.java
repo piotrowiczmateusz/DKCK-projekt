@@ -40,12 +40,13 @@ public class ItemsOperations {
 		}
 		this.getItemsArray().remove(index);
 		MainWindow.grid.drawSquare(tempItem.getPositionX(), tempItem.getPositionY(), tempItem.getPositionX(),
-				tempItem.getPositionY(), MainWindow.cellColor);
-		//MainWindow.grid.repairSquare(tempItem.getPositionX(), tempItem.getPositionY());
+				tempItem.getPositionY(), null);
+		// MainWindow.grid.repairSquare(tempItem.getPositionX(),
+		// tempItem.getPositionY());
 
-		MainWindow.grid.drawCircle(tempItem.getPositionX(), tempItem.getPositionY(), tempItem.getRange(),
-				MainWindow.cellColor);
-		//MainWindow.grid.repairCircle(tempItem.getPositionX(), tempItem.getPositionY(), tempItem.getRange());
+		MainWindow.grid.drawCircle(tempItem.getPositionX(), tempItem.getPositionY(), tempItem.getRange(), null);
+		// MainWindow.grid.repairCircle(tempItem.getPositionX(),
+		// tempItem.getPositionY(), tempItem.getRange());
 		MainWindow.grid.repairSquares();
 		MainWindow.grid.repairCircles();
 	}

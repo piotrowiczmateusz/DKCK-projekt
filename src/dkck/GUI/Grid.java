@@ -79,7 +79,19 @@ public class Grid extends JPanel {
 		}
 	}
 
-	public void drawSquare(int prevX, int prevY, int x, int y, Color color) {
+	Color chooseObjectColor(Item itemReference) {
+
+		if (itemReference instanceof Rocket) {
+			return MainWindow.rocketColor;
+		} else if (itemReference instanceof Bomb && !(itemReference instanceof Rocket)) {
+			return MainWindow.bombColor;
+		} else if (itemReference instanceof Sapper) {
+			return MainWindow.sapperColor;
+		}
+		return MainWindow.cellColor;
+	}
+
+	public void drawSquare(int prevX, int prevY, int x, int y, Item itemReference) {
 		if (prevX > this.getRows())
 			prevX = this.getRows();
 		if (x > this.getRows())
@@ -89,10 +101,13 @@ public class Grid extends JPanel {
 		if (y > this.getColumns())
 			y = this.getColumns();
 
+		Color tempColor = chooseObjectColor(itemReference);
+
 		this.cellPanes.get(prevX).get(prevY).setBackground(MainWindow.cellColor);
-		this.cellPanes.get(x).get(y).setBackground(color);
+		this.cellPanes.get(x).get(y).setBackground(tempColor);
 		MainWindow.grid.cellPanes.get(prevX).get(prevY).label.setText("");
-		MainWindow.grid.cellPanes.get(x).get(y).label.setText("2");
+		if (itemReference != null)
+			MainWindow.grid.cellPanes.get(x).get(y).label.setText(Integer.toString(itemReference.getId()));
 	}
 
 	/*
@@ -117,35 +132,37 @@ public class Grid extends JPanel {
 
 	// funkcja rysowania zakresów obiektów
 
-	public void drawCircle(int x0, int y0, int radius, Color color) {
+	public void drawCircle(int x0, int y0, int radius, Item itemReference) {
 		int x = radius;
 		int y = 0;
 		int decisionOver2 = 1 - x;
 
+		Color tempColor = chooseObjectColor(itemReference);
+
 		while (y <= x) {
 			if ((x + x0 >= 0) && (x + x0 <= this.getRows()) && (y + y0 >= 0) && (y + y0 <= this.getColumns())) {
-				this.cellPanes.get(x + x0).get(y + y0).setBackground(color);
+				this.cellPanes.get(x + x0).get(y + y0).setBackground(tempColor);
 			}
 			if ((y + x0 >= 0) && (y + x0 <= this.getRows()) && (x + y0 >= 0) && (x + y0 <= this.getColumns())) {
-				this.cellPanes.get(y + x0).get(x + y0).setBackground(color);
+				this.cellPanes.get(y + x0).get(x + y0).setBackground(tempColor);
 			}
 			if ((-x + x0 >= 0) && (-x + x0 <= this.getRows()) && (y + y0 >= 0) && (y + y0 <= this.getColumns())) {
-				this.cellPanes.get(-x + x0).get(y + y0).setBackground(color);
+				this.cellPanes.get(-x + x0).get(y + y0).setBackground(tempColor);
 			}
 			if ((-y + x0 >= 0) && (-y + x0 <= this.getRows()) && (x + y0 >= 0) && (x + y0 <= this.getColumns())) {
-				this.cellPanes.get(-y + x0).get(x + y0).setBackground(color);
+				this.cellPanes.get(-y + x0).get(x + y0).setBackground(tempColor);
 			}
 			if ((-x + x0 >= 0) && (-x + x0 <= this.getRows()) && (-y + y0 >= 0) && (-y + y0 <= this.getColumns())) {
-				this.cellPanes.get(-x + x0).get(-y + y0).setBackground(color);
+				this.cellPanes.get(-x + x0).get(-y + y0).setBackground(tempColor);
 			}
 			if ((-y + x0 >= 0) && (-y + x0 <= this.getRows()) && (-x + y0 >= 0) && (-x + y0 <= this.getColumns())) {
-				this.cellPanes.get(-y + x0).get(-x + y0).setBackground(color);
+				this.cellPanes.get(-y + x0).get(-x + y0).setBackground(tempColor);
 			}
 			if ((x + x0 >= 0) && (x + x0 <= this.getRows()) && (-y + y0 >= 0) && (-y + y0 <= this.getColumns())) {
-				this.cellPanes.get(x + x0).get(-y + y0).setBackground(color);
+				this.cellPanes.get(x + x0).get(-y + y0).setBackground(tempColor);
 			}
 			if ((y + x0 >= 0) && (y + x0 <= this.getRows()) && (-x + y0 >= 0) && (-x + y0 <= this.getColumns())) {
-				this.cellPanes.get(y + x0).get(-x + y0).setBackground(color);
+				this.cellPanes.get(y + x0).get(-x + y0).setBackground(tempColor);
 			}
 			y++;
 			if (decisionOver2 <= 0) {
@@ -181,17 +198,7 @@ public class Grid extends JPanel {
 		for (int i = 0; i < MainWindow.itemsCollection.getItemsArray().size(); i++) {
 			Item tempItem = MainWindow.itemsCollection.getItemsArray().get(i);
 
-			if (tempItem instanceof Bomb && (tempItem instanceof Rocket == false)) {
-				MainWindow.grid.drawCircle(tempItem.getPositionX(), tempItem.getPositionY(), tempItem.getRange(),
-						MainWindow.bombColor);
-
-			} else if (tempItem instanceof Sapper) {
-				MainWindow.grid.drawCircle(tempItem.getPositionX(), tempItem.getPositionY(), tempItem.getRange(),
-						MainWindow.sapperColor);
-			} else if (tempItem instanceof Rocket) {
-				MainWindow.grid.drawCircle(tempItem.getPositionX(), tempItem.getPositionY(), tempItem.getRange(),
-						MainWindow.rocketColor);
-			}
+			MainWindow.grid.drawCircle(tempItem.getPositionX(), tempItem.getPositionY(), tempItem.getRange(), tempItem);
 		}
 	}
 
@@ -199,16 +206,8 @@ public class Grid extends JPanel {
 		for (int i = 0; i < MainWindow.itemsCollection.getItemsArray().size(); i++) {
 			Item tempItem = MainWindow.itemsCollection.getItemsArray().get(i);
 
-			if (tempItem instanceof Bomb && (tempItem instanceof Rocket == false)) {
-				MainWindow.grid.drawSquare(tempItem.getPositionX(), tempItem.getPositionY(), tempItem.getPositionX(),
-						tempItem.getPositionY(), MainWindow.bombColor);
-			} else if (tempItem instanceof Sapper) {
-				MainWindow.grid.drawSquare(tempItem.getPositionX(), tempItem.getPositionY(), tempItem.getPositionX(),
-						tempItem.getPositionY(), MainWindow.sapperColor);
-			} else if (tempItem instanceof Rocket) {
-				MainWindow.grid.drawSquare(tempItem.getPositionX(), tempItem.getPositionY(), tempItem.getPositionX(),
-						tempItem.getPositionY(), MainWindow.rocketColor);
-			}
+			MainWindow.grid.drawSquare(tempItem.getPositionX(), tempItem.getPositionY(), tempItem.getPositionX(),
+					tempItem.getPositionY(), tempItem);
 		}
 	}
 

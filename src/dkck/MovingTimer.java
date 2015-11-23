@@ -1,6 +1,5 @@
 package dkck;
 
-import java.awt.Color;
 import java.util.Timer;
 import java.util.TimerTask;
 
@@ -140,38 +139,28 @@ public class MovingTimer extends TimerTask {
 
 						MainWindow.grid.drawCircle(initItemPositionX, initItemPositionY, tempItem.getRange(), null);
 						MainWindow.grid.drawCircle(tempItem.getPositionX(), tempItem.getPositionY(),
-								tempItem.getRange(), MainWindow.bombColor);
+								tempItem.getRange(), tempItem);
 						MainWindow.grid.drawSquare(initItemPositionX, initItemPositionY, tempItem.getPositionX(),
-								tempItem.getPositionY(), MainWindow.bombColor);
+								tempItem.getPositionY(), tempItem);
 						MainWindow.grid.cellPanes.get(tempItem.getPositionX()).get(tempItem.getPositionY()).label
 								.setText(tempItem.getId() + 1 + "");
 
 					}
 
 					// drawing moving object
-					Color tempColor = null;
 
-					if (this.getItemReference() instanceof Sapper) {
-						tempColor = MainWindow.sapperColor;
-					} else if (this.getItemReference() instanceof Rocket) {
-						tempColor = MainWindow.rocketColor;
-					}
+					MainWindow.grid.drawCircle(initItemPositionX, initItemPositionY, this.getItemReference().getRange(),
+							null);
+					MainWindow.grid.drawCircle(this.getItemReference().getPositionX(),
+							this.getItemReference().getPositionY(), this.getItemReference().getRange(), tempItem);
+					MainWindow.grid.drawSquare(initItemPositionX, initItemPositionY,
+							this.getItemReference().getPositionX(), this.getItemReference().getPositionY(), tempItem);
 
-					if (tempColor != null) {
-
-						MainWindow.grid.drawCircle(initItemPositionX, initItemPositionY,
-								this.getItemReference().getRange(), null);
-						MainWindow.grid.drawCircle(this.getItemReference().getPositionX(),
-								this.getItemReference().getPositionY(), this.getItemReference().getRange(),
-								tempColor);
-						MainWindow.grid.drawSquare(initItemPositionX, initItemPositionY,
-								this.getItemReference().getPositionX(), this.getItemReference().getPositionY(),
-								tempColor);
-					}
-
-//					MainWindow.grid.repairCircle(this.getItemReference().getPositionX(),
-//							this.getItemReference().getPositionY(), this.getItemReference().getRange());
-//					MainWindow.grid.repairSquare(initItemPositionX, initItemPositionY);
+					// MainWindow.grid.repairCircle(this.getItemReference().getPositionX(),
+					// this.getItemReference().getPositionY(),
+					// this.getItemReference().getRange());
+					// MainWindow.grid.repairSquare(initItemPositionX,
+					// initItemPositionY);
 					MainWindow.grid.repairCircles();
 					MainWindow.grid.repairSquares();
 				} else

@@ -1,6 +1,6 @@
 package dkck;
 
-import java.awt.Color;
+
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Random;
@@ -109,21 +109,15 @@ public abstract class Item {
 		this.range = range;
 		this.id = id;
 
-		Color tempColor = null;
+		
 
-		if (this instanceof Rocket) {
-			tempColor = MainWindow.rocketColor;
-		} else if (this instanceof Bomb) {
-			tempColor = MainWindow.bombColor;
-		} else if (this instanceof Sapper) {
-			tempColor = MainWindow.sapperColor;
-		}
+		
 
-		if (tempColor != null) {
+		
 			MainWindow.grid.drawCircle(this.getPositionX(), this.getPositionY(), this.getRange(), null);
-			MainWindow.grid.drawCircle(this.getPositionX(), this.getPositionY(), this.getRange(), tempColor);
-			MainWindow.grid.drawSquare(positionX, positionY, positionX, positionY, tempColor);
-		}
+			MainWindow.grid.drawCircle(this.getPositionX(), this.getPositionY(), this.getRange(), this);
+			MainWindow.grid.drawSquare(positionX, positionY, positionX, positionY, this);
+		
 
 		if (speed == 0) {
 			this.setTargetsArray(null);
