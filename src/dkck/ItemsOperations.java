@@ -1,6 +1,5 @@
 package dkck;
 
-
 import java.util.ArrayList;
 import java.util.List;
 
@@ -42,13 +41,13 @@ public class ItemsOperations {
 		this.getItemsArray().remove(index);
 		MainWindow.grid.drawSquare(tempItem.getPositionX(), tempItem.getPositionY(), tempItem.getPositionX(),
 				tempItem.getPositionY(), MainWindow.cellColor);
-		MainWindow.grid.repairSquare(tempItem.getPositionX(), tempItem.getPositionY());
+		//MainWindow.grid.repairSquare(tempItem.getPositionX(), tempItem.getPositionY());
 
 		MainWindow.grid.drawCircle(tempItem.getPositionX(), tempItem.getPositionY(), tempItem.getRange(),
 				MainWindow.cellColor);
-		MainWindow.grid.repairCircle(tempItem.getPositionX(), tempItem.getPositionY(), tempItem.getRange());
-		MainWindow.grid.repairSquare2();
-		MainWindow.grid.repairCircle2();
+		//MainWindow.grid.repairCircle(tempItem.getPositionX(), tempItem.getPositionY(), tempItem.getRange());
+		MainWindow.grid.repairSquares();
+		MainWindow.grid.repairCircles();
 	}
 
 	protected void createBombs(int numberOfBombs) {
@@ -115,10 +114,10 @@ public class ItemsOperations {
 			itemsArray.add(new Rocket(itemsArray.get(0)));
 		}
 
-	/*	for (int i = 0; i < 2000; ++i) {
-			 itemsArray.add(new Rocket(itemsArray.get(0)));
+		for (int i = 0; i < 2000; ++i) {
+			itemsArray.add(new Rocket(itemsArray.get(0)));
 			dropItem(itemsArray.size() - 1);
-		}*/
+		}
 	}
 
 	public void actions() throws InterruptedException {

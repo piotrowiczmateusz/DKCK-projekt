@@ -14,10 +14,12 @@ public class Interpreter {
 		for (int i = 1; i < MainWindow.itemsCollection.getItemsArray().size(); i++) {
 			Item tempItem = MainWindow.itemsCollection.getItemsArray().get(i);
 
-			if ((typeOfItem.isInstance(tempItem)) && (typeOfItem.equals(tempItem.getClass()) && tempItem.getId() == id)) {
+			if ((typeOfItem.isInstance(tempItem))
+					&& (typeOfItem.equals(tempItem.getClass()) && tempItem.getId() == id)) {
 				return tempItem;
 			}
 		}
+		
 		MainWindow.updateLog("Item nie istnieje");
 
 		return null;

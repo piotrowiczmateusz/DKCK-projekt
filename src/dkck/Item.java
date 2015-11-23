@@ -119,9 +119,11 @@ public abstract class Item {
 			tempColor = MainWindow.sapperColor;
 		}
 
-		MainWindow.grid.drawCircle(this.getPositionX(), this.getPositionY(), this.getRange(), null);
-		MainWindow.grid.drawCircle(this.getPositionX(), this.getPositionY(), this.getRange(), tempColor);
-		MainWindow.grid.drawSquare(positionX, positionY, positionX, positionY, tempColor);
+		if (tempColor != null) {
+			MainWindow.grid.drawCircle(this.getPositionX(), this.getPositionY(), this.getRange(), null);
+			MainWindow.grid.drawCircle(this.getPositionX(), this.getPositionY(), this.getRange(), tempColor);
+			MainWindow.grid.drawSquare(positionX, positionY, positionX, positionY, tempColor);
+		}
 
 		if (speed == 0) {
 			this.setTargetsArray(null);

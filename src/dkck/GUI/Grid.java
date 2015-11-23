@@ -95,26 +95,25 @@ public class Grid extends JPanel {
 		MainWindow.grid.cellPanes.get(x).get(y).label.setText("2");
 	}
 
-	public void repairSquare(int positionX, int positionY) {
-		for (int i = 0; i < MainWindow.itemsCollection.getItemsArray().size(); i++) {
-			Item tempItem = MainWindow.itemsCollection.getItemsArray().get(i);
-
-			if ((tempItem.getPositionX() == positionX) && (tempItem.getPositionY() == positionY)) {
-				if (tempItem instanceof Bomb && (tempItem instanceof Rocket == false)) {
-					MainWindow.grid.drawSquare(tempItem.getPositionX(), tempItem.getPositionY(),
-							tempItem.getPositionX(), tempItem.getPositionY(), MainWindow.bombColor);
-
-				} else if (tempItem instanceof Sapper) {
-					MainWindow.grid.drawSquare(positionX, positionY, tempItem.getPositionX(), tempItem.getPositionY(),
-							MainWindow.sapperColor);
-
-				} else if (tempItem instanceof Rocket) {
-					MainWindow.grid.drawSquare(positionX, positionY, tempItem.getPositionX(), tempItem.getPositionY(),
-							MainWindow.rocketColor);
-				}
-			}
-		}
-	}
+	/*
+	 * public void repairSquare(int positionX, int positionY) { for (int i = 0;
+	 * i < MainWindow.itemsCollection.getItemsArray().size(); i++) { Item
+	 * tempItem = MainWindow.itemsCollection.getItemsArray().get(i);
+	 * 
+	 * if ((tempItem.getPositionX() == positionX) && (tempItem.getPositionY() ==
+	 * positionY)) { if (tempItem instanceof Bomb && (tempItem instanceof Rocket
+	 * == false)) { MainWindow.grid.drawSquare(tempItem.getPositionX(),
+	 * tempItem.getPositionY(), tempItem.getPositionX(),
+	 * tempItem.getPositionY(), MainWindow.bombColor);
+	 * 
+	 * } else if (tempItem instanceof Sapper) {
+	 * MainWindow.grid.drawSquare(positionX, positionY, tempItem.getPositionX(),
+	 * tempItem.getPositionY(), MainWindow.sapperColor);
+	 * 
+	 * } else if (tempItem instanceof Rocket) {
+	 * MainWindow.grid.drawSquare(positionX, positionY, tempItem.getPositionX(),
+	 * tempItem.getPositionY(), MainWindow.rocketColor); } } } }
+	 */
 
 	// funkcja rysowania zakresów obiektów
 
@@ -158,27 +157,27 @@ public class Grid extends JPanel {
 		}
 	}
 
-	public void repairCircle(int x0, int y0, int radius) {
-		for (int i = 0; i < MainWindow.itemsCollection.getItemsArray().size(); i++) {
-			Item tempItem = MainWindow.itemsCollection.getItemsArray().get(i);
+	/*
+	 * public void repairCircle(int x0, int y0, int radius) { for (int i = 0; i
+	 * < MainWindow.itemsCollection.getItemsArray().size(); i++) { Item tempItem
+	 * = MainWindow.itemsCollection.getItemsArray().get(i);
+	 * 
+	 * if ((tempItem.getPositionX() == x0) && (tempItem.getPositionY() == y0) &&
+	 * (tempItem.getRange() == radius)) { if (tempItem instanceof Bomb &&
+	 * (tempItem instanceof Rocket == false)) {
+	 * MainWindow.grid.drawCircle(tempItem.getPositionX(),
+	 * tempItem.getPositionY(), tempItem.getRange(), MainWindow.bombColor);
+	 * 
+	 * } else if (tempItem instanceof Sapper) {
+	 * MainWindow.grid.drawCircle(tempItem.getPositionX(),
+	 * tempItem.getPositionY(), tempItem.getRange(), MainWindow.sapperColor); }
+	 * else if (tempItem instanceof Rocket) {
+	 * MainWindow.grid.drawCircle(tempItem.getPositionX(),
+	 * tempItem.getPositionY(), tempItem.getRange(), MainWindow.rocketColor); }
+	 * } } }
+	 */
 
-			if ((tempItem.getPositionX() == x0) && (tempItem.getPositionY() == y0) && (tempItem.getRange() == radius)) {
-				if (tempItem instanceof Bomb && (tempItem instanceof Rocket == false)) {
-					MainWindow.grid.drawCircle(tempItem.getPositionX(), tempItem.getPositionY(), tempItem.getRange(),
-							MainWindow.bombColor);
-
-				} else if (tempItem instanceof Sapper) {
-					MainWindow.grid.drawCircle(tempItem.getPositionX(), tempItem.getPositionY(), tempItem.getRange(),
-							MainWindow.sapperColor);
-				} else if (tempItem instanceof Rocket) {
-					MainWindow.grid.drawCircle(tempItem.getPositionX(), tempItem.getPositionY(), tempItem.getRange(),
-							MainWindow.rocketColor);
-				}
-			}
-		}
-	}
-
-	public void repairCircle2() {
+	public void repairCircles() {
 		for (int i = 0; i < MainWindow.itemsCollection.getItemsArray().size(); i++) {
 			Item tempItem = MainWindow.itemsCollection.getItemsArray().get(i);
 
@@ -196,7 +195,7 @@ public class Grid extends JPanel {
 		}
 	}
 
-	public void repairSquare2() {
+	public void repairSquares() {
 		for (int i = 0; i < MainWindow.itemsCollection.getItemsArray().size(); i++) {
 			Item tempItem = MainWindow.itemsCollection.getItemsArray().get(i);
 
