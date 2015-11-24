@@ -36,7 +36,7 @@ public class ItemsOperations {
 
 	private void dropItem(int index) {
 		Item tempItem = this.getItemsArray().get(index);
-		
+
 		if (tempItem.getMovingTimer() != null) {
 			((Bomb) tempItem).getMovingTimer().cancel();
 			((Bomb) tempItem).getMovingTimer().setItemReference(null);
@@ -133,8 +133,10 @@ public class ItemsOperations {
 		for (int j = 0; j < 3; ++j) {
 			Thread.sleep(1000);
 			for (int i = 0; i < 2; ++i) {
-				Thread.sleep(300);
+				// Thread.sleep(300);
 				itemsArray.add(new Rocket(itemsArray.get(0)));
+				// dropItem(findItem(this.getItemsArray().get(itemsArray.size()
+				// - 1)));
 				// Thread.sleep(300);
 
 				// dropItem(findItem(this.getItemsArray().get(itemsArray.size()
