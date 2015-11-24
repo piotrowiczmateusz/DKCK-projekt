@@ -30,8 +30,18 @@ public class ItemsOperations {
 		this.itemsArray = new ArrayList<Item>();
 	}
 
+	private int findItem(Item itemReference) {
+		return this.getItemsArray().indexOf(itemReference);
+	}
+
 	private void dropItem(int index) {
 		Item tempItem = this.getItemsArray().get(index);
+		
+		if (tempItem.getMovingTimer() != null) {
+			((Bomb) tempItem).getMovingTimer().cancel();
+			((Bomb) tempItem).getMovingTimer().setItemReference(null);
+			((Bomb) tempItem).setMovingTimer(null);
+		}
 
 		if (tempItem instanceof Bomb && ((Bomb) tempItem).getBombTimer() != null) {
 			((Bomb) tempItem).getBombTimer().cancel();
@@ -105,6 +115,11 @@ public class ItemsOperations {
 										// zawsze dodawnay jako pierwszy, ułatwi
 										// to pracę
 
+		itemsArray.add(new Sapper());
+		itemsArray.add(new Sapper());
+
+		itemsArray.add(new Sapper());
+
 		// itemsArray.add(new Sapper());
 		itemsArray.add(new Bomb());
 		itemsArray.add(new Bomb());
@@ -115,10 +130,47 @@ public class ItemsOperations {
 			itemsArray.add(new Rocket(itemsArray.get(0)));
 		}
 
-		for (int i = 0; i < 2000; ++i) {
-			itemsArray.add(new Rocket(itemsArray.get(0)));
-			dropItem(itemsArray.size() - 1);
+		for (int j = 0; j < 3; ++j) {
+			Thread.sleep(1000);
+			for (int i = 0; i < 2; ++i) {
+				Thread.sleep(300);
+				itemsArray.add(new Rocket(itemsArray.get(0)));
+				// Thread.sleep(300);
+
+				// dropItem(findItem(this.getItemsArray().get(itemsArray.size()
+				// - 1)));
+
+				// dropItem(itemsArray.size() - 1);
+			}
 		}
+
+		for (int j = 0; j < 3; ++j) {
+			Thread.sleep(1000);
+			for (int i = 0; i < 2; ++i) {
+				Thread.sleep(300);
+
+				// Thread.sleep(300);
+
+				dropItem(findItem(this.getItemsArray().get(itemsArray.size() - 1)));
+
+				// dropItem(itemsArray.size() - 1);
+			}
+		}
+
+		// for (int j = 0; j < 5; ++j) {
+		// Thread.sleep(300);
+		// for (int i = 0; i < 3; ++i) {
+		// // Thread.sleep(300);
+		// //itemsArray.add(new Rocket(itemsArray.get(0)));
+		// Thread.sleep(300);
+		// dropItem(itemsArray.size() - 1);
+		// }
+		// }
+		// while(true)
+		// {
+		// MainWindow.grid.repairCircles();
+		// MainWindow.grid.repairSquares();
+		// }
 	}
 
 	public void actions() throws InterruptedException {
