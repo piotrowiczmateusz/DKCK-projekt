@@ -22,7 +22,9 @@ public class MainWindow extends JFrame {
 
 	public static final Color cellColor = Color.WHITE;
 
-	public static final Color bombColor = Color.RED;
+	public static final Color bombActiveColor = Color.RED;
+	
+	public static final Color bombDisableColor = Color.PINK;
 
 	public static final Color sapperColor = Color.BLUE;
 

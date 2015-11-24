@@ -87,7 +87,10 @@ public class Grid extends JPanel {
 		} else if (itemReference instanceof Rocket) {
 			return MainWindow.rocketColor;
 		} else if (itemReference instanceof Bomb && !(itemReference instanceof Rocket)) {
-			return MainWindow.bombColor;
+			if (((Bomb) itemReference).getBombStatus() == 1)
+				return MainWindow.bombActiveColor;
+			else
+				return MainWindow.bombDisableColor;
 		} else if (itemReference instanceof Sapper) {
 			return MainWindow.sapperColor;
 		}
