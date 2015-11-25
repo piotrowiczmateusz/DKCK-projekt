@@ -3,8 +3,6 @@ package dkck;
 import java.util.Timer;
 import java.util.TimerTask;
 
-import dkck.GUI.Grid;
-
 public class BombTimer extends TimerTask {
 
 	public Item itemReference;

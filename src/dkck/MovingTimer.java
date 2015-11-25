@@ -83,7 +83,7 @@ public class MovingTimer extends TimerTask {
 						&& this.getItemReference().getTargetsArray().get(0).getPositionY() == this.getItemReference()
 								.getPositionY()) {
 
-					MainWindow.updateLog("Saper dotar³ do celu");
+					MainWindow.updateLog("Obiekt dotar³ do celu");
 
 					if (this.getItemReference() instanceof Rocket)
 						((Rocket) this.getItemReference()).explode();
