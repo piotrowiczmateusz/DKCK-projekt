@@ -50,16 +50,18 @@ public class ItemsOperations {
 			((Bomb) tempItem).setBombTimer(null);
 		}
 		MainWindow.itemsCollection.getItemsArray().remove(index);
-		MainWindow.grid.drawSquare(tempItem.getPositionX(), tempItem.getPositionY(), tempItem.getPositionX(),
-				tempItem.getPositionY(), null);
+
 		// MainWindow.grid.repairSquare(tempItem.getPositionX(),
 		// tempItem.getPositionY());
 
 		MainWindow.grid.drawCircle(tempItem.getPositionX(), tempItem.getPositionY(), tempItem.getRange(), null);
+		MainWindow.grid.drawSquare(tempItem.getPositionX(), tempItem.getPositionY(), tempItem.getPositionX(),
+				tempItem.getPositionY(), null);
 		// MainWindow.grid.repairCircle(tempItem.getPositionX(),
 		// tempItem.getPositionY(), tempItem.getRange());
-		Grid.repairSquares();
+		
 		Grid.repairCircles();
+		Grid.repairSquares();
 	}
 
 	protected void createBombs(int numberOfBombs) {
@@ -132,7 +134,7 @@ public class ItemsOperations {
 		}
 
 		for (int j = 0; j < 3; ++j) {
-			//Thread.sleep(1000);
+			// Thread.sleep(1000);
 			for (int i = 0; i < 2; ++i) {
 				// Thread.sleep(300);
 				itemsArray.add(new Rocket(itemsArray.get(0)));
@@ -148,13 +150,14 @@ public class ItemsOperations {
 		}
 
 		for (int j = 0; j < 3; ++j) {
-			//Thread.sleep(1000);
+			// Thread.sleep(1000);
 			for (int i = 0; i < 2; ++i) {
-				//Thread.sleep(300);
+				// Thread.sleep(300);
 
 				// Thread.sleep(300);
 
-				//dropItem(findItem(this.getItemsArray().get(itemsArray.size() - 1)));
+				// dropItem(findItem(this.getItemsArray().get(itemsArray.size()
+				// - 1)));
 
 				// dropItem(itemsArray.size() - 1);
 			}

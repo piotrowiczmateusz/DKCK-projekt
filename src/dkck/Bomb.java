@@ -150,8 +150,9 @@ public class Bomb extends Item {
 			this.setBombStatus(0);
 		}
 
-		Grid.repairCircles();
+		
 		Grid.repairSquares();
+		Grid.repairCircles();
 
 		if (this instanceof Bomb && !(this instanceof Rocket)) {
 			timerLog.setText("Bomba nr: " + this.getId() + " wybuch³a");

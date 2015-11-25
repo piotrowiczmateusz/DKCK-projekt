@@ -87,7 +87,7 @@ public abstract class Item {
 
 		int positionY = 0;
 
-		if (this instanceof Point == false) {
+		if (!(this instanceof Point)) {
 			positionX = generator.nextInt(MainWindow.gridRows);
 
 			positionY = generator.nextInt(MainWindow.gridColumns);
@@ -104,10 +104,12 @@ public abstract class Item {
 		this.id = id;
 
 		MainWindow.grid.drawCircle(this.getPositionX(), this.getPositionY(), this.getRange(), null);
+		MainWindow.grid.drawSquare(this.getPositionX(), this.getPositionY(),this.getPositionX(), this.getPositionY(), null);
 		MainWindow.grid.drawCircle(this.getPositionX(), this.getPositionY(), this.getRange(), this);
-		MainWindow.grid.drawSquare(positionX, positionY, positionX, positionY, this);
-		Grid.repairSquares();
+		MainWindow.grid.drawSquare(this.getPositionX(), this.getPositionY(),this.getPositionX(), this.getPositionY(), this);
+		
 		Grid.repairCircles();
+		Grid.repairSquares();
 
 		this.setTargetsArray(null);
 		this.setMovingTimer(null);
