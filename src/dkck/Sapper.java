@@ -1,5 +1,8 @@
 package dkck;
 
+import java.util.LinkedList;
+import java.util.Random;
+
 import dkck.GUI.MainWindow;
 
 public class Sapper extends Item {
@@ -53,6 +56,14 @@ public class Sapper extends Item {
 		this.setHealthPoints(20);
 		MainWindow.updateHPPanel("Sapper HP: " + this.getHealthPoints());
 		MainWindow.updatePositionPanel("Pozycja sapera: [" + this.getPositionX() + "][" + this.getPositionY() + "]");
+
+		Random generator = new Random();
+
+		int speed = 70 + generator.nextInt(50);
+
+		this.setTargetsArray(new LinkedList<Item>());
+		this.setMovingTimer(new MovingTimer(this, speed));
+
 	}
 
 	/**

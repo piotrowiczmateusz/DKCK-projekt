@@ -1,6 +1,5 @@
 package dkck;
 
-import java.util.LinkedList;
 import java.util.List;
 import java.util.Random;
 
@@ -94,15 +93,10 @@ public abstract class Item {
 			positionY = generator.nextInt(MainWindow.gridColumns);
 		}
 
-		int range = 2 + generator.nextInt(10);
+		int range = 0;
 
-		int speed = 0;
-
-		if (this instanceof Sapper)
-			speed = 70 + generator.nextInt(50);
-
-		if (this instanceof Rocket)
-			speed = 25 + generator.nextInt(25);
+		if (!(this instanceof Point))
+			range = 2 + generator.nextInt(10);
 
 		this.positionX = positionX;
 		this.positionY = positionY;
@@ -115,18 +109,15 @@ public abstract class Item {
 		Grid.repairSquares();
 		Grid.repairCircles();
 
-		if (speed == 0) {
-			this.setTargetsArray(null);
-			this.setMovingTimer(null);
-		} else {
-			this.setTargetsArray(new LinkedList<Item>());
-			this.setMovingTimer(new MovingTimer(this, speed));
-		}
+		this.setTargetsArray(null);
+		this.setMovingTimer(null);
 
 	}
 
 	protected void addTaskToMove(Item targetToReach, Item itemToMove) throws InterruptedException {
-		if (this.getTargetsArray() != null && this.getMovingTimer() != null) {
+		if (this.getTargetsArray() != null /*
+											 * && this.getMovingTimer() != null
+											 */) {
 			this.getTargetsArray().add(targetToReach);
 			this.getTargetsArray().add(itemToMove);
 		}
