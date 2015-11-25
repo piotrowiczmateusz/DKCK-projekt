@@ -62,7 +62,8 @@ public class Sapper extends Item {
 		int speed = 70 + generator.nextInt(50);
 
 		this.setTargetsArray(new LinkedList<Item>());
-		this.setMovingTimer(new MovingTimer(this, speed));
+		this.setMovingTimer(new MovingTimer(this));
+		this.getMovingTimer().getTimer1().schedule(getMovingTimer(), 0, speed);
 
 	}
 

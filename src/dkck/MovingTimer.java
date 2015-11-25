@@ -29,11 +29,11 @@ public class MovingTimer extends TimerTask {
 		this.timer1 = timer1;
 	}
 
-	public MovingTimer(Item itemReference, int miliseconds) {
+	public MovingTimer(Item itemReference) {
 		super();
 		this.setItemReference(itemReference);
 		this.setTimer1(new Timer());
-		this.getTimer1().schedule(this, 0, miliseconds);
+		
 	}
 
 	public void run() {

@@ -115,9 +115,7 @@ public abstract class Item {
 	}
 
 	protected void addTaskToMove(Item targetToReach, Item itemToMove) throws InterruptedException {
-		if (this.getTargetsArray() != null /*
-											 * && this.getMovingTimer() != null
-											 */) {
+		if (this.getTargetsArray() != null && this.getMovingTimer() != null) {
 			this.getTargetsArray().add(targetToReach);
 			this.getTargetsArray().add(itemToMove);
 		}

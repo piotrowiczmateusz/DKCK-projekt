@@ -17,7 +17,7 @@ public class Rocket extends Bomb {
 
 		int speed = 25 + generator.nextInt(25);
 		this.setTargetsArray(new LinkedList<Item>());
-		// this.setMovingTimer(new MovingTimer(this, speed));
+		this.setMovingTimer(new MovingTimer(this));
 
 		if (itemArgument instanceof Sapper) {
 			for (int i = 0; i < MainWindow.itemsCollection.getItemsArray().size(); i++) {
@@ -28,6 +28,7 @@ public class Rocket extends Bomb {
 			}
 		}
 
-		this.setMovingTimer(new MovingTimer(this, speed));
+		
+		this.getMovingTimer().getTimer1().schedule(getMovingTimer(), 0, speed);
 	}
 }
