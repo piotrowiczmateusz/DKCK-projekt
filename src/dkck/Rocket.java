@@ -15,7 +15,7 @@ public class Rocket extends Bomb {
 		super();
 		Random generator = new Random();
 
-		int speed = 25 + generator.nextInt(25);
+		int speed = 10 + generator.nextInt(200);
 		this.setTargetsArray(new LinkedList<Item>());
 		this.setMovingTimer(new MovingTimer(this));
 
