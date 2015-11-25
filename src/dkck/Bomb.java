@@ -8,6 +8,7 @@ import java.util.Random;
 import javax.swing.JTextField;
 import javax.swing.border.MatteBorder;
 
+import dkck.GUI.Grid;
 import dkck.GUI.MainWindow;
 
 public class Bomb extends Item {
@@ -77,13 +78,12 @@ public class Bomb extends Item {
 		timerLog.setPreferredSize(new Dimension(358, 14));
 		timerLog.setEditable(false);
 
-		if (this instanceof Rocket)
-			this.setBombTimer(null);
-		else {
+		if (this instanceof Bomb && !(this instanceof Rocket)) {
 			MainWindow.timerPanel.add(((Bomb) this).getTimerLog(), BorderLayout.WEST);
 			this.setBombTimer(new BombTimer(this, 1000));
 
-		}
+		} else
+			this.setBombTimer(null);
 
 		if (this.getBombTimer() == null) {
 			this.setExplosionLeftTime(0);
@@ -92,8 +92,9 @@ public class Bomb extends Item {
 			this.setExplosionLeftTime(10 + generator.nextInt(300));
 		}
 
-		this.setBombStatus(1);		
-		MainWindow.grid.cellPanes.get(this.getPositionX()).get(this.getPositionY()).label.setText(this.getId()+1+"");
+		this.setBombStatus(1);
+		MainWindow.grid.cellPanes.get(this.getPositionX()).get(this.getPositionY()).label
+				.setText(this.getId() + 1 + "");
 
 	}
 
@@ -149,10 +150,14 @@ public class Bomb extends Item {
 			this.setBombStatus(0);
 		}
 
-		if (this instanceof Bomb && (this instanceof Rocket) == false)
+		Grid.repairCircles();
+		Grid.repairSquares();
+
+		if (this instanceof Bomb && !(this instanceof Rocket)) {
 			timerLog.setText("Bomba nr: " + this.getId() + " wybuch³a");
 
-		MainWindow.updateLog("Bomba nr: " + this.getId() + " wybuch³a");
+			MainWindow.updateLog("Bomba nr: " + this.getId() + " wybuch³a");
+		}
 
 		for (int i = 0; i < MainWindow.itemsCollection.getItemsArray().size(); i++) {
 			Item tempItem = MainWindow.itemsCollection.getItemsArray().get(i);
