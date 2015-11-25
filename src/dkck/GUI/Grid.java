@@ -205,7 +205,7 @@ public class Grid extends JPanel {
 	 * } } }
 	 */
 
-	public void repairCircles() {
+	public static void repairCircles() {
 		for (int i = 0; i < MainWindow.itemsCollection.getItemsArray().size(); i++) {
 			Item tempItem = MainWindow.itemsCollection.getItemsArray().get(i);
 
@@ -213,7 +213,7 @@ public class Grid extends JPanel {
 		}
 	}
 
-	public void repairSquares() {
+	public static void repairSquares() {
 		for (int i = 0; i < MainWindow.itemsCollection.getItemsArray().size(); i++) {
 			Item tempItem = MainWindow.itemsCollection.getItemsArray().get(i);
 

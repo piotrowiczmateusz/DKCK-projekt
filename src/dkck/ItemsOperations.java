@@ -3,6 +3,7 @@ package dkck;
 import java.util.ArrayList;
 import java.util.List;
 
+import dkck.GUI.Grid;
 import dkck.GUI.MainWindow;
 
 public class ItemsOperations {
@@ -30,12 +31,12 @@ public class ItemsOperations {
 		this.itemsArray = new ArrayList<Item>();
 	}
 
-	private int findItem(Item itemReference) {
-		return this.getItemsArray().indexOf(itemReference);
+	static int findItem(Item itemReference) {
+		return MainWindow.itemsCollection.getItemsArray().indexOf(itemReference);
 	}
 
-	private void dropItem(int index) {
-		Item tempItem = this.getItemsArray().get(index);
+	static void dropItem(int index) {
+		Item tempItem = MainWindow.itemsCollection.getItemsArray().get(index);
 
 		if (tempItem.getMovingTimer() != null) {
 			((Bomb) tempItem).getMovingTimer().cancel();
@@ -48,7 +49,7 @@ public class ItemsOperations {
 			((Bomb) tempItem).getBombTimer().setItemReference(null);
 			((Bomb) tempItem).setBombTimer(null);
 		}
-		this.getItemsArray().remove(index);
+		MainWindow.itemsCollection.getItemsArray().remove(index);
 		MainWindow.grid.drawSquare(tempItem.getPositionX(), tempItem.getPositionY(), tempItem.getPositionX(),
 				tempItem.getPositionY(), null);
 		// MainWindow.grid.repairSquare(tempItem.getPositionX(),
@@ -57,8 +58,8 @@ public class ItemsOperations {
 		MainWindow.grid.drawCircle(tempItem.getPositionX(), tempItem.getPositionY(), tempItem.getRange(), null);
 		// MainWindow.grid.repairCircle(tempItem.getPositionX(),
 		// tempItem.getPositionY(), tempItem.getRange());
-		MainWindow.grid.repairSquares();
-		MainWindow.grid.repairCircles();
+		Grid.repairSquares();
+		Grid.repairCircles();
 	}
 
 	protected void createBombs(int numberOfBombs) {
@@ -100,7 +101,7 @@ public class ItemsOperations {
 				}
 
 				if (continueSearching) {
-					this.dropItem(currentBombIndex + beginningArrayIndex);
+					dropItem(currentBombIndex + beginningArrayIndex);
 				} else {
 					goodBombPosition = true;
 				}
@@ -131,7 +132,7 @@ public class ItemsOperations {
 		}
 
 		for (int j = 0; j < 3; ++j) {
-			Thread.sleep(1000);
+			//Thread.sleep(1000);
 			for (int i = 0; i < 2; ++i) {
 				// Thread.sleep(300);
 				itemsArray.add(new Rocket(itemsArray.get(0)));
@@ -147,13 +148,13 @@ public class ItemsOperations {
 		}
 
 		for (int j = 0; j < 3; ++j) {
-			Thread.sleep(1000);
+			//Thread.sleep(1000);
 			for (int i = 0; i < 2; ++i) {
-				Thread.sleep(300);
+				//Thread.sleep(300);
 
 				// Thread.sleep(300);
 
-				dropItem(findItem(this.getItemsArray().get(itemsArray.size() - 1)));
+				//dropItem(findItem(this.getItemsArray().get(itemsArray.size() - 1)));
 
 				// dropItem(itemsArray.size() - 1);
 			}

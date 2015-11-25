@@ -4,6 +4,7 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.Random;
 
+import dkck.GUI.Grid;
 import dkck.GUI.MainWindow;
 
 public abstract class Item {
@@ -111,8 +112,8 @@ public abstract class Item {
 		MainWindow.grid.drawCircle(this.getPositionX(), this.getPositionY(), this.getRange(), null);
 		MainWindow.grid.drawCircle(this.getPositionX(), this.getPositionY(), this.getRange(), this);
 		MainWindow.grid.drawSquare(positionX, positionY, positionX, positionY, this);
-		MainWindow.grid.repairSquares();
-		MainWindow.grid.repairCircles();
+		Grid.repairSquares();
+		Grid.repairCircles();
 
 		if (speed == 0) {
 			this.setTargetsArray(null);

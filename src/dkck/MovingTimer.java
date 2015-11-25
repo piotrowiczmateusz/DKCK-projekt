@@ -2,7 +2,9 @@ package dkck;
 
 import java.util.Timer;
 import java.util.TimerTask;
+import dkck.ItemsOperations;
 
+import dkck.GUI.Grid;
 import dkck.GUI.MainWindow;
 
 public class MovingTimer extends TimerTask {
@@ -161,14 +163,17 @@ public class MovingTimer extends TimerTask {
 					// this.getItemReference().getRange());
 					// MainWindow.grid.repairSquare(initItemPositionX,
 					// initItemPositionY);
-					MainWindow.grid.repairCircles();
-					MainWindow.grid.repairSquares();
+					Grid.repairCircles();
+					Grid.repairSquares();
 				} else
 					run();// recursive call
+			} else if (this.getItemReference() instanceof Rocket) {
+				ItemsOperations.dropItem(ItemsOperations.findItem(this.getItemReference()));
 			}
 
 		} else {
 			this.cancel();
+
 		}
 	}
 }

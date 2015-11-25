@@ -23,13 +23,13 @@ public class MainWindow extends JFrame {
 	public static final Color cellColor = Color.WHITE;
 
 	public static final Color bombActiveColor = Color.RED;
-	
+
 	public static final Color bombDisableColor = Color.PINK;
 
 	public static final Color sapperColor = Color.BLUE;
 
 	public static final Color rocketColor = Color.GREEN;
-	
+
 	public static Interpreter interpreter;
 
 	// Window elements
@@ -77,20 +77,20 @@ public class MainWindow extends JFrame {
 	}
 
 	public static void main(String[] args) throws InterruptedException {
-		
+
 		new MainWindow();
 
 		itemsCollection = new ItemsOperations();
 		itemsCollection.addItems();
-		//itemsCollection.actions();
+		// itemsCollection.actions();
 		interpreter = new Interpreter();
-	
+
 	}
 
 	public MainWindow() {
 
 		super();
-		
+
 		setDefaultCloseOperation(EXIT_ON_CLOSE);
 		setPreferredSize(new Dimension(900, 578));
 
@@ -119,7 +119,5 @@ public class MainWindow extends JFrame {
 		setVisible(true);
 		setResizable(false);
 
-		
-		
 	}
 }
