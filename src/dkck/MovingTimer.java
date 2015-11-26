@@ -146,8 +146,8 @@ public class MovingTimer extends TimerTask {
 								tempItem.getRange(), tempItem);
 						MainWindow.grid.drawSquare(initItemPositionX, initItemPositionY, tempItem.getPositionX(),
 								tempItem.getPositionY(), tempItem);
-						MainWindow.grid.cellPanes.get(tempItem.getPositionX()).get(tempItem.getPositionY()).label
-								.setText(tempItem.getId() + 1 + "");
+						//MainWindow.grid.cellPanes.get(tempItem.getPositionX()).get(tempItem.getPositionY()).label
+								//.setText((tempItem.getId() + 1) + "");
 
 					}
 

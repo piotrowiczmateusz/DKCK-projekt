@@ -71,7 +71,7 @@ public class Bomb extends Item {
 		super(id);
 		id++;
 
-		this.timerLog = new JTextField("Bomb nr: " + this.getId());
+		this.timerLog = new JTextField("Bomb nr: " + (this.getId()+ 1));
 		timerLog.setOpaque(true);
 		timerLog.setBackground(Color.white);
 		timerLog.setBorder(new MatteBorder(0, 0, 0, 0, (Color) new Color(0, 0, 0)));
@@ -128,14 +128,14 @@ public class Bomb extends Item {
 					this.getBombTimer().cancel();
 					this.setBombStatus(2);
 					tempSapper.setNumberOfDisarmedBombs(tempSapper.getNumberOfDisarmedBombs() + 1);
-					MainWindow.updateLog("Bomba nr " + this.getId() + " jest teraz rozbrojona");
+					MainWindow.updateLog("Bomba nr " + (this.getId() + 1) + " jest teraz rozbrojona");
 
 				} else {
 					MainWindow.updateLog("Nie uda³o siê rozbroiæ bomby");
 					this.explode();
 				}
 			} else
-				MainWindow.updateLog("Bomba nr: " + this.getId() + " jest ju¿ rozbrojona");
+				MainWindow.updateLog("Bomba nr: " + (this.getId() + 1) + " jest ju¿ rozbrojona");
 		}
 	}
 
@@ -155,9 +155,9 @@ public class Bomb extends Item {
 		Grid.repairCircles();
 
 		if (this instanceof Bomb && !(this instanceof Rocket)) {
-			timerLog.setText("Bomba nr: " + this.getId() + " wybuch³a");
+			timerLog.setText("Bomba nr: " + (this.getId() + 1) + " wybuch³a");
 
-			MainWindow.updateLog("Bomba nr: " + this.getId() + " wybuch³a");
+			MainWindow.updateLog("Bomba nr: " + (this.getId() + 1) + " wybuch³a");
 		}
 
 		for (int i = 0; i < MainWindow.itemsCollection.getItemsArray().size(); i++) {
