@@ -104,10 +104,12 @@ public abstract class Item {
 		this.id = id;
 
 		MainWindow.grid.drawCircle(this.getPositionX(), this.getPositionY(), this.getRange(), null);
-		MainWindow.grid.drawSquare(this.getPositionX(), this.getPositionY(),this.getPositionX(), this.getPositionY(), null);
+		MainWindow.grid.drawSquare(this.getPositionX(), this.getPositionY(), this.getPositionX(), this.getPositionY(),
+				null);
 		MainWindow.grid.drawCircle(this.getPositionX(), this.getPositionY(), this.getRange(), this);
-		MainWindow.grid.drawSquare(this.getPositionX(), this.getPositionY(),this.getPositionX(), this.getPositionY(), this);
-		
+		MainWindow.grid.drawSquare(this.getPositionX(), this.getPositionY(), this.getPositionX(), this.getPositionY(),
+				this);
+
 		Grid.repairCircles();
 		Grid.repairSquares();
 
@@ -146,10 +148,10 @@ public abstract class Item {
 				tempText = "Sapper";
 			} else if (i == 2) {
 				cls = Rocket.class;
-				tempText = "Point";
+				tempText = "Rocket";
 			} else if (i == 3) {
 				cls = Point.class;
-				tempText = "Rocket";
+				tempText = "Point";
 			}
 			if (cls.isInstance(tempItem) && tempItem.getClass().equals(cls)) {
 				return tempText;

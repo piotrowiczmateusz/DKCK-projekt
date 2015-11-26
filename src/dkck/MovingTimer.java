@@ -82,11 +82,13 @@ public class MovingTimer extends TimerTask {
 								.getPositionX()
 						&& this.getItemReference().getTargetsArray().get(0).getPositionY() == this.getItemReference()
 								.getPositionY()) {
-
-					MainWindow.updateLog("Obiekt dotar³ do celu");
-
-					if (this.getItemReference() instanceof Rocket)
+					
+					MainWindow.updateLog("Obiekt " +
+							this.getItemReference().nameOfItem(this.getItemReference()) + " dotar³ do celu");
+					if (this.getItemReference() instanceof Rocket) {
 						((Rocket) this.getItemReference()).explode();
+
+					}
 
 					continueStep = false;
 				}
@@ -98,7 +100,7 @@ public class MovingTimer extends TimerTask {
 					Item tempItem = ((Sapper) this.getItemReference()).getTargetsArray().get(1);
 					if (tempItem.getPositionX() != initItemPositionX && tempItem.getPositionY() != initItemPositionY) {
 
-						MainWindow.updateLog("Saper zgubi³ bombê");
+						MainWindow.updateLog("Obiekt " + this.getItemReference().nameOfItem(this.getItemReference())+ "zgubi³ bombê");
 						continueStep = false;
 					}
 				}
@@ -127,7 +129,7 @@ public class MovingTimer extends TimerTask {
 						this.getItemReference().setPositionY(this.getItemReference().getPositionY() - 1);
 					}
 
-					MainWindow.updatePositionPanel("Pozycja sapera: [" + (this.getItemReference().getPositionX() + 1)
+					if( this.getItemReference() instanceof Sapper) MainWindow.updatePositionPanel("Pozycja sapera: [" + (this.getItemReference().getPositionX() + 1)
 							+ "][" + (this.getItemReference().getPositionY() + 1) + "]");
 
 					// moving bomb
