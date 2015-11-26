@@ -115,7 +115,7 @@ public class Grid extends JPanel {
 		}
 		MainWindow.grid.cellPanes.get(prevX).get(prevY).label.setText("");
 		if (tempColor != null && itemReference != null) {
-			MainWindow.grid.cellPanes.get(x).get(y).label.setText(Integer.toString(itemReference.getId()));
+			MainWindow.grid.cellPanes.get(x).get(y).label.setText(Integer.toString(itemReference.getId() + 1));
 		}
 	}
 

@@ -93,8 +93,8 @@ public class Bomb extends Item {
 		}
 
 		this.setBombStatus(1);
-		MainWindow.grid.cellPanes.get(this.getPositionX()).get(this.getPositionY()).label
-				.setText(this.getId() + 1 + "");
+//		MainWindow.grid.cellPanes.get(this.getPositionX()).get(this.getPositionY()).label
+//				.setText((this.getId() + 1) + "");
 
 	}
 

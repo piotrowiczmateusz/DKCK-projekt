@@ -43,14 +43,14 @@ public class BombTimer extends TimerTask {
 				 * + tempBomb.getExplosionLeftTime() +
 				 * " seconds left to explosion");
 				 */
-//				try {
-//					Thread.sleep(200);
-//				} catch (InterruptedException e) {
-//					// TODO Auto-generated catch block
-//					e.printStackTrace();
-//				}
-				
-				tempBomb.getTimerLog().setText("Bomba nr: " + tempBomb.getId() + " ma: "
+				// try {
+				// Thread.sleep(200);
+				// } catch (InterruptedException e) {
+				// // TODO Auto-generated catch block
+				// e.printStackTrace();
+				// }
+
+				tempBomb.getTimerLog().setText("Bomba nr: " + (tempBomb.getId() + 1) + " ma: "
 						+ tempBomb.getExplosionLeftTime() + " sekund do wybuchu");
 
 			} else {

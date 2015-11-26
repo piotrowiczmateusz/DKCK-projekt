@@ -59,7 +59,7 @@ public class ItemsOperations {
 				tempItem.getPositionY(), null);
 		// MainWindow.grid.repairCircle(tempItem.getPositionX(),
 		// tempItem.getPositionY(), tempItem.getRange());
-		
+
 		Grid.repairCircles();
 		Grid.repairSquares();
 	}
