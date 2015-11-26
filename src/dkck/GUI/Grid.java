@@ -206,20 +206,57 @@ public class Grid extends JPanel {
 	 */
 
 	public static void repairCircles() {
-		for (int i = 0; i < MainWindow.itemsCollection.getItemsArray().size(); i++) {
-			Item tempItem = MainWindow.itemsCollection.getItemsArray().get(i);
+		Class<?> cls = null;
 
-			MainWindow.grid.drawCircle(tempItem.getPositionX(), tempItem.getPositionY(), tempItem.getRange(), tempItem);
+		for (int i = 0; i < 4; ++i) {
+			if (i == 0) {
+				cls = Bomb.class;
+			} else if (i == 1) {
+				cls = Sapper.class;
+			} else if (i == 2) {
+				cls = Rocket.class;
+			} else if (i == 3) {
+				cls = Point.class;
+			}
+
+			for (int j = 0; j < MainWindow.itemsCollection.getItemsArray().size(); j++) {
+				Item tempItem = MainWindow.itemsCollection.getItemsArray().get(j);
+
+				if (cls.isInstance(tempItem) && tempItem.getClass().equals(cls)) {
+					MainWindow.grid.drawCircle(tempItem.getPositionX(), tempItem.getPositionY(), tempItem.getRange(),
+							tempItem);
+				}
+			}
+
 		}
 	}
 
 	public static void repairSquares() {
-		for (int i = 0; i < MainWindow.itemsCollection.getItemsArray().size(); i++) {
-			Item tempItem = MainWindow.itemsCollection.getItemsArray().get(i);
 
-			MainWindow.grid.drawSquare(tempItem.getPositionX(), tempItem.getPositionY(), tempItem.getPositionX(),
-					tempItem.getPositionY(), tempItem);
+		Class<?> cls = null;
+
+		for (int i = 0; i < 4; ++i) {
+			if (i == 0) {
+				cls = Bomb.class;
+			} else if (i == 1) {
+				cls = Sapper.class;
+			} else if (i == 2) {
+				cls = Rocket.class;
+			} else if (i == 3) {
+				cls = Point.class;
+			}
+
+			for (int j = 0; j < MainWindow.itemsCollection.getItemsArray().size(); j++) {
+				Item tempItem = MainWindow.itemsCollection.getItemsArray().get(j);
+
+				if (cls.isInstance(tempItem) && tempItem.getClass().equals(cls)) {
+					MainWindow.grid.drawSquare(tempItem.getPositionX(), tempItem.getPositionY(),
+							tempItem.getPositionX(), tempItem.getPositionY(), tempItem);
+				}
+			}
+
 		}
+
 	}
 
 	public void drawSapper(int x, int y) {

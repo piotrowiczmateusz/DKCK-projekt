@@ -145,7 +145,7 @@ public abstract class Item {
 				cls = Sapper.class;
 				tempText = "Sapper";
 			} else if (i == 2) {
-				cls = Point.class;
+				cls = Rocket.class;
 				tempText = "Point";
 			} else if (i == 3) {
 				cls = Point.class;
