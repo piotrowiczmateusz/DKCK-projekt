@@ -31,32 +31,30 @@ public class ItemsOperations {
 		this.itemsArray = new ArrayList<Item>();
 	}
 
-	static int findItem(Item itemReference) {
-		return MainWindow.itemsCollection.getItemsArray().indexOf(itemReference);
-	}
 
-	static void dropItem(int index) {
-		Item tempItem = MainWindow.itemsCollection.getItemsArray().get(index);
+	static void dropItem(Item itemReference) {
+		
 
-		if (tempItem.getMovingTimer() != null) {
-			((Bomb) tempItem).getMovingTimer().cancel();
-			((Bomb) tempItem).getMovingTimer().setItemReference(null);
-			((Bomb) tempItem).setMovingTimer(null);
+		if (itemReference.getMovingTimer() != null) {
+			((Bomb) itemReference).getMovingTimer().cancel();
+			((Bomb) itemReference).getMovingTimer().setItemReference(null);
+			((Bomb) itemReference).setMovingTimer(null);
 		}
 
-		if (tempItem instanceof Bomb && ((Bomb) tempItem).getBombTimer() != null) {
-			((Bomb) tempItem).getBombTimer().cancel();
-			((Bomb) tempItem).getBombTimer().setItemReference(null);
-			((Bomb) tempItem).setBombTimer(null);
+		if (itemReference instanceof Bomb && ((Bomb) itemReference).getBombTimer() != null) {
+			((Bomb) itemReference).getBombTimer().cancel();
+			((Bomb) itemReference).getBombTimer().setItemReference(null);
+			((Bomb) itemReference).setBombTimer(null);
 		}
-		MainWindow.itemsCollection.getItemsArray().remove(index);
+		
+		MainWindow.itemsCollection.getItemsArray().remove(itemReference);
 
 		// MainWindow.grid.repairSquare(tempItem.getPositionX(),
 		// tempItem.getPositionY());
 
-		MainWindow.grid.drawCircle(tempItem.getPositionX(), tempItem.getPositionY(), tempItem.getRange(), null);
-		MainWindow.grid.drawSquare(tempItem.getPositionX(), tempItem.getPositionY(), tempItem.getPositionX(),
-				tempItem.getPositionY(), null);
+		MainWindow.grid.drawCircle(itemReference.getPositionX(), itemReference.getPositionY(), itemReference.getRange(), null);
+		MainWindow.grid.drawSquare(itemReference.getPositionX(), itemReference.getPositionY(), itemReference.getPositionX(),
+				itemReference.getPositionY(), null);
 		// MainWindow.grid.repairCircle(tempItem.getPositionX(),
 		// tempItem.getPositionY(), tempItem.getRange());
 
@@ -103,7 +101,7 @@ public class ItemsOperations {
 				}
 
 				if (continueSearching) {
-					dropItem(currentBombIndex + beginningArrayIndex);
+					dropItem(this.getItemsArray().get(this.getItemsArray().size() - 1));
 				} else {
 					goodBombPosition = true;
 				}
@@ -133,9 +131,9 @@ public class ItemsOperations {
 			itemsArray.add(new Rocket(itemsArray.get(0)));
 		}
 
-		for (int j = 0; j < 3; ++j) {
+		for (int j = 0; j < 4; ++j) {
 			// Thread.sleep(1000);
-			for (int i = 0; i < 2; ++i) {
+			for (int i = 0; i < 4; ++i) {
 				// Thread.sleep(300);
 				itemsArray.add(new Rocket(itemsArray.get(0)));
 				// dropItem(findItem(this.getItemsArray().get(itemsArray.size()

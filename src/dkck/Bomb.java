@@ -151,8 +151,7 @@ public class Bomb extends Item {
 		}
 
 		
-		Grid.repairSquares();
-		Grid.repairCircles();
+	
 
 		if (this instanceof Bomb && !(this instanceof Rocket)) {
 			timerLog.setText("Bomba nr: " + (this.getId() + 1) + " wybuch³a");
@@ -177,5 +176,8 @@ public class Bomb extends Item {
 
 			}
 		}
+		Grid.repairSquares();
+		Grid.repairCircles();
 	}
+	
 }

@@ -170,7 +170,7 @@ public class MovingTimer extends TimerTask {
 				} else
 					run();// recursive call
 			} else if (this.getItemReference() instanceof Rocket) {
-				ItemsOperations.dropItem(ItemsOperations.findItem(this.getItemReference()));
+				ItemsOperations.dropItem(this.getItemReference());
 			}
 
 		} else {

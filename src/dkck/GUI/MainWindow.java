@@ -26,7 +26,11 @@ public class MainWindow extends JFrame {
 
 	public static final Color bombDisableColor = Color.PINK;
 
-	public static final Color sapperColor = Color.BLUE;
+	public static final Color sapperAliveColor = Color.BLUE;
+	
+	public static final Color sapperDeadColor = Color.CYAN;
+	
+
 
 	public static final Color rocketColor = Color.GREEN;
 

@@ -92,7 +92,11 @@ public class Grid extends JPanel {
 			else
 				return MainWindow.bombDisableColor;
 		} else if (itemReference instanceof Sapper) {
-			return MainWindow.sapperColor;
+			
+			if (((Sapper) itemReference).getHealthPoints() > 0)
+				return MainWindow.sapperAliveColor;
+			else
+				return MainWindow.sapperDeadColor;
 		}
 		return MainWindow.cellColor;
 	}
