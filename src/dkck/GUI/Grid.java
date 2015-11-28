@@ -16,6 +16,7 @@ import dkck.Item;
 import dkck.Point;
 import dkck.Rocket;
 import dkck.Sapper;
+import dkck.Tree;
 
 public class Grid extends JPanel {
 
@@ -82,7 +83,9 @@ public class Grid extends JPanel {
 
 	Color chooseObjectColor(Item itemReference) {
 
-		if (itemReference instanceof Point) {
+		if (itemReference instanceof Tree) {
+			return MainWindow.treeColor;
+		} else if (itemReference instanceof Point) {
 			return null;
 		} else if (itemReference instanceof Rocket) {
 			return MainWindow.rocketColor;
@@ -92,7 +95,6 @@ public class Grid extends JPanel {
 			else
 				return MainWindow.bombDisableColor;
 		} else if (itemReference instanceof Sapper) {
-			
 			if (((Sapper) itemReference).getHealthPoints() > 0)
 				return MainWindow.sapperAliveColor;
 			else
@@ -210,18 +212,8 @@ public class Grid extends JPanel {
 	 */
 
 	public static void repairCircles() {
-		Class<?> cls = null;
 
-		for (int i = 0; i < 4; ++i) {
-			if (i == 0) {
-				cls = Bomb.class;
-			} else if (i == 1) {
-				cls = Sapper.class;
-			} else if (i == 2) {
-				cls = Rocket.class;
-			} else if (i == 3) {
-				cls = Point.class;
-			}
+		for (Class<?> cls : MainWindow.classSequence) {
 
 			for (int j = 0; j < MainWindow.itemsCollection.getItemsArray().size(); j++) {
 				Item tempItem = MainWindow.itemsCollection.getItemsArray().get(j);
@@ -237,18 +229,7 @@ public class Grid extends JPanel {
 
 	public static void repairSquares() {
 
-		Class<?> cls = null;
-
-		for (int i = 0; i < 4; ++i) {
-			if (i == 0) {
-				cls = Bomb.class;
-			} else if (i == 1) {
-				cls = Sapper.class;
-			} else if (i == 2) {
-				cls = Rocket.class;
-			} else if (i == 3) {
-				cls = Point.class;
-			}
+		for (Class<?> cls : MainWindow.classSequence) {
 
 			for (int j = 0; j < MainWindow.itemsCollection.getItemsArray().size(); j++) {
 				Item tempItem = MainWindow.itemsCollection.getItemsArray().get(j);

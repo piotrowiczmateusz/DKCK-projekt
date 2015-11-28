@@ -7,8 +7,14 @@ import java.awt.Dimension;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 
+import dkck.Bomb;
 import dkck.Interpreter;
+import dkck.Item;
 import dkck.ItemsOperations;
+import dkck.Point;
+import dkck.Rocket;
+import dkck.Sapper;
+import dkck.Tree;
 
 public class MainWindow extends JFrame {
 
@@ -27,12 +33,14 @@ public class MainWindow extends JFrame {
 	public static final Color bombDisableColor = Color.PINK;
 
 	public static final Color sapperAliveColor = Color.BLUE;
-	
+
 	public static final Color sapperDeadColor = Color.CYAN;
-	
 
+	public static final Color treeColor = Color.GREEN;
 
-	public static final Color rocketColor = Color.GREEN;
+	public static final Color rocketColor = Color.ORANGE;
+
+	public static final Class<?>[] classSequence = { Bomb.class, Sapper.class, Tree.class, Rocket.class, Point.class };
 
 	public static Interpreter interpreter;
 
@@ -90,6 +98,24 @@ public class MainWindow extends JFrame {
 		interpreter = new Interpreter();
 
 	}
+	
+	// metoda sprawdzajaca czy bomba istnieje
+		static public Item findElementByID(int id, Class<?> typeOfItem) {
+
+			for (int i = 1; i < itemsCollection.getItemsArray().size(); i++) {
+				Item tempItem = itemsCollection.getItemsArray().get(i);
+
+				if ((typeOfItem.isInstance(tempItem))
+						&& (typeOfItem.equals(tempItem.getClass()) && tempItem.getId() == id)) {
+					return tempItem;
+				}
+			}
+
+			updateLog("Item nie istnieje");
+
+			return null;
+		}
+
 
 	public MainWindow() {
 

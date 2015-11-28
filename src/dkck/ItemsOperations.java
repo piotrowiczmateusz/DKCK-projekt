@@ -31,9 +31,7 @@ public class ItemsOperations {
 		this.itemsArray = new ArrayList<Item>();
 	}
 
-
 	static void dropItem(Item itemReference) {
-		
 
 		if (itemReference.getMovingTimer() != null) {
 			((Bomb) itemReference).getMovingTimer().cancel();
@@ -46,15 +44,16 @@ public class ItemsOperations {
 			((Bomb) itemReference).getBombTimer().setItemReference(null);
 			((Bomb) itemReference).setBombTimer(null);
 		}
-		
+
 		MainWindow.itemsCollection.getItemsArray().remove(itemReference);
 
 		// MainWindow.grid.repairSquare(tempItem.getPositionX(),
 		// tempItem.getPositionY());
 
-		MainWindow.grid.drawCircle(itemReference.getPositionX(), itemReference.getPositionY(), itemReference.getRange(), null);
-		MainWindow.grid.drawSquare(itemReference.getPositionX(), itemReference.getPositionY(), itemReference.getPositionX(),
-				itemReference.getPositionY(), null);
+		MainWindow.grid.drawCircle(itemReference.getPositionX(), itemReference.getPositionY(), itemReference.getRange(),
+				null);
+		MainWindow.grid.drawSquare(itemReference.getPositionX(), itemReference.getPositionY(),
+				itemReference.getPositionX(), itemReference.getPositionY(), null);
 		// MainWindow.grid.repairCircle(tempItem.getPositionX(),
 		// tempItem.getPositionY(), tempItem.getRange());
 
@@ -112,12 +111,16 @@ public class ItemsOperations {
 	// nowa metoda służąca do dodawania itemów
 	public void addItems() throws InterruptedException {
 
+		itemsArray.add(new Tree());
+
 		itemsArray.add(new Sapper()); // WAŻNE proponuje, żeby został 1 saper,
 										// zawsze dodawnay jako pierwszy, ułatwi
 										// to pracę
 
 		itemsArray.add(new Sapper());
 		itemsArray.add(new Sapper());
+
+		itemsArray.add(new Tree());
 
 		itemsArray.add(new Sapper());
 
@@ -128,14 +131,14 @@ public class ItemsOperations {
 
 		for (int i = 0; i < 2; ++i) {
 			itemsArray.add(new Bomb());
-			itemsArray.add(new Rocket(itemsArray.get(0)));
+			itemsArray.add(new Rocket(MainWindow.findElementByID(0, Sapper.class)));
 		}
 
 		for (int j = 0; j < 4; ++j) {
 			// Thread.sleep(1000);
 			for (int i = 0; i < 4; ++i) {
 				// Thread.sleep(300);
-				itemsArray.add(new Rocket(itemsArray.get(0)));
+				itemsArray.add(new Rocket(MainWindow.findElementByID(0, Sapper.class)));
 				// dropItem(findItem(this.getItemsArray().get(itemsArray.size()
 				// - 1)));
 				// Thread.sleep(300);
@@ -147,18 +150,15 @@ public class ItemsOperations {
 			}
 		}
 
-		for (int j = 0; j < 3; ++j) {
-			// Thread.sleep(1000);
-			for (int i = 0; i < 2; ++i) {
-				// Thread.sleep(300);
+		// Thread.sleep(1000);
+		for (int i = 0; i < 200; ++i) {
+			// Thread.sleep(300);
+			itemsArray.add(new Tree());
+		}
 
-				// Thread.sleep(300);
+		for (int i = 0; i < 200; ++i) {
 
-				// dropItem(findItem(this.getItemsArray().get(itemsArray.size()
-				// - 1)));
-
-				// dropItem(itemsArray.size() - 1);
-			}
+			dropItem(itemsArray.get(itemsArray.size() - 1));
 		}
 
 		// for (int j = 0; j < 5; ++j) {

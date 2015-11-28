@@ -96,7 +96,12 @@ public abstract class Item {
 		int range = 0;
 
 		if (!(this instanceof Point))
-			range = 2 + generator.nextInt(10);
+			if (this instanceof Sapper)
+				range = 2 + generator.nextInt(3);
+			else if (this instanceof Tree)
+				range = 2 + generator.nextInt(1);
+			else
+				range = 2 + generator.nextInt(10);
 
 		this.positionX = positionX;
 		this.positionY = positionY;
@@ -135,22 +140,23 @@ public abstract class Item {
 
 	public String nameOfItem(Item itemArgument) {
 
-		Class<?> cls = null;
 		String tempText = "";
 		Item tempItem = itemArgument;
 
-		for (int i = 0; i < 4; ++i) {
-			if (i == 0) {
-				cls = Bomb.class;
+		for (Class<?> cls : MainWindow.classSequence) {
+			if (cls.equals(Bomb.class)) {
+
 				tempText = "Bomb";
-			} else if (i == 1) {
-				cls = Sapper.class;
+			} else if (cls.equals(Sapper.class)) {
 				tempText = "Sapper";
-			} else if (i == 2) {
-				cls = Rocket.class;
+			} else if (cls.equals(Tree.class)) {
+
+				tempText = "Tree";
+			} else if (cls.equals(Rocket.class)) {
+
 				tempText = "Rocket";
-			} else if (i == 3) {
-				cls = Point.class;
+			} else if (cls.equals(Point.class)) {
+
 				tempText = "Point";
 			}
 			if (cls.isInstance(tempItem) && tempItem.getClass().equals(cls)) {

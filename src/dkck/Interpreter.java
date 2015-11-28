@@ -8,23 +8,7 @@ public class Interpreter {
 		super();
 	}
 
-	// metoda sprawdzajaca czy bomba istnieje
-	public Item findElementByID(int id, Class<?> typeOfItem) {
-
-		for (int i = 1; i < MainWindow.itemsCollection.getItemsArray().size(); i++) {
-			Item tempItem = MainWindow.itemsCollection.getItemsArray().get(i);
-
-			if ((typeOfItem.isInstance(tempItem))
-					&& (typeOfItem.equals(tempItem.getClass()) && tempItem.getId() == id)) {
-				return tempItem;
-			}
-		}
-		
-		MainWindow.updateLog("Item nie istnieje");
-
-		return null;
-	}
-
+	
 	// metoda zwracająca konkretną bombę w zależności od wejścia
 	public Bomb getBomb(String input) {
 
@@ -33,27 +17,27 @@ public class Interpreter {
 		Item tempBomb = null;
 
 		if (input.matches("|(.*)pierwsza(.*)|(.*)pierwszą(.*)|(.*)pierwszej(.*)|(.*)jeden(.*)")) {
-			tempBomb = findElementByID(0, bombClass);
+			tempBomb = MainWindow.findElementByID(0, bombClass);
 		}
 
 		else if (input.matches("|(.*)druga(.*)|(.*)drugą(.*)|(.*)drugiej(.*)|(.*)dwa(.*)")) {
-			tempBomb = findElementByID(1, bombClass);
+			tempBomb = MainWindow.findElementByID(1, bombClass);
 		}
 
 		else if (input.matches("|(.*)trzecia(.*)|(.*)trzecią(.*)|(.*)trzeciej(.*)|(.*)trzy(.*)")) {
-			tempBomb = findElementByID(2, bombClass);
+			tempBomb = MainWindow.findElementByID(2, bombClass);
 		}
 
 		else if (input.matches("|(.*)czwarta(.*)|(.*)czwartą(.*)|(.*)czwartej(.*)|(.*)cztery(.*)")) {
-			tempBomb = findElementByID(3, bombClass);
+			tempBomb = MainWindow.findElementByID(3, bombClass);
 		}
 
 		else if (input.matches("|(.*)piąta(.*)|(.*)piątą(.*)|(.*)piątej(.*)|(.*)pięć(.*)")) {
-			tempBomb = findElementByID(4, bombClass);
+			tempBomb = MainWindow.findElementByID(4, bombClass);
 		}
 
 		else if (input.matches("|(.*)szósta(.*)|(.*)szóstą(.*)|(.*)szóstej(.*)|(.*)sześć(.*)")) {
-			tempBomb = findElementByID(5, bombClass);
+			tempBomb = MainWindow.findElementByID(5, bombClass);
 		}
 
 		else if (input.matches("|(.*)najbliższą(.*)|(.*)najbliższej(.*)|(.*)najbliżej(.*)|(.*)blisko(.*)")) {
@@ -64,7 +48,7 @@ public class Interpreter {
 				Item tempItem = MainWindow.itemsCollection.getItemsArray().get(i);
 
 				if ((tempItem instanceof Bomb) && !(tempItem instanceof Rocket)) {
-					double value = tempItem.distanceCalculation(MainWindow.itemsCollection.getItemsArray().get(0));
+					double value = tempItem.distanceCalculation(MainWindow.findElementByID(0, Sapper.class));
 					if (value < min) {
 						min = value;
 						tempBomb = (Bomb) tempItem;
@@ -81,7 +65,7 @@ public class Interpreter {
 				Item tempItem = MainWindow.itemsCollection.getItemsArray().get(i);
 
 				if ((tempItem instanceof Bomb) && !(tempItem instanceof Rocket)) {
-					double value = tempItem.distanceCalculation(MainWindow.itemsCollection.getItemsArray().get(0));
+					double value = tempItem.distanceCalculation(MainWindow.findElementByID(0, Sapper.class));
 					if (value > max) {
 						max = value;
 						tempBomb = (Bomb) tempItem;
@@ -99,7 +83,9 @@ public class Interpreter {
 
 	public void interpret(String input) throws InterruptedException {
 
-		Sapper tempSapper = (Sapper) MainWindow.itemsCollection.getItemsArray().get(0);
+		Class<?> sapperClass = Sapper.class;
+
+		Sapper tempSapper = (Sapper) MainWindow.findElementByID(0, sapperClass);
 
 		/* Przemieszczanie siê */
 
