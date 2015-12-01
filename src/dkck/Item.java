@@ -97,11 +97,11 @@ public abstract class Item {
 
 		if (!(this instanceof Point))
 			if (this instanceof Sapper)
-				range = 2 + generator.nextInt(3);
+				range = 3 + generator.nextInt(1);
 			else if (this instanceof Tree)
 				range = 2 + generator.nextInt(1);
 			else
-				range = 2 + generator.nextInt(10);
+				range = 5 + generator.nextInt(8);
 
 		this.positionX = positionX;
 		this.positionY = positionY;

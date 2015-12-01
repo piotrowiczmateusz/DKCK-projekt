@@ -151,12 +151,12 @@ public class ItemsOperations {
 		}
 
 		// Thread.sleep(1000);
-		for (int i = 0; i < 200; ++i) {
+		for (int i = 0; i < 10; ++i) {
 			// Thread.sleep(300);
 			itemsArray.add(new Tree());
 		}
 
-		for (int i = 0; i < 200; ++i) {
+		for (int i = 0; i < 10; ++i) {
 
 			dropItem(itemsArray.get(itemsArray.size() - 1));
 		}

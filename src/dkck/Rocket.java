@@ -13,6 +13,7 @@ public class Rocket extends Bomb {
 
 	public Rocket(Item itemArgument) throws InterruptedException {
 		super();
+
 		Random generator = new Random();
 
 		int speed = 10 + generator.nextInt(200);
@@ -20,14 +21,20 @@ public class Rocket extends Bomb {
 		this.setMovingTimer(new MovingTimer(this));
 
 		if (itemArgument instanceof Sapper) {
-			for (int i = 0; i < MainWindow.itemsCollection.getItemsArray().size(); i++) {
-				Item tempItem = MainWindow.itemsCollection.getItemsArray().get(i);
-				if (tempItem instanceof Sapper && tempItem != itemArgument) {
-					this.reachItem(tempItem);
+			Sapper sapperReference = (Sapper) itemArgument;
+			if (sapperReference.getNumberOfRockets() > 0) {
+				sapperReference.setNumberOfRockets(sapperReference.getNumberOfRockets() - 1);
+
+				for (int i = 0; i < MainWindow.itemsCollection.getItemsArray().size(); i++) {
+					Item tempItem = MainWindow.itemsCollection.getItemsArray().get(i);
+					if (tempItem instanceof Sapper && tempItem != itemArgument) {
+						this.reachItem(tempItem);
+					}
 				}
+
 			}
 		}
-
 		this.getMovingTimer().getTimer1().schedule(getMovingTimer(), 0, speed);
+
 	}
 }

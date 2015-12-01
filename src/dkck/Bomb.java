@@ -71,7 +71,7 @@ public class Bomb extends Item {
 		super(id);
 		id++;
 
-		this.timerLog = new JTextField("Bomb nr: " + (this.getId()+ 1));
+		this.timerLog = new JTextField("Bomb nr: " + (this.getId() + 1));
 		timerLog.setOpaque(true);
 		timerLog.setBackground(Color.white);
 		timerLog.setBorder(new MatteBorder(0, 0, 0, 0, (Color) new Color(0, 0, 0)));
@@ -79,22 +79,19 @@ public class Bomb extends Item {
 		timerLog.setEditable(false);
 
 		if (this instanceof Bomb && !(this instanceof Rocket)) {
-			MainWindow.timerPanel.add(((Bomb) this).getTimerLog(), BorderLayout.WEST);
+			MainWindow.timerPanel.add(this.getTimerLog(), BorderLayout.WEST);
 			this.setBombTimer(new BombTimer(this, 1000));
-
-		} else
-			this.setBombTimer(null);
-
-		if (this.getBombTimer() == null) {
-			this.setExplosionLeftTime(0);
-		} else {
 			Random generator = new Random();
 			this.setExplosionLeftTime(10 + generator.nextInt(300));
+
+		} else {
+			this.setBombTimer(null);
+			this.setExplosionLeftTime(0);
 		}
 
 		this.setBombStatus(1);
-//		MainWindow.grid.cellPanes.get(this.getPositionX()).get(this.getPositionY()).label
-//				.setText((this.getId() + 1) + "");
+		// MainWindow.grid.cellPanes.get(this.getPositionX()).get(this.getPositionY()).label
+		// .setText((this.getId() + 1) + "");
 
 	}
 
@@ -150,9 +147,6 @@ public class Bomb extends Item {
 			this.setBombStatus(0);
 		}
 
-		
-	
-
 		if (this instanceof Bomb && !(this instanceof Rocket)) {
 			timerLog.setText("Bomba nr: " + (this.getId() + 1) + " wybuch³a");
 
@@ -179,5 +173,5 @@ public class Bomb extends Item {
 		Grid.repairSquares();
 		Grid.repairCircles();
 	}
-	
+
 }

@@ -15,12 +15,16 @@ public class Sapper extends Item {
 	private int numberOfDisarmedBombs;
 
 	private int healthPoints;
+	
+	private int numberOfRockets;
 
 	private boolean SapperStatus;
 
 	/**
 	 * SETTERS AND GETTERS
 	 */
+	
+	
 	public int getNumberOfDisarmedBombs() {
 		return numberOfDisarmedBombs;
 	}
@@ -35,6 +39,14 @@ public class Sapper extends Item {
 
 	public void setHealthPoints(int healthPoints) {
 		this.healthPoints = healthPoints;
+	}
+	
+	public int getNumberOfRockets() {
+		return numberOfRockets;
+	}
+
+	public void setNumberOfRockets(int numberOfRockets) {
+		this.numberOfRockets = numberOfRockets;
 	}
 
 	public boolean getSapperStatus() {
@@ -54,6 +66,7 @@ public class Sapper extends Item {
 		id++;
 		this.setSapperStatus(true);
 		this.setHealthPoints(20);
+		this.setNumberOfRockets(5);
 		MainWindow.updateHPPanel("Sapper HP: " + this.getHealthPoints());
 		MainWindow.updatePositionPanel("Pozycja sapera: [" + this.getPositionX() + "][" + this.getPositionY() + "]");
 
