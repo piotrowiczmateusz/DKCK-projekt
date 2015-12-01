@@ -134,22 +134,6 @@ public class ItemsOperations {
 			itemsArray.add(new Rocket(MainWindow.findElementByID(0, Sapper.class)));
 		}
 
-		for (int j = 0; j < 4; ++j) {
-			// Thread.sleep(1000);
-			for (int i = 0; i < 4; ++i) {
-				// Thread.sleep(300);
-				itemsArray.add(new Rocket(MainWindow.findElementByID(0, Sapper.class)));
-				// dropItem(findItem(this.getItemsArray().get(itemsArray.size()
-				// - 1)));
-				// Thread.sleep(300);
-
-				// dropItem(findItem(this.getItemsArray().get(itemsArray.size()
-				// - 1)));
-
-				// dropItem(itemsArray.size() - 1);
-			}
-		}
-
 		// Thread.sleep(1000);
 		for (int i = 0; i < 10; ++i) {
 			// Thread.sleep(300);
@@ -159,6 +143,22 @@ public class ItemsOperations {
 		for (int i = 0; i < 10; ++i) {
 
 			dropItem(itemsArray.get(itemsArray.size() - 1));
+		}
+
+		for (int j = 0; j < 10; ++j) {
+			// Thread.sleep(1000);
+
+			// Thread.sleep(300);
+			itemsArray.add(new Rocket(MainWindow.findElementByID(0, Sapper.class)));
+			// dropItem(findItem(this.getItemsArray().get(itemsArray.size()
+			// - 1)));
+			// Thread.sleep(300);
+
+			// dropItem(findItem(this.getItemsArray().get(itemsArray.size()
+			// - 1)));
+
+			// dropItem(itemsArray.size() - 1);
+
 		}
 
 		// for (int j = 0; j < 5; ++j) {

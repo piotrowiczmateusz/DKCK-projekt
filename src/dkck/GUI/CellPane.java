@@ -9,19 +9,22 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 
 public class CellPane extends JPanel {
-	
+
 	private static final long serialVersionUID = 1L;
-	//public Color defaultBackground;
+	// public Color defaultBackground;
 	public ImagePanel image = new ImagePanel(new ImageIcon("images/blank.png").getImage());
 
 	public JLabel label = new JLabel();
-	
+
 	public CellPane() {
 		setLayout(new FlowLayout());
 		((FlowLayout) getLayout()).setVgap(0);
 		setBackground(Color.WHITE);
+
+		label.setFont(label.getFont().deriveFont(7.0f));
 		add(label);
-		//add(image);
+
+		// add(image);
 	}
 
 	@Override
