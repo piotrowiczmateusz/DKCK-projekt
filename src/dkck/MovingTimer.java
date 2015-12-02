@@ -33,7 +33,6 @@ public class MovingTimer extends TimerTask {
 		super();
 		this.setItemReference(itemReference);
 		this.setTimer1(new Timer());
-
 	}
 
 	public void run() {

@@ -45,6 +45,12 @@ public class ItemsOperations {
 			((Bomb) itemReference).setBombTimer(null);
 		}
 
+		if (itemReference instanceof Bomb && !(itemReference instanceof Rocket)) {
+			Bomb bombReference = (Bomb) itemReference;
+			MainWindow.timerPanel.remove(((Bomb) bombReference).getTimerLog());
+			bombReference.setTimerLog(null);
+		}
+
 		MainWindow.itemsCollection.getItemsArray().remove(itemReference);
 
 		// MainWindow.grid.repairSquare(tempItem.getPositionX(),
@@ -129,23 +135,25 @@ public class ItemsOperations {
 		itemsArray.add(new Bomb());
 		itemsArray.add(new Bomb());
 
+		dropItem(itemsArray.get(itemsArray.size() - 1));
+
 		for (int i = 0; i < 2; ++i) {
 			itemsArray.add(new Bomb());
 			itemsArray.add(new Rocket(MainWindow.findElementByID(0, Sapper.class)));
 		}
 
 		// Thread.sleep(1000);
-		for (int i = 0; i < 10; ++i) {
-			// Thread.sleep(300);
-			itemsArray.add(new Tree());
-		}
+		// for (int i = 0; i < 10; ++i) {
+		// // Thread.sleep(300);
+		// itemsArray.add(new Tree());
+		// }
+		//
+		// for (int i = 0; i < 10; ++i) {
+		//
+		// dropItem(itemsArray.get(itemsArray.size() - 1));
+		// }
 
-		for (int i = 0; i < 10; ++i) {
-
-			dropItem(itemsArray.get(itemsArray.size() - 1));
-		}
-
-		for (int j = 0; j < 10; ++j) {
+		for (int j = 0; j < 5; ++j) {
 			// Thread.sleep(1000);
 
 			// Thread.sleep(300);
