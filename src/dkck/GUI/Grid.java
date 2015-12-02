@@ -215,8 +215,7 @@ public class Grid extends JPanel {
 
 		for (Class<?> cls : MainWindow.classSequence) {
 
-			for (int j = 0; j < MainWindow.itemsCollection.getItemsArray().size(); j++) {
-				Item tempItem = MainWindow.itemsCollection.getItemsArray().get(j);
+			for (Item tempItem : MainWindow.itemsCollection.getItemsArray()) {
 
 				if (cls.isInstance(tempItem) && tempItem.getClass().equals(cls)) {
 					MainWindow.grid.drawCircle(tempItem.getPositionX(), tempItem.getPositionY(), tempItem.getRange(),
@@ -231,8 +230,7 @@ public class Grid extends JPanel {
 
 		for (Class<?> cls : MainWindow.classSequence) {
 
-			for (int j = 0; j < MainWindow.itemsCollection.getItemsArray().size(); j++) {
-				Item tempItem = MainWindow.itemsCollection.getItemsArray().get(j);
+			for (Item tempItem : MainWindow.itemsCollection.getItemsArray()) {
 
 				if (cls.isInstance(tempItem) && tempItem.getClass().equals(cls)) {
 					MainWindow.grid.drawSquare(tempItem.getPositionX(), tempItem.getPositionY(),

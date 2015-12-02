@@ -25,8 +25,8 @@ public class Rocket extends Bomb {
 			if (sapperReference.getNumberOfRockets() > 0) {
 				sapperReference.setNumberOfRockets(sapperReference.getNumberOfRockets() - 1);
 
-				for (int i = 0; i < MainWindow.itemsCollection.getItemsArray().size(); i++) {
-					Item tempItem = MainWindow.itemsCollection.getItemsArray().get(i);
+				for (Item tempItem : MainWindow.itemsCollection.getItemsArray()) {
+
 					if (tempItem instanceof Sapper && tempItem != itemArgument) {
 						this.reachItem(tempItem);
 					}

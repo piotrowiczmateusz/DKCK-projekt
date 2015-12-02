@@ -125,6 +125,7 @@ public class Bomb extends Item {
 					this.getBombTimer().cancel();
 					this.setBombStatus(2);
 					tempSapper.setNumberOfDisarmedBombs(tempSapper.getNumberOfDisarmedBombs() + 1);
+					tempSapper.setNumberOfRockets(tempSapper.getNumberOfRockets() + 1);
 					MainWindow.updateLog("Bomba nr " + (this.getId() + 1) + " jest teraz rozbrojona");
 
 				} else {
