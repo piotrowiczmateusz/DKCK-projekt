@@ -102,7 +102,7 @@ public class MainWindow extends JFrame {
 	// metoda sprawdzajaca czy bomba istnieje
 		static public Item findElementByID(int id, Class<?> typeOfItem) {
 
-			for (int i = 1; i < itemsCollection.getItemsArray().size(); i++) {
+			for (int i = 0; i < itemsCollection.getItemsArray().size(); i++) {
 				Item tempItem = itemsCollection.getItemsArray().get(i);
 
 				if ((typeOfItem.isInstance(tempItem))

@@ -8,6 +8,43 @@ public class Interpreter {
 		super();
 	}
 
+	public Sapper getSapper(String input) {
+		
+		Class<?> sapperClass = Sapper.class;
+
+		Item tempSapper = null;
+
+		if (input.matches("|(.*)pierwszego sapera(.*)|(.*)sapera numer jeden(.*)|(.*)pierwszy saper(.*)")) {
+			tempSapper = (Sapper) MainWindow.findElementByID(0, sapperClass);
+		}
+
+		else if (input.matches("|(.*)drugiego sapera(.*)|(.*)sapera numer dwa(.*)|(.*)drugi saper(.*)")) {
+			tempSapper = (Sapper) MainWindow.findElementByID(1, sapperClass);
+		}
+
+		else if (input.matches("|(.*)trzeciego sapera(.*)|(.*)sapera numer trzy(.*)|(.*)trzeci saper(.*)")) {
+			tempSapper = (Sapper) MainWindow.findElementByID(2, sapperClass);
+		}
+		
+		else if (input.matches("|(.*)czwartego sapera(.*)|(.*)sapera numer cztery(.*|(.*)czwarty saper(.*))")) {
+			tempSapper = (Sapper) MainWindow.findElementByID(3, sapperClass);
+		}
+		
+		else if (input.matches("|(.*)piątego sapera(.*)|(.*)sapera numer pięć(.*)|(.*)piąty saper(.*)")) {
+			tempSapper = (Sapper) MainWindow.findElementByID(4, sapperClass);
+		}
+		
+		else if (input.matches("|(.*)szóstego sapera(.*)|(.*)sapera numer sześć(.*)|(.*)szósty saper(.*)")) {
+			tempSapper = (Sapper) MainWindow.findElementByID(5, sapperClass);
+		}
+		
+		else {
+			MainWindow.updateLog("Sprecyzuj swoje polecenie.");
+		}
+
+		return (Sapper) tempSapper;
+	}
+	
 	
 	// metoda zwracająca konkretną bombę w zależności od wejścia
 	public Bomb getBomb(String input) {
@@ -15,6 +52,8 @@ public class Interpreter {
 		Class<?> bombClass = Bomb.class;
 
 		Item tempBomb = null;
+
+		Sapper tempSapper = getSapper(input);
 
 		if (input.matches("|(.*)pierwsza(.*)|(.*)pierwszą(.*)|(.*)pierwszej(.*)|(.*)jeden(.*)")) {
 			tempBomb = MainWindow.findElementByID(0, bombClass);
@@ -44,11 +83,11 @@ public class Interpreter {
 
 			double min = 50;
 
-			for (int i = 1; i < MainWindow.itemsCollection.getItemsArray().size(); i++) {
+			for (int i = 0; i < MainWindow.itemsCollection.getItemsArray().size(); i++) {
 				Item tempItem = MainWindow.itemsCollection.getItemsArray().get(i);
 
 				if ((tempItem instanceof Bomb) && !(tempItem instanceof Rocket)) {
-					double value = tempItem.distanceCalculation(MainWindow.findElementByID(0, Sapper.class));
+					double value = tempItem.distanceCalculation(tempSapper);
 					if (value < min) {
 						min = value;
 						tempBomb = (Bomb) tempItem;
@@ -61,11 +100,11 @@ public class Interpreter {
 
 			double max = 0;
 
-			for (int i = 1; i < MainWindow.itemsCollection.getItemsArray().size(); i++) {
+			for (int i = 0; i < MainWindow.itemsCollection.getItemsArray().size(); i++) {
 				Item tempItem = MainWindow.itemsCollection.getItemsArray().get(i);
 
 				if ((tempItem instanceof Bomb) && !(tempItem instanceof Rocket)) {
-					double value = tempItem.distanceCalculation(MainWindow.findElementByID(0, Sapper.class));
+					double value = tempItem.distanceCalculation(tempSapper);
 					if (value > max) {
 						max = value;
 						tempBomb = (Bomb) tempItem;
@@ -80,13 +119,51 @@ public class Interpreter {
 
 		return (Bomb) tempBomb;
 	}
+	
+	public Tree getTree(String input) {
+
+		Class<?> treeClass = Tree.class;
+
+		Item tempTree = null;
+		
+
+		if (input.matches("|(.*)pierwszego(.*)")) {
+			tempTree = MainWindow.findElementByID(0, treeClass);
+		}
+
+		else if (input.matches("|(.*)drugiego(.*)")) {
+			tempTree = MainWindow.findElementByID(1, treeClass);
+		}
+
+		else if (input.matches("|(.*)trzeciego(.*)")) {
+			tempTree = MainWindow.findElementByID(2, treeClass);
+		}
+
+		else if (input.matches("|(.*)czwartego(.*)")) {
+			tempTree = MainWindow.findElementByID(3, treeClass);
+		}
+
+		else if (input.matches("|(.*)piątego(.*)")) {
+			tempTree = MainWindow.findElementByID(4, treeClass);
+		}
+
+		else if (input.matches("|(.*)szóstego(.*)")) {
+			tempTree = MainWindow.findElementByID(5, treeClass);
+		}
+
+		else {
+			MainWindow.updateLog("Sprecyzuj swoje polecenie.");
+		}
+
+		return (Tree) tempTree;
+	}
+	
+
 
 	public void interpret(String input) throws InterruptedException {
 
-		Class<?> sapperClass = Sapper.class;
-
-		Sapper tempSapper = (Sapper) MainWindow.findElementByID(0, sapperClass);
-
+		Sapper tempSapper = getSapper(input);
+		
 		/* Przemieszczanie siê */
 
 		if (input.matches("|(.*)idź(.*)|(.*)pójdź(.*)")) {
@@ -101,6 +178,15 @@ public class Interpreter {
 				x = tempBomb.getPositionX();
 				y = tempBomb.getPositionY();
 
+			}
+			
+			if (input.matches("(.*)drzewo(.*)|(.*)drzewa(.*)")){
+				 
+				Tree tempTree = getTree(input);
+				
+				x = tempTree.getPositionX();		
+				y = tempTree.getPositionY();
+				
 			}
 
 			else {
@@ -129,11 +215,39 @@ public class Interpreter {
 		else if (input.matches("(.*)przenieś(.*)|(.*)przenieść(.*)")) {
 
 			Bomb tempBomb = getBomb(input);
-			tempSapper.moveBomb(tempBomb, 0, 0);
+			if (input.matches("(.*)północ(.*)|(.*)północny(.*)|(.*)góra(.*)|(.*)górę(.*)|(.*)górny(.*)")
+					&& input.matches("(.*)wschód(.*)|(.*)wschodni(.*)|(.*)prawo(.*)|(.*)prawy(.*)")) {
+				tempSapper.moveBomb(tempBomb, 0, MainWindow.gridRows-1);
+			} else if (input.matches("(.*)północ(.*)|(.*)północny(.*)|(.*)góra(.*)|(.*)górę(.*)|(.*)górny(.*)")
+					&& input.matches("(.*)zachód(.*)|(.*)zachodni(.*)|(.*)lewo(.*)|(.*)lewy(.*)"))  {
+				tempSapper.moveBomb(tempBomb, 0, 0);
+			}
+			if (input.matches("(.*)południe(.*)|(.*)południowy(.*)|(.*)dół(.*)|(.*)dolny(.*)")
+					&& input.matches("(.*)wschód(.*)|(.*)wschodni(.*)|(.*)prawo(.*)|(.*)prawy(.*)")) {
+				tempSapper.moveBomb(tempBomb, MainWindow.gridColumns-1, MainWindow.gridRows-1);
+			} else if (input.matches("(.*)południe(.*)|(.*)południowy(.*)|(.*)dół(.*)|(.*)dolny(.*)")
+					&& input.matches("(.*)zachód(.*)|(.*)zachodni(.*)|(.*)lewo(.*)|(.*)lewy(.*)"))  {
+				tempSapper.moveBomb(tempBomb, MainWindow.gridColumns-1, 0);
+			}
+			
+			if (input.matches("(.*)drzewo(.*)|(.*)drzewa(.*)")){
+				 
+				Tree tempTree = getTree(input);
+				
+				int x = tempTree.getPositionX();
+				
+				int y = tempTree.getPositionY();
+				
+				tempSapper.moveBomb(tempBomb, x, y);
 
+				
+			}
+				
+				
 		}
+			
 
-		else {
+	else {
 		}
 	}
 	/*
