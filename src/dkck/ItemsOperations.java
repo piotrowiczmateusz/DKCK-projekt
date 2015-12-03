@@ -53,15 +53,10 @@ public class ItemsOperations {
 
 		MainWindow.itemsCollection.getItemsArray().remove(itemReference);
 
-		// MainWindow.grid.repairSquare(tempItem.getPositionX(),
-		// tempItem.getPositionY());
-
 		MainWindow.grid.drawCircle(itemReference.getPositionX(), itemReference.getPositionY(), itemReference.getRange(),
 				null);
 		MainWindow.grid.drawSquare(itemReference.getPositionX(), itemReference.getPositionY(),
 				itemReference.getPositionX(), itemReference.getPositionY(), null);
-		// MainWindow.grid.repairCircle(tempItem.getPositionX(),
-		// tempItem.getPositionY(), tempItem.getRange());
 
 		Grid.repairCircles();
 		Grid.repairSquares();
@@ -142,47 +137,9 @@ public class ItemsOperations {
 			itemsArray.add(new Rocket(MainWindow.findElementByID(0, Sapper.class)));
 		}
 
-		// Thread.sleep(1000);
-		// for (int i = 0; i < 10; ++i) {
-		// // Thread.sleep(300);
-		// itemsArray.add(new Tree());
-		// }
-		//
-		// for (int i = 0; i < 10; ++i) {
-		//
-		// dropItem(itemsArray.get(itemsArray.size() - 1));
-		// }
-
 		for (int j = 0; j < 5; ++j) {
-			// Thread.sleep(1000);
-
-			// Thread.sleep(300);
-			itemsArray.add(new Rocket(MainWindow.findElementByID(0, Sapper.class)));
-			// dropItem(findItem(this.getItemsArray().get(itemsArray.size()
-			// - 1)));
-			// Thread.sleep(300);
-
-			// dropItem(findItem(this.getItemsArray().get(itemsArray.size()
-			// - 1)));
-
-			// dropItem(itemsArray.size() - 1);
-
+			itemsArray.add(new Rocket(MainWindow.findElementByID(0, Sapper.class)));		
 		}
-
-		// for (int j = 0; j < 5; ++j) {
-		// Thread.sleep(300);
-		// for (int i = 0; i < 3; ++i) {
-		// // Thread.sleep(300);
-		// //itemsArray.add(new Rocket(itemsArray.get(0)));
-		// Thread.sleep(300);
-		// dropItem(itemsArray.size() - 1);
-		// }
-		// }
-		// while(true)
-		// {
-		// MainWindow.grid.repairCircles();
-		// MainWindow.grid.repairSquares();
-		// }
 	}
 
 	public void actions() throws InterruptedException {

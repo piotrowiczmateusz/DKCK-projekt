@@ -6,7 +6,6 @@ import java.awt.GridBagLayout;
 import java.util.ArrayList;
 import java.util.List;
 
-import javax.swing.ImageIcon;
 import javax.swing.JPanel;
 import javax.swing.border.Border;
 import javax.swing.border.MatteBorder;
@@ -125,26 +124,6 @@ public class Grid extends JPanel {
 		}
 	}
 
-	/*
-	 * public void repairSquare(int positionX, int positionY) { for (int i = 0;
-	 * i < MainWindow.itemsCollection.getItemsArray().size(); i++) { Item
-	 * tempItem = MainWindow.itemsCollection.getItemsArray().get(i);
-	 * 
-	 * if ((tempItem.getPositionX() == positionX) && (tempItem.getPositionY() ==
-	 * positionY)) { if (tempItem instanceof Bomb && (tempItem instanceof Rocket
-	 * == false)) { MainWindow.grid.drawSquare(tempItem.getPositionX(),
-	 * tempItem.getPositionY(), tempItem.getPositionX(),
-	 * tempItem.getPositionY(), MainWindow.bombColor);
-	 * 
-	 * } else if (tempItem instanceof Sapper) {
-	 * MainWindow.grid.drawSquare(positionX, positionY, tempItem.getPositionX(),
-	 * tempItem.getPositionY(), MainWindow.sapperColor);
-	 * 
-	 * } else if (tempItem instanceof Rocket) {
-	 * MainWindow.grid.drawSquare(positionX, positionY, tempItem.getPositionX(),
-	 * tempItem.getPositionY(), MainWindow.rocketColor); } } } }
-	 */
-
 	// funkcja rysowania zakresów obiektów
 
 	public void drawCircle(int x0, int y0, int radius, Item itemReference) {
@@ -191,26 +170,6 @@ public class Grid extends JPanel {
 		}
 	}
 
-	/*
-	 * public void repairCircle(int x0, int y0, int radius) { for (int i = 0; i
-	 * < MainWindow.itemsCollection.getItemsArray().size(); i++) { Item tempItem
-	 * = MainWindow.itemsCollection.getItemsArray().get(i);
-	 * 
-	 * if ((tempItem.getPositionX() == x0) && (tempItem.getPositionY() == y0) &&
-	 * (tempItem.getRange() == radius)) { if (tempItem instanceof Bomb &&
-	 * (tempItem instanceof Rocket == false)) {
-	 * MainWindow.grid.drawCircle(tempItem.getPositionX(),
-	 * tempItem.getPositionY(), tempItem.getRange(), MainWindow.bombColor);
-	 * 
-	 * } else if (tempItem instanceof Sapper) {
-	 * MainWindow.grid.drawCircle(tempItem.getPositionX(),
-	 * tempItem.getPositionY(), tempItem.getRange(), MainWindow.sapperColor); }
-	 * else if (tempItem instanceof Rocket) {
-	 * MainWindow.grid.drawCircle(tempItem.getPositionX(),
-	 * tempItem.getPositionY(), tempItem.getRange(), MainWindow.rocketColor); }
-	 * } } }
-	 */
-
 	public static void repairCircles() {
 
 		for (Class<?> cls : MainWindow.classSequence) {
@@ -241,29 +200,4 @@ public class Grid extends JPanel {
 		}
 
 	}
-
-	public void drawSapper(int x, int y) {
-		this.cellPanes.get(x).get(y).image.img = new ImageIcon("images/sapper.png").getImage();
-	}
-
-	public void drawDeadSapper(int x, int y) {
-		this.cellPanes.get(x).get(y).image.img = new ImageIcon("images/dead.png").getImage();
-	}
-
-	public void drawBomb(int x, int y) {
-		this.cellPanes.get(x).get(y).image.img = new ImageIcon("images/bomb.png").getImage();
-	}
-
-	public void drawExplodedBomb(int x, int y) {
-		this.cellPanes.get(x).get(y).image.img = new ImageIcon("images/exploded.png").getImage();
-	}
-
-	public void drawDisarmedBomb(int x, int y) {
-		this.cellPanes.get(x).get(y).image.img = new ImageIcon("images/disarmed.png").getImage();
-	}
-
-	public void drawRocket(int x, int y) {
-		this.cellPanes.get(x).get(y).image.img = new ImageIcon("images/disarmed.png").getImage();
-	}
-
 }

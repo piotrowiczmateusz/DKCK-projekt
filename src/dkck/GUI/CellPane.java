@@ -4,16 +4,13 @@ import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.FlowLayout;
 
-import javax.swing.ImageIcon;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 
 public class CellPane extends JPanel {
 
 	private static final long serialVersionUID = 1L;
-	// public Color defaultBackground;
-	public ImagePanel image = new ImagePanel(new ImageIcon("images/blank.png").getImage());
-
+	
 	public JLabel label = new JLabel();
 
 	public CellPane() {
@@ -23,8 +20,6 @@ public class CellPane extends JPanel {
 
 		label.setFont(label.getFont().deriveFont(7.0f));
 		add(label);
-
-		// add(image);
 	}
 
 	@Override

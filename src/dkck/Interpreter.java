@@ -161,8 +161,8 @@ public class Interpreter {
 
 		/* Przemieszczanie siê */
 
-		if (input.matches("|(.*)idź(.*)|(.*)pójdź(.*)")) {
-
+		if (input.matches("|(.*)idź(.*)|(.*)pójdź(.*)")) {	
+			
 			int x = tempSapper.getPositionX();
 			int y = tempSapper.getPositionY();
 
