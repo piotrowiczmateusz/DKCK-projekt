@@ -184,7 +184,6 @@ public class Grid extends JPanel {
 							tempItem);
 				}
 			}
-
 		}
 	}
 
@@ -199,8 +198,6 @@ public class Grid extends JPanel {
 							tempItem.getPositionX(), tempItem.getPositionY(), tempItem);
 				}
 			}
-
 		}
-
 	}
 }

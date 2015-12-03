@@ -80,9 +80,6 @@ public class Bomb extends Item {
 			this.setExplosionLeftTime(0);
 		}
 
-		// MainWindow.grid.cellPanes.get(this.getPositionX()).get(this.getPositionY()).label
-		// .setText((this.getId() + 1) + "");
-
 	}
 
 	/**
@@ -160,11 +157,9 @@ public class Bomb extends Item {
 				if (this.checkItemsRange(tempSapper) == true) {
 					tempSapper.hurt();
 				}
-
 			}
 		}
 		Grid.repairSquares();
 		Grid.repairCircles();
 	}
-
 }

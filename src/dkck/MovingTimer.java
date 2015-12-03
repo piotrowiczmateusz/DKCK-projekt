@@ -13,11 +13,11 @@ public class MovingTimer extends TimerTask {
 
 	private Timer timer1;
 
-	public Item getItemReference() {
+	public Item getItemRef() {
 		return itemReference;
 	}
 
-	public void setItemReference(Item itemReference) {
+	public void setItemRef(Item itemReference) {
 		this.itemReference = itemReference;
 	}
 
@@ -31,21 +31,21 @@ public class MovingTimer extends TimerTask {
 
 	public MovingTimer(Item itemReference) {
 		super();
-		this.setItemReference(itemReference);
+		this.setItemRef(itemReference);
 		this.setTimer1(new Timer());
 	}
 
 	public void run() {
 
-		if (this.getItemReference() instanceof Sapper || this.getItemReference() instanceof Rocket) {
+		if (this.getItemRef() instanceof Sapper || this.getItemRef() instanceof Rocket) {
 
 			boolean continueStep = true;// important variable to state if item
 										// is doing one step or not in one cycle
 			Sapper tempSapper = null;
 
-			if (this.getItemReference() instanceof Sapper) {
+			if (this.getItemRef() instanceof Sapper) {
 
-				tempSapper = ((Sapper) this.getItemReference());
+				tempSapper = ((Sapper) this.getItemRef());
 
 				// checking sapper health points
 
@@ -57,15 +57,15 @@ public class MovingTimer extends TimerTask {
 					continueStep = false;
 				}
 			}
-			if (this.getItemReference().getTargetsArray().isEmpty() == false) {
+			if (this.getItemRef().getTargetsArray().isEmpty() == false) {
 
 				// checking if sapper is already dead (if is, rocket choose
 				// another
 				// sapperg to hurt)
 
-				if (this.getItemReference() instanceof Rocket
-						&& this.getItemReference().getTargetsArray().get(0) instanceof Sapper) {
-					tempSapper = ((Sapper) this.getItemReference().getTargetsArray().get(0));
+				if (this.getItemRef() instanceof Rocket
+						&& this.getItemRef().getTargetsArray().get(0) instanceof Sapper) {
+					tempSapper = ((Sapper) this.getItemRef().getTargetsArray().get(0));
 					if (tempSapper.getHealthPoints() == 0) {
 						continueStep = false;
 					}
@@ -73,19 +73,19 @@ public class MovingTimer extends TimerTask {
 
 				// checking position of item (mayby he reached the target)
 
-				int initItemPositionX = this.getItemReference().getPositionX();
-				int initItemPositionY = this.getItemReference().getPositionY();
+				int initItemPositionX = this.getItemRef().getPositionX();
+				int initItemPositionY = this.getItemRef().getPositionY();
 
-				if (this.getItemReference().getTargetsArray().isEmpty() == false
-						&& this.getItemReference().getTargetsArray().get(0).getPositionX() == this.getItemReference()
+				if (this.getItemRef().getTargetsArray().isEmpty() == false
+						&& this.getItemRef().getTargetsArray().get(0).getPositionX() == this.getItemRef()
 								.getPositionX()
-						&& this.getItemReference().getTargetsArray().get(0).getPositionY() == this.getItemReference()
+						&& this.getItemRef().getTargetsArray().get(0).getPositionY() == this.getItemRef()
 								.getPositionY()) {
 					
 					MainWindow.updateLog("Obiekt " +
-							this.getItemReference().nameOfItem(this.getItemReference()) + " dotar³ do celu");
-					if (this.getItemReference() instanceof Rocket) {
-						((Rocket) this.getItemReference()).explode();
+							this.getItemRef().nameOfItem(this.getItemRef()) + " dotar³ do celu");
+					if (this.getItemRef() instanceof Rocket) {
+						((Rocket) this.getItemRef()).explode();
 
 					}
 
@@ -94,12 +94,12 @@ public class MovingTimer extends TimerTask {
 
 				// checking bomb loss
 
-				if (this.getItemReference().getTargetsArray().get(1) instanceof Bomb
-						&& this.getItemReference() instanceof Sapper) {
-					Item tempItem = ((Sapper) this.getItemReference()).getTargetsArray().get(1);
+				if (this.getItemRef().getTargetsArray().get(1) instanceof Bomb
+						&& this.getItemRef() instanceof Sapper) {
+					Item tempItem = ((Sapper) this.getItemRef()).getTargetsArray().get(1);
 					if (tempItem.getPositionX() != initItemPositionX && tempItem.getPositionY() != initItemPositionY) {
 
-						MainWindow.updateLog("Obiekt " + this.getItemReference().nameOfItem(this.getItemReference())+ "zgubi³ bombê");
+						MainWindow.updateLog("Obiekt " + this.getItemRef().nameOfItem(this.getItemRef())+ "zgubi³ bombê");
 						continueStep = false;
 					}
 				}
@@ -107,74 +107,67 @@ public class MovingTimer extends TimerTask {
 				// removing things form list if something was wrong
 
 				if (continueStep == false) {
-					this.getItemReference().getTargetsArray().remove(1);
-					this.getItemReference().getTargetsArray().remove(0);
+					this.getItemRef().getTargetsArray().remove(1);
+					this.getItemRef().getTargetsArray().remove(0);
 				}
 
 				if (continueStep == true) {
 
-					Item tempItem = this.getItemReference().getTargetsArray().get(0);
+					Item tempItem = this.getItemRef().getTargetsArray().get(0);
 
 					// one step to target
 
-					if (tempItem.getPositionX() > this.getItemReference().getPositionX()) {
-						this.getItemReference().setPositionX(this.getItemReference().getPositionX() + 1);
-					} else if (tempItem.getPositionX() < this.getItemReference().getPositionX()) {
-						this.getItemReference().setPositionX(this.getItemReference().getPositionX() - 1);
+					if (tempItem.getPositionX() > this.getItemRef().getPositionX()) {
+						this.getItemRef().setPositionX(this.getItemRef().getPositionX() + 1);
+					} else if (tempItem.getPositionX() < this.getItemRef().getPositionX()) {
+						this.getItemRef().setPositionX(this.getItemRef().getPositionX() - 1);
 					}
-					if (tempItem.getPositionY() > this.getItemReference().getPositionY()) {
-						this.getItemReference().setPositionY(this.getItemReference().getPositionY() + 1);
-					} else if (tempItem.getPositionY() < this.getItemReference().getPositionY()) {
-						this.getItemReference().setPositionY(this.getItemReference().getPositionY() - 1);
+					if (tempItem.getPositionY() > this.getItemRef().getPositionY()) {
+						this.getItemRef().setPositionY(this.getItemRef().getPositionY() + 1);
+					} else if (tempItem.getPositionY() < this.getItemRef().getPositionY()) {
+						this.getItemRef().setPositionY(this.getItemRef().getPositionY() - 1);
 					}
 
-					if( this.getItemReference() instanceof Sapper) MainWindow.updatePositionPanel("Pozycja sapera: [" + (this.getItemReference().getPositionX() + 1)
-							+ "][" + (this.getItemReference().getPositionY() + 1) + "]");
+					if( this.getItemRef() instanceof Sapper) {				
+						((Sapper) this.getItemRef()).getPositionLog().setText("Pozycja sapera " + this.getItemRef().getId() + ": [" + (this.getItemRef().getPositionX() + 1)
+								+ "][" + (this.getItemRef().getPositionY() + 1) + "]");
+					}
 
 					// moving bomb
 
-					if (this.getItemReference().getTargetsArray().get(1) instanceof Bomb
-							&& this.getItemReference() instanceof Sapper) {
-						tempItem = ((Sapper) this.getItemReference()).getTargetsArray().get(1);
+					if (this.getItemRef().getTargetsArray().get(1) instanceof Bomb
+							&& this.getItemRef() instanceof Sapper) {
+						tempItem = ((Sapper) this.getItemRef()).getTargetsArray().get(1);
 
-						tempItem.setPositionX(this.getItemReference().getPositionX());
-						tempItem.setPositionY(this.getItemReference().getPositionY());
+						tempItem.setPositionX(this.getItemRef().getPositionX());
+						tempItem.setPositionY(this.getItemRef().getPositionY());
 
 						MainWindow.grid.drawCircle(initItemPositionX, initItemPositionY, tempItem.getRange(), null);
 						MainWindow.grid.drawCircle(tempItem.getPositionX(), tempItem.getPositionY(),
 								tempItem.getRange(), tempItem);
 						MainWindow.grid.drawSquare(initItemPositionX, initItemPositionY, tempItem.getPositionX(),
 								tempItem.getPositionY(), tempItem);
-						//MainWindow.grid.cellPanes.get(tempItem.getPositionX()).get(tempItem.getPositionY()).label
-								//.setText((tempItem.getId() + 1) + "");
-
 					}
 
 					// drawing moving object
 
-					MainWindow.grid.drawCircle(initItemPositionX, initItemPositionY, this.getItemReference().getRange(),
+					MainWindow.grid.drawCircle(initItemPositionX, initItemPositionY, this.getItemRef().getRange(),
 							null);
-					MainWindow.grid.drawCircle(this.getItemReference().getPositionX(),
-							this.getItemReference().getPositionY(), this.getItemReference().getRange(), tempItem);
+					MainWindow.grid.drawCircle(this.getItemRef().getPositionX(),
+							this.getItemRef().getPositionY(), this.getItemRef().getRange(), tempItem);
 					MainWindow.grid.drawSquare(initItemPositionX, initItemPositionY,
-							this.getItemReference().getPositionX(), this.getItemReference().getPositionY(), tempItem);
+							this.getItemRef().getPositionX(), this.getItemRef().getPositionY(), tempItem);
 
-					// MainWindow.grid.repairCircle(this.getItemReference().getPositionX(),
-					// this.getItemReference().getPositionY(),
-					// this.getItemReference().getRange());
-					// MainWindow.grid.repairSquare(initItemPositionX,
-					// initItemPositionY);
 					Grid.repairCircles();
 					Grid.repairSquares();
 				} else
 					run();// recursive call
-			} else if (this.getItemReference() instanceof Rocket) {
-				ItemsOperations.dropItem(this.getItemReference());
+			} else if (this.getItemRef() instanceof Rocket) {
+				ItemsOperations.dropItem(this.getItemRef());
 			}
 
 		} else {
 			this.cancel();
-
 		}
 	}
 }

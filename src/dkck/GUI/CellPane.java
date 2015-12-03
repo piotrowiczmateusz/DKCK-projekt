@@ -17,7 +17,6 @@ public class CellPane extends JPanel {
 		setLayout(new FlowLayout());
 		((FlowLayout) getLayout()).setVgap(0);
 		setBackground(Color.WHITE);
-
 		label.setFont(label.getFont().deriveFont(7.0f));
 		add(label);
 	}

@@ -32,7 +32,7 @@ public class ConsoleIn extends JTextField {
 					} catch (InterruptedException e1) {
 						e1.printStackTrace();
 					}
-		            MainWindow.updateLog("USER: " + input);	           
+		            MainWindow.updateLog("U¯YTKOWNIK: " + input);	           
 		            MainWindow.consoleIn.setText(null);	           
 		        }        
 			}	

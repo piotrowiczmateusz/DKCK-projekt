@@ -35,13 +35,13 @@ public class ItemsOperations {
 
 		if (itemReference.getMovingTimer() != null) {
 			((Bomb) itemReference).getMovingTimer().cancel();
-			((Bomb) itemReference).getMovingTimer().setItemReference(null);
+			((Bomb) itemReference).getMovingTimer().setItemRef(null);
 			((Bomb) itemReference).setMovingTimer(null);
 		}
 
 		if (itemReference instanceof Bomb && ((Bomb) itemReference).getBombTimer() != null) {
 			((Bomb) itemReference).getBombTimer().cancel();
-			((Bomb) itemReference).getBombTimer().setItemReference(null);
+			((Bomb) itemReference).getBombTimer().setItemRef(null);
 			((Bomb) itemReference).setBombTimer(null);
 		}
 

@@ -15,7 +15,7 @@ public class LogPanel extends JTextArea {
 	public LogPanel() {    
 		super();	
 		setBackground(Color.white);
-		setPreferredSize(new Dimension(360, 250));
+		setPreferredSize(new Dimension(360, 170));
 		setBorder(BorderFactory.createLineBorder(Color.black));
 		setBounds(new Rectangle(new Point(180, 10), getPreferredSize()));	
 		setEditable(false);

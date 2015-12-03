@@ -31,10 +31,8 @@ public class Rocket extends Bomb {
 						this.reachItem(tempItem);
 					}
 				}
-
 			}
 		}
 		this.getMovingTimer().getTimer1().schedule(getMovingTimer(), 0, speed);
-
 	}
 }

@@ -9,11 +9,11 @@ public class BombTimer extends TimerTask {
 
 	private Timer timer1;
 
-	public Item getItemReference() {
+	public Item getItemRef() {
 		return itemReference;
 	}
 
-	public void setItemReference(Item itemReference) {
+	public void setItemRef(Item itemReference) {
 		this.itemReference = itemReference;
 	}
 
@@ -38,24 +38,12 @@ public class BombTimer extends TimerTask {
 			Bomb tempBomb = ((Bomb) itemReference);
 			if (tempBomb.getExplosionLeftTime() > 0) {
 				tempBomb.setExplosionLeftTime(tempBomb.getExplosionLeftTime() - 1);
-				/*
-				 * System.out.println("Bomb nr: " + tempBomb.getId() + " has: "
-				 * + tempBomb.getExplosionLeftTime() +
-				 * " seconds left to explosion");
-				 */
-				// try {
-				// Thread.sleep(200);
-				// } catch (InterruptedException e) {
-				// // TODO Auto-generated catch block
-				// e.printStackTrace();
-				// }
 
 				tempBomb.getTimerLog().setText("Bomba nr: " + (tempBomb.getId() + 1) + " ma: "
 						+ tempBomb.getExplosionLeftTime() + " sekund do wybuchu");
 
 			} else {
 				tempBomb.explode();
-
 			}
 
 		} else {

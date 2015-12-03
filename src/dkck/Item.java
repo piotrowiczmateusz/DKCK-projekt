@@ -89,12 +89,10 @@ public abstract class Item {
 		Random generator = new Random();
 
 		int positionX = 0;
-
 		int positionY = 0;
 
 		if (!(this instanceof Point)) {
 			positionX = generator.nextInt(MainWindow.gridRows);
-
 			positionY = generator.nextInt(MainWindow.gridColumns);
 		}
 

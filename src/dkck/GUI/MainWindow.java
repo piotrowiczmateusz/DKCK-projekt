@@ -30,7 +30,7 @@ public class MainWindow extends JFrame {
 
 	public static final Color bombActiveColor = Color.RED;
 
-	public static final Color bombDisableColor = Color.PINK;
+	public static final Color bombDisableColor = Color.LIGHT_GRAY;
 
 	public static final Color bombDisarmedColor = Color.MAGENTA;
 
@@ -60,8 +60,8 @@ public class MainWindow extends JFrame {
 
 	// RightPanel elements
 
-	private static HPPanel HPPanel = new HPPanel();
-	private static PositionPanel positionPanel = new PositionPanel();
+	public static HPPanel HPPanel = new HPPanel();
+	public static PositionPanel positionPanel = new PositionPanel();
 	public static TimerPanel timerPanel = new TimerPanel();
 	private static LogPanel logPanel = new LogPanel();
 
@@ -77,21 +77,12 @@ public class MainWindow extends JFrame {
 		MainWindow.logPanel.setText(message + "\n" + log);
 	}
 
-	public static void updateHPPanel(String message) {
-		MainWindow.HPPanel.setText(message);
-	}
-
-	public static void updatePositionPanel(String message) {
-		MainWindow.positionPanel.setText(message);
-	}
-
 	public static void main(String[] args) throws InterruptedException {
 
 		new MainWindow();
 
 		itemsCollection = new ItemsOperations();
 		itemsCollection.addItems();
-		// itemsCollection.actions();
 		interpreter = new Interpreter();
 
 	}

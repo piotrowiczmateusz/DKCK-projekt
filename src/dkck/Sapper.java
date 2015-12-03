@@ -1,7 +1,12 @@
 package dkck;
 
+import java.awt.BorderLayout;
+import java.awt.Color;
 import java.util.LinkedList;
 import java.util.Random;
+
+import javax.swing.BorderFactory;
+import javax.swing.JTextField;
 
 import dkck.GUI.MainWindow;
 
@@ -18,12 +23,15 @@ public class Sapper extends Item {
 	
 	private int numberOfRockets;
 
-	private boolean SapperStatus;
+	private boolean sapperStatus;
+	
+	private JTextField HPLog;
+	
+	private JTextField positionLog;
 
 	/**
 	 * SETTERS AND GETTERS
 	 */
-	
 	
 	public int getNumberOfDisarmedBombs() {
 		return numberOfDisarmedBombs;
@@ -50,12 +58,29 @@ public class Sapper extends Item {
 	}
 
 	public boolean getSapperStatus() {
-		return SapperStatus;
+		return sapperStatus;
 	}
 
 	public void setSapperStatus(boolean sapperStatus) {
-		SapperStatus = sapperStatus;
+		this.sapperStatus = sapperStatus;
 	}
+	
+	public JTextField getHPLog() {
+		return HPLog;
+	}
+
+	public void setHPLog(JTextField HPLog) {
+		this.HPLog = HPLog;
+	}
+	
+	public JTextField getPositionLog() {
+		return positionLog;
+	}
+
+	public void setPositionLog(JTextField positionLog) {
+		this.positionLog = positionLog;
+	}
+
 
 	/**
 	 * CONSTRUCTORS
@@ -67,9 +92,7 @@ public class Sapper extends Item {
 		this.setSapperStatus(true);
 		this.setHealthPoints(20);
 		this.setNumberOfRockets(5);
-		MainWindow.updateHPPanel("Sapper HP: " + this.getHealthPoints());
-		MainWindow.updatePositionPanel("Pozycja sapera: [" + this.getPositionX() + "][" + this.getPositionY() + "]");
-
+		
 		Random generator = new Random();
 
 		int speed = 70 + generator.nextInt(50);
@@ -77,7 +100,14 @@ public class Sapper extends Item {
 		this.setTargetsArray(new LinkedList<Item>());
 		this.setMovingTimer(new MovingTimer(this));
 		this.getMovingTimer().getTimer1().schedule(getMovingTimer(), 0, speed);
-
+		
+		this.setHPLog(new JTextField("Saper " + this.getId() + " HP: " + this.getHealthPoints()));
+		this.getHPLog().setBorder(BorderFactory.createLineBorder(Color.white));
+		MainWindow.HPPanel.add(this.getHPLog(), BorderLayout.EAST);
+				
+		this.setPositionLog(new JTextField("Pozycja sapera " + this.getId() + ": [" + this.getPositionX() + "][" + this.getPositionY() + "]"));
+		this.getPositionLog().setBorder(BorderFactory.createLineBorder(Color.white));
+		MainWindow.positionPanel.add(this.getPositionLog(), BorderLayout.EAST);
 	}
 
 	/**
@@ -87,7 +117,7 @@ public class Sapper extends Item {
 	public void hurt() {
 		if (this.getHealthPoints() > 0) {
 			this.setHealthPoints(this.getHealthPoints() - 1);
-			MainWindow.updateHPPanel("Saper HP: " + this.getHealthPoints());
+			this.getHPLog().setText("Saper " + this.getId() + " HP: " + this.getHealthPoints());
 		}
 	}
 
@@ -154,7 +184,6 @@ public class Sapper extends Item {
 					System.out.println("Number of disarmed bombs: " + this.getNumberOfDisarmedBombs());
 
 				} else {
-					System.out.println("too far to disarm bomb!");
 					MainWindow.updateLog("Za daleko, ¿eby rozbroiæ bombê");
 				}
 			}

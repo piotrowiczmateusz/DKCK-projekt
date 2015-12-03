@@ -7,10 +7,9 @@ import java.awt.Point;
 import java.awt.Rectangle;
 
 import javax.swing.BorderFactory;
-import javax.swing.JLabel;
-import javax.swing.SwingConstants;
+import javax.swing.JPanel;
 
-public class HPPanel extends JLabel {
+public class HPPanel extends JPanel {
 
 	private static final long serialVersionUID = 1L;
 
@@ -19,10 +18,9 @@ public class HPPanel extends JLabel {
 		setOpaque(true);
 		setBackground(Color.white);
 		setForeground(Color.black);
-		setPreferredSize(new Dimension(176, 25));
+		setPreferredSize(new Dimension(176, 110));
 		setBorder(BorderFactory.createLineBorder(Color.black));
-		setHorizontalAlignment(SwingConstants.CENTER);
-		setBounds(new Rectangle(new Point(10, 10), getPreferredSize()));
+		setBounds(new Rectangle(new Point(100, 10), getPreferredSize()));
 		setFont(new Font("Arial", Font.PLAIN, 12));
 	}
 }
