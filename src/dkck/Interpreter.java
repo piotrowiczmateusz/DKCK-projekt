@@ -1,5 +1,8 @@
 package dkck;
 
+import java.util.Arrays;
+import java.util.List;
+
 import dkck.GUI.MainWindow;
 
 public class Interpreter {
@@ -8,52 +11,67 @@ public class Interpreter {
 		super();
 	}
 	
+	// sprawdzanie czy w wejściu jest spójnik
+	public List<String> checkConjuction(String input) {
+		
+		List<String> inputParts = null;
+		
+		inputParts = Arrays.asList(input.split(" i "));
+	
+		return inputParts;
+	}
 
 	public Sapper getSapper(String input) {
 
 		Class<?> sapperClass = Sapper.class;
 
 		Item tempSapper = null;
+		
+		if (input.matches("(.*)saper(.*)|(.*)sapera(.*)")) {
+			if (input.matches("|(.*)pierwszego(.*)|(.*)jeden(.*)|(.*)pierwszy(.*)")) {
+				tempSapper = (Sapper) MainWindow.findElementByID(0, sapperClass);
+			}
 
-		if (input.matches("|(.*)pierwszego sapera(.*)|(.*)sapera numer jeden(.*)|(.*)pierwszy saper(.*)")) {
+			else if (input.matches("|(.*)drugiego(.*)|(.*)dwa(.*)|(.*)drugi(.*)")) {
+				tempSapper = (Sapper) MainWindow.findElementByID(1, sapperClass);
+			}
+
+			else if (input.matches("|(.*)trzeciego(.*)|(.*)trzy(.*)|(.*)trzeci(.*)")) {
+				tempSapper = (Sapper) MainWindow.findElementByID(2, sapperClass);
+			}
+
+			else if (input.matches("|(.*)czwartego(.*)|(.*)cztery(.*|(.*)czwarty(.*))")) {
+				tempSapper = (Sapper) MainWindow.findElementByID(3, sapperClass);
+			}
+
+			else if (input.matches("|(.*)piątego(.*)|(.*)pięć(.*)|(.*)piąty(.*)")) {
+				tempSapper = (Sapper) MainWindow.findElementByID(4, sapperClass);
+			}
+
+			else if (input.matches("|(.*)szóstego(.*)|(.*)sześć(.*)|(.*)szósty(.*)")) {
+				tempSapper = (Sapper) MainWindow.findElementByID(5, sapperClass);
+			}
+			
+			else {
+				// gdy użytkownik nie poda numeru sapera wybiera pierwszego		
+				tempSapper = (Sapper) MainWindow.findElementByID(0, sapperClass);
+			}
+		}
+
+		else {		
+			// gdy uzytkownik nie odnosi się do sapera, program wykonuje polecenia dla pierwszego sapera
 			tempSapper = (Sapper) MainWindow.findElementByID(0, sapperClass);
-		}
-
-		else if (input.matches("|(.*)drugiego sapera(.*)|(.*)sapera numer dwa(.*)|(.*)drugi saper(.*)")) {
-			tempSapper = (Sapper) MainWindow.findElementByID(1, sapperClass);
-		}
-
-		else if (input.matches("|(.*)trzeciego sapera(.*)|(.*)sapera numer trzy(.*)|(.*)trzeci saper(.*)")) {
-			tempSapper = (Sapper) MainWindow.findElementByID(2, sapperClass);
-		}
-
-		else if (input.matches("|(.*)czwartego sapera(.*)|(.*)sapera numer cztery(.*|(.*)czwarty saper(.*))")) {
-			tempSapper = (Sapper) MainWindow.findElementByID(3, sapperClass);
-		}
-
-		else if (input.matches("|(.*)piątego sapera(.*)|(.*)sapera numer pięć(.*)|(.*)piąty saper(.*)")) {
-			tempSapper = (Sapper) MainWindow.findElementByID(4, sapperClass);
-		}
-
-		else if (input.matches("|(.*)szóstego sapera(.*)|(.*)sapera numer sześć(.*)|(.*)szósty saper(.*)")) {
-			tempSapper = (Sapper) MainWindow.findElementByID(5, sapperClass);
-		}
-
-		else {
-			MainWindow.updateLog("Sprecyzuj swoje polecenie.");
 		}
 
 		return (Sapper) tempSapper;
 	}
 
 	// metoda zwracająca konkretną bombę w zależności od wejścia
-	public Bomb getBomb(String input) {
+	public Bomb getBomb(String input, Sapper tempSapper) {
 
 		Class<?> bombClass = Bomb.class;
 
 		Item tempBomb = null;
-
-		Sapper tempSapper = getSapper(input);
 
 		if (input.matches("|(.*)pierwsza(.*)|(.*)pierwszą(.*)|(.*)pierwszej(.*)|(.*)jeden(.*)")) {
 			tempBomb = MainWindow.findElementByID(0, bombClass);
@@ -112,7 +130,20 @@ public class Interpreter {
 		}
 
 		else {
-			MainWindow.updateLog("Sprecyzuj swoje polecenie.");
+			
+			// gdy użytkownik nie sprecyzuje numeru bomby wybiera najbliższą
+			double min = 50;
+
+			for (Item tempItem : MainWindow.itemsCollection.getItemsArray()) {
+
+				if ((tempItem instanceof Bomb) && !(tempItem instanceof Rocket)) {
+					double value = tempItem.distanceCalculation(tempSapper);
+					if (value < min) {
+						min = value;
+						tempBomb = (Bomb) tempItem;
+					}
+				}
+			}
 		}
 
 		return (Bomb) tempBomb;
@@ -149,7 +180,7 @@ public class Interpreter {
 		}
 
 		else {
-			MainWindow.updateLog("Sprecyzuj swoje polecenie.");
+			tempTree = MainWindow.findElementByID(0, treeClass);
 		}
 
 		return (Tree) tempTree;
@@ -157,97 +188,97 @@ public class Interpreter {
 
 	public void interpret(String input) throws InterruptedException {
 
-		Sapper tempSapper = getSapper(input);
-
-		/* Przemieszczanie siê */
-
-		if (input.matches("|(.*)idź(.*)|(.*)pójdź(.*)")) {	
+		List<String> inputParts = checkConjuction(input);
+		
+		for(int i = 0; i < inputParts.size(); i++) {
 			
-			int x = tempSapper.getPositionX();
-			int y = tempSapper.getPositionY();
+			input = inputParts.get(i);
+			
+			Sapper tempSapper = getSapper(input);
 
-			if (input.matches("(.*)bomba(.*)|(.*)bomby(.*)|(.*)bombę(.*)")) {
+			/* Przemieszczanie siê */
 
-				Bomb tempBomb = getBomb(input);
+			if (input.matches("|(.*)idź(.*)|(.*)pójdź(.*)")) {	
+				
+				int x = tempSapper.getPositionX();
+				int y = tempSapper.getPositionY();
 
-				x = tempBomb.getPositionX();
-				y = tempBomb.getPositionY();
+				if (input.matches("(.*)bomba(.*)|(.*)bomby(.*)|(.*)bombę(.*)")) {
+
+					Bomb tempBomb = getBomb(input, tempSapper);
+
+					x = tempBomb.getPositionX();
+					y = tempBomb.getPositionY();
+
+				}
+
+				else if (input.matches("(.*)drzewo(.*)|(.*)drzewa(.*)")) {
+
+					Tree tempTree = getTree(input);
+
+					x = tempTree.getPositionX();
+					y = tempTree.getPositionY();
+
+				}
+
+				else {
+					if (input.matches("(.*)północ(.*)|(.*)północny(.*)|(.*)góra(.*)|(.*)górę(.*)")) {
+						x = 0;
+					} else if (input.matches("(.*)południe(.*)|(.*)południowy(.*)|(.*)dół(.*)")) {
+						x = 49;
+					}
+					if (input.matches("(.*)zachód(.*)|(.*)zachodni(.*)|(.*)lewo(.*)|(.*)lewy(.*)")) {
+						y = 0;
+					} else if (input.matches("(.*)wschód(.*)|(.*)wschodni(.*)|(.*)prawo(.*)|(.*)prawy(.*)")) {
+						y = 49;
+					}
+				}
+
+				tempSapper.go(x, y);
+			}
+
+			else if (input.matches("(.*)rozbrój(.*)|(.*)rozbroić(.*)")) {
+
+				Bomb tempBomb = getBomb(input, tempSapper);
+				tempSapper.disarmBomb(tempBomb);
 
 			}
 
-			if (input.matches("(.*)drzewo(.*)|(.*)drzewa(.*)")) {
+			else if (input.matches("(.*)przenieś(.*)|(.*)przenieść(.*)")) {
 
-				Tree tempTree = getTree(input);
+				Bomb tempBomb = getBomb(input, tempSapper);
+				if (input.matches("(.*)północ(.*)|(.*)północny(.*)|(.*)góra(.*)|(.*)górę(.*)|(.*)górny(.*)")
+						&& input.matches("(.*)wschód(.*)|(.*)wschodni(.*)|(.*)prawo(.*)|(.*)prawy(.*)")) {
+					tempSapper.moveBomb(tempBomb, 0, MainWindow.gridRows - 1);
+				} else if (input.matches("(.*)północ(.*)|(.*)północny(.*)|(.*)góra(.*)|(.*)górę(.*)|(.*)górny(.*)")
+						&& input.matches("(.*)zachód(.*)|(.*)zachodni(.*)|(.*)lewo(.*)|(.*)lewy(.*)")) {
+					tempSapper.moveBomb(tempBomb, 0, 0);
+				}
+				if (input.matches("(.*)południe(.*)|(.*)południowy(.*)|(.*)dół(.*)|(.*)dolny(.*)")
+						&& input.matches("(.*)wschód(.*)|(.*)wschodni(.*)|(.*)prawo(.*)|(.*)prawy(.*)")) {
+					tempSapper.moveBomb(tempBomb, MainWindow.gridColumns - 1, MainWindow.gridRows - 1);
+				} else if (input.matches("(.*)południe(.*)|(.*)południowy(.*)|(.*)dół(.*)|(.*)dolny(.*)")
+						&& input.matches("(.*)zachód(.*)|(.*)zachodni(.*)|(.*)lewo(.*)|(.*)lewy(.*)")) {
+					tempSapper.moveBomb(tempBomb, MainWindow.gridColumns - 1, 0);
+				}
 
-				x = tempTree.getPositionX();
-				y = tempTree.getPositionY();
+				if (input.matches("(.*)drzewo(.*)|(.*)drzewa(.*)")) {
 
+					Tree tempTree = getTree(input);
+					
+					int x = tempTree.getPositionX();
+					int y = tempTree.getPositionY();
+
+					tempSapper.moveBomb(tempBomb, x, y);
+				}
 			}
 
 			else {
-				if (input.matches("(.*)północ(.*)|(.*)północny(.*)|(.*)góra(.*)|(.*)górę(.*)")) {
-					x = 0;
-				} else if (input.matches("(.*)południe(.*)|(.*)południowy(.*)|(.*)dół(.*)")) {
-					x = 49;
-				}
-				if (input.matches("(.*)zachód(.*)|(.*)zachodni(.*)|(.*)lewo(.*)|(.*)lewy(.*)")) {
-					y = 0;
-				} else if (input.matches("(.*)wschód(.*)|(.*)wschodni(.*)|(.*)prawo(.*)|(.*)prawy(.*)")) {
-					y = 49;
-				}
 			}
-
-			tempSapper.go(x, y);
+			
 		}
-
-		else if (input.matches("(.*)rozbrój(.*)|(.*)rozbroić(.*)")) {
-
-			Bomb tempBomb = getBomb(input);
-			tempSapper.disarmBomb(tempBomb);
-
-		}
-
-		else if (input.matches("(.*)przenieś(.*)|(.*)przenieść(.*)")) {
-
-			Bomb tempBomb = getBomb(input);
-			if (input.matches("(.*)północ(.*)|(.*)północny(.*)|(.*)góra(.*)|(.*)górę(.*)|(.*)górny(.*)")
-					&& input.matches("(.*)wschód(.*)|(.*)wschodni(.*)|(.*)prawo(.*)|(.*)prawy(.*)")) {
-				tempSapper.moveBomb(tempBomb, 0, MainWindow.gridRows - 1);
-			} else if (input.matches("(.*)północ(.*)|(.*)północny(.*)|(.*)góra(.*)|(.*)górę(.*)|(.*)górny(.*)")
-					&& input.matches("(.*)zachód(.*)|(.*)zachodni(.*)|(.*)lewo(.*)|(.*)lewy(.*)")) {
-				tempSapper.moveBomb(tempBomb, 0, 0);
-			}
-			if (input.matches("(.*)południe(.*)|(.*)południowy(.*)|(.*)dół(.*)|(.*)dolny(.*)")
-					&& input.matches("(.*)wschód(.*)|(.*)wschodni(.*)|(.*)prawo(.*)|(.*)prawy(.*)")) {
-				tempSapper.moveBomb(tempBomb, MainWindow.gridColumns - 1, MainWindow.gridRows - 1);
-			} else if (input.matches("(.*)południe(.*)|(.*)południowy(.*)|(.*)dół(.*)|(.*)dolny(.*)")
-					&& input.matches("(.*)zachód(.*)|(.*)zachodni(.*)|(.*)lewo(.*)|(.*)lewy(.*)")) {
-				tempSapper.moveBomb(tempBomb, MainWindow.gridColumns - 1, 0);
-			}
-
-			if (input.matches("(.*)drzewo(.*)|(.*)drzewa(.*)")) {
-
-				Tree tempTree = getTree(input);
-
-				int x = tempTree.getPositionX();
-
-				int y = tempTree.getPositionY();
-
-				tempSapper.moveBomb(tempBomb, x, y);
-
-			}
-
-		}
-
-		else {
-		}
+		
+		
 	}
-	/*
-	 * if(input.matches("(.*)[0-9](.*)")) { for(int i = 0; i < input.length()-1;
-	 * i++) { if(Character.isDigit(input.charAt(i))) { x = input.charAt(i) - 23;
-	 * 
-	 * System.out.println(x); }
-	 * 
-	 * } }
-	 */
+
 }

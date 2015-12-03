@@ -83,11 +83,6 @@ public class MainWindow extends JFrame {
 		MainWindow.positionPanel.setText(message);
 	}
 
-	public static void updateTimerPanel(String message) {
-		// String log = MainWindow.timerPanel.getText();
-		// MainWindow.timerPanel.setText(message + "\n" + log);
-	}
-
 	public static void main(String[] args) throws InterruptedException {
 
 		new MainWindow();
