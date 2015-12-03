@@ -129,6 +129,7 @@ public class ItemsOperations {
 		itemsArray.add(new Bomb());
 		itemsArray.add(new Bomb());
 		itemsArray.add(new Bomb());
+		itemsArray.add(new Bomb());
 
 		dropItem(itemsArray.get(itemsArray.size() - 1));
 
