@@ -32,6 +32,8 @@ public class MainWindow extends JFrame {
 
 	public static final Color bombDisableColor = Color.PINK;
 
+	public static final Color bombDisarmedColor = Color.MAGENTA;
+
 	public static final Color sapperAliveColor = Color.BLUE;
 
 	public static final Color sapperDeadColor = Color.CYAN;
@@ -93,24 +95,23 @@ public class MainWindow extends JFrame {
 		interpreter = new Interpreter();
 
 	}
-	
+
 	// metoda sprawdzajaca czy bomba istnieje
-		static public Item findElementByID(int id, Class<?> typeOfItem) {
+	static public Item findElementByID(int id, Class<?> typeOfItem) {
 
-			for (int i = 0; i < itemsCollection.getItemsArray().size(); i++) {
-				Item tempItem = itemsCollection.getItemsArray().get(i);
+		for (int i = 0; i < itemsCollection.getItemsArray().size(); i++) {
+			Item tempItem = itemsCollection.getItemsArray().get(i);
 
-				if ((typeOfItem.isInstance(tempItem))
-						&& (typeOfItem.equals(tempItem.getClass()) && tempItem.getId() == id)) {
-					return tempItem;
-				}
+			if ((typeOfItem.isInstance(tempItem))
+					&& (typeOfItem.equals(tempItem.getClass()) && tempItem.getId() == id)) {
+				return tempItem;
 			}
-
-			updateLog("Item nie istnieje");
-
-			return null;
 		}
 
+		updateLog("Item nie istnieje");
+
+		return null;
+	}
 
 	public MainWindow() {
 

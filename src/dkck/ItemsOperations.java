@@ -132,13 +132,14 @@ public class ItemsOperations {
 
 		dropItem(itemsArray.get(itemsArray.size() - 1));
 
-		for (int i = 0; i < 2; ++i) {
-			itemsArray.add(new Bomb());
-			//itemsArray.add(new Rocket(MainWindow.findElementByID(0, Sapper.class)));
+		for (int i = 0; i < 8; ++i) {
+			// itemsArray.add(new Bomb());
+			itemsArray.add(new Rocket(MainWindow.findElementByID(0, Sapper.class)));
 		}
 
 		for (int j = 0; j < 5; ++j) {
-			//itemsArray.add(new Rocket(MainWindow.findElementByID(0, Sapper.class)));		
+			// itemsArray.add(new Rocket(MainWindow.findElementByID(0,
+			// Sapper.class)));
 		}
 	}
 

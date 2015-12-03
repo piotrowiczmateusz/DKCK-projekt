@@ -1,7 +1,12 @@
 package dkck;
 
+import java.awt.Color;
+import java.awt.Dimension;
 import java.util.List;
 import java.util.Random;
+
+import javax.swing.JTextField;
+import javax.swing.border.MatteBorder;
 
 import dkck.GUI.Grid;
 import dkck.GUI.MainWindow;
@@ -107,6 +112,17 @@ public abstract class Item {
 		this.positionY = positionY;
 		this.range = range;
 		this.id = id;
+
+		if (this instanceof Bomb && !(this instanceof Rocket)) {
+			Bomb bombReference = (Bomb) this;
+			bombReference.setTimerLog(new JTextField("Bomb nr: " + (bombReference.getId() + 1)));
+			bombReference.getTimerLog().setOpaque(true);
+			bombReference.getTimerLog().setBackground(Color.white);
+			bombReference.getTimerLog().setBorder(new MatteBorder(0, 0, 0, 0, (Color) new Color(0, 0, 0)));
+			bombReference.getTimerLog().setPreferredSize(new Dimension(358, 14));
+			bombReference.getTimerLog().setEditable(false);
+			bombReference.setBombStatus(1);
+		}
 
 		MainWindow.grid.drawCircle(this.getPositionX(), this.getPositionY(), this.getRange(), null);
 		MainWindow.grid.drawSquare(this.getPositionX(), this.getPositionY(), this.getPositionX(), this.getPositionY(),

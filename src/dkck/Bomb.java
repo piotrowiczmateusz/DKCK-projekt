@@ -1,12 +1,10 @@
 package dkck;
 
 import java.awt.BorderLayout;
-import java.awt.Color;
-import java.awt.Dimension;
+
 import java.util.Random;
 
 import javax.swing.JTextField;
-import javax.swing.border.MatteBorder;
 
 import dkck.GUI.Grid;
 import dkck.GUI.MainWindow;
@@ -71,13 +69,6 @@ public class Bomb extends Item {
 		super(id);
 		id++;
 
-		this.timerLog = new JTextField("Bomb nr: " + (this.getId() + 1));
-		timerLog.setOpaque(true);
-		timerLog.setBackground(Color.white);
-		timerLog.setBorder(new MatteBorder(0, 0, 0, 0, (Color) new Color(0, 0, 0)));
-		timerLog.setPreferredSize(new Dimension(358, 14));
-		timerLog.setEditable(false);
-
 		if (this instanceof Bomb && !(this instanceof Rocket)) {
 			MainWindow.timerPanel.add(this.getTimerLog(), BorderLayout.WEST);
 			this.setBombTimer(new BombTimer(this, 1000));
@@ -89,7 +80,6 @@ public class Bomb extends Item {
 			this.setExplosionLeftTime(0);
 		}
 
-		this.setBombStatus(1);
 		// MainWindow.grid.cellPanes.get(this.getPositionX()).get(this.getPositionY()).label
 		// .setText((this.getId() + 1) + "");
 
@@ -134,6 +124,8 @@ public class Bomb extends Item {
 				}
 			} else
 				MainWindow.updateLog("Bomba nr: " + (this.getId() + 1) + " jest ju¿ rozbrojona");
+			Grid.repairCircles();
+			Grid.repairSquares();
 		}
 	}
 
