@@ -6,6 +6,8 @@ import java.awt.GridBagLayout;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.swing.ImageIcon;
+import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.border.Border;
 import javax.swing.border.MatteBorder;
@@ -44,6 +46,7 @@ public class Grid extends JPanel {
 	}
 
 	public Grid(int rows, int columns) {
+				
 		this.rows = rows - 1;
 		this.columns = columns - 1;
 
@@ -58,7 +61,14 @@ public class Grid extends JPanel {
 				gbc.gridx = col;
 				gbc.gridy = row;
 
-				this.cellPanes.get(row).add(new CellPane());
+				CellPane cellPane = new CellPane();
+				JLabel cellLabel = new JLabel();
+				cellLabel.setIcon(new ImageIcon("images/blank.png"));
+				setComponentZOrder(cellPane, 0);
+				setComponentZOrder(cellLabel, 1);
+				cellPane.add(cellLabel);
+				
+				this.cellPanes.get(row).add(cellPane);
 
 				Border border = null;
 				if (row < rows - 1) {
@@ -76,8 +86,13 @@ public class Grid extends JPanel {
 				}
 				this.cellPanes.get(row).get(col).setBorder(border);
 				add(this.cellPanes.get(row).get(col), gbc);
+				
 			}
+			
+			
 		}
+		
+		
 	}
 
 	Color chooseObjectColor(Item itemReference) {

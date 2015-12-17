@@ -4,6 +4,8 @@ import java.awt.BorderLayout;
 
 import java.util.Random;
 
+import javax.swing.ImageIcon;
+import javax.swing.JLabel;
 import javax.swing.JTextField;
 
 import dkck.GUI.Grid;
@@ -24,6 +26,8 @@ public class Bomb extends Item {
 	private int explosionLeftTime;// zmienna przechowujaca czas do wybuchu
 
 	private JTextField timerLog;
+	
+	public JLabel label;
 
 	/**
 	 * SETTERS AND GETTERS
@@ -68,18 +72,21 @@ public class Bomb extends Item {
 	public Bomb() {
 		super(id);
 		id++;
-
+		
 		if (this instanceof Bomb && !(this instanceof Rocket)) {
 			MainWindow.timerPanel.add(this.getTimerLog(), BorderLayout.WEST);
 			this.setBombTimer(new BombTimer(this, 1000));
 			Random generator = new Random();
 			this.setExplosionLeftTime(10 + generator.nextInt(300));
+			//MainWindow.grid.cellPanes.get(this.getPositionX()).get(this.getPositionY()).label.setIcon(new ImageIcon("images/bomb.png"));
 
 		} else {
 			this.setBombTimer(null);
 			this.setExplosionLeftTime(0);
 		}
 
+		
+		
 	}
 
 	/**
