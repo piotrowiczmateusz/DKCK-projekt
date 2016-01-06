@@ -46,7 +46,7 @@ public class Grid extends JPanel {
 	}
 
 	public Grid(int rows, int columns) {
-				
+
 		this.rows = rows - 1;
 		this.columns = columns - 1;
 
@@ -67,7 +67,7 @@ public class Grid extends JPanel {
 				setComponentZOrder(cellPane, 0);
 				setComponentZOrder(cellLabel, 1);
 				cellPane.add(cellLabel);
-				
+
 				this.cellPanes.get(row).add(cellPane);
 
 				Border border = null;
@@ -86,13 +86,11 @@ public class Grid extends JPanel {
 				}
 				this.cellPanes.get(row).get(col).setBorder(border);
 				add(this.cellPanes.get(row).get(col), gbc);
-				
+
 			}
-			
-			
+
 		}
-		
-		
+
 	}
 
 	Color chooseObjectColor(Item itemReference) {

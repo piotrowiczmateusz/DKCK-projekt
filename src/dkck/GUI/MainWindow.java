@@ -32,11 +32,11 @@ public class MainWindow extends JFrame {
 
 	public static final Color bombDisableColor = Color.LIGHT_GRAY;
 
-	public static final Color bombDisarmedColor = Color.LIGHT_GRAY;
+	public static final Color bombDisarmedColor = Color.GRAY;
 
 	public static final Color sapperAliveColor = new Color(122, 188, 255);
 
-	public static final Color sapperDeadColor = new Color(122, 188, 255);
+	public static final Color sapperDeadColor = new Color(122, 140, 255);
 
 	public static final Color treeColor = new Color(138, 182, 107);
 

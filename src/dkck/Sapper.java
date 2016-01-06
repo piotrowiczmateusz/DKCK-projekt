@@ -90,12 +90,12 @@ public class Sapper extends Item {
 		super(id);
 		id++;
 		this.setSapperStatus(true);
-		this.setHealthPoints(20);
+		this.setHealthPoints(5);
 		this.setNumberOfRockets(5);
 		
 		Random generator = new Random();
 
-		int speed = 70 + generator.nextInt(50);
+		int speed = 150 + generator.nextInt(120);
 
 		this.setTargetsArray(new LinkedList<Item>());
 		this.setMovingTimer(new MovingTimer(this));

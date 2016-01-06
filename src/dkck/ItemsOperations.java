@@ -62,52 +62,52 @@ public class ItemsOperations {
 		Grid.repairSquares();
 	}
 
-	protected void createBombs(int numberOfBombs) {
-
-		Point pointReference = new Point(0, 0);
-
-		int beginningArrayIndex = this.getItemsArray().size() - 1;
-
-		for (int currentBombIndex = 0; currentBombIndex < numberOfBombs; currentBombIndex++) {
-			boolean goodBombPosition = true;
-			do {
-				this.getItemsArray().add(new Bomb());
-
-				boolean continueSearching = true;
-
-				int maxCounter = 0;
-
-				for (int tempX = pointReference.getPositionX(); tempX < MainWindow.gridRows; tempX++) {
-					for (int tempY = pointReference.getPositionY(); tempY < MainWindow.gridColumns; tempY++) {
-						if (continueSearching) {
-							int counter = 0;
-							for (int arrayIndex = beginningArrayIndex + 1; arrayIndex < currentBombIndex
-									+ beginningArrayIndex; arrayIndex++) {
-								if (pointReference.checkItemsCenterDistance(this.getItemsArray().get(arrayIndex))) {
-									counter++;
-								}
-							}
-
-							if (maxCounter < counter)
-								maxCounter = counter;
-
-							if (maxCounter == currentBombIndex + 1) {
-								continueSearching = false;
-								pointReference.setPositionX(tempX);
-								pointReference.setPositionY(tempY);
-							}
-						}
-					}
-				}
-
-				if (continueSearching) {
-					dropItem(this.getItemsArray().get(this.getItemsArray().size() - 1));
-				} else {
-					goodBombPosition = true;
-				}
-			} while (goodBombPosition == false);
-		}
-	}
+//	protected void createBombs(int numberOfBombs) {
+//
+//		Point pointReference = new Point(0, 0);
+//
+//		int beginningArrayIndex = this.getItemsArray().size() - 1;
+//
+//		for (int currentBombIndex = 0; currentBombIndex < numberOfBombs; currentBombIndex++) {
+//			boolean goodBombPosition = true;
+//			do {
+//				this.getItemsArray().add(new Bomb());
+//
+//				boolean continueSearching = true;
+//
+//				int maxCounter = 0;
+//
+//				for (int tempX = pointReference.getPositionX(); tempX < MainWindow.gridRows; tempX++) {
+//					for (int tempY = pointReference.getPositionY(); tempY < MainWindow.gridColumns; tempY++) {
+//						if (continueSearching) {
+//							int counter = 0;
+//							for (int arrayIndex = beginningArrayIndex + 1; arrayIndex < currentBombIndex
+//									+ beginningArrayIndex; arrayIndex++) {
+//								if (pointReference.checkItemsCenterDistance(this.getItemsArray().get(arrayIndex))) {
+//									counter++;
+//								}
+//							}
+//
+//							if (maxCounter < counter)
+//								maxCounter = counter;
+//
+//							if (maxCounter == currentBombIndex + 1) {
+//								continueSearching = false;
+//								pointReference.setPositionX(tempX);
+//								pointReference.setPositionY(tempY);
+//							}
+//						}
+//					}
+//				}
+//
+//				if (continueSearching) {
+//					dropItem(this.getItemsArray().get(this.getItemsArray().size() - 1));
+//				} else {
+//					goodBombPosition = true;
+//				}
+//			} while (goodBombPosition == false);
+//		}
+//	}
 
 	// nowa metoda służąca do dodawania itemów
 	public void addItems() throws InterruptedException {

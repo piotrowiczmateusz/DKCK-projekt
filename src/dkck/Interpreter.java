@@ -286,7 +286,6 @@ public class Interpreter {
 					tempSapper.moveBomb(tempBomb, x, y);
 				}
 			}
-
 			else {
 			}
 			
