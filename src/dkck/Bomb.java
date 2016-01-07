@@ -12,10 +12,6 @@ import dkck.GUI.MainWindow;
 
 public class Bomb extends Item {
 
-	/**
-	 * ATTRIBUTES
-	 */
-
 	private static int id = 0;
 
 	private BombTimer bombTimer;
@@ -28,9 +24,6 @@ public class Bomb extends Item {
 	
 	public JLabel label;
 
-	/**
-	 * SETTERS AND GETTERS
-	 */
 
 	public BombTimer getBombTimer() {
 		return bombTimer;
@@ -64,10 +57,6 @@ public class Bomb extends Item {
 		this.timerLog = timerLog;
 	}
 
-	/**
-	 * CONSTRUCTORS
-	 */
-
 	public Bomb() {
 		super(id);
 		id++;
@@ -77,20 +66,13 @@ public class Bomb extends Item {
 			this.setBombTimer(new BombTimer(this, 1000));
 			Random generator = new Random();
 			this.setExplosionLeftTime(10 + generator.nextInt(300));
-			//MainWindow.grid.cellPanes.get(this.getPositionX()).get(this.getPositionY()).label.setIcon(new ImageIcon("images/bomb.png"));
 
 		} else {
 			this.setBombTimer(null);
 			this.setExplosionLeftTime(0);
-		}
-
-		
-		
+		}	
 	}
 
-	/**
-	 * OTHER METHODS
-	 */
 
 	public void launch() {
 

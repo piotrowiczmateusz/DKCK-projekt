@@ -286,6 +286,11 @@ public class Interpreter {
 					tempSapper.moveBomb(tempBomb, x, y);
 				}
 			}
+			
+			else if(input.matches("(.*)utwórz rakietę(.*)|(.*)stwórz rakietę(.*)")) {
+				MainWindow.itemsCollection.getItemsArray().add(new Rocket(MainWindow.findElementByID(tempSapper.getId(), tempSapper.getClass())));
+			}
+			
 			else {
 			}
 			

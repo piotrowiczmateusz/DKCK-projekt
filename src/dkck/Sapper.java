@@ -12,9 +12,6 @@ import dkck.GUI.MainWindow;
 
 public class Sapper extends Item {
 
-	/**
-	 * ATTRIBUTES
-	 */
 	public static int id = 0;
 
 	private int numberOfDisarmedBombs;
@@ -29,9 +26,6 @@ public class Sapper extends Item {
 	
 	private JTextField positionLog;
 
-	/**
-	 * SETTERS AND GETTERS
-	 */
 	
 	public int getNumberOfDisarmedBombs() {
 		return numberOfDisarmedBombs;
@@ -82,10 +76,6 @@ public class Sapper extends Item {
 	}
 
 
-	/**
-	 * CONSTRUCTORS
-	 */
-
 	public Sapper() {
 		super(id);
 		id++;
@@ -110,10 +100,6 @@ public class Sapper extends Item {
 		MainWindow.positionPanel.add(this.getPositionLog(), BorderLayout.EAST);
 	}
 
-	/**
-	 * OTHER METHODS
-	 */
-
 	public void hurt() {
 		if (this.getHealthPoints() > 0) {
 			this.setHealthPoints(this.getHealthPoints() - 1);
@@ -129,46 +115,9 @@ public class Sapper extends Item {
 		if (itemArgument instanceof Bomb) {
 
 			this.addTaskToMove(itemArgument, null);
-
 			this.addTaskToMove(new Point(x, y), itemArgument);
 
-			// IMPORTANT CODE TO USE IN THE FUTURE!!!
-
-			// Sprawdza, czy przenosi bombe na krawedz planszy lub, czy na tym
-			// miejscu nie ma innej bomby.
-
-			// if ((x != 0) && (MainWindow.grid.cellPanes.get(x -
-			// 1).get(y).getBackground() != Color.black)) {
-			// itemArgument.setPositionX(x - 1);
-			// itemArgument.setPositionY(y);
-			//
-			// MainWindow.grid.drawBomb(x - 1, y);
-			// MainWindow.updateLog("The bomb was moved to [" + (x - 1) + "][" +
-			// y + "]");
-			// } else {
-			// itemArgument.setPositionX(x);
-			// if ((y != 0) && (MainWindow.grid.cellPanes.get(x).get(y -
-			// 1).getBackground() != Color.black)) {
-			// itemArgument.setPositionY(y - 1);
-			//
-			// MainWindow.grid.drawBomb(x, y - 1);
-			// MainWindow.updateLog("The bomb was moved to [" + x + "][" + (y -
-			// 1) + "]");
-			// } else if ((y != 50) && (MainWindow.grid.cellPanes.get(x).get(y +
-			// 1).getBackground() != Color.black)) {
-			// itemArgument.setPositionY(y + 1);
-			//
-			// MainWindow.grid.drawBomb(x, y + 1);
-			// MainWindow.updateLog("The bomb was moved to [" + x + "][" + (y +
-			// 1) + "]");
-			// } else {
-			// MainWindow.updateLog("It was impossible to move bomb to [" + x +
-			// "][" + (y + 1)
-			// + "]. Choose different coordinates.");
-			// }
-			// }
 		}
-
 	}
 
 	/**

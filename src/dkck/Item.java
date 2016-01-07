@@ -13,9 +13,6 @@ import dkck.GUI.MainWindow;
 
 public abstract class Item {
 
-	/**
-	 * ATTRIBUTES
-	 */
 	private int positionX;
 
 	private int positionY;
@@ -28,10 +25,7 @@ public abstract class Item {
 
 	private List<Item> targetsArray;
 
-	/**
-	 * SETTERS AND GETTERS
-	 */
-
+	
 	public int getPositionX() {
 		return positionX;
 	}
@@ -80,9 +74,6 @@ public abstract class Item {
 		this.targetsArray = targetsArray;
 	}
 
-	/**
-	 * CONSTRUCTORS
-	 */
 
 	public Item(int id) {
 		super();
