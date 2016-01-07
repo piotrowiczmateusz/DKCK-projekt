@@ -82,8 +82,7 @@ public class MovingTimer extends TimerTask {
 						&& this.getItemRef().getTargetsArray().get(0).getPositionY() == this.getItemRef()
 								.getPositionY()) {
 					
-					MainWindow.updateLog("Obiekt " +
-							this.getItemRef().nameOfItem(this.getItemRef()) + " dotar³ do celu");
+					MainWindow.updateLog(this.getItemRef().nameOfItem(this.getItemRef()) + " dotar³ do celu");
 					if (this.getItemRef() instanceof Rocket) {
 						((Rocket) this.getItemRef()).explode();
 
@@ -99,7 +98,7 @@ public class MovingTimer extends TimerTask {
 					Item tempItem = ((Sapper) this.getItemRef()).getTargetsArray().get(1);
 					if (tempItem.getPositionX() != initItemPositionX && tempItem.getPositionY() != initItemPositionY) {
 
-						MainWindow.updateLog("Obiekt " + this.getItemRef().nameOfItem(this.getItemRef())+ "zgubi³ bombê");
+						MainWindow.updateLog(this.getItemRef().nameOfItem(this.getItemRef())+ "zgubi³ bombê");
 						continueStep = false;
 					}
 				}
@@ -161,7 +160,7 @@ public class MovingTimer extends TimerTask {
 					Grid.repairCircles();
 					Grid.repairSquares();
 				} else
-					run();// recursive call
+					run(); // recursive call
 			} else if (this.getItemRef() instanceof Rocket) {
 				ItemsOperations.dropItem(this.getItemRef());
 			}

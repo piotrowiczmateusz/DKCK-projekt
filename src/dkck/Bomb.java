@@ -16,9 +16,9 @@ public class Bomb extends Item {
 
 	private BombTimer bombTimer;
 
-	private int bombStatus;// INACTIVE - 0, ACTIVE - 1, DISARMED - 2
+	private int bombStatus; // INACTIVE - 0, ACTIVE - 1, DISARMED - 2
 
-	private int explosionLeftTime;// zmienna przechowujaca czas do wybuchu
+	private int explosionLeftTime; // zmienna przechowujaca czas do wybuchu
 
 	private JTextField timerLog;
 	
@@ -114,10 +114,8 @@ public class Bomb extends Item {
 		}
 	}
 
-	/**
-	 * modyfikuje nieznacznie pola bomby i zmniejsza punkty ¿ycia dla Sapera
-	 */
-
+	 //modyfikuje nieznacznie pola bomby i zmniejsza punkty ¿ycia dla Sapera
+	 
 	public void explode() {
 		if (this.getBombStatus() == 1 && this.getBombTimer() != null) {
 			this.getBombTimer().cancel();

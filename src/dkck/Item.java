@@ -193,10 +193,8 @@ public abstract class Item {
 		return tempDistance;
 	}
 
-	/**
-	 * Sprawdza czy item jest w zasiêgu innego itemu
-	 */
-
+	//Sprawdza czy item jest w zasiêgu innego itemu
+	
 	public boolean checkItemsRange(Item itemArgument) {
 
 		if (distanceCalculation(itemArgument) <= this.getRange() + itemArgument.getRange()) {
@@ -205,11 +203,9 @@ public abstract class Item {
 			return false;
 		}
 	}
-
-	/**
-	 * Sprawdza czy œrodek obiektu jest w zasiêgu itemu
-	 */
-
+	
+	//Sprawdza czy œrodek obiektu jest w zasiêgu itemu
+	
 	public boolean checkItemsCenterDistance(Item itemArgument) {
 		if (distanceCalculation(itemArgument) <= this.getRange()) {
 			return true;
@@ -217,5 +213,4 @@ public abstract class Item {
 			return false;
 		}
 	}
-
 }

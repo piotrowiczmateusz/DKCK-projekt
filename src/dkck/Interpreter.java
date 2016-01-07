@@ -12,6 +12,7 @@ public class Interpreter {
 	}
 	
 	// sprawdzanie czy w wejściu jest spójnik
+	
 	public List<String> checkConjuction(String input) {
 		
 		input = input.toLowerCase();
@@ -53,13 +54,16 @@ public class Interpreter {
 			}
 			
 			else {
+				
 				// gdy użytkownik nie poda numeru sapera wybiera pierwszego		
+				
 				tempSapper = (Sapper) MainWindow.findElementByID(0, sapperClass);
 			}
 		}
 
 		else {		
 			// gdy uzytkownik nie odnosi się do sapera, program wykonuje polecenia dla pierwszego sapera
+			
 			tempSapper = (Sapper) MainWindow.findElementByID(0, sapperClass);
 		}
 
@@ -67,6 +71,7 @@ public class Interpreter {
 	}
 
 	// metoda zwracająca konkretną bombę w zależności od wejścia
+	
 	public Bomb getBomb(String input, Sapper tempSapper) {
 
 		Class<?> bombClass = Bomb.class;
@@ -132,6 +137,7 @@ public class Interpreter {
 		else {
 			
 			// gdy użytkownik nie sprecyzuje numeru bomby wybiera najbliższą
+			
 			double min = 50;
 
 			for (Item tempItem : MainWindow.itemsCollection.getItemsArray()) {
@@ -210,7 +216,7 @@ public class Interpreter {
 			
 			Sapper tempSapper = getSapper(input);
 
-			/* Przemieszczanie siê */
+			// Przemieszczanie siê 
 
 			if (input.matches("|(.*)idź(.*)|(.*)pójdź(.*)")) {	
 				

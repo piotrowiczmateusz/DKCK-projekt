@@ -7,8 +7,8 @@ import dkck.GUI.MainWindow;
 
 /**
  * @author Dariusz
- *
  */
+
 public class Rocket extends Bomb {
 
 	public Rocket(Item itemArgument) throws InterruptedException {

@@ -107,10 +107,9 @@ public class Sapper extends Item {
 		}
 	}
 
-	/**
-	 * Saper idzie na pozycjê bomby. Nastpênie na pozycje x,y i zmienia pozycjê
-	 * bomby.
-	 */
+	
+	// Saper idzie na pozycjê bomby. Nastpênie na pozycje x,y i zmienia pozycjê bomby.
+	 
 	public void moveBomb(Item itemArgument, int x, int y) throws InterruptedException {
 		if (itemArgument instanceof Bomb) {
 
@@ -120,10 +119,9 @@ public class Sapper extends Item {
 		}
 	}
 
-	/**
-	 * Wywo³uje metodê 'go', sprawdza status bomby, losowo decyduje, czy bomba
-	 * wybuchnie.
-	 */
+	
+	//Wywo³uje metodê 'go', sprawdza status bomby, losowo decyduje, czy bomba wybuchnie.
+	 
 	public void disarmBomb(Item itemArgument) throws InterruptedException {
 		if (this.getHealthPoints() > 0) {
 			if (itemArgument instanceof Bomb) {
