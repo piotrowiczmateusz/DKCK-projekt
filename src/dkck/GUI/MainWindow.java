@@ -64,6 +64,8 @@ public class MainWindow extends JFrame {
 	public static PositionPanel positionPanel = new PositionPanel();
 	public static TimerPanel timerPanel = new TimerPanel();
 	private static LogPanel logPanel = new LogPanel();
+	public static RocketPanel rocketPanel = new RocketPanel();
+	public static BombPanel bombPanel = new BombPanel();
 
 	// Bottom Panel elements
 
@@ -117,6 +119,8 @@ public class MainWindow extends JFrame {
 
 		rightPanel.add(HPPanel);
 		rightPanel.add(positionPanel);
+		rightPanel.add(rocketPanel);
+		rightPanel.add(bombPanel);
 		rightPanel.add(new JLabel("Zegar:"));
 		rightPanel.add(timerPanel);
 		rightPanel.add(new JLabel("Komunikaty:"));

@@ -18,7 +18,7 @@ public class PositionPanel extends JPanel {
 		setOpaque(true);
 		setBackground(Color.white);
 		setForeground(Color.black);
-		setPreferredSize(new Dimension(176, 110));
+		setPreferredSize(new Dimension(50, 110));
 		setBorder(BorderFactory.createLineBorder(Color.black));
 		setBounds(new Rectangle(new Point(10, 45), getPreferredSize()));
 		setFont(new Font("Arial", Font.PLAIN, 12));

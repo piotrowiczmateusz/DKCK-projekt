@@ -128,7 +128,7 @@ public class MovingTimer extends TimerTask {
 					}
 
 					if( this.getItemRef() instanceof Sapper) {				
-						((Sapper) this.getItemRef()).getPositionLog().setText("Pozycja sapera " + this.getItemRef().getId() + ": [" + (this.getItemRef().getPositionX() + 1)
+						((Sapper) this.getItemRef()).getPositionLog().setText("[" + (this.getItemRef().getPositionX() + 1)
 								+ "][" + (this.getItemRef().getPositionY() + 1) + "]");
 					}
 
