@@ -34,6 +34,7 @@ public class Rocket extends Bomb {
 					}
 				}
 			}
+			else MainWindow.updateLog("Saper nie ma ju¿ rakiet");
 		}
 		this.getMovingTimer().getTimer1().schedule(getMovingTimer(), 0, speed);
 	}
