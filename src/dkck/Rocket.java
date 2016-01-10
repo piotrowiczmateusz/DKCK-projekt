@@ -26,15 +26,14 @@ public class Rocket extends Bomb {
 				sapperReference.setNumberOfRockets(sapperReference.getNumberOfRockets() - 1);
 				sapperReference.getRocketLog().setText("Rakiety: " + sapperReference.getNumberOfRockets());
 
-
 				for (Item tempItem : MainWindow.itemsCollection.getItemsArray()) {
 
 					if (tempItem instanceof Sapper && tempItem != itemArgument) {
 						this.reachItem(tempItem);
 					}
 				}
-			}
-			else MainWindow.updateLog("Saper nie ma ju¿ rakiet");
+			} else
+				MainWindow.updateLog("Saper nie ma ju¿ rakiet");
 		}
 		this.getMovingTimer().getTimer1().schedule(getMovingTimer(), 0, speed);
 	}

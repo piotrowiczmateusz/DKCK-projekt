@@ -18,20 +18,19 @@ public class Sapper extends Item {
 	private int numberOfDisarmedBombs;
 
 	private int healthPoints;
-	
+
 	private int numberOfRockets;
 
 	private boolean sapperStatus;
-	
+
 	private JTextField HPLog;
-	
+
 	private JTextField positionLog;
-	
+
 	private JTextField rocketLog;
-	
+
 	private JTextField bombLog;
 
-	
 	public int getNumberOfDisarmedBombs() {
 		return numberOfDisarmedBombs;
 	}
@@ -47,7 +46,7 @@ public class Sapper extends Item {
 	public void setHealthPoints(int healthPoints) {
 		this.healthPoints = healthPoints;
 	}
-	
+
 	public int getNumberOfRockets() {
 		return numberOfRockets;
 	}
@@ -63,7 +62,7 @@ public class Sapper extends Item {
 	public void setSapperStatus(boolean sapperStatus) {
 		this.sapperStatus = sapperStatus;
 	}
-	
+
 	public JTextField getHPLog() {
 		return HPLog;
 	}
@@ -71,7 +70,7 @@ public class Sapper extends Item {
 	public void setHPLog(JTextField HPLog) {
 		this.HPLog = HPLog;
 	}
-	
+
 	public JTextField getPositionLog() {
 		return positionLog;
 	}
@@ -79,7 +78,7 @@ public class Sapper extends Item {
 	public void setPositionLog(JTextField positionLog) {
 		this.positionLog = positionLog;
 	}
-	
+
 	public JTextField getRocketLog() {
 		return rocketLog;
 	}
@@ -87,7 +86,7 @@ public class Sapper extends Item {
 	public void setRocketLog(JTextField rocketLog) {
 		this.rocketLog = rocketLog;
 	}
-	
+
 	public JTextField getBombLog() {
 		return bombLog;
 	}
@@ -95,21 +94,21 @@ public class Sapper extends Item {
 	public void setBombLog(JTextField bombLog) {
 		this.bombLog = bombLog;
 	}
-	
-	Font font = new Font("Arial", Font.PLAIN,11);
-	
+
+	Font font = new Font("Arial", Font.PLAIN, 11);
+
 	public Sapper() {
 		super(id);
 		id++;
 		this.setSapperStatus(true);
-		this.setHealthPoints(5);
+		this.setHealthPoints(1);
 		this.setNumberOfRockets(5);
-		
-		JTextField HP = new JTextField("Saper " + (this.getId()+1) + " HP: " + this.getHealthPoints());
-		JTextField position = new JTextField("[" + (this.getPositionX()+1) + "][" + (this.getPositionY()+1) + "]");
+
+		JTextField HP = new JTextField("Saper " + (this.getId() + 1) + " HP: " + this.getHealthPoints());
+		JTextField position = new JTextField("[" + (this.getPositionX() + 1) + "][" + (this.getPositionY() + 1) + "]");
 		JTextField rockets = new JTextField("Rakiety: " + this.getNumberOfRockets());
 		JTextField bombs = new JTextField("Rozbrojone bomby: " + this.getNumberOfDisarmedBombs());
-		
+
 		Random generator = new Random();
 
 		int speed = 150 + generator.nextInt(120);
@@ -117,22 +116,22 @@ public class Sapper extends Item {
 		this.setTargetsArray(new LinkedList<Item>());
 		this.setMovingTimer(new MovingTimer(this));
 		this.getMovingTimer().getTimer1().schedule(getMovingTimer(), 0, speed);
-		
+
 		HP.setFont(font);
 		this.setHPLog(HP);
 		this.getHPLog().setBorder(BorderFactory.createLineBorder(Color.white));
 		MainWindow.HPPanel.add(this.getHPLog(), BorderLayout.EAST);
-		
+
 		position.setFont(font);
 		this.setPositionLog(position);
 		this.getPositionLog().setBorder(BorderFactory.createLineBorder(Color.white));
 		MainWindow.positionPanel.add(this.getPositionLog(), BorderLayout.EAST);
-		
+
 		rockets.setFont(font);
 		this.setRocketLog(rockets);
 		this.getRocketLog().setBorder(BorderFactory.createLineBorder(Color.white));
 		MainWindow.rocketPanel.add(this.getRocketLog(), BorderLayout.EAST);
-		
+
 		bombs.setFont(font);
 		this.setBombLog(bombs);
 		this.getBombLog().setBorder(BorderFactory.createLineBorder(Color.white));
@@ -142,13 +141,24 @@ public class Sapper extends Item {
 	public void hurt() {
 		if (this.getHealthPoints() > 0) {
 			this.setHealthPoints(this.getHealthPoints() - 1);
-			this.getHPLog().setText("Saper " + (this.getId()+1) + " HP: " + this.getHealthPoints());
+			this.getHPLog().setText("Saper " + (this.getId() + 1) + " HP: " + this.getHealthPoints());
+		} else {
+			// check if is anybody alive
+			boolean temp_variable = false;
+			for (Item tempItem : MainWindow.itemsCollection.getItemsArray()) {
+				if (tempItem instanceof Sapper) {
+					if (((Sapper) tempItem).getHealthPoints() == 0)
+						temp_variable = true;
+				}
+			}
+			if (temp_variable == true)
+				MainWindow.updateLog("Wszyscy nie saperzy nie ¿yj¹");
 		}
 	}
 
-	
-	// Saper idzie na pozycjê bomby. Nastpênie na pozycje x,y i zmienia pozycjê bomby.
-	 
+	// Saper idzie na pozycjê bomby. Nastpênie na pozycje x,y i zmienia pozycjê
+	// bomby.
+
 	public void moveBomb(Item itemArgument, int x, int y) throws InterruptedException {
 		if (itemArgument instanceof Bomb) {
 
@@ -158,9 +168,9 @@ public class Sapper extends Item {
 		}
 	}
 
-	
-	//Wywo³uje metodê 'go', sprawdza status bomby, losowo decyduje, czy bomba wybuchnie.
-	 
+	// Wywo³uje metodê 'go', sprawdza status bomby, losowo decyduje, czy bomba
+	// wybuchnie.
+
 	public void disarmBomb(Item itemArgument) throws InterruptedException {
 		if (this.getHealthPoints() > 0) {
 			if (itemArgument instanceof Bomb) {

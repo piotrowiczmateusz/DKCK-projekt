@@ -12,7 +12,7 @@ import javax.swing.JPanel;
 public class BombPanel extends JPanel {
 
 	private static final long serialVersionUID = 1L;
-	
+
 	public BombPanel() {
 		super();
 		setOpaque(true);
@@ -22,7 +22,7 @@ public class BombPanel extends JPanel {
 		setBorder(BorderFactory.createLineBorder(Color.black));
 		setBounds(new Rectangle(new Point(510, 10), getPreferredSize()));
 		setFont(new Font("Arial", Font.PLAIN, 12));
-		
+
 	}
 
 }

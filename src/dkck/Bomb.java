@@ -21,9 +21,8 @@ public class Bomb extends Item {
 	private int explosionLeftTime; // zmienna przechowujaca czas do wybuchu
 
 	private JTextField timerLog;
-	
-	public JLabel label;
 
+	public JLabel label;
 
 	public BombTimer getBombTimer() {
 		return bombTimer;
@@ -60,7 +59,7 @@ public class Bomb extends Item {
 	public Bomb() {
 		super(id);
 		id++;
-		
+
 		if (this instanceof Bomb && !(this instanceof Rocket)) {
 			MainWindow.timerPanel.add(this.getTimerLog(), BorderLayout.WEST);
 			this.setBombTimer(new BombTimer(this, 1000));
@@ -70,9 +69,8 @@ public class Bomb extends Item {
 		} else {
 			this.setBombTimer(null);
 			this.setExplosionLeftTime(0);
-		}	
+		}
 	}
-
 
 	public void launch() {
 
@@ -114,8 +112,8 @@ public class Bomb extends Item {
 		}
 	}
 
-	 //modyfikuje nieznacznie pola bomby i zmniejsza punkty ¿ycia dla Sapera
-	 
+	// modyfikuje nieznacznie pola bomby i zmniejsza punkty ¿ycia dla Sapera
+
 	public void explode() {
 		if (this.getBombStatus() == 1 && this.getBombTimer() != null) {
 			this.getBombTimer().cancel();

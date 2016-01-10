@@ -7,7 +7,7 @@ import javax.swing.JPanel;
 import javax.swing.border.MatteBorder;
 
 public class BottomPanel extends JPanel {
-	
+
 	private static final long serialVersionUID = 1L;
 
 	public BottomPanel() {

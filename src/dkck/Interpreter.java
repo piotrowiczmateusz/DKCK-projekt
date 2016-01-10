@@ -10,16 +10,15 @@ public class Interpreter {
 	public Interpreter() {
 		super();
 	}
-	
+
 	// sprawdzanie czy w wejściu jest spójnik
-	
+
 	public List<String> checkConjuction(String input) {
-		
+
 		input = input.toLowerCase();
-		List<String> inputParts = null;	
-		inputParts = Arrays.asList(input.split(" i "));	
+		List<String> inputParts = null;
+		inputParts = Arrays.asList(input.split(" i "));
 		return inputParts;
-		
 	}
 
 	public Sapper getSapper(String input) {
@@ -27,7 +26,7 @@ public class Interpreter {
 		Class<?> sapperClass = Sapper.class;
 
 		Item tempSapper = null;
-		
+
 		if (input.matches("(.*)saper(.*)|(.*)sapera(.*)")) {
 			if (input.matches("(.*)pierwszego(.*)|(.*)jeden(.*)|(.*)pierwszy(.*)|(.*)1(.*)")) {
 				tempSapper = (Sapper) MainWindow.findElementByID(0, sapperClass);
@@ -52,18 +51,19 @@ public class Interpreter {
 			else if (input.matches("(.*)szóstego(.*)|(.*)sześć(.*)|(.*)szósty(.*)|(.*)6(.*)")) {
 				tempSapper = (Sapper) MainWindow.findElementByID(5, sapperClass);
 			}
-			
+
 			else {
-				
-				// gdy użytkownik nie poda numeru sapera wybiera pierwszego		
-				
+
+				// gdy użytkownik nie poda numeru sapera wybiera pierwszego
+
 				tempSapper = (Sapper) MainWindow.findElementByID(0, sapperClass);
 			}
 		}
 
-		else {		
-			// gdy uzytkownik nie odnosi się do sapera, program wykonuje polecenia dla pierwszego sapera
-			
+		else {
+			// gdy uzytkownik nie odnosi się do sapera, program wykonuje
+			// polecenia dla pierwszego sapera
+
 			tempSapper = (Sapper) MainWindow.findElementByID(0, sapperClass);
 		}
 
@@ -71,7 +71,7 @@ public class Interpreter {
 	}
 
 	// metoda zwracająca konkretną bombę w zależności od wejścia
-	
+
 	public Bomb getBomb(String input, Sapper tempSapper) {
 
 		Class<?> bombClass = Bomb.class;
@@ -135,9 +135,9 @@ public class Interpreter {
 		}
 
 		else {
-			
+
 			// gdy użytkownik nie sprecyzuje numeru bomby wybiera najbliższą
-			
+
 			double min = 50;
 
 			for (Item tempItem : MainWindow.itemsCollection.getItemsArray()) {
@@ -186,7 +186,7 @@ public class Interpreter {
 		}
 
 		else {
-			
+
 			double min = 50;
 
 			for (Item tempItem : MainWindow.itemsCollection.getItemsArray()) {
@@ -199,7 +199,7 @@ public class Interpreter {
 					}
 				}
 			}
-				
+
 			tempTree = MainWindow.findElementByID(0, treeClass);
 		}
 
@@ -209,17 +209,17 @@ public class Interpreter {
 	public void interpret(String input) throws InterruptedException {
 
 		List<String> inputParts = checkConjuction(input);
-		
-		for(int i = 0; i < inputParts.size(); i++) {
-			
+
+		for (int i = 0; i < inputParts.size(); i++) {
+
 			input = inputParts.get(i);
-			
+
 			Sapper tempSapper = getSapper(input);
 
-			// Przemieszczanie siê 
+			// Przemieszczanie siê
 
-			if (input.matches("|(.*)idź(.*)|(.*)pójdź(.*)")) {	
-				
+			if (input.matches("|(.*)idź(.*)|(.*)pójdź(.*)")) {
+
 				int x = tempSapper.getPositionX();
 				int y = tempSapper.getPositionY();
 
@@ -285,24 +285,24 @@ public class Interpreter {
 				if (input.matches("(.*)drzewo(.*)|(.*)drzewa(.*)")) {
 
 					Tree tempTree = getTree(input, tempSapper);
-					
+
 					int x = tempTree.getPositionX();
 					int y = tempTree.getPositionY();
 
 					tempSapper.moveBomb(tempBomb, x, y);
 				}
 			}
-			
-			else if(input.matches("(.*)utwórz rakietę(.*)|(.*)stwórz rakietę(.*)")) {
-				MainWindow.itemsCollection.getItemsArray().add(new Rocket(MainWindow.findElementByID(tempSapper.getId(), tempSapper.getClass())));
+
+			else if (input.matches("(.*)utwórz rakietę(.*)|(.*)stwórz rakietę(.*)")) {
+				MainWindow.itemsCollection.getItemsArray()
+						.add(new Rocket(MainWindow.findElementByID(tempSapper.getId(), tempSapper.getClass())));
 			}
-			
+
 			else {
 			}
-			
+
 		}
-		
-		
+
 	}
 
 }

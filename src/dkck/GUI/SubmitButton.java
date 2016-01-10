@@ -20,14 +20,14 @@ public class SubmitButton extends JButton {
 		setForeground(Color.black);
 		setPreferredSize(new Dimension(200, 30));
 		setBorder(BorderFactory.createLineBorder(Color.black));
-		
+
 		addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
 				MainWindow.updateLog("USER: " + MainWindow.consoleIn.getText());
-		        MainWindow.consoleIn.setText(null);
+				MainWindow.consoleIn.setText(null);
 			}
 		});
-		
+
 	}
 }

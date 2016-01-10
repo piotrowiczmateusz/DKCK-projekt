@@ -13,8 +13,8 @@ public class HPPanel extends JPanel {
 
 	private static final long serialVersionUID = 1L;
 
-	public HPPanel() {	    
-		super();	    
+	public HPPanel() {
+		super();
 		setOpaque(true);
 		setBackground(Color.white);
 		setForeground(Color.black);

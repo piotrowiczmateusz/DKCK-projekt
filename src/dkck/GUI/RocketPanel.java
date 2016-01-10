@@ -9,11 +9,10 @@ import java.awt.Rectangle;
 import javax.swing.BorderFactory;
 import javax.swing.JPanel;
 
-
 public class RocketPanel extends JPanel {
 
 	private static final long serialVersionUID = 1L;
-	
+
 	public RocketPanel() {
 		super();
 		setOpaque(true);
@@ -23,8 +22,7 @@ public class RocketPanel extends JPanel {
 		setBorder(BorderFactory.createLineBorder(Color.black));
 		setBounds(new Rectangle(new Point(510, 10), getPreferredSize()));
 		setFont(new Font("Arial", Font.PLAIN, 12));
-		
-	}
 
+	}
 
 }

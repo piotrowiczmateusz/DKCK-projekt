@@ -54,17 +54,17 @@ public class ItemsOperations {
 		Grid.repairSquares();
 	}
 
-	//nowa metoda służąca do dodawania itemów
-	
+	// nowa metoda służąca do dodawania itemów
+
 	public void addItems() throws InterruptedException {
 
 		itemsArray.add(new Tree());
 		itemsArray.add(new Tree());
 
-		itemsArray.add(new Sapper()); 
 		itemsArray.add(new Sapper());
 		itemsArray.add(new Sapper());
-		itemsArray.add(new Sapper());		
+		itemsArray.add(new Sapper());
+		itemsArray.add(new Sapper());
 
 		itemsArray.add(new Bomb());
 		itemsArray.add(new Bomb());

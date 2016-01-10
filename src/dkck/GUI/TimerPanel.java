@@ -12,8 +12,8 @@ public class TimerPanel extends JPanel {
 
 	private static final long serialVersionUID = 1L;
 
-	public TimerPanel() {	    
-		super();	    
+	public TimerPanel() {
+		super();
 		setOpaque(true);
 		setBackground(Color.white);
 		setPreferredSize(new Dimension(360, 160));
