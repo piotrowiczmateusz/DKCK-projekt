@@ -8,10 +8,27 @@ import dkck.GUI.MainWindow;
 
 public class ItemsOperations {
 
+	private static boolean gameOverVariable;
+
 	private List<Item> itemsArray;
 
 	public List<Item> getItemsArray() {
 		return itemsArray;
+	}
+
+	/**
+	 * @return the gameOverVariable
+	 */
+	public static boolean isGameOverVariable() {
+		return gameOverVariable;
+	}
+
+	/**
+	 * @param gameOverVariable
+	 *            the gameOverVariable to set
+	 */
+	public static void setGameOverVariable(boolean gameOverVariable) {
+		ItemsOperations.gameOverVariable = gameOverVariable;
 	}
 
 	public void setItemsArray(List<Item> itemsArray) {
@@ -22,29 +39,43 @@ public class ItemsOperations {
 		super();
 		this.itemsArray = new ArrayList<Item>();
 	}
-	
-	static void checkGameOver()
-	{
-		boolean tempVariableSapper = true;
-		for (Item tempItem : MainWindow.itemsCollection.getItemsArray()) {
-			if (tempItem instanceof Sapper) {
-				if (((Sapper) tempItem).getHealthPoints() > 0)
-					tempVariableSapper = false;
+
+	static void checkGameOver() {
+		if (ItemsOperations.isGameOverVariable() == false) {
+			boolean tempVariableSapper = true;
+			for (Item tempItem : MainWindow.itemsCollection.getItemsArray()) {
+				if (tempItem instanceof Sapper) {
+					if (((Sapper) tempItem).getHealthPoints() > 0)
+						tempVariableSapper = false;
+				}
+			}
+			if (tempVariableSapper == true)
+				MainWindow.updateLog("Wszyscy nie saperzy nie żyją");
+
+			boolean tempVariableBomb = true;
+			for (Item tempItem : MainWindow.itemsCollection.getItemsArray()) {
+				if (tempItem instanceof Bomb && !(tempItem instanceof Rocket)) {
+					if (((Bomb) tempItem).getBombStatus() == 1)
+						tempVariableBomb = false;
+				}
+			}
+			if (tempVariableBomb == true)
+				MainWindow.updateLog("Wszystkie bomby nieaktywne");
+
+			if (tempVariableBomb == true || tempVariableSapper == true) {
+				// Canceling all timers
+				ItemsOperations.setGameOverVariable(true);
+				MainWindow.updateLog("Koniec rozgrywki");
+				for (Item tempItem : MainWindow.itemsCollection.getItemsArray()) {
+					if (tempItem instanceof Bomb && !(tempItem instanceof Rocket))
+						((Bomb) tempItem).getBombTimer().cancel();
+					if (tempItem instanceof Sapper)
+						tempItem.getMovingTimer().cancel();
+					if (tempItem instanceof Rocket)
+						tempItem.getMovingTimer().cancel();
+				}
 			}
 		}
-		if (tempVariableSapper == true)
-			MainWindow.updateLog("Wszyscy nie saperzy nie żyją");
-		
-		boolean tempVariableBomb = true;
-		for (Item tempItem : MainWindow.itemsCollection.getItemsArray()) {
-			if (tempItem instanceof Bomb && !(tempItem instanceof Rocket)) {
-				if (((Bomb) tempItem).getBombStatus() == 1)
-					tempVariableBomb = false;
-			}
-		}
-		if (tempVariableBomb == true)
-			MainWindow.updateLog("Wszystkie bomby nieaktywne");
-		///return temp_variable;
 	}
 
 	static void dropItem(Item itemReference) {

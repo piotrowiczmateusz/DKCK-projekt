@@ -101,7 +101,7 @@ public class Sapper extends Item {
 		super(id);
 		id++;
 		this.setSapperStatus(true);
-		this.setHealthPoints(1);
+		this.setHealthPoints(5);
 		this.setNumberOfRockets(5);
 
 		JTextField HP = new JTextField("Saper " + (this.getId() + 1) + " HP: " + this.getHealthPoints());
@@ -142,8 +142,8 @@ public class Sapper extends Item {
 		if (this.getHealthPoints() > 0) {
 			this.setHealthPoints(this.getHealthPoints() - 1);
 			this.getHPLog().setText("Saper " + (this.getId() + 1) + " HP: " + this.getHealthPoints());
-		} 
-			// check if is anybody alive
+		}
+		// check if is anybody alive
 		ItemsOperations.checkGameOver();
 	}
 

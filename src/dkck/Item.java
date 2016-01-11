@@ -25,7 +25,6 @@ public abstract class Item {
 
 	private List<Item> targetsArray;
 
-	
 	public int getPositionX() {
 		return positionX;
 	}
@@ -73,7 +72,6 @@ public abstract class Item {
 	public void setTargetsArray(List<Item> targetsArray) {
 		this.targetsArray = targetsArray;
 	}
-
 
 	public Item(int id) {
 		super();
@@ -193,8 +191,8 @@ public abstract class Item {
 		return tempDistance;
 	}
 
-	//Sprawdza czy item jest w zasiêgu innego itemu
-	
+	// Sprawdza czy item jest w zasiêgu innego itemu
+
 	public boolean checkItemsRange(Item itemArgument) {
 
 		if (distanceCalculation(itemArgument) <= this.getRange() + itemArgument.getRange()) {
@@ -203,9 +201,9 @@ public abstract class Item {
 			return false;
 		}
 	}
-	
-	//Sprawdza czy œrodek obiektu jest w zasiêgu itemu
-	
+
+	// Sprawdza czy œrodek obiektu jest w zasiêgu itemu
+
 	public boolean checkItemsCenterDistance(Item itemArgument) {
 		if (distanceCalculation(itemArgument) <= this.getRange()) {
 			return true;

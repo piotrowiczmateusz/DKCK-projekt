@@ -146,6 +146,7 @@ public class Bomb extends Item {
 		}
 		Grid.repairSquares();
 		Grid.repairCircles();
-		if (this instanceof Bomb && !(this instanceof Rocket)) ItemsOperations.checkGameOver();
+		if (this instanceof Bomb && !(this instanceof Rocket))
+			ItemsOperations.checkGameOver();
 	}
 }
