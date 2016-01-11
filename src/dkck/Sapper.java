@@ -142,18 +142,9 @@ public class Sapper extends Item {
 		if (this.getHealthPoints() > 0) {
 			this.setHealthPoints(this.getHealthPoints() - 1);
 			this.getHPLog().setText("Saper " + (this.getId() + 1) + " HP: " + this.getHealthPoints());
-		} else {
+		} 
 			// check if is anybody alive
-			boolean temp_variable = false;
-			for (Item tempItem : MainWindow.itemsCollection.getItemsArray()) {
-				if (tempItem instanceof Sapper) {
-					if (((Sapper) tempItem).getHealthPoints() == 0)
-						temp_variable = true;
-				}
-			}
-			if (temp_variable == true)
-				MainWindow.updateLog("Wszyscy nie saperzy nie ¿yj¹");
-		}
+		ItemsOperations.checkGameOver();
 	}
 
 	// Saper idzie na pozycjê bomby. Nastpênie na pozycje x,y i zmienia pozycjê

@@ -64,7 +64,7 @@ public class Bomb extends Item {
 			MainWindow.timerPanel.add(this.getTimerLog(), BorderLayout.WEST);
 			this.setBombTimer(new BombTimer(this, 1000));
 			Random generator = new Random();
-			this.setExplosionLeftTime(10 + generator.nextInt(300));
+			this.setExplosionLeftTime(30 + generator.nextInt(300));
 
 		} else {
 			this.setBombTimer(null);
@@ -109,6 +109,7 @@ public class Bomb extends Item {
 				MainWindow.updateLog("Bomba nr: " + (this.getId() + 1) + " jest ju¿ rozbrojona");
 			Grid.repairCircles();
 			Grid.repairSquares();
+			ItemsOperations.checkGameOver();
 		}
 	}
 
@@ -145,5 +146,6 @@ public class Bomb extends Item {
 		}
 		Grid.repairSquares();
 		Grid.repairCircles();
+		if (this instanceof Bomb && !(this instanceof Rocket)) ItemsOperations.checkGameOver();
 	}
 }

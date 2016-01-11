@@ -22,6 +22,30 @@ public class ItemsOperations {
 		super();
 		this.itemsArray = new ArrayList<Item>();
 	}
+	
+	static void checkGameOver()
+	{
+		boolean tempVariableSapper = true;
+		for (Item tempItem : MainWindow.itemsCollection.getItemsArray()) {
+			if (tempItem instanceof Sapper) {
+				if (((Sapper) tempItem).getHealthPoints() > 0)
+					tempVariableSapper = false;
+			}
+		}
+		if (tempVariableSapper == true)
+			MainWindow.updateLog("Wszyscy nie saperzy nie żyją");
+		
+		boolean tempVariableBomb = true;
+		for (Item tempItem : MainWindow.itemsCollection.getItemsArray()) {
+			if (tempItem instanceof Bomb && !(tempItem instanceof Rocket)) {
+				if (((Bomb) tempItem).getBombStatus() == 1)
+					tempVariableBomb = false;
+			}
+		}
+		if (tempVariableBomb == true)
+			MainWindow.updateLog("Wszystkie bomby nieaktywne");
+		///return temp_variable;
+	}
 
 	static void dropItem(Item itemReference) {
 
