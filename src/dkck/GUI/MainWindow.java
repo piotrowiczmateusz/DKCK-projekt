@@ -85,7 +85,10 @@ public class MainWindow extends JFrame {
 
 		itemsCollection = new ItemsOperations();
 		itemsCollection.addItems();
+		
 		interpreter = new Interpreter();
+		//Thread.sleep(1000);
+		ItemsOperations.checkGameOver();
 
 	}
 
