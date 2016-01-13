@@ -3,6 +3,8 @@ package dkck;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.swing.JOptionPane;
+
 import dkck.GUI.Grid;
 import dkck.GUI.MainWindow;
 
@@ -40,6 +42,31 @@ public class ItemsOperations {
 		this.itemsArray = new ArrayList<Item>();
 	}
 
+	static void winner() {
+		int max_bombs = 0;
+		for (Item tempItem : MainWindow.itemsCollection.getItemsArray()) {
+			if (tempItem instanceof Sapper) {
+				if (((Sapper) tempItem).getHealthPoints() > 0
+						&& max_bombs < ((Sapper) tempItem)
+								.getNumberOfDisarmedBombs())
+					max_bombs = ((Sapper) tempItem).getNumberOfDisarmedBombs();
+			}
+		}
+
+		for (Item tempItem : MainWindow.itemsCollection.getItemsArray()) {
+			if (tempItem instanceof Sapper) {
+				if (((Sapper) tempItem).getHealthPoints() > 0
+						&& max_bombs == ((Sapper) tempItem)
+								.getNumberOfDisarmedBombs()) {
+					JOptionPane.showMessageDialog(null, "Wygrał saper nr: "
+							+ (tempItem.getId() + 1));
+					MainWindow.updateLog("Wygrał saper nr: "
+							+ (tempItem.getId() + 1));
+				}
+			}
+		}
+	}
+
 	static void checkGameOver() {
 		if (ItemsOperations.isGameOverVariable() == false) {
 			boolean tempVariableSapper = true;
@@ -66,8 +93,10 @@ public class ItemsOperations {
 				// Canceling all timers
 				ItemsOperations.setGameOverVariable(true);
 				MainWindow.updateLog("Koniec rozgrywki");
+				winner();
 				for (Item tempItem : MainWindow.itemsCollection.getItemsArray()) {
-					if (tempItem instanceof Bomb && !(tempItem instanceof Rocket))
+					if (tempItem instanceof Bomb
+							&& !(tempItem instanceof Rocket))
 						((Bomb) tempItem).getBombTimer().cancel();
 					if (tempItem instanceof Sapper)
 						tempItem.getMovingTimer().cancel();
@@ -86,7 +115,8 @@ public class ItemsOperations {
 			((Bomb) itemReference).setMovingTimer(null);
 		}
 
-		if (itemReference instanceof Bomb && ((Bomb) itemReference).getBombTimer() != null) {
+		if (itemReference instanceof Bomb
+				&& ((Bomb) itemReference).getBombTimer() != null) {
 			((Bomb) itemReference).getBombTimer().cancel();
 			((Bomb) itemReference).getBombTimer().setItemRef(null);
 			((Bomb) itemReference).setBombTimer(null);
@@ -100,10 +130,11 @@ public class ItemsOperations {
 
 		MainWindow.itemsCollection.getItemsArray().remove(itemReference);
 
-		MainWindow.grid.drawCircle(itemReference.getPositionX(), itemReference.getPositionY(), itemReference.getRange(),
-				null);
-		MainWindow.grid.drawSquare(itemReference.getPositionX(), itemReference.getPositionY(),
-				itemReference.getPositionX(), itemReference.getPositionY(), null);
+		MainWindow.grid.drawCircle(itemReference.getPositionX(),
+				itemReference.getPositionY(), itemReference.getRange(), null);
+		MainWindow.grid.drawSquare(itemReference.getPositionX(),
+				itemReference.getPositionY(), itemReference.getPositionX(),
+				itemReference.getPositionY(), null);
 
 		Grid.repairCircles();
 		Grid.repairSquares();
