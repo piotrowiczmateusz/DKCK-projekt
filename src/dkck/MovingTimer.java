@@ -31,8 +31,8 @@ public class MovingTimer extends TimerTask {
 
 	public MovingTimer(Item itemReference) {
 		super();
-		this.setItemRef(itemReference);
-		this.setTimer1(new Timer());
+		this.itemReference = itemReference;
+		this.timer1 = new Timer();
 	}
 
 	public void run() {
@@ -77,28 +77,24 @@ public class MovingTimer extends TimerTask {
 				int initItemPositionY = this.getItemRef().getPositionY();
 
 				if (this.getItemRef().getTargetsArray().isEmpty() == false
-						&& this.getItemRef().getTargetsArray().get(0).getPositionX() == this.getItemRef()
-								.getPositionX()
+						&& this.getItemRef().getTargetsArray().get(0).getPositionX() == this.getItemRef().getPositionX()
 						&& this.getItemRef().getTargetsArray().get(0).getPositionY() == this.getItemRef()
 								.getPositionY()) {
-					
-					MainWindow.updateLog(this.getItemRef().nameOfItem(this.getItemRef()) + " dotar³ do celu");
+
+					MainWindow.updateLog("Obiekt: \"" + this.getItemRef().nameOfItem(this.getItemRef()) + "\" dotar³ do celu");
 					if (this.getItemRef() instanceof Rocket) {
 						((Rocket) this.getItemRef()).explode();
-
 					}
-
 					continueStep = false;
 				}
 
 				// checking bomb loss
 
-				if (this.getItemRef().getTargetsArray().get(1) instanceof Bomb
-						&& this.getItemRef() instanceof Sapper) {
+				if (this.getItemRef().getTargetsArray().get(1) instanceof Bomb && this.getItemRef() instanceof Sapper) {
 					Item tempItem = ((Sapper) this.getItemRef()).getTargetsArray().get(1);
 					if (tempItem.getPositionX() != initItemPositionX && tempItem.getPositionY() != initItemPositionY) {
 
-						MainWindow.updateLog(this.getItemRef().nameOfItem(this.getItemRef())+ "zgubi³ bombê");
+						MainWindow.updateLog(this.getItemRef().nameOfItem(this.getItemRef()) + "zgubi³ bombê");
 						continueStep = false;
 					}
 				}
@@ -127,9 +123,10 @@ public class MovingTimer extends TimerTask {
 						this.getItemRef().setPositionY(this.getItemRef().getPositionY() - 1);
 					}
 
-					if( this.getItemRef() instanceof Sapper) {				
-						((Sapper) this.getItemRef()).getPositionLog().setText("[" + (this.getItemRef().getPositionX() + 1)
-								+ "][" + (this.getItemRef().getPositionY() + 1) + "]");
+					if (this.getItemRef() instanceof Sapper) {
+						((Sapper) this.getItemRef()).getPositionLog()
+								.setText("[" + (this.getItemRef().getPositionX() + 1) + "]["
+										+ (this.getItemRef().getPositionY() + 1) + "]");
 					}
 
 					// moving bomb
@@ -152,10 +149,10 @@ public class MovingTimer extends TimerTask {
 
 					MainWindow.grid.drawCircle(initItemPositionX, initItemPositionY, this.getItemRef().getRange(),
 							null);
-					MainWindow.grid.drawCircle(this.getItemRef().getPositionX(),
-							this.getItemRef().getPositionY(), this.getItemRef().getRange(), tempItem);
-					MainWindow.grid.drawSquare(initItemPositionX, initItemPositionY,
-							this.getItemRef().getPositionX(), this.getItemRef().getPositionY(), tempItem);
+					MainWindow.grid.drawCircle(this.getItemRef().getPositionX(), this.getItemRef().getPositionY(),
+							this.getItemRef().getRange(), tempItem);
+					MainWindow.grid.drawSquare(initItemPositionX, initItemPositionY, this.getItemRef().getPositionX(),
+							this.getItemRef().getPositionY(), tempItem);
 
 					Grid.repairCircles();
 					Grid.repairSquares();
